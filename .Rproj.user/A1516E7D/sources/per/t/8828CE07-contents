@@ -1,0 +1,26 @@
+.examplebox {
+  padding: 1em;
+  background: #deebff;
+  color: black;
+  border: 2px solid #a1bbe6;
+  border-radius: 10px;
+  margin-bottom: 3%;
+}
+.center {
+  text-align: center;
+}
+.flexcenter {
+  display: flex;
+  justify-content: center;
+}
+.half {
+  width: 50%;
+}
+
+table * {
+  border-color: transparent;
+  color: black;
+}
+tr {
+  text-align: center;
+}

@@ -1,0 +1,7 @@
+# Prefacio {.unnumbered}
+
+Desde la cátedra de Análisis Estadístico, les damos una cálida bienvenida a este nuevo curso, donde nos sumergiremos nuevamente en el fascinante mundo de los datos, la toma de decisiones y, sobre todas las cosas, el apasionante proceso de aprendizaje.
+
+¿Alguna vez se han preguntado cómo las empresas líderes toman decisiones cruciales basadas en datos? ¿O cómo pueden prever tendencias económicas que transforman industrias enteras? A lo largo de este curso, exploraremos técnicas y conceptos fundamentales que nos permitirán descubrir el valioso conocimiento que los datos pueden brindarnos. Desde los conceptos básicos de la teoría de probabilidad hasta métodos gráficos e inferenciales, aprenderemos a resolver problemas y ofrecer soluciones basadas en un análisis riguroso.
+
+¡Esperamos que tomen este recorrido como un desafío, como una oportunidad para poner a prueba sus habilidades y construir un espacio interactivo donde tanto ustedes como nosotros enriquezcamos nuestros conocimientos!
