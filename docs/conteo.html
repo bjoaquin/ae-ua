@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Análisis Estadístico (UA) - 1&nbsp; Herramientas de conteo</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./conteo.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Herramientas de conteo</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Análisis Estadístico (UA)</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prefacio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./conteo.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Herramientas de conteo</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referencias</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción"><span class="header-section-number">1.1</span> Introducción</a></li>
+  <li><a href="#herramientas-de-conteo-simples" id="toc-herramientas-de-conteo-simples" class="nav-link" data-scroll-target="#herramientas-de-conteo-simples"><span class="header-section-number">1.2</span> Herramientas de conteo simples</a>
+  <ul class="collapse">
+  <li><a href="#factoriales" id="toc-factoriales" class="nav-link" data-scroll-target="#factoriales"><span class="header-section-number">1.2.1</span> Factoriales</a></li>
+  <li><a href="#permutaciones" id="toc-permutaciones" class="nav-link" data-scroll-target="#permutaciones"><span class="header-section-number">1.2.2</span> Permutaciones</a></li>
+  <li><a href="#combinaciones" id="toc-combinaciones" class="nav-link" data-scroll-target="#combinaciones"><span class="header-section-number">1.2.3</span> Combinaciones</a></li>
+  </ul></li>
+  <li><a href="#herramientas-de-conteo-con-repetición" id="toc-herramientas-de-conteo-con-repetición" class="nav-link" data-scroll-target="#herramientas-de-conteo-con-repetición"><span class="header-section-number">1.3</span> Herramientas de conteo con repetición</a>
+  <ul class="collapse">
+  <li><a href="#permutaciones-con-repetición" id="toc-permutaciones-con-repetición" class="nav-link" data-scroll-target="#permutaciones-con-repetición"><span class="header-section-number">1.3.1</span> Permutaciones con repetición</a></li>
+  <li><a href="#combinaciones-con-repetición" id="toc-combinaciones-con-repetición" class="nav-link" data-scroll-target="#combinaciones-con-repetición"><span class="header-section-number">1.3.2</span> Combinaciones con repetición</a></li>
+  </ul></li>
+  <li><a href="#reglas-de-conteo" id="toc-reglas-de-conteo" class="nav-link" data-scroll-target="#reglas-de-conteo"><span class="header-section-number">1.4</span> Reglas de conteo</a>
+  <ul class="collapse">
+  <li><a href="#regla-de-la-multiplicidad" id="toc-regla-de-la-multiplicidad" class="nav-link" data-scroll-target="#regla-de-la-multiplicidad"><span class="header-section-number">1.4.1</span> Regla de la multiplicidad</a></li>
+  <li><a href="#regla-de-la-adición" id="toc-regla-de-la-adición" class="nav-link" data-scroll-target="#regla-de-la-adición"><span class="header-section-number">1.4.2</span> Regla de la adición</a></li>
+  </ul></li>
+  <li><a href="#mezclando-reglas-y-herramientas" id="toc-mezclando-reglas-y-herramientas" class="nav-link" data-scroll-target="#mezclando-reglas-y-herramientas"><span class="header-section-number">1.5</span> Mezclando reglas y herramientas</a></li>
+  <li><a href="#un-caso-real-mccombinaciones" id="toc-un-caso-real-mccombinaciones" class="nav-link" data-scroll-target="#un-caso-real-mccombinaciones"><span class="header-section-number">1.6</span> Un caso real: McCombinaciones</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Herramientas de conteo</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introducción" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="introducción"><span class="header-section-number">1.1</span> Introducción</h2>
+<p>Las <strong>herramientas de conteo</strong> sirven para contar el número de maneras distintas de obtener un cierto resultado, incluso bajo algunas condiciones o restricciones. Algunos ejemplos son:</p>
+<ul>
+<li>conociendo a los 3 ganadores de una competencia pero sin saber el orden en que ganaron, determinar de cuántas formas distintas podría haberse formado un podio entre esos 3 participantes.</li>
+<li>contar el número de formas en el que 5 personas pueden viajar en un auto de 5 asientos, considerando que sólo dos de ellas tienen licencia de conducir.</li>
+<li>contar el número de partidas de ajedrez que pueden jugarse en un torneo con 32 participantes, bajo la condición de que cada par de participantes se enfrenten una y sólo una vez.</li>
+<li>contar el número de estados posibles en los que puede hallarse un cubo de Rubik.</li>
+<li>contar el número de formas en el que 200 invitados a una fiesta pueden organizarse en mesas de 6 personas. Considerar cómo este número se vería afectado si a la fiesta asisten dos personas que se detestan y no quieren sentarse en la misma mesa.</li>
+<li>sabiendo que en WhatsApp se recibieron 23 mensajes de 5 chats, contar el número de formas en que estos 23 mensajes podrían encontrarse repartidos entre esos 5 chats.</li>
+</ul>
+</section>
+<section id="herramientas-de-conteo-simples" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="herramientas-de-conteo-simples"><span class="header-section-number">1.2</span> Herramientas de conteo simples</h2>
+<section id="factoriales" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="factoriales"><span class="header-section-number">1.2.1</span> Factoriales</h3>
+<p>El caso más simple para contar resultados posibles, del cual se desprenden todos los demás, consiste en contar de cuántas maneras puede reordenarse un conjunto de <span class="math inline">\(n\)</span> elementos, siendo <span class="math inline">\(n\)</span> un número natural (es decir, <span class="math inline">\(n \in \mathbb{N}\)</span>).</p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 1</strong></p>
+</div>
+<p>Tres personas (las llamaremos <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span> y <span class="math inline">\(C\)</span>) quieren sentarse en un sofá de tres asientos. ¿De cuántas formas distintas pueden hacerlo?</p>
+<p><strong>Solución:</strong> Este caso es lo suficientemente sencillo como para resolverlo por <em>enumeración exhaustiva</em>: se pueden listar todos los resultados posibles y después contar el tamaño de dicha lista.</p>
+<p>Los posibles reordenamientos de un grupo de 3 personas son:</p>
+<div class="flexcenter">
+<div class="half">
+<table class="table">
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(ABC\)</span></td>
+<td><span class="math inline">\(BAC\)</span></td>
+<td><span class="math inline">\(CAB\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(ACB\)</span></td>
+<td><span class="math inline">\(BCA\)</span></td>
+<td><span class="math inline">\(CBA\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Por lo tanto, existen 6 formas de que tres personas se sienten en un sillón de tres asientos.</p>
+</div>
+<p>El problema con la enumeración exhaustiva es que el número de reordenamientos crece rápidamente a medida que el tamaño del conjunto (o sea, <span class="math inline">\(n\)</span>) aumenta. Si logramos hallar un patrón o una fórmula en la forma de contar el número de reordenamientos posibles, entonces podremos calcular el número de reordenamientos para cualquier <span class="math inline">\(n\)</span>, sin tener que enumerar todos los casos posibles.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Idea clave
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Las herramientas de conteo nos permiten contar elementos sin necesidad de enumerarlos.</p>
+</div>
+</div>
+<p>Volvamos al ejemplo con <span class="math inline">\(n=3\)</span>. Para empezar: ¿cuántas personas distintas pueden sentarse en el primer asiento del sofá? Es evidente que cualquiera de las tres personas en cuestión (<span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span> y <span class="math inline">\(C\)</span>) pueden ocupar este lugar y por lo tanto la respuesta es 3. Ahora bien, ¿cuántas personas pueden sentarse en el segundo asiento, si consideramos que ya hay una persona sentada en el primero? Las opciones se ven reducidas. Si bien no sabemos quién, una de las personas ya está sentada en el primer asiento y por lo tanto no es elegible para sentarse en el segundo asiento. Sólo las dos personas restantes pueden ocupar dicho lugar y en consecuencia la respuesta es 2. Por último, ¿cuántas personas pueden sentarse en el tercer asiento si los dos primeros ya están ocupados? En este caso la respuesta es trivial: si dos de las tres personas ya se encuentran sentadas, entonces sólo queda una persona para sentarse en el tercer asiento y en consecuencia la respuesta es 1.</p>
+<p>En resumen, existen 3 posibilidades distintas para el primer asiento; por cada una de ellas se tienen 2 posibilidades distintas para el segundo asiento; a su vez, por cada una de las combinaciones anteriores (una persona en el primer asiento y otra en el segundo asiento) se tiene, por descarte, una sola posibilidad para el tercer asiento.</p>
+<p>En total se tienen <span class="math display">\[3 \times 2 \times 1 = 6 \;\text{resultados posibles.}\]</span></p>
+<p>¿Qué pasaría si fuesen <span class="math inline">\(n=4\)</span> personas en un sofá de 4 asientos? Si llamamos <span class="math inline">\(D\)</span> a la cuarta persona, la tabla de resultados posibles para esta situación es:</p>
+<div class="flexcenter">
+<div class="half">
+<table class="table">
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(ABCD\)</span></td>
+<td><span class="math inline">\(BACD\)</span></td>
+<td><span class="math inline">\(CABD\)</span></td>
+<td><span class="math inline">\(DABC\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(ABDC\)</span></td>
+<td><span class="math inline">\(BADC\)</span></td>
+<td><span class="math inline">\(CADB\)</span></td>
+<td><span class="math inline">\(DACB\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(ACBD\)</span></td>
+<td><span class="math inline">\(BCAD\)</span></td>
+<td><span class="math inline">\(CBAD\)</span></td>
+<td><span class="math inline">\(DBAC\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(ACDB\)</span></td>
+<td><span class="math inline">\(BCDA\)</span></td>
+<td><span class="math inline">\(CBDA\)</span></td>
+<td><span class="math inline">\(DBCA\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(ADBC\)</span></td>
+<td><span class="math inline">\(BDAC\)</span></td>
+<td><span class="math inline">\(CDAB\)</span></td>
+<td><span class="math inline">\(DCAB\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(ADCB\)</span></td>
+<td><span class="math inline">\(BDCA\)</span></td>
+<td><span class="math inline">\(CDBA\)</span></td>
+<td><span class="math inline">\(DCBA\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Nuevamente, por enumeración exhaustiva podemos ver que hay 24 resultados posibles para esta situación. ¿Cómo podríamos haberlo deducido sin tener que listar cada resultado? Afortunadamente, el razonamiento para el caso <span class="math inline">\(n=4\)</span> es análogo al caso <span class="math inline">\(n=3\)</span>.</p>
+<p>Cualquier persona puede sentarse en el primer asiento y por lo tanto hay 4 formas distintas en las que este lugar puede ser ocupado. Para cada uno de esos escenarios, cualquiera de las tres personas restantes puede ocupar el segundo asiento, resultando en 3 formas posibles de ocuparlo. A su vez, para cada una de las combinaciones anteriores (una persona en el primer asiento y otra persona en el segundo asiento) cualquiera de las dos personas restantes puede ocupar el tercer asiento y por lo tanto se tienen 2 formas posibles de ocuparlo. Finalmente, si tres de las cuatro personas ya se encuentran sentadas en los primeros tres asientos del sofá, entonces sólo queda un escenario posible para el cuarto asiento: que sea ocupado por la persona restante.</p>
+<p>En total se tienen <span class="math display">\[4 \times 3 \times 2 \times 1 = 24 \;\text{resultados posibles.}\]</span></p>
+<p>Es fácil ver que este razonamiento es aplicable a cualquier número de personas y asientos. En general, si se tienen <span class="math inline">\(n\)</span> personas queriendo sentarse en un sofá de <span class="math inline">\(n\)</span> asientos, existen <span class="math display">\[n \times (n-1) \times (n-2) \times \cdots \times 3 \times 2 \times 1\]</span> formas distintas de lograrlo.</p>
+<p>El procedimiento anterior es utilizado con frecuencia en combinatoria<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> y por lo tanto tiene su propio símbolo y nombre.</p>
+<p>Sea <span class="math inline">\(n \in \mathbb{N}\)</span>, se llama <strong>factorial de</strong> <span class="math inline">\(\mathbf{n}\)</span> a <span class="math display">\[n! = n \times (n-1)  \times (n-2) \times \cdots \times 3 \times 2 \times 1\]</span></p>
+<p>Existen dos formas alternativas de definir el factorial de <span class="math inline">\(n\)</span>: en forma iterativa y en forma recursiva.</p>
+<p>Forma iterativa: <span class="math display">\[n = \prod_{i=1}^n i = 1 \times 2 \times 3 \times \cdots \times (n-1) \times n\]</span></p>
+<p>Forma recursiva: <span class="math display">\[n! = n \times (n-1)! \qquad \forall \; n \in \mathbb{N}\]</span></p>
+<p>Un detalle a tener en cuenta con la forma recursiva es que para <span class="math inline">\(n=1\)</span> se tiene que <span class="math inline">\(1! = 1 \times 0!\)</span>. Por convención, se considera que <span class="math inline">\(0! = 1\)</span>.</p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 2</strong></p>
+</div>
+<p>Una lista de reproducción de Spotify está compuesta por 9 canciones. ¿En cuántos órdenes distintos pueden escucharse todas las canciones de la lista?</p>
+<p><strong>Solución:</strong> El problema consiste en averiguar cuántos reordenamientos son posibles para la lista de 9 canciones. Como ya vimos, esto equivale a <span class="math display">\[9! = 9 \times 8 \times 7 \times 6 \times 5 \times 4 \times 3 \times 2 \times 1 = 362\,880 \text{ órdenes distintos.}\]</span></p>
+</div>
+<p>Nótese el gran número de reordenamientos que resulta de un número tan pequeño de elementos. Este número es tan grande que sería inviable resolver el problema por enumeración exhaustiva. Incluso para una lista de 5 canciones se tendrían <span class="math inline">\(5!=120\)</span> posibles reordenamientos, los cuales ya son muchos como para escribirlos uno por uno. En líneas generales, el número factorial crece muy rápidamente, incluso más que el número exponencial.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-crecimiento-factorial" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="conteo_files/figure-html/fig-crecimiento-factorial-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figura&nbsp;1.1: Comparación de las funciones exponencial y factorial.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Como ya se dijo, el factorial es la base de las herramientas de conteo, pero no es la única. Es una forma práctica de contar el número de reordenamientos de <span class="math inline">\(n\)</span> elementos. Por ejemplo, en una carrera de Fórmula 1, donde compiten 20 autos, podemos usar el factorial para contar el número de resultados distintos para dicha carrera. Pero ¿qué pasaría si sólo nos interesara el resultado del podio, es decir, de las primeras 3 posiciones? Dicho de otro modo, dado un conjunto de <span class="math inline">\(n\)</span> elementos, ¿cómo podemos contar el número de <em>subconjuntos ordenados</em> de <span class="math inline">\(r&lt;n\)</span> elementos?</p>
+</section>
+<section id="permutaciones" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="permutaciones"><span class="header-section-number">1.2.2</span> Permutaciones</h3>
+<p>Intentemos resolver el problema propuesto en la sección anterior aplicando la misma lógica que nos llevó a descubrir el número factorial.</p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 3</strong></p>
+</div>
+<p>En una carrera de Fórmula 1 compiten 20 vehículos. ¿De cuántas formas distintas puede establecerse un podio en dicha carrera?</p>
+<p><strong>Solución:</strong> Cualquiera de los 20 conductores es elegible para ocupar el primer puesto. A su vez, por cada una de estas posibilidades, quedan 19 conductores que podrían tomar el segundo puesto. Finalmente, teniendo ya un conductor en el primer puesto y otro conductor en el segundo puesto, cualquiera de los 18 conductores restantes pueden ocupar el tercer puesto.</p>
+<p>En conclusión, existen <span class="math display">\[20 \times 19 \times 18 = 6\,840 \text{ podios posibles.}\]</span></p>
+</div>
+<p>Ignorando el contexto del problema, acabamos de deducir la forma de contar el número de subconjuntos ordenados de tamaño <span class="math inline">\(r=3\)</span> obtenidos a partir de un conjunto de tamaño <span class="math inline">\(n=20\)</span>.</p>
+<p>Para resolver este ejemplo empleamos la misma técnica de “multiplicación descendente” que dedujimos para el factorial, pero esta vez nos detuvimos después de <span class="math inline">\(r\)</span> factores en lugar de multiplicar los <span class="math inline">\(n\)</span> primeros números naturales. ¿Cómo podríamos generalizar este procedimiento en una fórmula?</p>
+<p>Para valores <span class="math inline">\(n\)</span> y <span class="math inline">\(r\)</span> cualesquiera (con <span class="math inline">\(r&lt;n\)</span>), el cálculo realizado es <span class="math display">\[n \times (n-1) \times (n-2) \times \cdots \times (n-r+2) \times (n-r+1)\]</span></p>
+<p>Al ser un producto, multiplicar el valor anterior por 1 no lo modifica en absoluto. Pero si escribimos ese 1 como <span class="math inline">\(\textstyle\frac{(n-r)!}{(n-r)!}\)</span> entonces se obtendría <span class="math display">\[n \times (n-1) \times \cdots \times (n-r+1) \times \frac{(n-r)!}{(n-r)!} = \frac{n \times (n-1) \times \cdots \times (n-r+1) \times (n-r)!}{(n-r)!}\]</span></p>
+<p>Utilizando la definición recursiva del número factorial, el producto de los dos últimos factores del numerador equivale a <span class="math inline">\((n-r+1)!\)</span> y por lo tanto la expresión anterior equivale a <span class="math display">\[\frac{n \times (n-1) \times \cdots \times (n-r+2) \times (n-r+1)!}{(n-r)!}\]</span></p>
+<p>A su vez, el producto de los dos últimos factores del numerador en esta nueva expresión equivale a <span class="math inline">\((n-r+2)!\)</span>. Aplicando sucesivamente este procedimiento se llega a que el numerador es igual a <span class="math inline">\(n!\)</span>. Es decir, la expresión anterior equivale a <span class="math display">\[\frac{n!}{(n-r)!}\]</span></p>
+<p>Hemos deducido otra herramienta de conteo importante.</p>
+<p>Sean <span class="math inline">\(n \in \mathbb{N}_0, \; r \in \mathbb{N}_0\)</span> <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> tales que <span class="math inline">\(r \leq n\)</span>, se llama <strong>permutación de</strong> <span class="math inline">\(\mathbf{n}\)</span> elementos en <span class="math inline">\(\mathbf{r}\)</span> a <span class="math display">\[_nP_r = \frac{n!}{(n-r)!}\]</span></p>
+<p>Nótese que cuando <span class="math inline">\(r=n\)</span> se tiene <span class="math display">\[_nP_n = \frac{n!}{(n-n)!} = \frac{n!}{0!} = \frac{n!}{1} = n!\]</span></p>
+<p>Esto tiene sentido, visto que lo que estamos contando a través de este número es el número de subconjuntos ordenados de tamaño <span class="math inline">\(n\)</span> obtenidos a partir de un conjunto de tamaño <span class="math inline">\(n\)</span>. Esto no es más que el número de reordenamientos entre <span class="math inline">\(n\)</span> elementos, lo cual (por lo visto en la sección anterior) sabemos que equivale a <span class="math inline">\(n!\)</span>. En otras palabras, el número de reordenamientos de un conjunto de <span class="math inline">\(n\)</span> elementos no es más que un caso particular de una permutación. Es por ello que el número de reordenamientos de conjuntos de tamaño <span class="math inline">\(n\)</span> suele denominarse <strong>permutación de</strong> <span class="math inline">\(\mathbf{n}\)</span> elementos y simbolizarse como <span class="math inline">\(P_n\)</span>.</p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 4</strong></p>
+</div>
+<p>Se tienen 8 franjas de tela, cada una de un color diferente. Se pretende utilizar tres de ellas para armar una bandera compuesta por una franja superior, una franja media y una franja inferior. ¿Cuántas banderas distintas son posibles?</p>
+<p><strong>Solución:</strong> Partiendo de un conjunto de <span class="math inline">\(n=8\)</span> elementos, debemos calcular el número de subconjuntos ordenados de tamaño <span class="math inline">\(r=3\)</span>. Es decir, debemos calcular una permutación de 8 en 3. <span class="math display">\[_8P_3 = \frac{8!}{5!} = 8 \times 7 \times 6 = 336 \text{ banderas posibles.}\]</span></p>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Advertencia
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Más allá de que una permutación se defina como un cociente de factoriales, en la práctica no es aconsejable calcular dicho cociente. Esto es porque los factoriales tienden a ser números muy grandes; tanto es así que es muy fácil encontrarse con números cuyo factorial es imposible de calcular con la tecnología de la que hoy disponemos.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> Incluso si pudiésemos calcular los números factoriales que componen el cociente, éstos podrían ser extremadamente grandes, dificultando considerablemente los cálculos. <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> Es por esto que, de hacerse los cálculos a mano, se recomienda seguir el proceso de multiplicación descendente.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Advertencia
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si bien hablamos de subconjuntos ordenados, al calcular permutaciones no es importante que exista una verdadera ordinalidad entre los elementos (en el sentido de que uno de ellos anteceda o suceda a otro), sino en realidad que estos sean distinguibles entre sí. Claramente la ordinalidad es una condición suficiente para lograr lo anterior, pero no es una condición necesaria, como veremos en el ejemplo siguiente.</p>
+</div>
+</div>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 5</strong></p>
+</div>
+<p>El club de debate de una escuela secundaria cuenta con nueve miembros. La semana próxima se realizará un torneo de debate que tomará lugar en cuatro ciudades diferentes: Seattle, Baltimore, Washington y Denver. El director de la escuela debe elegir a un participante para enviar a cada ciudad. ¿De cuántas formas distintas puede hacer esto?</p>
+<p><strong>Solución:</strong> Nótese que en este ejemplo importa no sólo cuaĺes de los 9 miembros del club son seleccionados, sino también a qué ciudad es enviado cada uno. Se fija entonces el orden de las ciudades tal como fueron enumeradas en el enunciado, de modo que el primer participante será enviado a Seattle; el segundo, a Baltimore; el tercero, a Washington y el cuarto, a Denver. Nótese que el orden elegido para las ciudades no afecta los cálculos. Efectivamente, para cualquier orden arbitrario entre las 4 ciudades se obtendría el mismo resultado.</p>
+<p>Hay 9 posibles participantes para ser enviados al torneo en Seattle. Por cada uno de ellos, cualquiera de los 8 restantes puede ser enviado a Baltimore. A su vez, por cada par de participantes elegidos para Seattle y Baltimore respectivamente, cualquiera de los 7 restantes puede ser asignado a Washington. Por último, para cualquier terna ordenada de tres alumnos, cualquiera de los 6 restantes puede ser enviado a Denver.</p>
+<p>Por lo tanto, se tienen <span class="math display">\[_9P_5 = 9 \times 8 \times 7 \times 6 = 3\,024 \text{ formas posibles.}\]</span></p>
+</div>
+<p>Este ejemplo plantea un escenario donde cada uno de los participantes seleccionados es asignado a una ciudad diferente y por lo tanto los cuatro roles son distinguibles entre sí. Supongamos ahora que el torneo de debate se lleva a cabo en un solo lugar, y por lo tanto los cuatro roles son equivalentes e intercambiables. Ciertamente esto llevaría a una reducción en el número de formas distintas de elegir los participantes, porque soluciones que anteriormente podían considerarse distintas (por ejemplo, el conjunto de alumnos <span class="math inline">\([A, B, C, D]\)</span> y el conjunto <span class="math inline">\([B, D, A, C]\)</span>) ahora deberían contarse como una única solución.</p>
+<p>La pregunta es: ¿cuál es entonces el número de formas distintas de elegir los participantes?</p>
+</section>
+<section id="combinaciones" class="level3" data-number="1.2.3">
+<h3 data-number="1.2.3" class="anchored" data-anchor-id="combinaciones"><span class="header-section-number">1.2.3</span> Combinaciones</h3>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 6</strong></p>
+</div>
+<p>Un club de debate de con nueve miembros debe elegir a cuatro de ellos para representar a su escuela en un torneo nacional. ¿De cuántas formas distintas puede hacerse esto?</p>
+<p><strong>Solución:</strong> Por lo visto en el Ejemplo 5 sabemos que, si cada uno de los cuatro puestos a ocupar fuese diferenciable de los otros tres, habría <span class="math inline">\(_9P_4 = 3\,024\)</span> formas distintas de lograr el objetivo. Pero ahora estos puestos son todos iguales y por lo tanto sólo importa cuáles de los nueve alumnos ingresan en la selección, sin importar el orden en que se los elige. Esto implica que el resultado será menor al del Ejemplo 5. Procedamos a calcular este valor.</p>
+<p>Supongamos que el conjunto total de alumnos es <span class="math inline">\(\{ A,B,C,D,E,F,G,H,I \}\)</span>. Un subconjunto posible de tamaño <span class="math inline">\(r=4\)</span> es <span class="math inline">\(\{ B, E, G, H \}\)</span>. El valor <span class="math inline">\(_9P_4\)</span> cuenta este mismo subconjunto varias veces, porque permuta sus elementos y considera dichas permutaciones como resultados distintos. En particular ¿cuántas veces cuenta cada uno? Sabemos que la cantidad de permutaciones entre 4 elementos es igual a <span class="math inline">\(P_4 = 4! = 24\)</span>. Es decir que por cada 24 subconjuntos enumerados por el valor <span class="math inline">\(_9P_4\)</span>, ahora sólo nos interesa uno.</p>
+<p>En conclusión, se tienen <span class="math display">\[\frac{_9P_4}{4!} = \frac{3024}{24} = 126 \text{ formas posibles.}\]</span></p>
+</div>
+<p>En general, dado un conjunto de <span class="math inline">\(n\)</span> elementos, hay <span class="math inline">\(\textstyle\frac{_nP_r}{r!}\)</span> formas distintas de elegir <em>subconjuntos no ordenados</em> de <span class="math inline">\(r \leq n\)</span> elementos. Este cálculo corresponde a nuestra tercer herramienta de conteo.</p>
+<p>Sean <span class="math inline">\(n \in \mathbb{N}_0, \; r \in \mathbb{N}_0\)</span> tales que <span class="math inline">\(r \leq n\)</span>, se llama <strong>combinación de</strong> <span class="math inline">\(\mathbf{n}\)</span> elementos en <span class="math inline">\(\mathbf{r}\)</span> a <span class="math display">\[_nC_r = \frac{_nP_r}{r!} = \frac{n!}{r! \, (n-r)!}\]</span></p>
+<p>Nótese que <span class="math inline">\(_nC_r \leq \; _nP_r \quad \forall \; n, r \in \mathbb{N}_0\)</span> tales que <span class="math inline">\(r \leq n\)</span>.</p>
+<p>En otras palabras, cuando queramos contar el número de “grupos” (de tamaño fijo) que pueden formarse a partir de un conjunto, utilizaremos combinaciones. Si adicionalmente nos interesa establecer “roles” dentro de dicho grupo, utilizaremos permutaciones.</p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 7a</strong></p>
+</div>
+<p>Un comité de 3 personas debe formarse a partir de un grupo de 20 personas. ¿De cuántas formas distintas puede hacerse esto?</p>
+<p><strong>Solución:</strong> Tenemos un conjunto de tamaño <span class="math inline">\(n=20\)</span> y nos interesa armar un grupo de tamaño <span class="math inline">\(r=3\)</span>, pero sin asignar roles dentro del grupo (es decir, los 3 cargos a ocupar son indistinguibles entre sí). En conclusión, debemos usar una combinación: <span class="math display">\[_{20}C_3 = \frac{20!}{3!\;17!} = \frac{20 \times 19 \times 18}{3 \times 2 \times 1} = 1\,140 \text{ comités posibles.}\]</span></p>
+<hr>
+<div class="center">
+<p><strong>Ejemplo 7b</strong></p>
+</div>
+<p>Supongamos ahora que los 3 cargos a ocupar en el comité son presidente, vicepresidente y secretario. ¿Cómo afecta esto el número de posibles comités?</p>
+<p><strong>Solución:</strong> Como ahora los cargos son distinguibles entre sí, ya no importa únicamente quiénes son las 3 personas seleccionadas sino también el rol que ocupa cada una de ellas. Debemos usar entonces una permutación: <span class="math display">\[_{20}P_3 = \frac{20!}{17!} = 20 \times 19 \times 18 = 6\,840 \text{ comités posibles.}\]</span></p>
+</div>
+</section>
+</section>
+<section id="herramientas-de-conteo-con-repetición" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="herramientas-de-conteo-con-repetición"><span class="header-section-number">1.3</span> Herramientas de conteo con repetición</h2>
+<p>Las herramientas presentadas hasta ahora tienen una importante limitación: asumen que cada elemento de nuestro conjunto original sólo puede ser seleccionado una única vez. En los ejemplos vistos hasta ahora esta suposición es adecuada: si necesitamos llenar 3 cupos para formar un comité, no tendría sentido darle 2 cargos a la misma persona (por ejemplo: que sea presidente y vicepresidente simultáneamente). Estos son casos donde la selección se realiza <em>sin repetición</em> o <em>sin reposición</em>. Es análogo al bingo: cada vez que se saca una bola, ésta no vuelve al bolillero y por lo tanto su correspondiente número no puede ser seleccionado otra vez.</p>
+<p>Pero existen casos donde amerita realizar una <strong>selección <em>con repetición</em></strong> o <em>con reposición</em>. En la analogía del bingo, esto sería equivalente a extraer una bola, anotar su número correspondiente y volver a meterla en el bolillero, de modo que dicha bola podría volver a ser seleccionada en extracciones posteriores.</p>
+<p>Cuando la selección es con repetición, las fórmulas que vimos hasta ahora ya no sirven. Esto es porque <strong>el número de subconjuntos posibles aumenta</strong> cuando pasamos de una selección sin repetición a una con repetición. Veámoslo con un ejemplo.</p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 8</strong></p>
+</div>
+<p>Tenemos una bolsa con tres bolas enumeradas del 1 al 3. Se procede a hacer una selección con repetición de dos bolas; es decir, se selecciona una primera bola, se anota su número, se la vuelve a introducir en la bola y se selecciona una segunda bola. Si nos interesa distinguir la primera bola de la segunda, ¿cuántas extracciones distintas son posibles?</p>
+<p><strong>Solución:</strong> Si la selección fuese sin repetición, habría <span class="math inline">\(_3P_2 = 6\)</span> formas posibles de seleccionar dos bolas. Estas son:</p>
+<div class="flexcenter">
+<div class="half">
+<table class="table">
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\((1,2)\)</span></td>
+<td><span class="math inline">\((2,1)\)</span></td>
+<td><span class="math inline">\((3,1)\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\((1,3)\)</span></td>
+<td><span class="math inline">\((2,3)\)</span></td>
+<td><span class="math inline">\((3,2)\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Pero como la selección es con repetición, también debemos contar los casos donde se selecciona dos veces la misma bola. Estos son 3 casos en total: <span class="math inline">\((1,1)\)</span>, <span class="math inline">\((2,2)\)</span> y <span class="math inline">\((3,3)\)</span>. Por lo tanto, en total se tienen: <span class="math display">\[_3P_2 + 3 = 6 + 3 = 9 \text{ extracciones posibles.}\]</span></p>
+</div>
+<p>En conclusión, debemos deducir nuevas fórmulas para las permutaciones y combinaciones en los casos donde se selecciona con repetición.</p>
+<section id="permutaciones-con-repetición" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="permutaciones-con-repetición"><span class="header-section-number">1.3.1</span> Permutaciones con repetición</h3>
+<p>Supongamos que tenemos una bolsa con <span class="math inline">\(n=7\)</span> canicas y debemos seleccionar <span class="math inline">\(r=3\)</span> de ellas. Anteriormente, bajo el paradigma de una selección sin repetición, nuestra lógica era la siguiente: hay 7 formas de seleccionar la primera canica, luego 6 formas de seleccionar la segunda (porque la primera que seleccionamos ya no está disponible) y por último 5 formas de seleccionar la tercera (porque tanto la primera como la segunda canica seleccionada ya no están disponibles). En total, existen <span class="math inline">\(7 \times 6 \times 5 = 210\)</span> formas distintas de realizar esta selección.</p>
+<p>Ahora bien, bajo una selección con repetición, esta falta de disponibilidad que considerábamos luego de cada selección ya no existe, porque la reposición actúa como un <em>reset</em> y entonces todas las canicas están disponibles en todas las extracciones. ¿Cómo afecta esto los cálculos? Hay 7 formas de seleccionar la primera canica, luego 7 formas de seleccionar la segunda y 7 formas de seleccionar la tercera. En total tenemos <span class="math inline">\(7 \times 7 \times 7 = 7^3 = 343\)</span> formas distintas de realizar esta selección.</p>
+<p>¿Cómo se generaliza está lógica para valores arbitrarios de <span class="math inline">\(n\)</span> y <span class="math inline">\(r\)</span>? Si tenemos <span class="math inline">\(n\)</span> canicas y debemos seleccionar <span class="math inline">\(r\)</span> de ellas con reposición, entonces hay <span class="math inline">\(n\)</span> formas de seleccionar la primera canica, <span class="math inline">\(n\)</span> formas de seleccionar la segunda canica, y así sucesivamente para las <span class="math inline">\(r\)</span> canicas. O sea, en total tenemos: <span class="math display">\[ \underbrace{n \times n \times \cdots \times n}_\text{$r$ veces} = n^r \text{ selecciones distintas.} \]</span></p>
+<p>Esto nos da una fórmula para calcular permutaciones.</p>
+<p>Sean <span class="math inline">\(n \in \mathbb{N}_0, \; r \in \mathbb{N}_0\)</span>, se llama <strong>permutación con repetición de</strong> <span class="math inline">\(\mathbf{n}\)</span> elementos en <span class="math inline">\(\mathbf{r}\)</span> a <span class="math display">\[_nP'_r = n^r.\]</span></p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 9</strong></p>
+</div>
+<p>Un candado numérico tiene 3 rotores, donde cada de ellos puede estar seteado en un dígito del 0 al 9. ¿Cuántas claves distintas son posibles?</p>
+<p><strong>Solución:</strong> Se tienen <span class="math inline">\(n=10\)</span> posibles dígitos a ser seleccionados (con repetición) un total de <span class="math inline">\(r=3\)</span> veces, una por rotor. Utilizando la ecuación que acabamos de deducir: <span class="math display">\[_{10}P'_3 = 10^3 = 1\,000 \text{ claves posibles.}\]</span></p>
+</div>
+<p>En las herramientas con repetición, a diferencia de las herramientas simples, no es necesario que se verifique <span class="math inline">\(r \leq n\)</span>. Es decir, podemos tener una bolsa con <span class="math inline">\(n=3\)</span> canicas y seleccionar <span class="math inline">\(r=100\)</span> de ellas con repetición. Esto es porque, al reponerlas tras cada extracción, las canicas actúan como si fuesen infinitas y por lo tanto podemos realizar tantas extracciones como queramos.</p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 10</strong></p>
+</div>
+<p>Se tienen 3 lamparitas en fila. Cada una de ellas puede estar apagada o encendida. ¿Cuántas configuraciones de on/off son posibles?</p>
+<p><strong>Solución:</strong> Una forma de pensar en este problema es como si contásemos con <span class="math inline">\(n=2\)</span> estados (apagado y encendido) que se seleccionan con repetición para cada una de las <span class="math inline">\(r=3\)</span> lamparitas. Por lo tanto, el número de permutaciones con repetición nos lleva a: <span class="math display">\[_2P'_3 = 2^3 = 8 \text{ configuraciones posibles.}\]</span> Estas configuraciones son:</p>
+<div class="flexcenter">
+<div class="half">
+<table class="table">
+<tbody>
+<tr class="odd">
+<td>❌❌❌</td>
+<td>❌❌✅</td>
+<td>❌✅❌</td>
+<td>❌✅✅</td>
+</tr>
+<tr class="even">
+<td>✅❌❌</td>
+<td>✅❌✅</td>
+<td>✅✅❌</td>
+<td>✅✅✅</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>donde ❌ representa una lamparita apagada y ✅ representa una encendida.</p>
+</div>
+<p>A veces debemos ser creativos al pensar cuáles son los <span class="math inline">\(n\)</span> elementos y cuáles son los <span class="math inline">\(r\)</span> cupos en nuestro problema. Con frecuencia se piensa en la entidad más tangible como los elementos y la menos tangible como los cupos (por ejemplo: la entidad tangible son las personas y la entidad intangible son los cargos a ocupar en un comité). Esto no siempre funciona: si pensáramos en las <span class="math inline">\(n=3\)</span> lamparitas como los elementos y los <span class="math inline">\(r=2\)</span> estados (“on” y “off”) como los cupos, tendríamos que existen <span class="math inline">\(_3P'_2 = 3^2 = 9\)</span> resultados posibles, lo cual es incorrecto.</p>
+<p>¿Cómo podemos evitar este error? Visto que estamos contando el número de resultados posibles de un cierto evento, a veces resulta de mucha ayuda escribir uno de esos posibles resultados a modo ilustrativo. La “longitud” de tal resultado será igual a <span class="math inline">\(r\)</span>. Veámoslo con los dos ejemplos anteriores:</p>
+<div class="flexcenter">
+<div data-latex="">
+<table class="table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 30%">
+<col style="width: 32%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Problema</th>
+<th>Ejemplo de solución</th>
+<th>Longitud de solución</th>
+<th><span class="math inline">\(r\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Candado numérico</td>
+<td><span class="math inline">\(2\quad 5\quad 6\)</span></td>
+<td>3 elementos</td>
+<td><span class="math inline">\(r=3\)</span></td>
+</tr>
+<tr class="even">
+<td>Lamparitas</td>
+<td>✅❌✅</td>
+<td>3 elementos</td>
+<td><span class="math inline">\(r=3\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="combinaciones-con-repetición" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="combinaciones-con-repetición"><span class="header-section-number">1.3.2</span> Combinaciones con repetición</h3>
+<p>Las combinaciones también pueden usarse ante una selección con repetición. La deducción de su fórmula quizás sea la más compleja de todas las herramientas, pero vale la pena, porque nos brinda una forma alternativa de pensar algunos ejercicios de combinatoria.</p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 11</strong></p>
+</div>
+<p>En una bolsa se tienen dos canicas: una azul y una roja. Se seleccionan dos de ellas al azar y con reposición. ¿Cuántas extracciones distintas son posibles?</p>
+<p><strong>Solución:</strong> Llamemos <span class="math inline">\(A\)</span> a la canica azul y <span class="math inline">\(R\)</span> a la canica roja. Tras la primera extracción, la canica es devuelta a la bolsa y en la segunda extracción es posible repetirla. Podemos pensar en la canica repetida como un elemento adicional, como si nuestra bolsa contuviera 3 canicas: una roja, una azul, y una del mismo color de la primera canica que seleccionemos. Como aún no sabemos de qué color será, podemos simbolizarla con una estrella, como si fuera un comodín.</p>
+<p><span class="math display">\[\{ \; A, \; R, \; \star \; \}\]</span></p>
+<p>De este modo consideramos la repetición mediante comodines en nuestro conjunto de elementos (la bolsa de canicas). Este nuevo problema puede resolverse utilizando una combinación simple. Ahora tengo 3 elementos, pero sigo teniendo que extraer 2 de ellos.</p>
+<p>Por lo tanto, el número de combinaciones con repetición resulta: <span class="math display">\[_2C'_2 \;=\; _3C_2 = 3 \text{ extracciones posibles.}\]</span></p>
+</div>
+<p>El resultado anterior es fácilmente verificable por enumeración exhaustiva. Las tres selecciones posibles son: extraer dos veces la canica azul, extraer dos veces la canica roja, o extraer una vez cada canica. Matemáticamente, estos resultados pueden expresarse como <span class="math inline">\(\{A, A\}, \{R, R\}, \{A, R\}\)</span>. ¿Cómo se ven estos resultados bajo el enfoque del comodín?</p>
+<div class="flexcenter">
+<div class="half">
+<table class="table">
+<thead>
+<tr class="header">
+<th>Original</th>
+<th></th>
+<th>Alternativo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\{A,A\}\)</span></td>
+<td><span class="math inline">\(\longrightarrow\)</span></td>
+<td><span class="math inline">\(\{A,\star\}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\{R,R\}\)</span></td>
+<td><span class="math inline">\(\longrightarrow\)</span></td>
+<td><span class="math inline">\(\{R,\star\}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\{A,R\}\)</span></td>
+<td><span class="math inline">\(\longrightarrow\)</span></td>
+<td><span class="math inline">\(\{A,R\}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Nótese que, bajo el enfoque de las 3 canicas, podría ocurrir que el comodín se seleccione en la primera extracción. ¿Cómo se interpretaría eso? Para tal caso cambiamos la definición del comodín: esta canica adicional repetirá el color de la canica que se seleccione en la segunda extracción. Aunque pueda parecer arbitrario, veremos en ejemplos posteriores que existe una forma sistemática de definir el valor que toma nuestro comodín.</p>
+<p>Sigamos construyendo una solución mediante otro ejemplo.</p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 12</strong></p>
+</div>
+<p>En una bolsa se tienen dos canicas: una azul y una roja. Se seleccionan tres de ellas al azar y con reposición. ¿Cuántas extracciones distintas son posibles?</p>
+<p><strong>Solución:</strong> Llamemos <span class="math inline">\(A\)</span> a la canica azul y <span class="math inline">\(R\)</span> a la canica roja. En este caso no alcanza con incorporar un único comodín porque, al ser tres extracciones y no dos, puede ocurrir que extraigamos la misma canica un total de tres veces: una extracción original + dos repeticiones. Por lo tanto es necesario contar con dos comodines. Usaremos un subíndice para diferenciarlos.</p>
+<p><span class="math display">\[\{\; A, \; R, \; \star_1, \; \star_2 \;\}\]</span></p>
+<p>Bajo una combinación simple, esto resultaría en un total de <span class="math inline">\(_4C_3 = 4\)</span> selecciones distintas. ¿Cómo podríamos trazar una equivalencia entre los resultados del enfoque de comodines y el enfoque original del problema? Para lograr esto conviene escribir los posibles resultados en forma ordenada: primero las canicas de colores (en orden alfabético) y luego los comodines (en orden ascendiente de subíndices).</p>
+<p>Una vez expresados de esta manera, las estrellas toman la siguiente definición: la estrella <span class="math inline">\(i\)</span>-ésima, <span class="math inline">\(\star_i\)</span>, asume el valor del <span class="math inline">\(i\)</span>-ésimo elemento del resultado.</p>
+<div class="flexcenter">
+<div class="half">
+<table class="table">
+<thead>
+<tr class="header">
+<th>Original</th>
+<th></th>
+<th>Alternativo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\{A,A,A\}\)</span></td>
+<td><span class="math inline">\(\longrightarrow\)</span></td>
+<td><span class="math inline">\(\{A,\star_1,\star_2\}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\{A,A,R\}\)</span></td>
+<td><span class="math inline">\(\longrightarrow\)</span></td>
+<td><span class="math inline">\(\{A,R,\star_1\}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\{A,R,R\}\)</span></td>
+<td><span class="math inline">\(\longrightarrow\)</span></td>
+<td><span class="math inline">\(\{A,R,\star_2\}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\{R,R,R\}\)</span></td>
+<td><span class="math inline">\(\longrightarrow\)</span></td>
+<td><span class="math inline">\(\{R,\star_1,\star_2\}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Nótese cómo funciona la primera equivalencia: <span class="math inline">\(\star_1\)</span> toma el valor del primer elemento en ese conjunto, o sea, <span class="math inline">\(A\)</span> (azul). A su vez, <span class="math inline">\(\star_2\)</span> toma el valor del segundo elemento, o sea, <span class="math inline">\(\star_1\)</span>, que ya dijimos que es una canica azul. Por lo tanto, ese resultado es equivalente a seleccionar una canica azul en las tres extracciones. El segundo resultado, por otra parte, se traduce como <span class="math inline">\(\{A,R,\star_1\} \equiv \{A,R,A\} \equiv \{A,A,R\}\)</span> (recordemos que no importa el orden de las extracciones y por eso los dos últimos conjuntos son equivalentes).</p>
+<p>En conclusión, se tienen: <span class="math display">\[_2C'_3 \;=\; _4C_3 = 4 \text{ extracciones posibles.}\]</span></p>
+</div>
+<p>A partir de este ejemplo podemos ver que las combinaciones con repetición cuentan con la misma propiedad que las permutaciones con repetición: <span class="math inline">\(n\)</span> puede ser menor, igual o mayor a <span class="math inline">\(r\)</span>.</p>
+<p>Ya estamos en condiciones de deducir la fórmula para las combinaciones con repetición. Hemos visto que pueden calcularse a través de una combinación simple, la cual considera el mismo número de <span class="math inline">\(r\)</span> cupos pero un número mayor de elementos. ¿Cuántos, exactamente? Hay que sumarle el número de comodines, el cual siempre es igual al número de extracciones exceptuando la primera, o sea, <span class="math inline">\(r-1\)</span>.</p>
+<p>Sean <span class="math inline">\(n \in \mathbb{N}_0, \; r \in \mathbb{N}_0\)</span>, se llama <strong>combinación con repetición de</strong> <span class="math inline">\(\mathbf{n}\)</span> elementos en <span class="math inline">\(\mathbf{r}\)</span> a <span class="math display">\[_nC'_r \; = \; _{(n+r-1)}C_r = \dfrac{(n+r-1)!}{r! \; (n-1)!}.\]</span></p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 13</strong></p>
+</div>
+<p>Una biblioteca tiene únicamente libros de contabilidad, de finanzas y de marketing. Seleccionando cinco de ellos al azar, ¿cuántos grupos de libros son posibles?</p>
+<p><strong>Solución:</strong> Llamemos <span class="math inline">\(C\)</span> a los libros de contabilidad, <span class="math inline">\(F\)</span> a los de finanzas y <span class="math inline">\(M\)</span> a los de marketing. Un grupo posible sería <span class="math inline">\(\{C,F,F,M,M\}\)</span>, ya que sólo nos interesa el género de cada libro.</p>
+<p>Utilizando la fórmula que acabamos de deducir: <span class="math display">\[_3C'_5 \;=\; _{(3+5-1)}C_5 \;=\; _7C_5 = 21 \text{ grupos de libros posibles.}\]</span></p>
+</div>
+<p>El ejemplo anterior muestra algo interesante: a veces las “reposiciones” son simbólicas, no reales. En este caso no teníamos canicas en una bolsa sino libros en una biblioteca. Más aún, los libros que seleccionamos no eran siempre los mismos sino que pertenecían a una gran colección.</p>
+<p>¿Por qué, entonces, hablamos de combinaciones con repetición? Esto es porque lo que nos interesa de cada libro, lo que los identifica, es su género, y esa característica sí se repite entre elementos distintos. Matemáticamente, esto es equivalente a tener un solo libro de cada género (contabilidad, finanzas y marketing), ponerlos en una caja y realizar cinco extracciones con reposición, de modo que cada libro pueda ser seleccionado en más de una ocasión.</p>
+<p>Si estos casos generan confusión, se recomienda nuevamente visualizar cómo sería un posible resultado, tal como se hizo en el ejemplo anterior y como se muestra en detalle en el siguiente.</p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 14</strong></p>
+</div>
+<p>Un local de empanadas tiene sólo 4 sabores disponibles: carne, humita, pollo y verdura. Pidiendo 3 empanadas, ¿cuántos pedidos distintos son posibles?</p>
+<p><strong>Solución:</strong> Llamemos <span class="math inline">\(C\)</span>, <span class="math inline">\(H\)</span>, <span class="math inline">\(P\)</span> y <span class="math inline">\(V\)</span> a los sabores. Por enumeración exhaustiva, los posibles pedidos de 3 empanadas son:</p>
+<div class="flexcenter">
+<div class="half">
+<table class="table">
+<thead>
+<tr class="header">
+<th>1 sabor</th>
+<th>2 sabores</th>
+<th></th>
+<th>3 sabores</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\{C,C,C\}\)</span></td>
+<td><span class="math inline">\(\{C,C,H\}\)</span></td>
+<td><span class="math inline">\(\{C,H,H\}\)</span></td>
+<td><span class="math inline">\(\{C,H,P\}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\{H,H,H\}\)</span></td>
+<td><span class="math inline">\(\{C,C,P\}\)</span></td>
+<td><span class="math inline">\(\{C,P,P\}\)</span></td>
+<td><span class="math inline">\(\{C,H,V\}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\{P,P,P\}\)</span></td>
+<td><span class="math inline">\(\{C,C,V\}\)</span></td>
+<td><span class="math inline">\(\{C,V,V\}\)</span></td>
+<td><span class="math inline">\(\{C,P,V\}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\{V,V,V\}\)</span></td>
+<td><span class="math inline">\(\{H,H,P\}\)</span></td>
+<td><span class="math inline">\(\{H,P,P\}\)</span></td>
+<td><span class="math inline">\(\{H,P,V\}\)</span></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><span class="math inline">\(\{H,H,V\}\)</span></td>
+<td><span class="math inline">\(\{H,V,V\}\)</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td><span class="math inline">\(\{P,P,V\}\)</span></td>
+<td><span class="math inline">\(\{P,V,V\}\)</span></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Esto nos da un total de 20 pedidos posibles. Verifiquemos que la fórmula para combinaciones con repetición nos devuelve el mismo resultado.</p>
+<p><span class="math display">\[_4C'_3 = \; _{(4+3-1)}C_3 \; = \; _6C_3 = \dfrac{6!}{3! \; 3!} = 20\]</span></p>
+<p>Por lo tanto: <span class="math display">\[_4C'_3 = 20 \text{ pedidos posibles.}\]</span></p>
+</div>
+</section>
+</section>
+<section id="reglas-de-conteo" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="reglas-de-conteo"><span class="header-section-number">1.4</span> Reglas de conteo</h2>
+<p>Lo que vimos hasta ahora son <em>herramientas</em> de conteo: artificios matemáticos para calcular en forma relativamente sencilla el número de formas posibles de hacer algo. Estas herramientas respetan ciertos lineamientos llamados <em>reglas de conteo</em>, las cuales veremos a continuación. Bajo ciertos escenarios simples, estas reglas son útiles por sí mismas para calcular el número de formas posibles de resolver una tarea.</p>
+<section id="regla-de-la-multiplicidad" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="regla-de-la-multiplicidad"><span class="header-section-number">1.4.1</span> Regla de la multiplicidad</h3>
+<p>La primera regla de conteo es la <strong>regla de la multiplicidad</strong>:</p>
+<p>Considérese un proceso que consiste en <span class="math inline">\(k\)</span> etapas, donde cada una de ellas puede realizarse de <span class="math inline">\(n_1\)</span>, <span class="math inline">\(n_2\)</span>, <span class="math inline">\(\cdots\)</span>, <span class="math inline">\(n_k\)</span> maneras diferentes, y donde cada una de las maneras de realizar una etapa puede combinarse con todas las maneras de las demás etapas. Entonces el procedimiento total puede realizarse de <span class="math display">\[\prod_{i=1}^k n_i = n_1 \times n_2 \times \cdots \times n_k\]</span> maneras diferentes.</p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 15</strong></p>
+</div>
+<p>Si en mi armario tengo 5 camisas, 3 pantalones y 2 pares de zapatos, ¿de cuántas formas distintas puedo vestirme?</p>
+<p><strong>Solución:</strong> El proceso “vestirse” consta de <span class="math inline">\(k=3\)</span> etapas: ponerse una camisa, ponerse un pantalón y ponerse un par de zapatos. Existen <span class="math inline">\(n_1=5\)</span> formas de elegir una camisa, <span class="math inline">\(n_2=3\)</span> formas de elegir un pantalón y <span class="math inline">\(n_3=2\)</span> formas de elegir un par de zapatos.</p>
+<p>Asumiendo que cada prenda de ropa puede combinarse con cualquier otra, esto resulta en un total de: <span class="math display">\[n_1 \times n_2 \times n_3 = 5 \times 3 \times 2 = 30 \text{ vestuarios posibles.}\]</span></p>
+</div>
+</section>
+<section id="regla-de-la-adición" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="regla-de-la-adición"><span class="header-section-number">1.4.2</span> Regla de la adición</h3>
+<p>La segunda regla de conteo es la <strong>regla de la adición</strong>: \</p>
+<p>Considérese un proceso que admite <span class="math inline">\(k\)</span> enfoques posibles, donde para cada uno de ellos existen <span class="math inline">\(n_1\)</span>, <span class="math inline">\(n_2\)</span>, <span class="math inline">\(\cdots\)</span>, <span class="math inline">\(n_k\)</span> formas distintas de ponerlo en práctica, pero donde elegir uno de los enfoques implica descartar todos los demás. Entonces el procedimiento total puede realizarse de <span class="math display">\[\sum_{i=1}^k n_i = n_1 + n_2 + \cdots + n_k\]</span> maneras diferentes.</p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 16</strong></p>
+</div>
+<p>Para viajar hoy de Rosario a Buenos Aires hay disponibles 2 horarios de tren, 14 de colectivo y 3 de avión. ¿Cuántas opciones disponibles hay para viajar?</p>
+<p><strong>Solución:</strong> El proceso “viajar de Rosario a Buenos Aires” admite <span class="math inline">\(k=3\)</span> enfoques: viajar en tren, viajar en colectivo o viajar en avión. Existen <span class="math inline">\(n_1=2\)</span> formas de viajar en tren, <span class="math inline">\(n_2=14\)</span> formas de viajar en colectivo y <span class="math inline">\(n_3=3\)</span> formas de viajar en avión. Naturalmente, elegir uno de los enfoques implica descartar los demás (es decir, si viajo en avión no voy a viajar en tren).</p>
+<p>Esto resulta en un total de: <span class="math display">\[n_1 + n_2 + n_3 = 2 + 14 + 3 = 19 \text{ viajes posibles.}\]</span></p>
+</div>
+<p>Esta propiedad a través de la cual elegir un enfoque implica no poder elegir ninguno de los demás es lo que se conoce como <em>exclusividad mutua</em>. Dos elementos vinculados de este modo se denominan <strong>mutuamente excluyentes</strong>. Por ejemplo, nacer en Argentina y nacer en Turquía son condiciones mutuamente excluyentes porque, si una es cierta, la otra no puede serlo.</p>
+</section>
+</section>
+<section id="mezclando-reglas-y-herramientas" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="mezclando-reglas-y-herramientas"><span class="header-section-number">1.5</span> Mezclando reglas y herramientas</h2>
+<p>Ocasionalmente nos encontramos con escenarios complejos, para los cuales no nos alcanza con una sola herramienta de conteo para contar todas las alternativas posibles. Cuando esto ocurre, debemos hacer uso de una mezcla de herramientas, las cuales se unen haciendo uso de las reglas de conteo.</p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 17</strong></p>
+</div>
+<p>Las matrículas de vehículos en China están compuestas por dos letras, seguidas por cuatro dígitos. ¿Cuántas matrículas distintas son posibles bajo este sistema?</p>
+<p><strong>Solución:</strong> El proceso de generación de una matrícula puede visualizarse como compuesto por dos etapas: selección de letras y selección de dígitos. Visto que cualquier conjunto de letras puede combinarse con cualquier conjunto de dígitos, estos dos sub-resultados deberán ser posteriormente multiplicados entre sí (regla de la multiplicidad).</p>
+<p>En cuanto a las letras, sabemos que importa el orden en que las escribimos y que pueden repetirse, por lo que existen <span class="math inline">\(_{26}P'_2 = 26^2\)</span> formas de elegirlas.</p>
+<p>En cuanto a los dígitos, también importa su orden y también pueden repetirse, por lo que existen <span class="math inline">\(_{10}P'_4 = 10^4\)</span> formas de elegirlos.</p>
+<p>Esto resulta en un total de: <span class="math display">\[26^2 \times 10^4 = 676 \times 10\,000 = 6\,760\,000 \text{ matrículas distintas.}\]</span></p>
+</div>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 18</strong></p>
+</div>
+<p>En la base de datos de una empresa nacional, los empleados diurnos son identificados con un número de legajo compuesto por dos letras seguidas por dos dígitos, mientras que el número de legajo de los empleados nocturnos consiste en una letra seguida por tres dígitos. ¿Cuántos empleados distintos admite este sistema?</p>
+<p><strong>Solución:</strong> Podemos pensar en la obtención de un número de legajo como un proceso que admite dos versiones: una para empleados diurnos y otra para empleados nocturnos. Estas versiones son mutuamente excluyentes y por lo tanto los números de legajos distintos de cada versión deben sumarse (regla de la adición).</p>
+<p>Usando lo visto en el ejemplo anterior, podemos deducir que existen <span class="math inline">\(_{27}P'_2 \,\times\, _{10}P'_2\)</span> legajos posibles para los empleados diurnos y que existen <span class="math inline">\(_{27}P'_1 \,\times\, _{10}P'_3\)</span> legajos posibles para los nocturnos.</p>
+<p>Esto resulta en un total de: <span class="math display">\[(27^2 \times 10^2) + (27 \times 10^3) = 72\,900 + 27\,000 = 99\,900 \text{ empleados distintos.}\]</span></p>
+</div>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 19</strong></p>
+</div>
+<p>Se tiene un total de 14 libros: 5 de química, 4 de física, 3 de astronomía y 2 de botánica. ¿De cuántas formas distintas pueden ser ordenados en una repisa?</p>
+<p><strong>Solución:</strong> Nótese que cuando la consigna habla de “ordenar los libros”, esto es respecto al tema de cada uno; es decir, intercambiar de lugar dos libros de física no se considera un nuevo ordenamiento, pero uno de física y uno de botánica sí. Como tal, una posible solución tendría la forma: <span class="math display">\[\{Q,A,F,F,Q,A,F,Q,Q,Q,B,A,B,F\}\]</span></p>
+<p>Una buena estrategia sería pensar, uno por uno, cómo los libros de cada tema podrían ser posicionados en la repisa. Tomemos, en primer lugar, los 5 libros de química. Estos podrían posicionarse en cualquiera de los 14 espacios vacíos de la repisa. ¿De cuántas maneras? Para calcular esto podríamos pensar en los 14 espacios como “elementos” y en los 5 libros como “cupos” a seleccionar. Esto nos da un total de <span class="math inline">\(_{14}C_5 = 2\,002\)</span> formas de ordenar los 5 libros de química entre los 14 espacios de una repisa.</p>
+<p>Quedan aún 9 espacios vacíos. ¿De cuántas maneras podemos llenar 4 de ellos con libros de física? En forma análoga a lo anterior, serían en total <span class="math inline">\(_9C_4 = 126\)</span> formas distintas. Para combinar ambos resultados, nótese que cualquiera de los ordenamientos de los libros de química puede combinarse con cualquiera de los ordenamientos de los de física. Aplicando la regla de la multiplicidad, estos valores deberían ser multiplicados entre sí. Del mismo modo se considerarían los libros de astronomía y de botánica.</p>
+<p>Esto resulta en un total de: <span class="math display">\[_{14}C_5 \;\times\; _9C_4 \;\times\; _5C_3 \;\times\; _2C_2 = 2\,002 \times 126 \times 10 \times 1 = 2\,522\,520 \text{ órdenes distintos.}\]</span></p>
+</div>
+<p>El ejemplo anterior introduce una herramienta muy útil en la combinatoria, que surge de mezclar herramientas y reglas de conteo.</p>
+<p>Sea un conjunto de <span class="math inline">\(n\)</span> elementos, los cuales pueden clasificarse en <span class="math inline">\(k\)</span> grupos mutuamente excluyentes. Si hay <span class="math inline">\(n_1\)</span> elementos en el primer grupo, <span class="math inline">\(n_2\)</span> en el segundo, <span class="math inline">\(\cdots\)</span>, <span class="math inline">\(n_k\)</span> en el <span class="math inline">\(k\)</span>-ésimo, se denomina <strong>coeficiente multinomial</strong>, calculado como <span class="math display">\[\dfrac{n!}{n_1! \; n_2! \; \cdots \; n_k!}\]</span> al número de formas de ordenar los elementos según su grupo. Nótese que debe verificarse <span class="math inline">\(n_1+n_2+\cdots+n_k=n\)</span>. Nótese también que para el caso de <span class="math inline">\(k=2\)</span> grupos este coeficiente equivale a una combinación simple.</p>
+</section>
+<section id="un-caso-real-mccombinaciones" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="un-caso-real-mccombinaciones"><span class="header-section-number">1.6</span> Un caso real: McCombinaciones</h2>
+<p>En 2002, McDonald’s lanzó una campaña para publicitar el menú McChoice: un menú compuesto por ocho ítems (gaseosa, hamburguesa, papas fritas, batido, pancho, entre otros). Cada cliente podía elegir si quería o no incluir cada uno de los ítems en su pedido, lo cual abría la posibilidad a ordenar un menú McChoice de muchas maneras distintas. ¿Cuántas, exactamente? En su campaña publicitaria, McDonald’s afirmaba que habían <span class="math inline">\(40\,312\)</span> formas posibles de ordenar un menú, lo cual es un gran error.</p>
+<div id="fig-mccombos" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/mccombos.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figura&nbsp;1.2: Una valla publicitaria anunciando el lanzamiento del menú McChoice.</figcaption>
+</figure>
+</div>
+<p>La elección de un menú específico surge de contestar “sí” o “no” a ocho preguntas específicas: ¿quiere una gaseosa?, ¿quiere un pancho?, ¿quiere un helado?, etcétera. Como cada uno de los ítems son distinguibles entre sí, la herramienta de conteo adecuada para este problema es una permutación con repetición, porque se repite ocho veces la pregunta de sí/no pero, dependiendo del orden en que se pregunta, cada respuesta está asociada a un ítem diferente. En otras palabras, se tiene un total de <span class="math inline">\(2^8 = 256\)</span> menúes posibles, aunque lo correcto sería excluir el caso del “menú vacío”, donde el cliente contesta “no” a todas las preguntas (no tendría sentido). En ese caso el resultado es: <span class="math display">\[2^8 - 1 = 256 - 1 = 255 \text{ menúes posibles.}\]</span></p>
+<p>¿Cómo McDonald’s arribó a un número tan distinto? Se desconoce el cálculo que realizaron, visto que públicamente negaron haber cometido un error <span class="citation" data-cites="parker2019">(<a href="#ref-parker2019" role="doc-biblioref">Parker 2019</a>)</span>, pero es fácil observar que <span class="math inline">\(40\,312 = 8! - 8.\)</span> Dada la similitud entre la estructura de este cálculo y la respuesta correcta, es sensato suponer que McDonald’s intentó seguir la misma lógica. El mayor error que cometieron fue usar un número factorial, el cual sirve para contar el número de formas de <em>ordenar</em> los ocho ítems del menú. Es decir, asumieron que los clientes pedirían todos los ítems del menú y las “diferencias” entre ellos surgirían del orden en que estos alimentos fuesen consumidos (si bien esto es ilógico porque, por ejemplo, la gaseosa suele consumirse al mismo tiempo que la gaseosa, en vez de antes o después).</p>
+<p>Un total de 154 personas presentaron una queja oficial a la <em>Advertising Standards Authority</em> de Reino Unido. A pesar de estar publicitando un número que resultó ser más de cien veces mayor al real, la agencia falló a favor de McDonald’s <span class="citation" data-cites="parker2019">(<a href="#ref-parker2019" role="doc-biblioref">Parker 2019</a>)</span>. Desde entonces, se le llaman McCombinaciones<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> a los números del tipo <span class="math inline">\(n!-n\)</span>, donde para <span class="math inline">\(n=8\)</span> se tiene el número utilizado en la publicidad.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-parker2019" class="csl-entry" role="listitem">
+Parker, M. 2019. <em>Humble Pi: A Comedy of Maths Errors</em>. Penguin Books Limited. <a href="https://books.google.com.ar/books?id=qYlZDwAAQBAJ">https://books.google.com.ar/books?id=qYlZDwAAQBAJ</a>.
+</div>
+</div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>La combinatoria es la rama de las matemáticas que estudia la enumeración de configuraciones que satisfacen ciertas condiciones.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>El conjunto <span class="math inline">\(\mathbb{N}_0\)</span> equivale al conjunto de números naturales y el número 0, es decir que <span class="math inline">\(\mathbb{N}_0 = \{0\} \cup \mathbb{N} = \{ 0,1,2,3,4,\cdots \}\)</span>. Si bien los casos donde <span class="math inline">\(n=0\)</span> y/o <span class="math inline">\(r=0\)</span> son triviales y poco frecuentes en la práctica, estos son posibles desde el punto de vista matemático y por lo tanto se los incluye. Esto no significa que no tienen sentido práctico: el caso <span class="math inline">\(r=0\)</span>, por ejemplo, refiere al número de formas de elegir subconjuntos de cero elementos; se considera que sólo hay una forma posible de hacer esto (no elegir ningún elemento).<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>En las calculadoras convencionales el mayor número factorial que puede calcularse es <span class="math inline">\(69!\)</span>, mientras que en las computadoras actuales dicho número es <span class="math inline">\(170!\)</span>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><a href="https://www.youtube.com/watch?v=flqC3c2wsNI" class="uri">https://www.youtube.com/watch?v=flqC3c2wsNI</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Secuencia <a href="https://oeis.org/A005096/internal">A005096</a> de la OEIS.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Prefacio</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link">
+        <span class="nav-page-text">Referencias</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
