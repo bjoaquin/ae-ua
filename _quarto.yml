@@ -34,3 +34,4 @@ editor: visual
 output:
   html_document:
     css: style.css
+    citation_package: biblatex
