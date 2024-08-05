@@ -12,16 +12,18 @@ book:
   author: 
     - Joaquín Bermejo
     - Victorio Costa
-  date: "6/23/2024"
+  date: "8/4/2024"
   chapters:
     - index.qmd
-    - conteo.qmd
+    - 0_conteo.qmd
+    - 1_prob.qmd
     - references.qmd
 
 bibliography: references.bib
 
 format:
   html:
+    number-sections: false
     theme: cosmo
     css: style.css
     link-external-icon: true

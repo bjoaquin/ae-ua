@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Análisis Estadístico (UA) - 1&nbsp; Herramientas de conteo</title>
+<title>Análisis Estadístico (UA) - 0. Herramientas de conteo</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -49,7 +49,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
+<link href="./1_prob.html" rel="next">
 <link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -95,7 +95,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./conteo.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Herramientas de conteo</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./0_conteo.html"><span class="chapter-title">0. Herramientas de conteo</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -122,14 +122,17 @@ div.csl-indent {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Prefacio</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Prefacio</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./conteo.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Herramientas de conteo</span></span></a>
+  <a href="./0_conteo.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">0. Herramientas de conteo</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1_prob.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1. Probabilidad</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -148,25 +151,25 @@ div.csl-indent {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción"><span class="header-section-number">1.1</span> Introducción</a></li>
-  <li><a href="#herramientas-de-conteo-simples" id="toc-herramientas-de-conteo-simples" class="nav-link" data-scroll-target="#herramientas-de-conteo-simples"><span class="header-section-number">1.2</span> Herramientas de conteo simples</a>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción">Introducción</a></li>
+  <li><a href="#herramientas-de-conteo-simples" id="toc-herramientas-de-conteo-simples" class="nav-link" data-scroll-target="#herramientas-de-conteo-simples">Herramientas de conteo simples</a>
   <ul class="collapse">
-  <li><a href="#factoriales" id="toc-factoriales" class="nav-link" data-scroll-target="#factoriales"><span class="header-section-number">1.2.1</span> Factoriales</a></li>
-  <li><a href="#permutaciones" id="toc-permutaciones" class="nav-link" data-scroll-target="#permutaciones"><span class="header-section-number">1.2.2</span> Permutaciones</a></li>
-  <li><a href="#combinaciones" id="toc-combinaciones" class="nav-link" data-scroll-target="#combinaciones"><span class="header-section-number">1.2.3</span> Combinaciones</a></li>
+  <li><a href="#factoriales" id="toc-factoriales" class="nav-link" data-scroll-target="#factoriales">Factoriales</a></li>
+  <li><a href="#permutaciones" id="toc-permutaciones" class="nav-link" data-scroll-target="#permutaciones">Permutaciones</a></li>
+  <li><a href="#combinaciones" id="toc-combinaciones" class="nav-link" data-scroll-target="#combinaciones">Combinaciones</a></li>
   </ul></li>
-  <li><a href="#herramientas-de-conteo-con-repetición" id="toc-herramientas-de-conteo-con-repetición" class="nav-link" data-scroll-target="#herramientas-de-conteo-con-repetición"><span class="header-section-number">1.3</span> Herramientas de conteo con repetición</a>
+  <li><a href="#herramientas-de-conteo-con-repetición" id="toc-herramientas-de-conteo-con-repetición" class="nav-link" data-scroll-target="#herramientas-de-conteo-con-repetición">Herramientas de conteo con repetición</a>
   <ul class="collapse">
-  <li><a href="#permutaciones-con-repetición" id="toc-permutaciones-con-repetición" class="nav-link" data-scroll-target="#permutaciones-con-repetición"><span class="header-section-number">1.3.1</span> Permutaciones con repetición</a></li>
-  <li><a href="#combinaciones-con-repetición" id="toc-combinaciones-con-repetición" class="nav-link" data-scroll-target="#combinaciones-con-repetición"><span class="header-section-number">1.3.2</span> Combinaciones con repetición</a></li>
+  <li><a href="#permutaciones-con-repetición" id="toc-permutaciones-con-repetición" class="nav-link" data-scroll-target="#permutaciones-con-repetición">Permutaciones con repetición</a></li>
+  <li><a href="#combinaciones-con-repetición" id="toc-combinaciones-con-repetición" class="nav-link" data-scroll-target="#combinaciones-con-repetición">Combinaciones con repetición</a></li>
   </ul></li>
-  <li><a href="#reglas-de-conteo" id="toc-reglas-de-conteo" class="nav-link" data-scroll-target="#reglas-de-conteo"><span class="header-section-number">1.4</span> Reglas de conteo</a>
+  <li><a href="#reglas-de-conteo" id="toc-reglas-de-conteo" class="nav-link" data-scroll-target="#reglas-de-conteo">Reglas de conteo</a>
   <ul class="collapse">
-  <li><a href="#regla-de-la-multiplicidad" id="toc-regla-de-la-multiplicidad" class="nav-link" data-scroll-target="#regla-de-la-multiplicidad"><span class="header-section-number">1.4.1</span> Regla de la multiplicidad</a></li>
-  <li><a href="#regla-de-la-adición" id="toc-regla-de-la-adición" class="nav-link" data-scroll-target="#regla-de-la-adición"><span class="header-section-number">1.4.2</span> Regla de la adición</a></li>
+  <li><a href="#regla-de-la-multiplicidad" id="toc-regla-de-la-multiplicidad" class="nav-link" data-scroll-target="#regla-de-la-multiplicidad">Regla de la multiplicidad</a></li>
+  <li><a href="#regla-de-la-adición" id="toc-regla-de-la-adición" class="nav-link" data-scroll-target="#regla-de-la-adición">Regla de la adición</a></li>
   </ul></li>
-  <li><a href="#mezclando-reglas-y-herramientas" id="toc-mezclando-reglas-y-herramientas" class="nav-link" data-scroll-target="#mezclando-reglas-y-herramientas"><span class="header-section-number">1.5</span> Mezclando reglas y herramientas</a></li>
-  <li><a href="#un-caso-real-mccombinaciones" id="toc-un-caso-real-mccombinaciones" class="nav-link" data-scroll-target="#un-caso-real-mccombinaciones"><span class="header-section-number">1.6</span> Un caso real: McCombinaciones</a></li>
+  <li><a href="#mezclando-reglas-y-herramientas" id="toc-mezclando-reglas-y-herramientas" class="nav-link" data-scroll-target="#mezclando-reglas-y-herramientas">Mezclando reglas y herramientas</a></li>
+  <li><a href="#un-caso-real-mccombinaciones" id="toc-un-caso-real-mccombinaciones" class="nav-link" data-scroll-target="#un-caso-real-mccombinaciones">Un caso real: McCombinaciones</a></li>
   </ul>
 </nav>
     </div>
@@ -175,7 +178,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Herramientas de conteo</span></h1>
+<h1 class="title"><span class="chapter-title">0. Herramientas de conteo</span></h1>
 </div>
 
 
@@ -190,8 +193,8 @@ div.csl-indent {
 
 </header>
 
-<section id="introducción" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="introducción"><span class="header-section-number">1.1</span> Introducción</h2>
+<section id="introducción" class="level2">
+<h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
 <p>Las <strong>herramientas de conteo</strong> sirven para contar el número de maneras distintas de obtener un cierto resultado, incluso bajo algunas condiciones o restricciones. Algunos ejemplos son:</p>
 <ul>
 <li>conociendo a los 3 ganadores de una competencia pero sin saber el orden en que ganaron, determinar de cuántas formas distintas podría haberse formado un podio entre esos 3 participantes.</li>
@@ -202,10 +205,10 @@ div.csl-indent {
 <li>sabiendo que en WhatsApp se recibieron 23 mensajes de 5 chats, contar el número de formas en que estos 23 mensajes podrían encontrarse repartidos entre esos 5 chats.</li>
 </ul>
 </section>
-<section id="herramientas-de-conteo-simples" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="herramientas-de-conteo-simples"><span class="header-section-number">1.2</span> Herramientas de conteo simples</h2>
-<section id="factoriales" class="level3" data-number="1.2.1">
-<h3 data-number="1.2.1" class="anchored" data-anchor-id="factoriales"><span class="header-section-number">1.2.1</span> Factoriales</h3>
+<section id="herramientas-de-conteo-simples" class="level2">
+<h2 class="anchored" data-anchor-id="herramientas-de-conteo-simples">Herramientas de conteo simples</h2>
+<section id="factoriales" class="level3">
+<h3 class="anchored" data-anchor-id="factoriales">Factoriales</h3>
 <p>El caso más simple para contar resultados posibles, del cual se desprenden todos los demás, consiste en contar de cuántas maneras puede reordenarse un conjunto de <span class="math inline">\(n\)</span> elementos, siendo <span class="math inline">\(n\)</span> un número natural (es decir, <span class="math inline">\(n \in \mathbb{N}\)</span>).</p>
 <div class="examplebox">
 <div class="center">
@@ -318,16 +321,16 @@ Idea clave
 <div class="cell-output-display">
 <div id="fig-crecimiento-factorial" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="conteo_files/figure-html/fig-crecimiento-factorial-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figura&nbsp;1.1: Comparación de las funciones exponencial y factorial.</figcaption>
+<p><img src="0_conteo_files/figure-html/fig-crecimiento-factorial-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figura&nbsp;2.1: Comparación de las funciones exponencial y factorial.</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>Como ya se dijo, el factorial es la base de las herramientas de conteo, pero no es la única. Es una forma práctica de contar el número de reordenamientos de <span class="math inline">\(n\)</span> elementos. Por ejemplo, en una carrera de Fórmula 1, donde compiten 20 autos, podemos usar el factorial para contar el número de resultados distintos para dicha carrera. Pero ¿qué pasaría si sólo nos interesara el resultado del podio, es decir, de las primeras 3 posiciones? Dicho de otro modo, dado un conjunto de <span class="math inline">\(n\)</span> elementos, ¿cómo podemos contar el número de <em>subconjuntos ordenados</em> de <span class="math inline">\(r&lt;n\)</span> elementos?</p>
 </section>
-<section id="permutaciones" class="level3" data-number="1.2.2">
-<h3 data-number="1.2.2" class="anchored" data-anchor-id="permutaciones"><span class="header-section-number">1.2.2</span> Permutaciones</h3>
+<section id="permutaciones" class="level3">
+<h3 class="anchored" data-anchor-id="permutaciones">Permutaciones</h3>
 <p>Intentemos resolver el problema propuesto en la sección anterior aplicando la misma lógica que nos llevó a descubrir el número factorial.</p>
 <div class="examplebox">
 <div class="center">
@@ -385,15 +388,15 @@ Advertencia
 <p><strong>Ejemplo 5</strong></p>
 </div>
 <p>El club de debate de una escuela secundaria cuenta con nueve miembros. La semana próxima se realizará un torneo de debate que tomará lugar en cuatro ciudades diferentes: Seattle, Baltimore, Washington y Denver. El director de la escuela debe elegir a un participante para enviar a cada ciudad. ¿De cuántas formas distintas puede hacer esto?</p>
-<p><strong>Solución:</strong> Nótese que en este ejemplo importa no sólo cuaĺes de los 9 miembros del club son seleccionados, sino también a qué ciudad es enviado cada uno. Se fija entonces el orden de las ciudades tal como fueron enumeradas en el enunciado, de modo que el primer participante será enviado a Seattle; el segundo, a Baltimore; el tercero, a Washington y el cuarto, a Denver. Nótese que el orden elegido para las ciudades no afecta los cálculos. Efectivamente, para cualquier orden arbitrario entre las 4 ciudades se obtendría el mismo resultado.</p>
+<p><strong>Solución:</strong> Nótese que en este ejemplo importa no sólo cuáles de los 9 miembros del club son seleccionados, sino también a qué ciudad es enviado cada uno. Se fija entonces el orden de las ciudades tal como fueron enumeradas en el enunciado, de modo que el primer participante será enviado a Seattle; el segundo, a Baltimore; el tercero, a Washington y el cuarto, a Denver. Nótese que el orden elegido para las ciudades no afecta los cálculos. Efectivamente, para cualquier orden arbitrario entre las 4 ciudades se obtendría el mismo resultado.</p>
 <p>Hay 9 posibles participantes para ser enviados al torneo en Seattle. Por cada uno de ellos, cualquiera de los 8 restantes puede ser enviado a Baltimore. A su vez, por cada par de participantes elegidos para Seattle y Baltimore respectivamente, cualquiera de los 7 restantes puede ser asignado a Washington. Por último, para cualquier terna ordenada de tres alumnos, cualquiera de los 6 restantes puede ser enviado a Denver.</p>
 <p>Por lo tanto, se tienen <span class="math display">\[_9P_5 = 9 \times 8 \times 7 \times 6 = 3\,024 \text{ formas posibles.}\]</span></p>
 </div>
 <p>Este ejemplo plantea un escenario donde cada uno de los participantes seleccionados es asignado a una ciudad diferente y por lo tanto los cuatro roles son distinguibles entre sí. Supongamos ahora que el torneo de debate se lleva a cabo en un solo lugar, y por lo tanto los cuatro roles son equivalentes e intercambiables. Ciertamente esto llevaría a una reducción en el número de formas distintas de elegir los participantes, porque soluciones que anteriormente podían considerarse distintas (por ejemplo, el conjunto de alumnos <span class="math inline">\([A, B, C, D]\)</span> y el conjunto <span class="math inline">\([B, D, A, C]\)</span>) ahora deberían contarse como una única solución.</p>
 <p>La pregunta es: ¿cuál es entonces el número de formas distintas de elegir los participantes?</p>
 </section>
-<section id="combinaciones" class="level3" data-number="1.2.3">
-<h3 data-number="1.2.3" class="anchored" data-anchor-id="combinaciones"><span class="header-section-number">1.2.3</span> Combinaciones</h3>
+<section id="combinaciones" class="level3">
+<h3 class="anchored" data-anchor-id="combinaciones">Combinaciones</h3>
 <div class="examplebox">
 <div class="center">
 <p><strong>Ejemplo 6</strong></p>
@@ -422,8 +425,8 @@ Advertencia
 </div>
 </section>
 </section>
-<section id="herramientas-de-conteo-con-repetición" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="herramientas-de-conteo-con-repetición"><span class="header-section-number">1.3</span> Herramientas de conteo con repetición</h2>
+<section id="herramientas-de-conteo-con-repetición" class="level2">
+<h2 class="anchored" data-anchor-id="herramientas-de-conteo-con-repetición">Herramientas de conteo con repetición</h2>
 <p>Las herramientas presentadas hasta ahora tienen una importante limitación: asumen que cada elemento de nuestro conjunto original sólo puede ser seleccionado una única vez. En los ejemplos vistos hasta ahora esta suposición es adecuada: si necesitamos llenar 3 cupos para formar un comité, no tendría sentido darle 2 cargos a la misma persona (por ejemplo: que sea presidente y vicepresidente simultáneamente). Estos son casos donde la selección se realiza <em>sin repetición</em> o <em>sin reposición</em>. Es análogo al bingo: cada vez que se saca una bola, ésta no vuelve al bolillero y por lo tanto su correspondiente número no puede ser seleccionado otra vez.</p>
 <p>Pero existen casos donde amerita realizar una <strong>selección <em>con repetición</em></strong> o <em>con reposición</em>. En la analogía del bingo, esto sería equivalente a extraer una bola, anotar su número correspondiente y volver a meterla en el bolillero, de modo que dicha bola podría volver a ser seleccionada en extracciones posteriores.</p>
 <p>Cuando la selección es con repetición, las fórmulas que vimos hasta ahora ya no sirven. Esto es porque <strong>el número de subconjuntos posibles aumenta</strong> cuando pasamos de una selección sin repetición a una con repetición. Veámoslo con un ejemplo.</p>
@@ -431,7 +434,7 @@ Advertencia
 <div class="center">
 <p><strong>Ejemplo 8</strong></p>
 </div>
-<p>Tenemos una bolsa con tres bolas enumeradas del 1 al 3. Se procede a hacer una selección con repetición de dos bolas; es decir, se selecciona una primera bola, se anota su número, se la vuelve a introducir en la bola y se selecciona una segunda bola. Si nos interesa distinguir la primera bola de la segunda, ¿cuántas extracciones distintas son posibles?</p>
+<p>Tenemos una bolsa con tres bolas enumeradas del 1 al 3. Se procede a hacer una selección con repetición de dos bolas; es decir, se selecciona una primera bola, se anota su número, se la vuelve a introducir en la bolsa y se selecciona una segunda bola. Si nos interesa distinguir la primera bola de la segunda, ¿cuántas extracciones distintas son posibles?</p>
 <p><strong>Solución:</strong> Si la selección fuese sin repetición, habría <span class="math inline">\(_3P_2 = 6\)</span> formas posibles de seleccionar dos bolas. Estas son:</p>
 <div class="flexcenter">
 <div class="half">
@@ -454,8 +457,8 @@ Advertencia
 <p>Pero como la selección es con repetición, también debemos contar los casos donde se selecciona dos veces la misma bola. Estos son 3 casos en total: <span class="math inline">\((1,1)\)</span>, <span class="math inline">\((2,2)\)</span> y <span class="math inline">\((3,3)\)</span>. Por lo tanto, en total se tienen: <span class="math display">\[_3P_2 + 3 = 6 + 3 = 9 \text{ extracciones posibles.}\]</span></p>
 </div>
 <p>En conclusión, debemos deducir nuevas fórmulas para las permutaciones y combinaciones en los casos donde se selecciona con repetición.</p>
-<section id="permutaciones-con-repetición" class="level3" data-number="1.3.1">
-<h3 data-number="1.3.1" class="anchored" data-anchor-id="permutaciones-con-repetición"><span class="header-section-number">1.3.1</span> Permutaciones con repetición</h3>
+<section id="permutaciones-con-repetición" class="level3">
+<h3 class="anchored" data-anchor-id="permutaciones-con-repetición">Permutaciones con repetición</h3>
 <p>Supongamos que tenemos una bolsa con <span class="math inline">\(n=7\)</span> canicas y debemos seleccionar <span class="math inline">\(r=3\)</span> de ellas. Anteriormente, bajo el paradigma de una selección sin repetición, nuestra lógica era la siguiente: hay 7 formas de seleccionar la primera canica, luego 6 formas de seleccionar la segunda (porque la primera que seleccionamos ya no está disponible) y por último 5 formas de seleccionar la tercera (porque tanto la primera como la segunda canica seleccionada ya no están disponibles). En total, existen <span class="math inline">\(7 \times 6 \times 5 = 210\)</span> formas distintas de realizar esta selección.</p>
 <p>Ahora bien, bajo una selección con repetición, esta falta de disponibilidad que considerábamos luego de cada selección ya no existe, porque la reposición actúa como un <em>reset</em> y entonces todas las canicas están disponibles en todas las extracciones. ¿Cómo afecta esto los cálculos? Hay 7 formas de seleccionar la primera canica, luego 7 formas de seleccionar la segunda y 7 formas de seleccionar la tercera. En total tenemos <span class="math inline">\(7 \times 7 \times 7 = 7^3 = 343\)</span> formas distintas de realizar esta selección.</p>
 <p>¿Cómo se generaliza está lógica para valores arbitrarios de <span class="math inline">\(n\)</span> y <span class="math inline">\(r\)</span>? Si tenemos <span class="math inline">\(n\)</span> canicas y debemos seleccionar <span class="math inline">\(r\)</span> de ellas con reposición, entonces hay <span class="math inline">\(n\)</span> formas de seleccionar la primera canica, <span class="math inline">\(n\)</span> formas de seleccionar la segunda canica, y así sucesivamente para las <span class="math inline">\(r\)</span> canicas. O sea, en total tenemos: <span class="math display">\[ \underbrace{n \times n \times \cdots \times n}_\text{$r$ veces} = n^r \text{ selecciones distintas.} \]</span></p>
@@ -534,8 +537,8 @@ Advertencia
 </div>
 </div>
 </section>
-<section id="combinaciones-con-repetición" class="level3" data-number="1.3.2">
-<h3 data-number="1.3.2" class="anchored" data-anchor-id="combinaciones-con-repetición"><span class="header-section-number">1.3.2</span> Combinaciones con repetición</h3>
+<section id="combinaciones-con-repetición" class="level3">
+<h3 class="anchored" data-anchor-id="combinaciones-con-repetición">Combinaciones con repetición</h3>
 <p>Las combinaciones también pueden usarse ante una selección con repetición. La deducción de su fórmula quizás sea la más compleja de todas las herramientas, pero vale la pena, porque nos brinda una forma alternativa de pensar algunos ejercicios de combinatoria.</p>
 <div class="examplebox">
 <div class="center">
@@ -705,11 +708,11 @@ Advertencia
 </div>
 </section>
 </section>
-<section id="reglas-de-conteo" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="reglas-de-conteo"><span class="header-section-number">1.4</span> Reglas de conteo</h2>
+<section id="reglas-de-conteo" class="level2">
+<h2 class="anchored" data-anchor-id="reglas-de-conteo">Reglas de conteo</h2>
 <p>Lo que vimos hasta ahora son <em>herramientas</em> de conteo: artificios matemáticos para calcular en forma relativamente sencilla el número de formas posibles de hacer algo. Estas herramientas respetan ciertos lineamientos llamados <em>reglas de conteo</em>, las cuales veremos a continuación. Bajo ciertos escenarios simples, estas reglas son útiles por sí mismas para calcular el número de formas posibles de resolver una tarea.</p>
-<section id="regla-de-la-multiplicidad" class="level3" data-number="1.4.1">
-<h3 data-number="1.4.1" class="anchored" data-anchor-id="regla-de-la-multiplicidad"><span class="header-section-number">1.4.1</span> Regla de la multiplicidad</h3>
+<section id="regla-de-la-multiplicidad" class="level3">
+<h3 class="anchored" data-anchor-id="regla-de-la-multiplicidad">Regla de la multiplicidad</h3>
 <p>La primera regla de conteo es la <strong>regla de la multiplicidad</strong>:</p>
 <p>Considérese un proceso que consiste en <span class="math inline">\(k\)</span> etapas, donde cada una de ellas puede realizarse de <span class="math inline">\(n_1\)</span>, <span class="math inline">\(n_2\)</span>, <span class="math inline">\(\cdots\)</span>, <span class="math inline">\(n_k\)</span> maneras diferentes, y donde cada una de las maneras de realizar una etapa puede combinarse con todas las maneras de las demás etapas. Entonces el procedimiento total puede realizarse de <span class="math display">\[\prod_{i=1}^k n_i = n_1 \times n_2 \times \cdots \times n_k\]</span> maneras diferentes.</p>
 <div class="examplebox">
@@ -721,9 +724,9 @@ Advertencia
 <p>Asumiendo que cada prenda de ropa puede combinarse con cualquier otra, esto resulta en un total de: <span class="math display">\[n_1 \times n_2 \times n_3 = 5 \times 3 \times 2 = 30 \text{ vestuarios posibles.}\]</span></p>
 </div>
 </section>
-<section id="regla-de-la-adición" class="level3" data-number="1.4.2">
-<h3 data-number="1.4.2" class="anchored" data-anchor-id="regla-de-la-adición"><span class="header-section-number">1.4.2</span> Regla de la adición</h3>
-<p>La segunda regla de conteo es la <strong>regla de la adición</strong>: \</p>
+<section id="regla-de-la-adición" class="level3">
+<h3 class="anchored" data-anchor-id="regla-de-la-adición">Regla de la adición</h3>
+<p>La segunda regla de conteo es la <strong>regla de la adición</strong>:</p>
 <p>Considérese un proceso que admite <span class="math inline">\(k\)</span> enfoques posibles, donde para cada uno de ellos existen <span class="math inline">\(n_1\)</span>, <span class="math inline">\(n_2\)</span>, <span class="math inline">\(\cdots\)</span>, <span class="math inline">\(n_k\)</span> formas distintas de ponerlo en práctica, pero donde elegir uno de los enfoques implica descartar todos los demás. Entonces el procedimiento total puede realizarse de <span class="math display">\[\sum_{i=1}^k n_i = n_1 + n_2 + \cdots + n_k\]</span> maneras diferentes.</p>
 <div class="examplebox">
 <div class="center">
@@ -736,8 +739,8 @@ Advertencia
 <p>Esta propiedad a través de la cual elegir un enfoque implica no poder elegir ninguno de los demás es lo que se conoce como <em>exclusividad mutua</em>. Dos elementos vinculados de este modo se denominan <strong>mutuamente excluyentes</strong>. Por ejemplo, nacer en Argentina y nacer en Turquía son condiciones mutuamente excluyentes porque, si una es cierta, la otra no puede serlo.</p>
 </section>
 </section>
-<section id="mezclando-reglas-y-herramientas" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="mezclando-reglas-y-herramientas"><span class="header-section-number">1.5</span> Mezclando reglas y herramientas</h2>
+<section id="mezclando-reglas-y-herramientas" class="level2">
+<h2 class="anchored" data-anchor-id="mezclando-reglas-y-herramientas">Mezclando reglas y herramientas</h2>
 <p>Ocasionalmente nos encontramos con escenarios complejos, para los cuales no nos alcanza con una sola herramienta de conteo para contar todas las alternativas posibles. Cuando esto ocurre, debemos hacer uso de una mezcla de herramientas, las cuales se unen haciendo uso de las reglas de conteo.</p>
 <div class="examplebox">
 <div class="center">
@@ -771,17 +774,17 @@ Advertencia
 <p>El ejemplo anterior introduce una herramienta muy útil en la combinatoria, que surge de mezclar herramientas y reglas de conteo.</p>
 <p>Sea un conjunto de <span class="math inline">\(n\)</span> elementos, los cuales pueden clasificarse en <span class="math inline">\(k\)</span> grupos mutuamente excluyentes. Si hay <span class="math inline">\(n_1\)</span> elementos en el primer grupo, <span class="math inline">\(n_2\)</span> en el segundo, <span class="math inline">\(\cdots\)</span>, <span class="math inline">\(n_k\)</span> en el <span class="math inline">\(k\)</span>-ésimo, se denomina <strong>coeficiente multinomial</strong>, calculado como <span class="math display">\[\dfrac{n!}{n_1! \; n_2! \; \cdots \; n_k!}\]</span> al número de formas de ordenar los elementos según su grupo. Nótese que debe verificarse <span class="math inline">\(n_1+n_2+\cdots+n_k=n\)</span>. Nótese también que para el caso de <span class="math inline">\(k=2\)</span> grupos este coeficiente equivale a una combinación simple.</p>
 </section>
-<section id="un-caso-real-mccombinaciones" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="un-caso-real-mccombinaciones"><span class="header-section-number">1.6</span> Un caso real: McCombinaciones</h2>
+<section id="un-caso-real-mccombinaciones" class="level2">
+<h2 class="anchored" data-anchor-id="un-caso-real-mccombinaciones">Un caso real: McCombinaciones</h2>
 <p>En 2002, McDonald’s lanzó una campaña para publicitar el menú McChoice: un menú compuesto por ocho ítems (gaseosa, hamburguesa, papas fritas, batido, pancho, entre otros). Cada cliente podía elegir si quería o no incluir cada uno de los ítems en su pedido, lo cual abría la posibilidad a ordenar un menú McChoice de muchas maneras distintas. ¿Cuántas, exactamente? En su campaña publicitaria, McDonald’s afirmaba que habían <span class="math inline">\(40\,312\)</span> formas posibles de ordenar un menú, lo cual es un gran error.</p>
 <div id="fig-mccombos" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/mccombos.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figura&nbsp;1.2: Una valla publicitaria anunciando el lanzamiento del menú McChoice.</figcaption>
+<figcaption class="figure-caption">Figura&nbsp;2.2: Una valla publicitaria anunciando el lanzamiento del menú McChoice.</figcaption>
 </figure>
 </div>
 <p>La elección de un menú específico surge de contestar “sí” o “no” a ocho preguntas específicas: ¿quiere una gaseosa?, ¿quiere un pancho?, ¿quiere un helado?, etcétera. Como cada uno de los ítems son distinguibles entre sí, la herramienta de conteo adecuada para este problema es una permutación con repetición, porque se repite ocho veces la pregunta de sí/no pero, dependiendo del orden en que se pregunta, cada respuesta está asociada a un ítem diferente. En otras palabras, se tiene un total de <span class="math inline">\(2^8 = 256\)</span> menúes posibles, aunque lo correcto sería excluir el caso del “menú vacío”, donde el cliente contesta “no” a todas las preguntas (no tendría sentido). En ese caso el resultado es: <span class="math display">\[2^8 - 1 = 256 - 1 = 255 \text{ menúes posibles.}\]</span></p>
-<p>¿Cómo McDonald’s arribó a un número tan distinto? Se desconoce el cálculo que realizaron, visto que públicamente negaron haber cometido un error <span class="citation" data-cites="parker2019">(<a href="references.html#ref-parker2019" role="doc-biblioref">Parker 2019</a>)</span>, pero es fácil observar que <span class="math inline">\(40\,312 = 8! - 8.\)</span> Dada la similitud entre la estructura de este cálculo y la respuesta correcta, es sensato suponer que McDonald’s intentó seguir la misma lógica. El mayor error que cometieron fue usar un número factorial, el cual sirve para contar el número de formas de <em>ordenar</em> los ocho ítems del menú. Es decir, asumieron que los clientes pedirían todos los ítems del menú y las “diferencias” entre ellos surgirían del orden en que estos alimentos fuesen consumidos (si bien esto es ilógico porque, por ejemplo, la gaseosa suele consumirse al mismo tiempo que la gaseosa, en vez de antes o después).</p>
+<p>¿Cómo McDonald’s arribó a un número tan distinto? Se desconoce el cálculo que realizaron, visto que públicamente negaron haber cometido un error <span class="citation" data-cites="parker2019">(<a href="references.html#ref-parker2019" role="doc-biblioref">Parker 2019</a>)</span>, pero es fácil observar que <span class="math inline">\(40\,312 = 8! - 8.\)</span> Dada la similitud entre la estructura de este cálculo y la respuesta correcta, es sensato suponer que McDonald’s intentó seguir la misma lógica. El mayor error que cometieron fue usar un número factorial, el cual sirve para contar el número de formas de <em>ordenar</em> los ocho ítems del menú. Es decir, asumieron que los clientes pedirían todos los ítems del menú y las “diferencias” entre ellos surgirían del orden en que estos alimentos fuesen consumidos (si bien esto es ilógico porque, por ejemplo, la gaseosa suele consumirse al mismo tiempo que la hamburguesa, en vez de antes o después).</p>
 <p>Un total de 154 personas presentaron una queja oficial a la <em>Advertising Standards Authority</em> de Reino Unido. A pesar de estar publicitando un número que resultó ser más de cien veces mayor al real, la agencia falló a favor de McDonald’s <span class="citation" data-cites="parker2019">(<a href="references.html#ref-parker2019" role="doc-biblioref">Parker 2019</a>)</span>. Desde entonces, se le llaman McCombinaciones<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> a los números del tipo <span class="math inline">\(n!-n\)</span>, donde para <span class="math inline">\(n=8\)</span> se tiene el número utilizado en la publicidad.</p>
 
 
@@ -1055,12 +1058,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./index.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Prefacio</span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Prefacio</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link">
-        <span class="nav-page-text">Referencias</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./1_prob.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-title">1. Probabilidad</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

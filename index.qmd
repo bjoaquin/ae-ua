@@ -1,4 +1,4 @@
-# Prefacio {.unnumbered}
+# Prefacio
 
 Desde la cátedra de Análisis Estadístico, les damos una cálida bienvenida a este nuevo curso, donde nos sumergiremos nuevamente en el fascinante mundo de los datos, la toma de decisiones y, sobre todas las cosas, el apasionante proceso de aprendizaje.
 

@@ -7,7 +7,7 @@ library(tidyverse)
 contador_ejemplos <- 0
 ```
 
-# Herramientas de conteo
+# 0. Herramientas de conteo
 
 ## Introducción
 
@@ -91,9 +91,9 @@ En total se tienen $$4 \times 3 \times 2 \times 1 = 24 \;\text{resultados posibl
 
 Es fácil ver que este razonamiento es aplicable a cualquier número de personas y asientos. En general, si se tienen $n$ personas queriendo sentarse en un sofá de $n$ asientos, existen $$n \times (n-1) \times (n-2) \times \cdots \times 3 \times 2 \times 1$$ formas distintas de lograrlo.
 
-El procedimiento anterior es utilizado con frecuencia en combinatoria[^conteo-1] y por lo tanto tiene su propio símbolo y nombre.
+El procedimiento anterior es utilizado con frecuencia en combinatoria[^0_conteo-1] y por lo tanto tiene su propio símbolo y nombre.
 
-[^conteo-1]: La combinatoria es la rama de las matemáticas que estudia la enumeración de configuraciones que satisfacen ciertas condiciones.
+[^0_conteo-1]: La combinatoria es la rama de las matemáticas que estudia la enumeración de configuraciones que satisfacen ciertas condiciones.
 
 Sea $n \in \mathbb{N}$, se llama **factorial de** $\mathbf{n}$ a $$n! = n \times (n-1)  \times (n-2) \times \cdots \times 3 \times 2 \times 1$$
 
@@ -183,9 +183,9 @@ A su vez, el producto de los dos últimos factores del numerador en esta nueva e
 
 Hemos deducido otra herramienta de conteo importante.
 
-Sean $n \in \mathbb{N}_0, \; r \in \mathbb{N}_0$ [^conteo-2] tales que $r \leq n$, se llama **permutación de** $\mathbf{n}$ elementos en $\mathbf{r}$ a $$_nP_r = \frac{n!}{(n-r)!}$$
+Sean $n \in \mathbb{N}_0, \; r \in \mathbb{N}_0$ [^0_conteo-2] tales que $r \leq n$, se llama **permutación de** $\mathbf{n}$ elementos en $\mathbf{r}$ a $$_nP_r = \frac{n!}{(n-r)!}$$
 
-[^conteo-2]: El conjunto $\mathbb{N}_0$ equivale al conjunto de números naturales y el número 0, es decir que $\mathbb{N}_0 = \{0\} \cup \mathbb{N} = \{ 0,1,2,3,4,\cdots \}$. Si bien los casos donde $n=0$ y/o $r=0$ son triviales y poco frecuentes en la práctica, estos son posibles desde el punto de vista matemático y por lo tanto se los incluye. Esto no significa que no tienen sentido práctico: el caso $r=0$, por ejemplo, refiere al número de formas de elegir subconjuntos de cero elementos; se considera que sólo hay una forma posible de hacer esto (no elegir ningún elemento).
+[^0_conteo-2]: El conjunto $\mathbb{N}_0$ equivale al conjunto de números naturales y el número 0, es decir que $\mathbb{N}_0 = \{0\} \cup \mathbb{N} = \{ 0,1,2,3,4,\cdots \}$. Si bien los casos donde $n=0$ y/o $r=0$ son triviales y poco frecuentes en la práctica, estos son posibles desde el punto de vista matemático y por lo tanto se los incluye. Esto no significa que no tienen sentido práctico: el caso $r=0$, por ejemplo, refiere al número de formas de elegir subconjuntos de cero elementos; se considera que sólo hay una forma posible de hacer esto (no elegir ningún elemento).
 
 Nótese que cuando $r=n$ se tiene $$_nP_n = \frac{n!}{(n-n)!} = \frac{n!}{0!} = \frac{n!}{1} = n!$$
 
@@ -209,12 +209,12 @@ Se tienen 8 franjas de tela, cada una de un color diferente. Se pretende utiliza
 ::: callout-warning
 #### Advertencia
 
-Más allá de que una permutación se defina como un cociente de factoriales, en la práctica no es aconsejable calcular dicho cociente. Esto es porque los factoriales tienden a ser números muy grandes; tanto es así que es muy fácil encontrarse con números cuyo factorial es imposible de calcular con la tecnología de la que hoy disponemos.[^conteo-3] Incluso si pudiésemos calcular los números factoriales que componen el cociente, éstos podrían ser extremadamente grandes, dificultando considerablemente los cálculos. [^conteo-4] Es por esto que, de hacerse los cálculos a mano, se recomienda seguir el proceso de multiplicación descendente.
+Más allá de que una permutación se defina como un cociente de factoriales, en la práctica no es aconsejable calcular dicho cociente. Esto es porque los factoriales tienden a ser números muy grandes; tanto es así que es muy fácil encontrarse con números cuyo factorial es imposible de calcular con la tecnología de la que hoy disponemos.[^0_conteo-3] Incluso si pudiésemos calcular los números factoriales que componen el cociente, éstos podrían ser extremadamente grandes, dificultando considerablemente los cálculos. [^0_conteo-4] Es por esto que, de hacerse los cálculos a mano, se recomienda seguir el proceso de multiplicación descendente.
 :::
 
-[^conteo-3]: En las calculadoras convencionales el mayor número factorial que puede calcularse es $69!$, mientras que en las computadoras actuales dicho número es $170!$.
+[^0_conteo-3]: En las calculadoras convencionales el mayor número factorial que puede calcularse es $69!$, mientras que en las computadoras actuales dicho número es $170!$.
 
-[^conteo-4]: <https://www.youtube.com/watch?v=flqC3c2wsNI>
+[^0_conteo-4]: <https://www.youtube.com/watch?v=flqC3c2wsNI>
 
 ::: callout-warning
 #### Advertencia
@@ -234,7 +234,7 @@ contador_ejemplos <- contador_ejemplos + 1
 
 El club de debate de una escuela secundaria cuenta con nueve miembros. La semana próxima se realizará un torneo de debate que tomará lugar en cuatro ciudades diferentes: Seattle, Baltimore, Washington y Denver. El director de la escuela debe elegir a un participante para enviar a cada ciudad. ¿De cuántas formas distintas puede hacer esto?
 
-**Solución:** Nótese que en este ejemplo importa no sólo cuaĺes de los 9 miembros del club son seleccionados, sino también a qué ciudad es enviado cada uno. Se fija entonces el orden de las ciudades tal como fueron enumeradas en el enunciado, de modo que el primer participante será enviado a Seattle; el segundo, a Baltimore; el tercero, a Washington y el cuarto, a Denver. Nótese que el orden elegido para las ciudades no afecta los cálculos. Efectivamente, para cualquier orden arbitrario entre las 4 ciudades se obtendría el mismo resultado.
+**Solución:** Nótese que en este ejemplo importa no sólo cuáles de los 9 miembros del club son seleccionados, sino también a qué ciudad es enviado cada uno. Se fija entonces el orden de las ciudades tal como fueron enumeradas en el enunciado, de modo que el primer participante será enviado a Seattle; el segundo, a Baltimore; el tercero, a Washington y el cuarto, a Denver. Nótese que el orden elegido para las ciudades no afecta los cálculos. Efectivamente, para cualquier orden arbitrario entre las 4 ciudades se obtendría el mismo resultado.
 
 Hay 9 posibles participantes para ser enviados al torneo en Seattle. Por cada uno de ellos, cualquiera de los 8 restantes puede ser enviado a Baltimore. A su vez, por cada par de participantes elegidos para Seattle y Baltimore respectivamente, cualquiera de los 7 restantes puede ser asignado a Washington. Por último, para cualquier terna ordenada de tres alumnos, cualquiera de los 6 restantes puede ser enviado a Denver.
 
@@ -317,7 +317,7 @@ contador_ejemplos <- contador_ejemplos + 1
 **Ejemplo `r contador_ejemplos`**
 :::
 
-Tenemos una bolsa con tres bolas enumeradas del 1 al 3. Se procede a hacer una selección con repetición de dos bolas; es decir, se selecciona una primera bola, se anota su número, se la vuelve a introducir en la bola y se selecciona una segunda bola. Si nos interesa distinguir la primera bola de la segunda, ¿cuántas extracciones distintas son posibles?
+Tenemos una bolsa con tres bolas enumeradas del 1 al 3. Se procede a hacer una selección con repetición de dos bolas; es decir, se selecciona una primera bola, se anota su número, se la vuelve a introducir en la bolsa y se selecciona una segunda bola. Si nos interesa distinguir la primera bola de la segunda, ¿cuántas extracciones distintas son posibles?
 
 **Solución:** Si la selección fuese sin repetición, habría $_3P_2 = 6$ formas posibles de seleccionar dos bolas. Estas son:
 
@@ -572,7 +572,7 @@ Asumiendo que cada prenda de ropa puede combinarse con cualquier otra, esto resu
 
 ### Regla de la adición
 
-La segunda regla de conteo es la **regla de la adición**: \\
+La segunda regla de conteo es la **regla de la adición**:
 
 Considérese un proceso que admite $k$ enfoques posibles, donde para cada uno de ellos existen $n_1$, $n_2$, $\cdots$, $n_k$ formas distintas de ponerlo en práctica, pero donde elegir uno de los enfoques implica descartar todos los demás. Entonces el procedimiento total puede realizarse de $$\sum_{i=1}^k n_i = n_1 + n_2 + \cdots + n_k$$ maneras diferentes.
 
@@ -672,8 +672,8 @@ En 2002, McDonald's lanzó una campaña para publicitar el menú McChoice: un me
 
 La elección de un menú específico surge de contestar "sí" o "no" a ocho preguntas específicas: ¿quiere una gaseosa?, ¿quiere un pancho?, ¿quiere un helado?, etcétera. Como cada uno de los ítems son distinguibles entre sí, la herramienta de conteo adecuada para este problema es una permutación con repetición, porque se repite ocho veces la pregunta de sí/no pero, dependiendo del orden en que se pregunta, cada respuesta está asociada a un ítem diferente. En otras palabras, se tiene un total de $2^8 = 256$ menúes posibles, aunque lo correcto sería excluir el caso del "menú vacío", donde el cliente contesta "no" a todas las preguntas (no tendría sentido). En ese caso el resultado es: $$2^8 - 1 = 256 - 1 = 255 \text{ menúes posibles.}$$
 
-¿Cómo McDonald's arribó a un número tan distinto? Se desconoce el cálculo que realizaron, visto que públicamente negaron haber cometido un error [@parker2019], pero es fácil observar que $40\,312 = 8! - 8.$ Dada la similitud entre la estructura de este cálculo y la respuesta correcta, es sensato suponer que McDonald's intentó seguir la misma lógica. El mayor error que cometieron fue usar un número factorial, el cual sirve para contar el número de formas de *ordenar* los ocho ítems del menú. Es decir, asumieron que los clientes pedirían todos los ítems del menú y las "diferencias" entre ellos surgirían del orden en que estos alimentos fuesen consumidos (si bien esto es ilógico porque, por ejemplo, la gaseosa suele consumirse al mismo tiempo que la gaseosa, en vez de antes o después).
+¿Cómo McDonald's arribó a un número tan distinto? Se desconoce el cálculo que realizaron, visto que públicamente negaron haber cometido un error [@parker2019], pero es fácil observar que $40\,312 = 8! - 8.$ Dada la similitud entre la estructura de este cálculo y la respuesta correcta, es sensato suponer que McDonald's intentó seguir la misma lógica. El mayor error que cometieron fue usar un número factorial, el cual sirve para contar el número de formas de *ordenar* los ocho ítems del menú. Es decir, asumieron que los clientes pedirían todos los ítems del menú y las "diferencias" entre ellos surgirían del orden en que estos alimentos fuesen consumidos (si bien esto es ilógico porque, por ejemplo, la gaseosa suele consumirse al mismo tiempo que la hamburguesa, en vez de antes o después).
 
-Un total de 154 personas presentaron una queja oficial a la *Advertising Standards Authority* de Reino Unido. A pesar de estar publicitando un número que resultó ser más de cien veces mayor al real, la agencia falló a favor de McDonald's [@parker2019]. Desde entonces, se le llaman McCombinaciones[^conteo-5] a los números del tipo $n!-n$, donde para $n=8$ se tiene el número utilizado en la publicidad.
+Un total de 154 personas presentaron una queja oficial a la *Advertising Standards Authority* de Reino Unido. A pesar de estar publicitando un número que resultó ser más de cien veces mayor al real, la agencia falló a favor de McDonald's [@parker2019]. Desde entonces, se le llaman McCombinaciones[^0_conteo-5] a los números del tipo $n!-n$, donde para $n=8$ se tiene el número utilizado en la publicidad.
 
-[^conteo-5]: Secuencia [A005096](https://oeis.org/A005096/internal) de la OEIS.
+[^0_conteo-5]: Secuencia [A005096](https://oeis.org/A005096/internal) de la OEIS.

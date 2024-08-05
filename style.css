@@ -17,6 +17,10 @@
   width: 50%;
 }
 
+.indent {
+  margin-left: 10%;
+}
+
 table * {
   border-color: transparent;
   color: black;

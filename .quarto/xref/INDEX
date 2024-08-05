@@ -16,5 +16,11 @@
   },
   "conteo.qmd": {
     "conteo.html": "891a0270"
+  },
+  "0_conteo.qmd": {
+    "0_conteo.html": "cb5ab7d7"
+  },
+  "1_prob.qmd": {
+    "1_prob.html": "d3aa9d8a"
   }
 }
