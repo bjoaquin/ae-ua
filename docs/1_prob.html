@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -150,7 +169,13 @@ ul.task-list li input[type="checkbox"] {
   </ul></li>
   <li><a href="#algunos-ejemplos" id="toc-algunos-ejemplos" class="nav-link" data-scroll-target="#algunos-ejemplos">Algunos ejemplos</a></li>
   <li><a href="#axiomas-de-probabilidad" id="toc-axiomas-de-probabilidad" class="nav-link" data-scroll-target="#axiomas-de-probabilidad">Axiomas de probabilidad</a></li>
-  <li><a href="#probabilidad-condicional" id="toc-probabilidad-condicional" class="nav-link" data-scroll-target="#probabilidad-condicional">Probabilidad condicional</a></li>
+  <li><a href="#probabilidad-condicional" id="toc-probabilidad-condicional" class="nav-link" data-scroll-target="#probabilidad-condicional">Probabilidad condicional</a>
+  <ul class="collapse">
+  <li><a href="#teorema-de-la-multiplicación" id="toc-teorema-de-la-multiplicación" class="nav-link" data-scroll-target="#teorema-de-la-multiplicación">Teorema de la multiplicación</a></li>
+  <li><a href="#independencia" id="toc-independencia" class="nav-link" data-scroll-target="#independencia">Independencia</a></li>
+  <li><a href="#teorema-de-bayes" id="toc-teorema-de-bayes" class="nav-link" data-scroll-target="#teorema-de-bayes">Teorema de Bayes</a></li>
+  </ul></li>
+  <li><a href="#un-caso-real-el-caso-sally-clark" id="toc-un-caso-real-el-caso-sally-clark" class="nav-link" data-scroll-target="#un-caso-real-el-caso-sally-clark">Un caso real: el caso Sally Clark</a></li>
   </ul>
 </nav>
     </div>
@@ -211,7 +236,7 @@ Nota
 <p>Por lo tanto, un posible resultado del experimento sería <span class="math inline">\(s\)</span> = {Menta, Vainilla, Americana, Limón}.</p>
 <p>¿Cuántos resultados distintos existen? Para responder a esta pregunta podemos hacer uso de las herramientas de conteo estudiadas en la unidad anterior. Como no nos importa el orden y no se admite una repetición de los sabores, usamos una combinación simple: <span class="math inline">\(_8C_4 = 70\)</span> posibles elecciones de 4 sabores. Este es el tamaño del conjunto <span class="math inline">\(S\)</span>. En notación matemática se dice que <span class="math inline">\(\#S = 70\)</span>.</p>
 <p><span class="math display">\[S = \{ s_1, s_2, s_3, \cdots, s_{69}, s_{70} \}\]</span></p>
-<p>Si quisiéramos definir al conjunto <span class="math inline">\(S\)</span> en forma exhaustiva <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, se vería algo así como: \</p>
+<p>Si quisiéramos definir al conjunto <span class="math inline">\(S\)</span> en forma exhaustiva <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, se vería algo así como:</p>
 <p><span class="math inline">\(S\)</span> = {</p>
 <div class="indent">
 <p>{Chocolate, Vainilla, Frutilla, Limón},</p>
@@ -256,7 +281,7 @@ Nota
 </figure>
 </div>
 <p>Pensar en operaciones entre sucesos puede ser útil porque a veces un suceso complejo puede descomponerse en múltiples sucesos simples, los cuales se conectan mediante estas operaciones. Por ejemplo, supóngase el evento:</p>
-<p><span class="math inline">\(A\)</span>: “elegir Chocolate y Menta, o bien Frutilla y Sambayón”“.</p>
+<p><span class="math inline">\(A\)</span>: “elegir Chocolate y Menta, o bien Frutilla y Sambayón”.</p>
 <p>Este evento puede descomponerse como <span class="math display">\[A = (C \cap M) \cup (F \cap S),\]</span> donde</p>
 <ul>
 <li><span class="math inline">\(C\)</span>: elegir Chocolate.</li>
@@ -379,9 +404,131 @@ Nota
 </section>
 <section id="probabilidad-condicional" class="level2">
 <h2 class="anchored" data-anchor-id="probabilidad-condicional">Probabilidad condicional</h2>
-<p><strong>(Próximamente.)</strong> 🚧</p>
+<p>Supongamos que tenemos un mazo de cartas francesas (las de póker), el cual tiene 52 cartas. Lo mezclamos, lo apoyamos en la mesa boca abajo y tomamos las dos cartas superiores, de a una a la vez. ¿Cuál es la probabilidad de que la segunda carta seleccionada sea un as?</p>
+<p>Es posible que su respuesta sea “depende”, visto que la probabilidad para la segunda carta depende de cuál fue la primera carta seleccionada. Esta apreciación es en parte correcta y en parte errónea: ciertamente debemos <em>considerar</em> lo que ocurrió con la primera carta, pero, como veremos más adelante, podemos obtener una probabilidad para la segunda carta sin <em>saber</em> el resultado de la primera.</p>
+<p>Supongamos un experimento aleatorio sobre el que se definen dos eventos <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span>. Más aún, sea <span class="math inline">\(A\)</span> un evento tal que <span class="math inline">\(P(A) \neq 0\)</span>. Se define la <strong>probabilidad condicional de <span class="math inline">\(B\)</span> dado <span class="math inline">\(A\)</span></strong> como <span class="math display">\[P(B|A) = \dfrac{P(B \cap A)}{P(A)}.\]</span></p>
+<p>Como muestra la ecuación, calcular la probabilidad del evento <span class="math inline">\(B\)</span> condicionada a la ocurrencia del evento <span class="math inline">\(A\)</span> equivale a calcular la probabilidad de <span class="math inline">\(B\)</span> dentro del espacio muestral restringido por <span class="math inline">\(A\)</span>.</p>
+<div id="fig-condicional" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/condicional.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figura&nbsp;3.2: Representación visual de la probabilidad condicional. En el diagrama, la probabilidad condicional <span class="math inline">\(P(B|A)\)</span> tiene por numerador la parte de <span class="math inline">\(B\)</span> que está contenida en <span class="math inline">\(A\)</span>, y por denominador la totalidad de <span class="math inline">\(A\)</span>.</figcaption>
+</figure>
+</div>
+<p>Pongámoslo en práctica con un ejemplo simple:</p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 4</strong></p>
+</div>
+<p>Se arroja un dado y se observa la cara superior. Considérense los siguientes eventos:</p>
+<ul>
+<li><span class="math inline">\(A\)</span>: obtener un 1.</li>
+<li><span class="math inline">\(B\)</span>: obtener un número par.</li>
+<li><span class="math inline">\(C\)</span>: obtener un número mayor a 3.</li>
+</ul>
+<p>Calcular las probabilidades: <span class="math inline">\(P(B|C)\)</span>, <span class="math inline">\(P(C|B)\)</span> y <span class="math inline">\(P(A|C)\)</span>.</p>
+<p><strong>Solución:</strong></p>
+<ul>
+<li><strong>Experimento aleatorio:</strong> arrojar un dado y observar la cara superior.</li>
+<li><strong>Espacio muestral:</strong> <span class="math inline">\(S\)</span> = {1, 2, 3, 4, 5, 6}.</li>
+<li><strong>Ejemplo de resultado:</strong> <span class="math inline">\(s\)</span> = 3.</li>
+</ul>
+<p>Las probabilidades a calcular son:</p>
+<ul>
+<li><span class="math inline">\(P(B|C) = \dfrac{P(B \cap C)}{P(C)} = \dfrac{\frac{\#(B \cap C)}{\#S}}{\frac{\#C}{\#S}} = \dfrac{\#(B \cap C)}{\#C}\)</span></li>
+<li><span class="math inline">\(P(C|B) = \dfrac{P(B \cap C)}{P(B)} = \dfrac{\frac{\#(B \cap C)}{\#S}}{\frac{\#B}{\#S}} = \dfrac{\#(B \cap C)}{\#B}\)</span></li>
+<li><span class="math inline">\(P(A|C) = \dfrac{P(A \cap C)}{P(C)} = \dfrac{\frac{\#(A \cap C)}{\#S}}{\frac{\#C}{\#S}} = \dfrac{\#(A \cap C)}{\#C}\)</span></li>
+</ul>
+<p>Por lo tanto:</p>
+<ul>
+<li><p><strong>Casos posibles:</strong> <span class="math inline">\(\#S =6\)</span>.</p></li>
+<li><p><strong>Casos de interés:</strong></p>
+<ul>
+<li><span class="math inline">\(B = \{2,4,6\} \implies \#B = 3\)</span>.</li>
+<li><span class="math inline">\(C = \{4,5,6\} \implies \#C = 3\)</span>.</li>
+<li><span class="math inline">\(B \cap C = \{4,6\} \implies \#(B \cap C) = 2\)</span>.</li>
+<li><span class="math inline">\(A \cap C = \emptyset \implies \#(A \cap C) = 0\)</span>.</li>
+</ul></li>
+</ul>
+<p>Finalmente:</p>
+<ul>
+<li><span class="math inline">\(P(B|C) = \frac{2/6}{3/6} = \frac{2}{3} = 0,\overline{6} = 66,\overline{6}\%\)</span></li>
+<li><span class="math inline">\(P(C|B) = \frac{2/6}{3/6} = \frac{2}{3} = 0,\overline{6} = 66,\overline{6}\%\)</span></li>
+<li><span class="math inline">\(P(A|C) = \frac{0/6}{3/6} = \frac{0}{3} = 0 = 0\%\)</span></li>
+</ul>
+</div>
+<p>Es importante notar que las probabilidades condicionales también verifican los axiomas de probabilidad y las propiedades que de ellas se desprenden. Algunas que pueden resultar útiles son:</p>
+<ul>
+<li><span class="math inline">\(P(\overline{B}|A) = 1 - P(B|A)\)</span></li>
+<li><span class="math inline">\(P(A\cup B|C) = P(A|C) + P(B|C) - P(A \cap B|C)\)</span></li>
+</ul>
+<section id="teorema-de-la-multiplicación" class="level3">
+<h3 class="anchored" data-anchor-id="teorema-de-la-multiplicación">Teorema de la multiplicación</h3>
+<p>Es una regla para el cálculo de probabilidades que se desprende directamente de la definición de probabilidad condicional.</p>
+<p>Siendo <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span> dos sucesos definidos sobre un experimento aleatorio, se tiene: <span class="math display">\[P(A \cap B) = P(A|B) \cdot P(B) = P(B|A) \cdot P(A)\]</span></p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 5</strong></p>
+</div>
+<p>Se tiene un frasco lleno de canicas. No se sabe con exactitud cuántas tiene, pero se sabe que el 23% de ellas son verdes, mientras que las demás son blancas. Además, se sabe que el 15% de las canicas verdes brilla en la oscuridad. Si se extrae una canica al azar, ¿cuál es la probabilidad de que sea verde y brille en la oscuridad?</p>
+<p><strong>Solución:</strong></p>
+<ul>
+<li><p><strong>Experimento aleatorio:</strong> extraer al azar una canica del frasco.</p></li>
+<li><p><strong>Espacio muestral:</strong> <span class="math inline">\(S\)</span> = {cada canica del frasco}.</p></li>
+<li><p><strong>Ejemplo de resultado:</strong> <span class="math inline">\(s = v^*\)</span> (canica verde que brilla).</p></li>
+<li><p><strong>Eventos de interés:</strong></p>
+<ul>
+<li><span class="math inline">\(V\)</span>: se extrae una canica verde.</li>
+<li><span class="math inline">\(B\)</span>: se extrae una canica que brilla.</li>
+</ul></li>
+</ul>
+<p>Así: <span class="math display">\[P(V \cap B) = P(B|V) \cdot P(V) = 0,15 \cdot 0,23 = 0,0345 = 3,45\%\]</span></p>
+</div>
+</section>
+<section id="independencia" class="level3">
+<h3 class="anchored" data-anchor-id="independencia">Independencia</h3>
+<p>Siendo <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span> dos eventos aleatorios, se dice que éstos son <strong>eventos independientes</strong> si y sólo si <span class="math display">\[P(A \cap B) = P(A) \cdot P(B)\]</span></p>
+<p>Por un lado, nótese que esta ecuación es simétrica respecto a <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span>; es decir, si <span class="math inline">\(A\)</span> es independiente de <span class="math inline">\(B\)</span>, etnonces <span class="math inline">\(B\)</span> es a su vez independiente de <span class="math inline">\(A\)</span>. Por otro lado, nótese que la ecuación anterior resulta en <span class="math display">\[A \text{ y } B \text{ independientes} \iff P(A|B) = P(A)  \;\wedge\; P(B|A) = P(B).\]</span></p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Advertencia
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La independencia no puede representarse gráficamente mediante un diagrama de Venn.</p>
+</div>
+</div>
+</section>
+<section id="teorema-de-bayes" class="level3">
+<h3 class="anchored" data-anchor-id="teorema-de-bayes">Teorema de Bayes</h3>
+<p>Sean dos eventos <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span> tales que <span class="math inline">\(P(A) \neq 0\)</span>. Luego: <span class="math display">\[P(B|A) = \dfrac{P(A|B) \cdot P(B)}{P(A)}\]</span></p>
+<p>Este teorema nos provee una forma alternativa de calcular probabilidades condicionales.</p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 6</strong></p>
+</div>
+<p>El 2% de la población mundial está contagiada con una nueva enfermedad, y existen pruebas para su diagnóstico, con una sensibilidad de 98% y una especificidad del 95%. Una persona sospecha estar enferma y, al hacerse el test, obtiene un resultado positivo. ¿Cuál es la probabilidad de que esté realmente enferma?</p>
+<p><strong>Solución:</strong> lo vemos en clase 😉</p>
+</div>
+</section>
+</section>
+<section id="un-caso-real-el-caso-sally-clark" class="level2">
+<h2 class="anchored" data-anchor-id="un-caso-real-el-caso-sally-clark">Un caso real: el caso Sally Clark</h2>
+<p>El 23 de febrero de 1998 Sally Clark, una mujer inglesa de 33 años, fue arrestada bajo la sospecha de haber asesinado a sus dos hijos. <span class="citation" data-cites="clark">(<a href="references.html#ref-clark" role="doc-biblioref">Wikipedia 2024</a>)</span></p>
+<p>Su primer hijo había nacido en 1996 y fallecido tres meses más tarde bajo un diagnóstico de muerte súbita infantil. Para una familia promedio la probabilidad de este fenómeno es de 1 en 8543, lo cual es inusual pero no lo suficientemente llamativo como para levantar sospechas. Lo que alertó a las autoridades fue cuando, tras ocho semanas de nacer, el segundo hijo de la familia Clark también falleció por muerte súbita infantil.</p>
+<p>Sally Clark fue llevada a juicio, donde el fiscal argumentó que, si la probabilidad de que un hijo fallezca por muerte súbita infantil es de 1 en 8543, entonces la probabilidad de que dos hijos sufran ese fenómeno es de 1 en 73 millones (porque <span class="math inline">\(8543 \times 8543 = 72.982.849\)</span>). Estos números fueron suficientes para convencer al jurado de que el diagnóstico de muerte súbita infantil era muy poco probable. Sally Clark perdió el juicio y fue condenada a prisión.</p>
+<p>En octubre de 2001, dos meses luego del juicio, la Royal Statistical Society emitió un comunicado público alegando un mal uso de la estadística en el juicio. El cálculo empleado por el fiscal asumía que dos muertes súbitas infantiles dentro de una misma familia serían eventos independientes, cuando en realidad esto difícilmente sea cierto: dado un primer hijo fallecido por muerte súbita infantil, es posible que exista en la familia alguna predisposición genética hacia dicha condición, y por lo tanto no sería raro que un segundo hijo también la padeciera.</p>
+<p>Desde entonces, este caso ha sido citado innumerables veces como ejemplo de los peligros que surgen de no comprender adecuadamente cómo funcionan las probabilidades.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-clark" class="csl-entry" role="listitem">
+Wikipedia. 2024. <span>«Sally Clark - Wikipedia, The Free Encyclopedia»</span>. <a href="https://en.wikipedia.org/wiki/Sally_Clark">https://en.wikipedia.org/wiki/Sally_Clark</a>.
+</div>
+</div>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>

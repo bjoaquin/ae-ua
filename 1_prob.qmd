@@ -49,7 +49,7 @@ Por lo tanto, un posible resultado del experimento sería $s$ = {Menta, Vainilla
 
 $$S = \{ s_1, s_2, s_3, \cdots, s_{69}, s_{70} \}$$
 
-Si quisiéramos definir al conjunto $S$ en forma exhaustiva [^1_prob-1], se vería algo así como: \\
+Si quisiéramos definir al conjunto $S$ en forma exhaustiva [^1_prob-1], se vería algo así como:
 
 [^1_prob-1]: En matemáticas, existen dos formas de definir un conjunto: por extensión y por comprensión. La primera implica listar uno por uno los elementos del conjunto; por ejemplo: \{2, 4, 6, 8\}. La segunda implica usar palabras para definir el contenido; por ejemplo: \{los números pares entre 1 y 9\}.
 
@@ -104,7 +104,7 @@ Sobre estas definiciones se desprende que $A$ y $B$ son sucesos **mutuamente exc
 
 Pensar en operaciones entre sucesos puede ser útil porque a veces un suceso complejo puede descomponerse en múltiples sucesos simples, los cuales se conectan mediante estas operaciones. Por ejemplo, supóngase el evento:
 
-$A$: "elegir Chocolate y Menta, o bien Frutilla y Sambayón"".
+$A$: "elegir Chocolate y Menta, o bien Frutilla y Sambayón".
 
 Este evento puede descomponerse como $$A = (C \cap M) \cup (F \cap S),$$ donde
 
@@ -259,4 +259,147 @@ A partir de los axiomas de probabilidad se desprenden las siguientes propiedades
 
 ## Probabilidad condicional
 
-**(Próximamente.)** 🚧
+Supongamos que tenemos un mazo de cartas francesas (las de póker), el cual tiene 52 cartas. Lo mezclamos, lo apoyamos en la mesa boca abajo y tomamos las dos cartas superiores, de a una a la vez. ¿Cuál es la probabilidad de que la segunda carta seleccionada sea un as?
+
+Es posible que su respuesta sea "depende", visto que la probabilidad para la segunda carta depende de cuál fue la primera carta seleccionada. Esta apreciación es en parte correcta y en parte errónea: ciertamente debemos *considerar* lo que ocurrió con la primera carta, pero, como veremos más adelante, podemos obtener una probabilidad para la segunda carta sin *saber* el resultado de la primera.
+
+Supongamos un experimento aleatorio sobre el que se definen dos eventos $A$ y $B$. Más aún, sea $A$ un evento tal que $P(A) \neq 0$. Se define la **probabilidad condicional de $B$ dado $A$** como $$P(B|A) = \dfrac{P(B \cap A)}{P(A)}.$$
+
+Como muestra la ecuación, calcular la probabilidad del evento $B$ condicionada a la ocurrencia del evento $A$ equivale a calcular la probabilidad de $B$ dentro del espacio muestral restringido por $A$.
+
+![Representación visual de la probabilidad condicional. En el diagrama, la probabilidad condicional $P(B|A)$ tiene por numerador la parte de $B$ que está contenida en $A$, y por denominador la totalidad de $A$.](img/condicional.png){#fig-condicional}
+
+Pongámoslo en práctica con un ejemplo simple:
+
+::: {.examplebox data-latex=""}
+```{r}
+#| echo: FALSE
+contador_ejemplos <- contador_ejemplos + 1
+```
+
+::: {.center data-latex=""}
+**Ejemplo `r contador_ejemplos`**
+:::
+
+Se arroja un dado y se observa la cara superior. Considérense los siguientes eventos:
+
+* $A$: obtener un 1.
+* $B$: obtener un número par.
+* $C$: obtener un número mayor a 3.
+
+Calcular las probabilidades: $P(B|C)$, $P(C|B)$ y $P(A|C)$.
+
+**Solución:**
+
+* **Experimento aleatorio:** arrojar un dado y observar la cara superior.
+* **Espacio muestral:** $S$ = {1, 2, 3, 4, 5, 6}.
+* **Ejemplo de resultado:** $s$ = 3.
+
+Las probabilidades a calcular son:
+
+* $P(B|C) = \dfrac{P(B \cap C)}{P(C)} = \dfrac{\frac{\#(B \cap C)}{\#S}}{\frac{\#C}{\#S}} = \dfrac{\#(B \cap C)}{\#C}$
+* $P(C|B) = \dfrac{P(B \cap C)}{P(B)} = \dfrac{\frac{\#(B \cap C)}{\#S}}{\frac{\#B}{\#S}} = \dfrac{\#(B \cap C)}{\#B}$
+* $P(A|C) = \dfrac{P(A \cap C)}{P(C)} = \dfrac{\frac{\#(A \cap C)}{\#S}}{\frac{\#C}{\#S}} = \dfrac{\#(A \cap C)}{\#C}$
+
+Por lo tanto:
+
+* **Casos posibles:** $\#S =6$.
+* **Casos de interés:**
+
+  * $B = \{2,4,6\} \implies \#B = 3$.
+  * $C = \{4,5,6\} \implies \#C = 3$.
+  * $B \cap C = \{4,6\} \implies \#(B \cap C) = 2$.
+  * $A \cap C = \emptyset \implies \#(A \cap C) = 0$.
+  
+Finalmente:
+
+* $P(B|C) = \frac{2/6}{3/6} = \frac{2}{3} = 0,\overline{6} = 66,\overline{6}\%$
+* $P(C|B) = \frac{2/6}{3/6} = \frac{2}{3} = 0,\overline{6} = 66,\overline{6}\%$
+* $P(A|C) = \frac{0/6}{3/6} = \frac{0}{3} = 0 = 0\%$
+
+:::
+
+Es importante notar que las probabilidades condicionales también verifican los axiomas de probabilidad y las propiedades que de ellas se desprenden. Algunas que pueden resultar útiles son:
+
+* $P(\overline{B}|A) = 1 - P(B|A)$
+* $P(A\cup B|C) = P(A|C) + P(B|C) - P(A \cap B|C)$
+
+### Teorema de la multiplicación
+
+Es una regla para el cálculo de probabilidades que se desprende directamente de la definición de probabilidad condicional.
+
+Siendo $A$ y $B$ dos sucesos definidos sobre un experimento aleatorio, se tiene: $$P(A \cap B) = P(A|B) \cdot P(B) = P(B|A) \cdot P(A)$$
+
+::: {.examplebox data-latex=""}
+```{r}
+#| echo: FALSE
+contador_ejemplos <- contador_ejemplos + 1
+```
+
+::: {.center data-latex=""}
+**Ejemplo `r contador_ejemplos`**
+:::
+
+Se tiene un frasco lleno de canicas. No se sabe con exactitud cuántas tiene, pero se sabe que el 23\% de ellas son verdes, mientras que las demás son blancas. Además, se sabe que el 15\% de las canicas verdes brilla en la oscuridad. Si se extrae una canica al azar, ¿cuál es la probabilidad de que sea verde y brille en la oscuridad?
+
+**Solución:**
+
+* **Experimento aleatorio:** extraer al azar una canica del frasco.
+* **Espacio muestral:** $S$ = {cada canica del frasco}.
+* **Ejemplo de resultado:** $s = v^*$ (canica verde que brilla).
+* **Eventos de interés:**
+
+  * $V$: se extrae una canica verde.
+  * $B$: se extrae una canica que brilla.
+  
+Así:
+$$P(V \cap B) = P(B|V) \cdot P(V) = 0,15 \cdot 0,23 = 0,0345 = 3,45\%$$
+
+:::
+
+### Independencia
+
+Siendo $A$ y $B$ dos eventos aleatorios, se dice que éstos son **eventos independientes** si y sólo si $$P(A \cap B) = P(A) \cdot P(B)$$
+
+Por un lado, nótese que esta ecuación es simétrica respecto a $A$ y $B$; es decir, si $A$ es independiente de $B$, etnonces $B$ es a su vez independiente de $A$. Por otro lado, nótese que la ecuación anterior resulta en $$A \text{ y } B \text{ independientes} \iff P(A|B) = P(A)  \;\wedge\; P(B|A) = P(B).$$
+
+::: callout-warning
+#### Advertencia
+
+La independencia no puede representarse gráficamente mediante un diagrama de Venn.
+:::
+
+### Teorema de Bayes
+
+Sean dos eventos $A$ y $B$ tales que $P(A) \neq 0$. Luego:
+$$P(B|A) = \dfrac{P(A|B) \cdot P(B)}{P(A)}$$
+
+Este teorema nos provee una forma alternativa de calcular probabilidades condicionales.
+
+::: {.examplebox data-latex=""}
+```{r}
+#| echo: FALSE
+contador_ejemplos <- contador_ejemplos + 1
+```
+
+::: {.center data-latex=""}
+**Ejemplo `r contador_ejemplos`**
+:::
+
+El 2\% de la población mundial está contagiada con una nueva enfermedad, y existen pruebas para su diagnóstico, con una sensibilidad de 98\% y una especificidad del 95\%. Una persona sospecha estar enferma y, al hacerse el test, obtiene un resultado positivo. ¿Cuál es la probabilidad de que esté realmente enferma?
+
+**Solución:** lo vemos en clase 😉
+
+:::
+
+## Un caso real: el caso Sally Clark
+
+El 23 de febrero de 1998 Sally Clark, una mujer inglesa de 33 años, fue arrestada bajo la sospecha de haber asesinado a sus dos hijos. [@clark]
+
+Su primer hijo había nacido en 1996 y fallecido tres meses más tarde bajo un diagnóstico de muerte súbita infantil. Para una familia promedio la probabilidad de este fenómeno es de 1 en 8543, lo cual es inusual pero no lo suficientemente llamativo como para levantar sospechas. Lo que alertó a las autoridades fue cuando, tras ocho semanas de nacer, el segundo hijo de la familia Clark también falleció por muerte súbita infantil.
+
+Sally Clark fue llevada a juicio, donde el fiscal argumentó que, si la probabilidad de que un hijo fallezca por muerte súbita infantil es de 1 en 8543, entonces la probabilidad de que dos hijos sufran ese fenómeno es de 1 en 73 millones (porque $8543 \times 8543 = 72.982.849$). Estos números fueron suficientes para convencer al jurado de que el diagnóstico de muerte súbita infantil era muy poco probable. Sally Clark perdió el juicio y fue condenada a prisión.
+
+En octubre de 2001, dos meses luego del juicio, la Royal Statistical Society emitió un comunicado público alegando un mal uso de la estadística en el juicio. El cálculo empleado por el fiscal asumía que dos muertes súbitas infantiles dentro de una misma familia serían eventos independientes, cuando en realidad esto difícilmente sea cierto: dado un primer hijo fallecido por muerte súbita infantil, es posible que exista en la familia alguna predisposición genética hacia dicha condición, y por lo tanto no sería raro que un segundo hijo también la padeciera.
+
+Desde entonces, este caso ha sido citado innumerables veces como ejemplo de los peligros que surgen de no comprender adecuadamente cómo funcionan las probabilidades.

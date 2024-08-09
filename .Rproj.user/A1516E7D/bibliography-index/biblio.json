@@ -21,6 +21,25 @@
             "title": "Humble pi: A comedy of maths errors",
             "title-short": "Humble pi",
             "type": "book"
+        },
+        {
+            "URL": "https://en.wikipedia.org/wiki/Sally_Clark",
+            "author": [
+                {
+                    "family": "Wikipedia"
+                }
+            ],
+            "id": "clark",
+            "issued": {
+                "date-parts": [
+                    [
+                        2024
+                    ]
+                ]
+            },
+            "note": "[Online; accessed 09-August-2024]",
+            "title": "Sally clark - wikipedia, the free encyclopedia",
+            "type": ""
         }
     ],
     "project_biblios": [
