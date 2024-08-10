@@ -388,9 +388,43 @@ contador_ejemplos <- contador_ejemplos + 1
 
 El 2\% de la población mundial está contagiada con una nueva enfermedad, y existen pruebas para su diagnóstico, con una sensibilidad de 98\% y una especificidad del 95\%. Una persona sospecha estar enferma y, al hacerse el test, obtiene un resultado positivo. ¿Cuál es la probabilidad de que esté realmente enferma?
 
-**Solución:** lo vemos en clase 😉
+**Solución:**
+
+* **Experimento aleatorio:** seleccionar una persona, la cual puede estar o no enferma, y realizarle el test, el cual puede dar un resultado positivo o negativo.
+* **Espacio muestral:** $S = \{(\overline{E}, -),\; (\overline{E}, +),\; (E, -),\; (E, +)\}$.
+* **Ejemplo de resultado:** $s = (E, -)$.
+* **Eventos de interés:**
+  * $E$: la persona está enferma.
+  * $+$: la persona tiene un resultado positivo del test.
+  * $- (= +^c)$: la persona tiene un resultado negativo del test.
+
+Según el enunciado:
+
+* $P(E) = 2\% = 0,02$
+* $P(+|E) = 98\% = 0,98$
+* $P(-|\overline{E}) = 95\% = 0,95$
+    
+Por lo tanto, aplicando el teorema de Bayes:
+$$P(E|+) = \dfrac{P(+|E) \; P(E)}{P(+)} = \dfrac{P(+|E) \; P(E)}{P(+|E)\;P(E) + P(+|\overline{E})\;P(\overline{E})}$$
+
+Lo cual resulta en:
+$$P(E|+) = \dfrac{0,98 \times 0,02}{0,98 \times 0,02 + 0,05 \times 0,98} = \dfrac{2}{7} \approx 0,2857 = 28,57\%$$
 
 :::
+
+Como aclaración, el ejemplo anterior hace uso de un artificio matemático que a simple vista puede resultar extraño. Nótese como, luego de aplicar el teorema de Bayes, el denominador se expresa de una forma alternativa. Generalizando para dos eventos $A$ y $B$, la igualdad empleada es $$P(A) = P(A|B) \; P(B) + P(A|\overline{B}) \; P(\overline{B}).$$
+
+¿De dónde sale esto? En primer lugar, considérese la siguiente sucesión de igualdades.
+
+$$A \underset{(1)}{=} A \cap S \underset{(2)}{=} A \cap (B \cup \overline{B}) \underset{(3)}{=} (A \cap B) \cup (A \cap \overline{B})$$
+
+1. La intersección de cualquier evento con el espacio muestral es igual al evento original.
+2. La unión de cualquier evento con su complemento equivale al espacio muestral.
+3. Propiedad distributiva de conjuntos.
+
+Luego, los eventos $A \cap B$ y $A \cap \overline{B}$ son mutuamente excluyentes, visto que uno está contenido en $B$ y el otro en $\overline{B}$. Por lo tanto, aplicando el tercer axioma de probabilidad, se tiene que $$P(A) = P[(A \cap B) \cup (A \cap \overline{B})] = P(A \cap B) + P(A \cap \overline{B}).$$
+
+Finalmente, por el teorema de la multiplicación, los sumandos anteriores pueden redefinirse como: $$P(A) = P(A \cap B) + P(A \cap \overline{B}) = P(A|B) \; P(B) + P(A|\overline{B}) \; P(\overline{B}).$$
 
 ## Un caso real: el caso Sally Clark
 

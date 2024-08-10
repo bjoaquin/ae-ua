@@ -12,7 +12,7 @@ book:
   author: 
     - Joaquín Bermejo
     - Victorio Costa
-  date: "8/4/2024"
+  date: "8/10/2024"
   chapters:
     - index.qmd
     - 0_conteo.qmd

@@ -511,8 +511,37 @@ Advertencia
 <p><strong>Ejemplo 6</strong></p>
 </div>
 <p>El 2% de la población mundial está contagiada con una nueva enfermedad, y existen pruebas para su diagnóstico, con una sensibilidad de 98% y una especificidad del 95%. Una persona sospecha estar enferma y, al hacerse el test, obtiene un resultado positivo. ¿Cuál es la probabilidad de que esté realmente enferma?</p>
-<p><strong>Solución:</strong> lo vemos en clase 😉</p>
+<p><strong>Solución:</strong></p>
+<ul>
+<li><strong>Experimento aleatorio:</strong> seleccionar una persona, la cual puede estar o no enferma, y realizarle el test, el cual puede dar un resultado positivo o negativo.</li>
+<li><strong>Espacio muestral:</strong> <span class="math inline">\(S = \{(\overline{E}, -),\; (\overline{E}, +),\; (E, -),\; (E, +)\}\)</span>.</li>
+<li><strong>Ejemplo de resultado:</strong> <span class="math inline">\(s = (E, -)\)</span>.</li>
+<li><strong>Eventos de interés:</strong>
+<ul>
+<li><span class="math inline">\(E\)</span>: la persona está enferma.</li>
+<li><span class="math inline">\(+\)</span>: la persona tiene un resultado positivo del test.</li>
+<li><span class="math inline">\(- (= +^c)\)</span>: la persona tiene un resultado negativo del test.</li>
+</ul></li>
+</ul>
+<p>Según el enunciado:</p>
+<ul>
+<li><span class="math inline">\(P(E) = 2\% = 0,02\)</span></li>
+<li><span class="math inline">\(P(+|E) = 98\% = 0,98\)</span></li>
+<li><span class="math inline">\(P(-|\overline{E}) = 95\% = 0,95\)</span></li>
+</ul>
+<p>Por lo tanto, aplicando el teorema de Bayes: <span class="math display">\[P(E|+) = \dfrac{P(+|E) \; P(E)}{P(+)} = \dfrac{P(+|E) \; P(E)}{P(+|E)\;P(E) + P(+|\overline{E})\;P(\overline{E})}\]</span></p>
+<p>Lo cual resulta en: <span class="math display">\[P(E|+) = \dfrac{0,98 \times 0,02}{0,98 \times 0,02 + 0,05 \times 0,98} = \dfrac{2}{7} \approx 0,2857 = 28,57\%\]</span></p>
 </div>
+<p>Como aclaración, el ejemplo anterior hace uso de un artificio matemático que a simple vista puede resultar extraño. Nótese como, luego de aplicar el teorema de Bayes, el denominador se expresa de una forma alternativa. Generalizando para dos eventos <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span>, la igualdad empleada es <span class="math display">\[P(A) = P(A|B) \; P(B) + P(A|\overline{B}) \; P(\overline{B}).\]</span></p>
+<p>¿De dónde sale esto? En primer lugar, considérese la siguiente sucesión de igualdades.</p>
+<p><span class="math display">\[A \underset{(1)}{=} A \cap S \underset{(2)}{=} A \cap (B \cup \overline{B}) \underset{(3)}{=} (A \cap B) \cup (A \cap \overline{B})\]</span></p>
+<ol type="1">
+<li>La intersección de cualquier evento con el espacio muestral es igual al evento original.</li>
+<li>La unión de cualquier evento con su complemento equivale al espacio muestral.</li>
+<li>Propiedad distributiva de conjuntos.</li>
+</ol>
+<p>Luego, los eventos <span class="math inline">\(A \cap B\)</span> y <span class="math inline">\(A \cap \overline{B}\)</span> son mutuamente excluyentes, visto que uno está contenido en <span class="math inline">\(B\)</span> y el otro en <span class="math inline">\(\overline{B}\)</span>. Por lo tanto, aplicando el tercer axioma de probabilidad, se tiene que <span class="math display">\[P(A) = P[(A \cap B) \cup (A \cap \overline{B})] = P(A \cap B) + P(A \cap \overline{B}).\]</span></p>
+<p>Finalmente, por el teorema de la multiplicación, los sumandos anteriores pueden redefinirse como: <span class="math display">\[P(A) = P(A \cap B) + P(A \cap \overline{B}) = P(A|B) \; P(B) + P(A|\overline{B}) \; P(\overline{B}).\]</span></p>
 </section>
 </section>
 <section id="un-caso-real-el-caso-sally-clark" class="level2">
