@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Análisis Estadístico (UA) - 2. Variable Aleatoria</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./1_prob.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./2_va.html"><span class="chapter-title">2. Variable Aleatoria</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Análisis Estadístico (UA)</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Prefacio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0_conteo.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">0. Herramientas de conteo</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1_prob.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1. Probabilidad</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2_va.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">2. Variable Aleatoria</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referencias</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción">Introducción</a></li>
+  <li><a href="#variable-aleatoria" id="toc-variable-aleatoria" class="nav-link" data-scroll-target="#variable-aleatoria">Variable aleatoria</a></li>
+  <li><a href="#tipos-de-variable-aleatoria" id="toc-tipos-de-variable-aleatoria" class="nav-link" data-scroll-target="#tipos-de-variable-aleatoria">Tipos de variable aleatoria</a>
+  <ul class="collapse">
+  <li><a href="#variable-aleatoria-discreta" id="toc-variable-aleatoria-discreta" class="nav-link" data-scroll-target="#variable-aleatoria-discreta">Variable aleatoria discreta</a></li>
+  <li><a href="#variable-aleatoria-continua" id="toc-variable-aleatoria-continua" class="nav-link" data-scroll-target="#variable-aleatoria-continua">Variable aleatoria continua</a></li>
+  </ul></li>
+  <li><a href="#función-de-distribución" id="toc-función-de-distribución" class="nav-link" data-scroll-target="#función-de-distribución">Función de distribución</a></li>
+  <li><a href="#esperanza-y-variancia" id="toc-esperanza-y-variancia" class="nav-link" data-scroll-target="#esperanza-y-variancia">Esperanza y variancia</a>
+  <ul class="collapse">
+  <li><a href="#esperanza" id="toc-esperanza" class="nav-link" data-scroll-target="#esperanza">Esperanza</a></li>
+  <li><a href="#variancia" id="toc-variancia" class="nav-link" data-scroll-target="#variancia">Variancia</a></li>
+  <li><a href="#propiedades-de-ex-y-vx" id="toc-propiedades-de-ex-y-vx" class="nav-link" data-scroll-target="#propiedades-de-ex-y-vx">Propiedades de E(X) y V(X)</a></li>
+  </ul></li>
+  <li><a href="#distribuciones-de-probabilidad" id="toc-distribuciones-de-probabilidad" class="nav-link" data-scroll-target="#distribuciones-de-probabilidad">Distribuciones de probabilidad</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">2. Variable Aleatoria</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introducción" class="level2">
+<h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
+<p>Un basquetbolista tiene una tasa de encestos del 60%. Esto implica que en un tiro al aro tiene un 60% de probabilidad de encestar y un 40% de fallar. ¿Cuál es la probabilidad de que deba lanzar dos veces para eventualmente encestar? Suponiendo que los tiros son independientes entre sí, la probabilidad de fallar el primer tiro y acertar el segundo es <span class="math inline">\(0,4 \times 0,6 = 0,24\)</span>. ¿Cuál es la probabilidad de que deba lanzar tres veces para finalmente encestar? Siguiendo la misma lógica obtenemos <span class="math inline">\(0,4 \times 0,4 \times 0,6 = 0,096\)</span>.</p>
+<p>Podríamos seguir este procedimiento infinitamente: para cualquier número natural <span class="math inline">\(n\)</span> es posible calcular la probabilidad de que el basquetbolista falle los primeros <span class="math inline">\(n-1\)</span> tiros y finalmente enceste el último. De hecho, definiendo la variable</p>
+<p><span class="math display">\[X: \text{ número de tiros que realiza el basquetbolista hasta encestar}\]</span></p>
+<p>es fácil ver que la probabilidad de encestar en el <span class="math inline">\(n\)</span>-ésimo tiro está dada por</p>
+<p><span class="math display">\[P(X = n) = (0,4)^{n-1} \times 0,6 \qquad \forall \quad n \in \mathbb{N}.\]</span></p>
+<p>Esta ecuación comprime de forma eficiente la información necesaria para calcular la chance de ocurrencia de cualquier resultado posible. De no tenerla, tendríamos que definir un evento para cada resultado.</p>
+<ul>
+<li><span class="math inline">\(A\)</span>: el basquetbolista encesta al primer tiro <span class="math inline">\(\implies A = \{(Si)\}\)</span></li>
+<li><span class="math inline">\(B\)</span>: el basquetbolista encesta al segundo tiro <span class="math inline">\(\implies B = \{(No, Si)\}\)</span></li>
+<li><span class="math inline">\(C\)</span>: el basquetbolista encesta al tercer tiro <span class="math inline">\(\implies C = \{(No, No, Si)\}\)</span></li>
+</ul>
+<p><span class="math inline">\(\cdots\)</span></p>
+<p>Es por ello que surgen las variables aleatorias.</p>
+</section>
+<section id="variable-aleatoria" class="level2">
+<h2 class="anchored" data-anchor-id="variable-aleatoria">Variable aleatoria</h2>
+<p>Supóngase un experimento aleatorio sobre el que se define un espacio muestral <span class="math inline">\(S\)</span>. Se llama <strong>variable aleatoria</strong> a la función <span class="math inline">\(X\)</span> que asigna a cada uno de los elementos <span class="math inline">\(s \in S\)</span> un número real <span class="math inline">\(X(s)\)</span>.</p>
+<p>En el ejemplo introductorio, el experimento aleatorio es “lanzar al aro hasta encestar” y el espacio muestral es <span class="math inline">\(S=\)</span>{(Sí), (No, Sí), (No, No, Sí), <span class="math inline">\(\cdots\)</span>}. Bajo la definición ya dada para la variable aleatoria <span class="math inline">\(X\)</span>, esta función no hace más que contar el número de tiros en cada resultado:</p>
+<p><span class="math display">\[s = (Si) \implies X(s) = 1\]</span> <span class="math display">\[s = (No, Si) \implies X(s) = 2\]</span> <span class="math display">\[s = (No, No, Si) \implies X(s) = 3\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En el ejemplo introductorio se define <span class="math inline">\(X\)</span> como el “número de tiros hasta encestar”. Nótese la diferencia entre una variable aleatoria y un evento aleatorio. El <em>evento</em> suele escribirse como una afirmación, valiéndose de un verbo (por ejemplo, “el dado arrojado <strong>resulta</strong> en un número par”). Como tal, un evento sólo admite dos resultados posibles: ocurrir o no ocurrir. En cambio, una <em>variable</em> es un atributo, el cual puede tomar múltiples valores.</p>
+</div>
+</div>
+<p>Como a cada elemento del espacio muestral le corresponde un número real, es sensato preguntarse cuáles son todos los posibles números reales que podrían obtenerse en un cierto experimento. Dicho de otro modo, podríamos preguntarnos cuáles son todos los valores que puede tomar la variable <span class="math inline">\(X\)</span>. Este conjunto se conoce como <strong>recorrido</strong> de <span class="math inline">\(X\)</span> y se simboliza con <span class="math inline">\(R_X\)</span>.</p>
+<p><span class="math display">\[R_X = \{x \in \mathbb{R} : X(s) = x \;;\; s \in S\}\]</span></p>
+<p>Por ejemplo, para un experimento con sólo tres resultados posibles se tiene <span class="math inline">\(S=\{s_1, s_2 ,s_3\}\)</span> y por lo tanto <span class="math inline">\(R_X = \{X(s_1), X(s_2), X(s_3)\}\)</span>. En el ejemplo del basquetbolista se tiene que <span class="math inline">\(R_X = \mathbb{N}\)</span>, o sea que el número de tiros hasta encestar puede ser cualquier número natural. Algo interesante de este último caso es que el conjunto tiene infinitos elementos. En general, <span class="math inline">\(R_X\)</span> puede ser un conjunto:</p>
+<ul>
+<li>finito.</li>
+<li>infinito numerable.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
+<li>infinito no numerable.</li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Advertencia
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>El tamaño de <span class="math inline">\(S\)</span> no siempre es igual al tamaño de <span class="math inline">\(R_X\)</span>. Tómese como ejemplo el experimento de arrojar dos monedas al aire en simultáneo. El espacio muestral tiene cuatro elementos, porque <span class="math inline">\(S=\{(C,C), (C,X), (X,C), (X,X)\}\)</span>, pero si definimos una variable aletoria <span class="math inline">\(X\)</span> que cuenta el número de cruces, se tiene que <span class="math inline">\(R_X = \{0, 1, 2\}\)</span>. Esto es porque se tienen dos resultados del espacio muestral que bajo la función <span class="math inline">\(X\)</span> devuelven el mismo número real.</p>
+</div>
+</div>
+</section>
+<section id="tipos-de-variable-aleatoria" class="level2">
+<h2 class="anchored" data-anchor-id="tipos-de-variable-aleatoria">Tipos de variable aleatoria</h2>
+<p>Según la cardinalidad del recorrido de <span class="math inline">\(X\)</span> (es decir, según si <span class="math inline">\(R_X\)</span> es un conjunto finito, infinito numerable o infinito no numerable), una variable aleatoria puede clasificarse en uno de dos tipos: discreta o continua.</p>
+<section id="variable-aleatoria-discreta" class="level3">
+<h3 class="anchored" data-anchor-id="variable-aleatoria-discreta">Variable aleatoria discreta</h3>
+<p>Sea <span class="math inline">\(X\)</span> una v.a.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> definida sobre un espacio muestral <span class="math inline">\(S\)</span>. Se dice que <span class="math inline">\(X\)</span> es una <strong>variable aleatoria discreta</strong> si su recorrido es un conjunto finito o infinito numerable.</p>
+<p>Ejemplos de variables aleatorias discretas son los siguientes:</p>
+<ul>
+<li>Demanda de un cierto producto.</li>
+<li>Número de aces en un partido de tenis.</li>
+<li>Cantidad de senadores que votan en contra de una ley.</li>
+<li>Número de ventas anuales en Amazon.</li>
+</ul>
+<p>Supongamos un recorrido <span class="math inline">\(R_X = \{x_1, x_2, x_3, \cdots\}\)</span> a lo sumo numerable. Para cada resultado posible <span class="math inline">\(x_i\)</span> puede asociarse un número <span class="math inline">\(p(x_i) = P(X = x_i)\)</span>. Esta función es denominada <strong>función de probabilidad puntual</strong> de <span class="math inline">\(X\)</span>.</p>
+<p>La función <span class="math inline">\(p(x)\)</span> verifica dos propiedades importantes:</p>
+<ol type="1">
+<li><span class="math inline">\(p(x) &gt; 0 \quad \forall \quad x \in R_X\)</span> (condición de positividad)</li>
+<li><span class="math inline">\(\sum_{x \in R_X} p(x) = 1\)</span> (condición de cierre)</li>
+</ol>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 1</strong></p>
+</div>
+<p>Se arrojan 3 monedas equilibradas al aire y se registra para cada una si el resultado es cara o cruz. Sea <span class="math inline">\(X\)</span> la variable que registra el número de cruces obtenidas. Definir su función de probabilidad.</p>
+<p><strong>Solución:</strong></p>
+<ul>
+<li><strong>Experimento aleatorio:</strong> arrojar 3 monedas al aire y registrar la cara superior de cada una.</li>
+<li><strong>Espacio muestral:</strong> <span class="math inline">\(S = \{CCC, CCX, CXC, CXX, XCC, XCX, XXC, XXX\}\)</span>.</li>
+<li><strong>Ejemplo de resultado:</strong> <span class="math inline">\(s = CCX\)</span>.</li>
+<li><strong>Variable aleatoria:</strong> <span class="math inline">\(X\)</span>: número de cruces obtenidas.</li>
+<li><strong>Recorrido:</strong> <span class="math inline">\(R_X = \{0, 1, 2, 3\} \implies \#R_X = 4\)</span> (finito).</li>
+</ul>
+<p>La función de probabilidad surge de las siguientes probabilidades:</p>
+<ul>
+<li><span class="math inline">\(p(0) = P(X = 0) = P(s \in \{CCC\}) = \frac{1}{8}\)</span></li>
+<li><span class="math inline">\(p(1) = P(X = 1) = P(s \in \{CCX, CXC, XCC\}) = \frac{3}{8}\)</span></li>
+<li><span class="math inline">\(p(2) = P(X = 2) = P(s \in \{XXC, XCX, CXX\}) = \frac{3}{8}\)</span></li>
+<li><span class="math inline">\(p(3) = P(X = 3) = P(s \in \{XXX\}) = \frac{1}{8}\)</span></li>
+</ul>
+<p>Nótese que se verifican tanto la condición de positividad como la de cierre:</p>
+<ol type="1">
+<li>Positividad: <span class="math inline">\(\frac{3}{8} &gt; \frac{1}{8} &gt; 0\)</span> (todos los resultados son positivos)</li>
+<li>Cierre: <span class="math inline">\(\frac{1}{8} + \frac{3}{8} + \frac{3}{8} + \frac{1}{8} = \frac{8}{8} = 1\)</span></li>
+</ol>
+</div>
+<p>Al conjunto de pares <span class="math inline">\((x, p(x))\)</span> se lo llama <strong>distribución de probabilidad</strong> de la v.a. <span class="math inline">\(X\)</span>, denotada como <span class="math inline">\(X \sim p(x)\)</span><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Para una v.a. discreta existen tres formas de representar su distribución de probabilidad: como tabla, como gráfico o como fórmula.</p>
+<div id="fig-distrib_prob" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/distrib_prob.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figura&nbsp;4.1: Las tres formas de representar la distribución de probabilidad de una variable aleatoria discreta.</figcaption>
+</figure>
+</div>
+</section>
+<section id="variable-aleatoria-continua" class="level3">
+<h3 class="anchored" data-anchor-id="variable-aleatoria-continua">Variable aleatoria continua</h3>
+<p>Sea <span class="math inline">\(X\)</span> una v.a. definida sobre un espacio muestral <span class="math inline">\(S\)</span>. Se dice que <span class="math inline">\(X\)</span> es una <strong>variable aleatoria continua</strong> si su recorrido es un conjunto infinito no numerable.</p>
+<p>Ejemplos de variables aleatorias continuas son los siguientes:</p>
+<ul>
+<li>Producto Bruto Interno.</li>
+<li>Duración del vuelo AR1300 (EZE-JFK), en minutos.</li>
+<li>Valor del dólar en relación al precio argentino.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ante una variable aleatoria continua ya no podemos hablar de <span class="math inline">\(x_i\)</span>, visto que no existe un <span class="math inline">\(i\)</span>-ésimo valor de la variable.</p>
+</div>
+</div>
+<p>Para toda v.a. continua <span class="math inline">\(X\)</span> se tiene que <span class="math inline">\(P(X=x) = 0\)</span>. Es decir que las probabilidades puntuales son todas nulas. En su lugar, conviene estudiar la probabilidad de que <span class="math inline">\(X\)</span> tome un valor en un entorno de <span class="math inline">\(x\)</span>, lo cual se logra con una función particular.</p>
+<p>Se denomina <strong>función de densidad de probabilidad</strong> de <span class="math inline">\(X\)</span> a aquella función <span class="math inline">\(f(x)\)</span> que verifica:</p>
+<ol type="1">
+<li><span class="math inline">\(f(x)&gt;0 \quad \forall \quad x \in R_X\)</span> (condición de positividad)</li>
+<li><span class="math inline">\(\int_{R_X} f(x) \; dx = 1\)</span> (condición de cierre)</li>
+</ol>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 2</strong></p>
+</div>
+<p>Una empresa láctea vende sachets de yogur de un litro. La máquina que llena los envases no funciona a la perfección, por lo que el verdadero contenido de yogur puede variar entre envases. Se sabe que la variable ``litros de yogur en un sachet’’ (llamémosla <span class="math inline">\(X\)</span>) se distribuye siguiendo la función de densidad a continuación: <span class="math display">\[f(x) = K(4x - x^2) \qquad \forall \quad 0&lt;x&lt;2\]</span> ¿Cuál es el valor del número real <span class="math inline">\(K\)</span>?</p>
+<p><strong>Solución:</strong></p>
+<ul>
+<li><strong>Experimento aleatorio:</strong> usar la máquina para llenar un sachet de yogur.</li>
+<li><strong>Variable aleatoria:</strong> <span class="math inline">\(X\)</span>: litros de yogur en un sachet.</li>
+<li><strong>Recorrido:</strong> <span class="math inline">\(R_X = [0, 2] \subset \mathbb{R}\)</span> (infinito no numerable).</li>
+</ul>
+<p>Por condición de cierre: <span class="math display">\[\int_0^2 K(4x-2x^2) \; dx = K(2x^2 - \tfrac{2}{3}x^3) |_0^2 = K(8 - \tfrac{16}{3}) = \tfrac{8}{3} \implies K = \tfrac{3}{8}\]</span></p>
+</div>
+</section>
+</section>
+<section id="función-de-distribución" class="level2">
+<h2 class="anchored" data-anchor-id="función-de-distribución">Función de distribución</h2>
+<p>Sea <span class="math inline">\(X\)</span> una v.a. cualquiera (discreta o continua), llamamos <strong>función de distribución acumulada</strong> de <span class="math inline">\(X\)</span> a la función: <span class="math display">\[F(x) = P(X \leq x) \quad \forall \quad x \in \mathbb{R}.\]</span></p>
+<p>Esta definición puede particularizarse para cada tipo de variable aleatoria:</p>
+<ul>
+<li>Discreta: <span class="math inline">\(F(x) = \sum_{x_i \leq x} p(x_i)\)</span></li>
+<li>Continua: <span class="math inline">\(F(x) = \int_{-\infty}^x f(t) \; dt\)</span></li>
+</ul>
+<div id="fig-fc_distrib" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/fc_distrib.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figura&nbsp;4.2: Representaciones gráficas de funciones de distribución para una variable discreta (izquierda) y una continua (derecha).</figcaption>
+</figure>
+</div>
+<p>La función de distribución acumulada goza de tres propiedades:</p>
+<ul>
+<li>Es monótona no decreciente: <span class="math inline">\(x_1 &lt; x_2 \implies F(x_1) \leq F(x_2)\)</span></li>
+<li>Está acotada entre 0 y 1: <span class="math inline">\(\lim_{x \to -\infty} F(x) = 0\)</span> y <span class="math inline">\(\lim_{x \to +\infty} F(x) = 1\)</span></li>
+<li>Es continua por derecha: <span class="math inline">\(\lim_{x \to x_0^+} F(x) = F(x_0)\)</span></li>
+</ul>
+</section>
+<section id="esperanza-y-variancia" class="level2">
+<h2 class="anchored" data-anchor-id="esperanza-y-variancia">Esperanza y variancia</h2>
+<section id="esperanza" class="level3">
+<h3 class="anchored" data-anchor-id="esperanza">Esperanza</h3>
+<p>Definiremos la esperanza por separado para cada tipo de variable aleatoria.</p>
+<p><strong>Caso discreto:</strong> Sea <span class="math inline">\(X\)</span> una v.a. discreta con función de probabilidad <span class="math inline">\(p(x)\)</span>, se define la <strong>esperanza</strong> (o valor esperado) de <span class="math inline">\(X\)</span> como: <span class="math display">\[E(X) = \sum_{x_i \in R_X} x_i \cdot p(x_i)\]</span></p>
+<p><strong>Caso continuo:</strong> Sea <span class="math inline">\(X\)</span> una v.a. continua con función de densidad <span class="math inline">\(f(x)\)</span>, se define la <strong>esperanza</strong> de <span class="math inline">\(X\)</span> como: <span class="math display">\[E(X) = \int_{R_X} x \cdot f(x) \; dx\]</span></p>
+<p>Se hacen las siguientes observaciones sobre la esperanza:</p>
+<ul>
+<li>La esperanza puede no existir. La condición para su existencia es la convergencia de la serie (en el caso discreto) o de la integral impropia (en el caso continuo).</li>
+<li>Si <span class="math inline">\(R_X\)</span> es finito, la esperanza de <span class="math inline">\(X\)</span> se obtiene como una suma finita y por lo tanto existe .</li>
+<li>La esperanza representa el “centro de gravedad” de la distribución de probabilidad.</li>
+<li>La esperanza es un parámetro; no debe confundirse con el concepto de promedio o media aritmética.</li>
+</ul>
+</section>
+<section id="variancia" class="level3">
+<h3 class="anchored" data-anchor-id="variancia">Variancia</h3>
+<p>Nuevamente, se establece una definición para cada tipo de variable aleatoria.</p>
+<p><strong>Caso discreto:</strong> Sea <span class="math inline">\(X\)</span> una v.a. discreta con función de probabilidad <span class="math inline">\(p(x)\)</span>, se define la <strong>variancia</strong> de <span class="math inline">\(X\)</span> como: <span class="math display">\[V(X) = \sum_{x_i \in R_X} [x_i - E(X)]^2 \cdot p(x_i)\]</span></p>
+<p><strong>Caso continuo:</strong> Sea <span class="math inline">\(X\)</span> una v.a. continua con función de densidad <span class="math inline">\(f(x)\)</span>, se define la <strong>variancia</strong> de <span class="math inline">\(X\)</span> como: <span class="math display">\[V(X) = \int_{R_X} [x-E(X)]^2 \cdot f(x) \; dx\]</span></p>
+<p>La definición de <span class="math inline">\(V(X)\)</span> es equivalente a una expresión más sencilla de calcular, que frecuentemente se utiliza en la práctica para simplificar los cálculos: la <em>fórmula de trabajo</em> de <span class="math inline">\(V(X)\)</span>. <span class="math display">\[V(X) = E(X^2) - [E(X)]^2 = E(X^2) - E^2(X)\]</span></p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 3</strong></p>
+</div>
+<p>Calcular la Esperanza y Variancia para la variable aleatoria definida en el Ejemplo 1.</p>
+<p><strong>Solución:</strong> lo vemos en clase. 😉</p>
+</div>
+</section>
+<section id="propiedades-de-ex-y-vx" class="level3">
+<h3 class="anchored" data-anchor-id="propiedades-de-ex-y-vx">Propiedades de E(X) y V(X)</h3>
+<p>Se cumplen las siguientes propiedades para la Esperanza y Variancia de una variable aleatoria.</p>
+<p>Esperanza:</p>
+<ul>
+<li><span class="math inline">\(X=c\)</span> con prob. 1 <span class="math inline">\(\implies E(X) = c\)</span></li>
+<li><span class="math inline">\(E(X+a) = E(X) + a\)</span></li>
+<li><span class="math inline">\(E(c \cdot X) = c \cdot E(X)\)</span></li>
+<li><span class="math inline">\(E(c \cdot X + a) = c \cdot E(X) + a\)</span></li>
+</ul>
+<p>Variancia:</p>
+<ul>
+<li><span class="math inline">\(X=c\)</span> con prob. 1 <span class="math inline">\(\implies V(X) = 0\)</span></li>
+<li><span class="math inline">\(V(X+a) = V(X)\)</span></li>
+<li><span class="math inline">\(V(c \cdot X) = c^2 \cdot V(X)\)</span></li>
+<li><span class="math inline">\(V(c \cdot X + a) = c^2 \cdot V(X)\)</span></li>
+</ul>
+</section>
+</section>
+<section id="distribuciones-de-probabilidad" class="level2">
+<h2 class="anchored" data-anchor-id="distribuciones-de-probabilidad">Distribuciones de probabilidad</h2>
+<p><em>Próximamente.</em> 🚧</p>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Algunos conjuntos infinitos permiten enumerar todos sus elementos, como sucede por ejemplo para el caso de los números naturales: <span class="math inline">\(\mathbb{N} = \{1, 2, 3, \cdots\}\)</span>. Estos son ejemplos de infinitos numerables. Existen otros conjuntos infinitos, sin embargo, que no permiten tal enumeración. Un claro ejemplo son los números reales (<span class="math inline">\(\mathbb{R}\)</span>).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Por comodidad, en ocasiones adoptamos esta forma de abreviar “variable aleatoria”.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Se lee “<span class="math inline">\(X\)</span> se distribuye como una <span class="math inline">\(p(x)\)</span>”.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./1_prob.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">1. Probabilidad</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link">
+        <span class="nav-page-text">Referencias</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
