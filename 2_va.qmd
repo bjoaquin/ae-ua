@@ -7,7 +7,7 @@ library(tidyverse)
 contador_ejemplos <- 0
 ```
 
-# 2. Variable Aleatoria
+# 2. Variable aleatoria
 
 ## Introducción
 
@@ -45,6 +45,12 @@ $$s = (Si) \implies X(s) = 1$$ $$s = (No, Si) \implies X(s) = 2$$ $$s = (No, No,
 En el ejemplo introductorio se define $X$ como el "número de tiros hasta encestar". Nótese la diferencia entre una variable aleatoria y un evento aleatorio. El *evento* suele escribirse como una afirmación, valiéndose de un verbo (por ejemplo, "el dado arrojado **resulta** en un número par"). Como tal, un evento sólo admite dos resultados posibles: ocurrir o no ocurrir. En cambio, una *variable* es un atributo, el cual puede tomar múltiples valores.
 :::
 
+::: callout-note
+#### Nota
+
+Otra convención de la que hacemos uso es la distinción entre letras mayúsculas y minúsculas. Nótese cómo hemos usado la letra $S$ para referirnos al espacio muestral y la letra $s$ para referirnos a un elemento particular perteneciente a tal conjunto. Del mismo modo, reservaremos letras mayúsculas como $X$ para definir variables aleatorias y letras minúsculas como $x$ para referirnos a valores puntuales que éstas podrían asumir.
+:::
+
 Como a cada elemento del espacio muestral le corresponde un número real, es sensato preguntarse cuáles son todos los posibles números reales que podrían obtenerse en un cierto experimento. Dicho de otro modo, podríamos preguntarnos cuáles son todos los valores que puede tomar la variable $X$. Este conjunto se conoce como **recorrido** de $X$ y se simboliza con $R_X$.
 
 $$R_X = \{x \in \mathbb{R} : X(s) = x \;;\; s \in S\}$$
@@ -55,7 +61,7 @@ Por ejemplo, para un experimento con sólo tres resultados posibles se tiene $S=
 * infinito numerable.[^2_va-1]
 * infinito no numerable.
 
-[^2_va-1]: Algunos conjuntos infinitos permiten enumerar todos sus elementos, como sucede por ejemplo para el caso de los números naturales: $\mathbb{N} = \{1, 2, 3, \cdots\}$. Estos son ejemplos de infinitos numerables. Existen otros conjuntos infinitos, sin embargo, que no permiten tal enumeración. Un claro ejemplo son los números reales ($\mathbb{R}$).
+[^2_va-1]: Algunos conjuntos infinitos permiten enumerar todos sus elementos, como sucede por ejemplo para el caso de los números naturales: $\mathbb{N} = \{1, 2, 3, \cdots\}$. Estos son ejemplos de infinitos numerables. Existen otros conjuntos infinitos, sin embargo, que no permiten tal enumeración. Un claro ejemplo son los números reales ($\mathbb{R}$). ¿Cuál es el primer número real? Incluso si comenzáramos en uno arbitrario (por ejemplo, 0) ¿cuál sería el siguiente? No existe una forma satisfactoria de enumerar los números reales, y por eso se los denomina "no numerables".
 
 ::: callout-warning
 #### Advertencia
@@ -142,12 +148,26 @@ Ejemplos de variables aleatorias continuas son los siguientes:
 Ante una variable aleatoria continua ya no podemos hablar de $x_i$, visto que no existe un $i$-ésimo valor de la variable.
 :::
 
-Para toda v.a. continua $X$ se tiene que $P(X=x) = 0$. Es decir que las probabilidades puntuales son todas nulas. En su lugar, conviene estudiar la probabilidad de que $X$ tome un valor en un entorno de $x$, lo cual se logra con una función particular.
+Para toda v.a. continua $X$ se tiene que $P(X=x) = 0$. Es decir que las probabilidades puntuales son todas nulas. Esta característica puede ser difícil de asimilar, puesto que va en contra de la intuición: ¿cómo puede ser que un valor *posible* tenga una probabilidad *nula* de ocurrir? La explicación formal involucra matemáticas cuya complejidad exceden los contenidos de este curso; es suficiente con decir que, bajo un escenario donde los resultados posibles tienen infinitos decimales, es improbable que se obtenga *exactamente* un cierto número previsto de antemano.
+
+::: callout-warning
+#### Advertencia
+
+La noción de un "número con infinitos decimales" pareciera no aplicar a varios ejemplos de la vida cotidiana. Por ejemplo: si pesamos una sandía en una balanza, obtendremos a lo sumo tres (como mucho cuatro) decimales. Sin embargo, esta es una limitación impuesta por el instrumento de medición, no por la variable en sí misma. Si tuviéramos una balanza más precisa podríamos medir aún más decimales.
+
+Este concepto también aplica cuando la limitación en los decimales es generada no por el instrumento de medición sino por el uso habitual o la relevancia. Por ejemplo: cuando alguien nos pregunta por nuestra altura es común que respondamos algo como "un metro setenta y dos", es decir, usando dos decimales. Incluso si nos midiésemos con una cinta métrica que tuviera más decimales, nuestra respuesta seguiría limitándose a dos.
+
+Este redondeo por conveniencia aplica también a variables con decimales que cotidianamente redondeamos a números enteros. El ejemplo más claro es la edad. Tal número suele redondearse a "años cumplidos" y por lo tanto se la cuenta mediante números enteros, pero en realidad con cada segundo (incluso nanosegundo) que pasa nuestra edad va cambiando.
+:::
+
+¿Cómo podemos, entonces, medir probabilidades de ocurrencia sobre una variable en la cual cada valor puntual tiene probabilidad nula? En estos casos suele ser de interés la probabilidad de que la variable tome un valor dentro de un cierto *intervalo*. Así, se estudia la probabilidad de que $X$ tome un valor en un entorno de $x$, lo cual se logra con una función particular.
 
 Se denomina **función de densidad de probabilidad** de $X$ a aquella función $f(x)$ que verifica:
 
 1. $f(x)>0 \quad \forall \quad x \in R_X$ (condición de positividad)
 2. $\int_{R_X} f(x) \; dx = 1$ (condición de cierre)
+
+Es muy importante recordar que la función $f(x)$ no devuelve la probabilidad de ocurrencia del valor $X=x$. Como ya se dijo, dicha probabilidad sería nula. Más aún, la función $f(x)$ en ocasiones puede tomar valores mayores a 1, lo cual pone en evidencia que no mide probabilidades. Esta función es un mero intermediario para calcular una probabilidad, y para ello debe ser envuelta en una integral, como se muestra en el siguiente ejemplo.
 
 ::: {.examplebox data-latex=""}
 ```{r}
@@ -175,9 +195,9 @@ $$\int_0^2 K(4x-2x^2) \; dx = K(2x^2 - \tfrac{2}{3}x^3) |_0^2 = K(8 - \tfrac{16}
 
 ## Función de distribución
 
-Sea $X$ una v.a. cualquiera (discreta o continua), llamamos **función de distribución acumulada** de $X$ a la función: $$F(x) = P(X \leq x) \quad \forall \quad x \in \mathbb{R}.$$
+Sea $X$ una v.a. cualquiera (discreta o continua), llamamos **función de distribución acumulada** de $X$ a la función: $$F(x) = P(X \leq x) \quad \forall \quad x \in \mathbb{R}.$$ Es decir, esta función calcula la probabilidad de que $X$ tome el valor $x$ o cualquier valor menor a éste. De ahí la palabra "acumulada". En esta definición no importa si se consideran valores menores a $x$ que no son posibles bajo nuestra variable aleatoria, visto que esos casos tienen probabilidad nula (o densidad nula, en variables continuas).
 
-Esta definición puede particularizarse para cada tipo de variable aleatoria:
+La definición dada puede particularizarse para cada tipo de variable aleatoria:
 
 * Discreta: $F(x) = \sum_{x_i \leq x} p(x_i)$
 * Continua: $F(x) = \int_{-\infty}^x f(t) \; dt$
@@ -191,6 +211,10 @@ La función de distribución acumulada goza de tres propiedades:
 * Es continua por derecha: $\lim_{x \to x_0^+} F(x) = F(x_0)$
 
 ## Esperanza y variancia
+
+Hasta ahora hemos visto que una variable aleatoria puede definirse mediante una función de probabilidad (o densidad) o, equivalentemente, una función de distribución. Si bien esto nos da información suficiente para calcular la probabilidad de ocurrencia de cualquier evento, existen métricas que en forma sencilla reflejan características importantes sobre la variable en cuestión.
+
+Dichas métricas son llamadas Esperanza y Variancia, simbolizadas $E(X)$ y $V(X)$ respectivamente. La primera nos dice alrededor de qué valor tienden a situarse los resultados posibles de la variable. La segunda indica cuán propensa es la variable a alejarse de dicho valor central, como una suerte de medida de "estabilidad" o "aleatoriedad" de la variable.
 
 ### Esperanza
 
@@ -229,7 +253,30 @@ contador_ejemplos <- contador_ejemplos + 1
 
 Calcular la Esperanza y Variancia para la variable aleatoria definida en el Ejemplo 1.
 
-**Solución:** lo vemos en clase. 😉
+**Solución:** se tiene la siguiente función de probabilidad para la variable $X$.
+
+::: {.flexcenter data-latex=""}
+::: {.quarter .blackborder data-latex=""}
+| $x$  | $p(x)$ |
+|-----:|-------:|
+| 0    | 1/8    |
+| 1    | 3/8    |
+| 2    | 3/8    |
+| 3    | 1/8    |
+:::
+:::
+
+Por lo tanto:
+
+$$E(X) = 0 \times \tfrac{1}{8} + 1 \times \tfrac{3}{8} + 2 \times \tfrac{3}{8} + 3 \times \tfrac{1}{8} = \tfrac{3}{8} + \tfrac{6}{8} + \tfrac{3}{8} = \tfrac{12}{8} = 1,5$$
+
+Luego:
+
+$$E(X^2) = 0^2 \times \tfrac{1}{8} + 1^2 \times \tfrac{3}{8} + 2^2 \times \tfrac{3}{8} + 3^2 \times \tfrac{1}{8} = \tfrac{3}{8} + \tfrac{12}{8} + \tfrac{9}{8} = \tfrac{24}{8} = 3$$
+
+Finalmente:
+
+$$V(X) = E(X^2) - E^2(X) = 3 - (1,5)^2 = 3 - 2,25 = 0,75$$
 :::
 
 ### Propiedades de E(X) y V(X)
@@ -252,5 +299,11 @@ Variancia:
 * $V(c \cdot X + a) = c^2 \cdot V(X)$
 
 ## Distribuciones de probabilidad
+
+En la práctica, existen variables aleatorias que se utilizan con frecuencia y que, por lo tanto, tienen una distribución conocida. Esto nos ahorra tiempo y esfuerzo porque no tenemos que calcular cosas como su función de probabilidad (o densidad), su función de distribución, su esperanza o su variancia. Más aún, calcular probabilidades bajo estas distribuciones conocidas se vuelve relativamente sencillo porque programas informáticos como R ya tienen incluidos funciones que lo hacen por nosotros.
+
+Existen muchísimas distribuciones de probabilidad.[^2_va-4] En este curso nos limitaremos a estudiar seis: tres para variables discretas y tres para variables continuas.
+
+[^2_va-4]: <https://en.wikipedia.org/wiki/List_of_probability_distributions>
 
 *Próximamente.* 🚧

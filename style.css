@@ -16,6 +16,9 @@
 .half {
   width: 50%;
 }
+.quarter {
+  width: 25%;
+}
 
 .indent {
   margin-left: 10%;
@@ -27,4 +30,7 @@ table * {
 }
 tr {
   text-align: center;
+}
+.blackborder * {
+  border-color: black;
 }

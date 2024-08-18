@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Análisis Estadístico (UA) - 2. Variable Aleatoria</title>
+<title>Análisis Estadístico (UA) - 2. Variable aleatoria</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -76,7 +76,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./2_va.html"><span class="chapter-title">2. Variable Aleatoria</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./2_va.html"><span class="chapter-title">2. Variable aleatoria</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -118,7 +118,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2_va.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">2. Variable Aleatoria</span></a>
+  <a href="./2_va.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">2. Variable aleatoria</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -160,7 +160,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">2. Variable Aleatoria</span></h1>
+<h1 class="title"><span class="chapter-title">2. Variable aleatoria</span></h1>
 </div>
 
 
@@ -207,6 +207,19 @@ Nota
 </div>
 <div class="callout-body-container callout-body">
 <p>En el ejemplo introductorio se define <span class="math inline">\(X\)</span> como el “número de tiros hasta encestar”. Nótese la diferencia entre una variable aleatoria y un evento aleatorio. El <em>evento</em> suele escribirse como una afirmación, valiéndose de un verbo (por ejemplo, “el dado arrojado <strong>resulta</strong> en un número par”). Como tal, un evento sólo admite dos resultados posibles: ocurrir o no ocurrir. En cambio, una <em>variable</em> es un atributo, el cual puede tomar múltiples valores.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Otra convención de la que hacemos uso es la distinción entre letras mayúsculas y minúsculas. Nótese cómo hemos usado la letra <span class="math inline">\(S\)</span> para referirnos al espacio muestral y la letra <span class="math inline">\(s\)</span> para referirnos a un elemento particular perteneciente a tal conjunto. Del mismo modo, reservaremos letras mayúsculas como <span class="math inline">\(X\)</span> para definir variables aleatorias y letras minúsculas como <span class="math inline">\(x\)</span> para referirnos a valores puntuales que éstas podrían asumir.</p>
 </div>
 </div>
 <p>Como a cada elemento del espacio muestral le corresponde un número real, es sensato preguntarse cuáles son todos los posibles números reales que podrían obtenerse en un cierto experimento. Dicho de otro modo, podríamos preguntarnos cuáles son todos los valores que puede tomar la variable <span class="math inline">\(X\)</span>. Este conjunto se conoce como <strong>recorrido</strong> de <span class="math inline">\(X\)</span> y se simboliza con <span class="math inline">\(R_X\)</span>.</p>
@@ -306,12 +319,29 @@ Nota
 <p>Ante una variable aleatoria continua ya no podemos hablar de <span class="math inline">\(x_i\)</span>, visto que no existe un <span class="math inline">\(i\)</span>-ésimo valor de la variable.</p>
 </div>
 </div>
-<p>Para toda v.a. continua <span class="math inline">\(X\)</span> se tiene que <span class="math inline">\(P(X=x) = 0\)</span>. Es decir que las probabilidades puntuales son todas nulas. En su lugar, conviene estudiar la probabilidad de que <span class="math inline">\(X\)</span> tome un valor en un entorno de <span class="math inline">\(x\)</span>, lo cual se logra con una función particular.</p>
+<p>Para toda v.a. continua <span class="math inline">\(X\)</span> se tiene que <span class="math inline">\(P(X=x) = 0\)</span>. Es decir que las probabilidades puntuales son todas nulas. Esta característica puede ser difícil de asimilar, puesto que va en contra de la intuición: ¿cómo puede ser que un valor <em>posible</em> tenga una probabilidad <em>nula</em> de ocurrir? La explicación formal involucra matemáticas cuya complejidad exceden los contenidos de este curso; es suficiente con decir que, bajo un escenario donde los resultados posibles tienen infinitos decimales, es improbable que se obtenga <em>exactamente</em> un cierto número previsto de antemano.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Advertencia
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La noción de un “número con infinitos decimales” pareciera no aplicar a varios ejemplos de la vida cotidiana. Por ejemplo: si pesamos una sandía en una balanza, obtendremos a lo sumo tres (como mucho cuatro) decimales. Sin embargo, esta es una limitación impuesta por el instrumento de medición, no por la variable en sí misma. Si tuviéramos una balanza más precisa podríamos medir aún más decimales.</p>
+<p>Este concepto también aplica cuando la limitación en los decimales es generada no por el instrumento de medición sino por el uso habitual o la relevancia. Por ejemplo: cuando alguien nos pregunta por nuestra altura es común que respondamos algo como “un metro setenta y dos”, es decir, usando dos decimales. Incluso si nos midiésemos con una cinta métrica que tuviera más decimales, nuestra respuesta seguiría limitándose a dos.</p>
+<p>Este redondeo por conveniencia aplica también a variables con decimales que cotidianamente redondeamos a números enteros. El ejemplo más claro es la edad. Tal número suele redondearse a “años cumplidos” y por lo tanto se la cuenta mediante números enteros, pero en realidad con cada segundo (incluso nanosegundo) que pasa nuestra edad va cambiando.</p>
+</div>
+</div>
+<p>¿Cómo podemos, entonces, medir probabilidades de ocurrencia sobre una variable en la cual cada valor puntual tiene probabilidad nula? En estos casos suele ser de interés la probabilidad de que la variable tome un valor dentro de un cierto <em>intervalo</em>. Así, se estudia la probabilidad de que <span class="math inline">\(X\)</span> tome un valor en un entorno de <span class="math inline">\(x\)</span>, lo cual se logra con una función particular.</p>
 <p>Se denomina <strong>función de densidad de probabilidad</strong> de <span class="math inline">\(X\)</span> a aquella función <span class="math inline">\(f(x)\)</span> que verifica:</p>
 <ol type="1">
 <li><span class="math inline">\(f(x)&gt;0 \quad \forall \quad x \in R_X\)</span> (condición de positividad)</li>
 <li><span class="math inline">\(\int_{R_X} f(x) \; dx = 1\)</span> (condición de cierre)</li>
 </ol>
+<p>Es muy importante recordar que la función <span class="math inline">\(f(x)\)</span> no devuelve la probabilidad de ocurrencia del valor <span class="math inline">\(X=x\)</span>. Como ya se dijo, dicha probabilidad sería nula. Más aún, la función <span class="math inline">\(f(x)\)</span> en ocasiones puede tomar valores mayores a 1, lo cual pone en evidencia que no mide probabilidades. Esta función es un mero intermediario para calcular una probabilidad, y para ello debe ser envuelta en una integral, como se muestra en el siguiente ejemplo.</p>
 <div class="examplebox">
 <div class="center">
 <p><strong>Ejemplo 2</strong></p>
@@ -329,8 +359,8 @@ Nota
 </section>
 <section id="función-de-distribución" class="level2">
 <h2 class="anchored" data-anchor-id="función-de-distribución">Función de distribución</h2>
-<p>Sea <span class="math inline">\(X\)</span> una v.a. cualquiera (discreta o continua), llamamos <strong>función de distribución acumulada</strong> de <span class="math inline">\(X\)</span> a la función: <span class="math display">\[F(x) = P(X \leq x) \quad \forall \quad x \in \mathbb{R}.\]</span></p>
-<p>Esta definición puede particularizarse para cada tipo de variable aleatoria:</p>
+<p>Sea <span class="math inline">\(X\)</span> una v.a. cualquiera (discreta o continua), llamamos <strong>función de distribución acumulada</strong> de <span class="math inline">\(X\)</span> a la función: <span class="math display">\[F(x) = P(X \leq x) \quad \forall \quad x \in \mathbb{R}.\]</span> Es decir, esta función calcula la probabilidad de que <span class="math inline">\(X\)</span> tome el valor <span class="math inline">\(x\)</span> o cualquier valor menor a éste. De ahí la palabra “acumulada”. En esta definición no importa si se consideran valores menores a <span class="math inline">\(x\)</span> que no son posibles bajo nuestra variable aleatoria, visto que esos casos tienen probabilidad nula (o densidad nula, en variables continuas).</p>
+<p>La definición dada puede particularizarse para cada tipo de variable aleatoria:</p>
 <ul>
 <li>Discreta: <span class="math inline">\(F(x) = \sum_{x_i \leq x} p(x_i)\)</span></li>
 <li>Continua: <span class="math inline">\(F(x) = \int_{-\infty}^x f(t) \; dt\)</span></li>
@@ -350,6 +380,8 @@ Nota
 </section>
 <section id="esperanza-y-variancia" class="level2">
 <h2 class="anchored" data-anchor-id="esperanza-y-variancia">Esperanza y variancia</h2>
+<p>Hasta ahora hemos visto que una variable aleatoria puede definirse mediante una función de probabilidad (o densidad) o, equivalentemente, una función de distribución. Si bien esto nos da información suficiente para calcular la probabilidad de ocurrencia de cualquier evento, existen métricas que en forma sencilla reflejan características importantes sobre la variable en cuestión.</p>
+<p>Dichas métricas son llamadas Esperanza y Variancia, simbolizadas <span class="math inline">\(E(X)\)</span> y <span class="math inline">\(V(X)\)</span> respectivamente. La primera nos dice alrededor de qué valor tienden a situarse los resultados posibles de la variable. La segunda indica cuán propensa es la variable a alejarse de dicho valor central, como una suerte de medida de “estabilidad” o “aleatoriedad” de la variable.</p>
 <section id="esperanza" class="level3">
 <h3 class="anchored" data-anchor-id="esperanza">Esperanza</h3>
 <p>Definiremos la esperanza por separado para cada tipo de variable aleatoria.</p>
@@ -374,7 +406,43 @@ Nota
 <p><strong>Ejemplo 3</strong></p>
 </div>
 <p>Calcular la Esperanza y Variancia para la variable aleatoria definida en el Ejemplo 1.</p>
-<p><strong>Solución:</strong> lo vemos en clase. 😉</p>
+<p><strong>Solución:</strong> se tiene la siguiente función de probabilidad para la variable <span class="math inline">\(X\)</span>.</p>
+<div class="flexcenter">
+<div class="quarter blackborder">
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: right;"><span class="math inline">\(x\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(p(x)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1/8</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3/8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3/8</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1/8</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Por lo tanto:</p>
+<p><span class="math display">\[E(X) = 0 \times \tfrac{1}{8} + 1 \times \tfrac{3}{8} + 2 \times \tfrac{3}{8} + 3 \times \tfrac{1}{8} = \tfrac{3}{8} + \tfrac{6}{8} + \tfrac{3}{8} = \tfrac{12}{8} = 1,5\]</span></p>
+<p>Luego:</p>
+<p><span class="math display">\[E(X^2) = 0^2 \times \tfrac{1}{8} + 1^2 \times \tfrac{3}{8} + 2^2 \times \tfrac{3}{8} + 3^2 \times \tfrac{1}{8} = \tfrac{3}{8} + \tfrac{12}{8} + \tfrac{9}{8} = \tfrac{24}{8} = 3\]</span></p>
+<p>Finalmente:</p>
+<p><span class="math display">\[V(X) = E(X^2) - E^2(X) = 3 - (1,5)^2 = 3 - 2,25 = 0,75\]</span></p>
 </div>
 </section>
 <section id="propiedades-de-ex-y-vx" class="level3">
@@ -398,6 +466,8 @@ Nota
 </section>
 <section id="distribuciones-de-probabilidad" class="level2">
 <h2 class="anchored" data-anchor-id="distribuciones-de-probabilidad">Distribuciones de probabilidad</h2>
+<p>En la práctica, existen variables aleatorias que se utilizan con frecuencia y que, por lo tanto, tienen una distribución conocida. Esto nos ahorra tiempo y esfuerzo porque no tenemos que calcular cosas como su función de probabilidad (o densidad), su función de distribución, su esperanza o su variancia. Más aún, calcular probabilidades bajo estas distribuciones conocidas se vuelve relativamente sencillo porque programas informáticos como R ya tienen incluidos funciones que lo hacen por nosotros.</p>
+<p>Existen muchísimas distribuciones de probabilidad.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> En este curso nos limitaremos a estudiar seis: tres para variables discretas y tres para variables continuas.</p>
 <p><em>Próximamente.</em> 🚧</p>
 
 
@@ -405,9 +475,10 @@ Nota
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>Algunos conjuntos infinitos permiten enumerar todos sus elementos, como sucede por ejemplo para el caso de los números naturales: <span class="math inline">\(\mathbb{N} = \{1, 2, 3, \cdots\}\)</span>. Estos son ejemplos de infinitos numerables. Existen otros conjuntos infinitos, sin embargo, que no permiten tal enumeración. Un claro ejemplo son los números reales (<span class="math inline">\(\mathbb{R}\)</span>).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Algunos conjuntos infinitos permiten enumerar todos sus elementos, como sucede por ejemplo para el caso de los números naturales: <span class="math inline">\(\mathbb{N} = \{1, 2, 3, \cdots\}\)</span>. Estos son ejemplos de infinitos numerables. Existen otros conjuntos infinitos, sin embargo, que no permiten tal enumeración. Un claro ejemplo son los números reales (<span class="math inline">\(\mathbb{R}\)</span>). ¿Cuál es el primer número real? Incluso si comenzáramos en uno arbitrario (por ejemplo, 0) ¿cuál sería el siguiente? No existe una forma satisfactoria de enumerar los números reales, y por eso se los denomina “no numerables”.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Por comodidad, en ocasiones adoptamos esta forma de abreviar “variable aleatoria”.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>Se lee “<span class="math inline">\(X\)</span> se distribuye como una <span class="math inline">\(p(x)\)</span>”.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><a href="https://en.wikipedia.org/wiki/List_of_probability_distributions" class="uri">https://en.wikipedia.org/wiki/List_of_probability_distributions</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
