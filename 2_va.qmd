@@ -216,6 +216,8 @@ La función de distribución acumulada goza de tres propiedades:
 * Está acotada entre 0 y 1: $\lim_{x \to -\infty} F(x) = 0$ y $\lim_{x \to +\infty} F(x) = 1$
 * Es continua por derecha: $\lim_{x \to x_0^+} F(x) = F(x_0)$
 
+La función de distribución es particularmente útil en variables continuas, porque, si se la conoce, es posible calcular la probabilidad de que $X$ caiga dentro de un cierto intervalo sin necesidad de resolver una integral. Esto es porque: $$P(a < X \leq b) = P(X \leq b) - P(X \leq a) = F(b) - F(a)$$
+
 ## Esperanza y variancia
 
 Hasta ahora hemos visto que una variable aleatoria puede definirse mediante una función de probabilidad (o densidad) o, equivalentemente, una función de distribución. Si bien esto nos da información suficiente para calcular la probabilidad de ocurrencia de cualquier evento, existen métricas que en forma sencilla reflejan características importantes sobre la variable en cuestión.
