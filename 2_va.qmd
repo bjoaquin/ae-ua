@@ -179,7 +179,7 @@ contador_ejemplos <- contador_ejemplos + 1
 **Ejemplo `r contador_ejemplos`**
 :::
 
-Una empresa láctea vende sachets de yogur de un litro. La máquina que llena los envases no funciona a la perfección, por lo que el verdadero contenido de yogur puede variar entre envases. Se sabe que la variable ``litros de yogur en un sachet'' (llamémosla $X$) se distribuye siguiendo la función de densidad a continuación:
+Una empresa láctea vende sachets de yogur de un litro. La máquina que llena los envases no funciona a la perfección, por lo que el verdadero contenido de yogur puede variar entre envases. Se sabe que la variable "litros de yogur en un sachet" (llamémosla $X$) se distribuye siguiendo la función de densidad a continuación:
 $$f(x) = K(4x - x^2) \qquad \forall \quad 0<x<2$$
 ¿Cuál es el valor del número real $K$?
 
@@ -196,6 +196,12 @@ $$\int_0^2 K(4x-2x^2) \; dx = K(2x^2 - \tfrac{2}{3}x^3) |_0^2 = K(8 - \tfrac{16}
 ## Función de distribución
 
 Sea $X$ una v.a. cualquiera (discreta o continua), llamamos **función de distribución acumulada** de $X$ a la función: $$F(x) = P(X \leq x) \quad \forall \quad x \in \mathbb{R}.$$ Es decir, esta función calcula la probabilidad de que $X$ tome el valor $x$ o cualquier valor menor a éste. De ahí la palabra "acumulada". En esta definición no importa si se consideran valores menores a $x$ que no son posibles bajo nuestra variable aleatoria, visto que esos casos tienen probabilidad nula (o densidad nula, en variables continuas).
+
+::: callout-note
+#### Nota
+
+Para una v.a. continua, al verificarse que $P(X=x)=0$, se tiene que $F(x) = P(X \leq x) = P(X < x)$. Esto no se cumple para variables aleatorias discretas.
+:::
 
 La definición dada puede particularizarse para cada tipo de variable aleatoria:
 
@@ -306,4 +312,185 @@ Existen muchísimas distribuciones de probabilidad.[^2_va-4] En este curso nos l
 
 [^2_va-4]: <https://en.wikipedia.org/wiki/List_of_probability_distributions>
 
-*Próximamente.* 🚧
+### Distribuciones discretas
+
+#### Distribución Binomial
+
+Sea un experimento en el que sólo existen dos resultados posibles (los llamaremos "éxito" y "fracaso") y donde la probabilidad de éxito es igual a $p$.
+
+Considérense $n$ repeticiones *independientes* del experimento, y sea $X$ una v.a. que mide el **número de éxitos** a través de las $n$ repeticiones. Entonces $X$ tiene distribución Binomial de parámetros $p$ y $n$, donde: $$p(x) = _nC_x \cdot p^x \cdot (1-p)^{n-x} \quad ;\; x=0,1,\cdots,n$$
+
+::: callout-warning
+#### Advertencia
+
+Establecer los valores de los parámetros es fundamental para calcular probabilidades. Una vez hecho esto, la distribución de la variable está definida de forma unívoca. Al proceso de explicitar los parámetros se lo llama **parametrización**.
+
+La Binomial (y, en líneas generales, cualquier distribución de probabilidad) no es una sola distribución sino una *familia* de distribuciones. Para centrarse en una distribución particular es necesario definir familia + parámetros. Por lo tanto, si en un examen se da como ejemplo un experimento aleatorio y se pide "definir la variable aleatoria correspondiente", es necesario especificar la variable aleatoria *y* sus respectivos parámetros.
+:::
+
+Empleando la fórmula de esperanza y variancia sobre esta función de probabilidad, se obtiene que: $$E(X) = n \cdot p \qquad V(X) = n \cdot p \cdot (1-p)$$
+
+::: {.examplebox data-latex=""}
+```{r}
+#| echo: FALSE
+contador_ejemplos <- contador_ejemplos + 1
+```
+
+::: {.center data-latex=""}
+**Ejemplo `r contador_ejemplos`**
+:::
+
+Un examen *multiple choice* consta de diez preguntas, cada una de ellas con 4 respuestas posibles. Si un alumno elige una opción al azar en cada pregunta ¿cuál es la probabilidad de acertar en exactamente 7 preguntas?
+
+**Solución:** Considerando que el experimento es "adivinar la respuesta a una pregunta", se tiene que la probabilidad de éxito es $p=0,25$ (porque hay 4 respuestas posibles, de las cuales sólo una es correcta) y hay en total $n=10$ repeticiones del experimento. Considerando estos valores para los parámetros, se tiene que:
+
+$$p(7) = _{10}C_7 \cdot 0,25^7 \cdot 0,75^3 = 120 \cdot \tfrac{1}{16384} \cdot \tfrac{27}{64} = \tfrac{405}{131072} \approx 0,00309 = 0,309\%$$
+
+**Propuesto:** ¿cuál es la probabilidad de aprobar (al menos 6 correctas)?
+:::
+
+#### Distribución Poisson
+
+Al igual que la Binomial, existe otra distribución que cuenta el número de éxitos, o bien, el número de incidencias de un cierto evento. La diferencia radica en que esta nueva variable se usa en casos donde no se puede identificar una "unidad mínima" en la que sólo puede darse el éxito o el fracaso. Supóngase, por ejemplo, una variable aleatoria que cuenta el número de llamadas que ingresan a una central telefónica en el plazo de una hora. No existe una unidad de tiempo en la que sólo pueda entrar una llamada (o ninguna). En un segundo pueden entrar muchas llamadas. En una décima de segundo también. Lo mejor que podemos hacer en estos casos es definir un número esperado de incidencias dentro del plazo de tiempo considerado (en el ejemplo es una hora) y compararlo con el número de incidencias observadas al realizar el experimento.
+
+::: callout-note
+#### Nota
+
+A pesar del ejemplo dado, no es necesario que las incidencias se midan a través del tiempo. También podrían medirse, por ejemplo, en el espacio. Supóngase una variable aleatoria que cuenta el número de colonias de bacterias en una placa de Petri. Nuevamente, existe una unidad de espacio limitada (la superficie de la placa de Petri) pero dentro de ella es imposible determinar cuál es la unidad mínima en la que puede presentarse sólo una colonia (o ninguna).
+:::
+
+Sea $X$ una v.a. discreta con $R_X = \mathbb{N}_0$. Decimos que $X$ tiene una distribución Poisson[^2_va-5] si su función de probabilidad es: $$p(x) = \frac{e^{-\lambda}\lambda^x}{x!} \quad ;\; x \in \mathbb{N}_0$$
+
+[^2_va-5]: Se pronuncia "Puasón".
+
+El parámetro $\lambda$ representa el número medio de éxitos esperados por unidad de tiempo (o espacio).
+
+Para esta variable aleatoria se tiene que $E(X) = V(X) = \lambda$.
+
+::: {.examplebox data-latex=""}
+```{r}
+#| echo: FALSE
+contador_ejemplos <- contador_ejemplos + 1
+```
+
+::: {.center data-latex=""}
+**Ejemplo `r contador_ejemplos`**
+:::
+
+El número de errores de imprenta en una página de un determinado libro es, en promedio, un error por página. ¿Cuál es la probabilidad de observar más de un error en una página seleccionada al azar?
+
+**Solución:** Como el promedio es de un error por página se tiene que $\lambda = 1$. Luego:
+
+$$P(X>1) = 1 - [p(0) + p(1)] = 1 - [\frac{e^{-1}1^0}{0!} + \frac{e^{-1}1^1}{1!}] = 1 - 2e^{-1} \approx 0,264 = 26,4\%$$
+:::
+
+#### Distribución Hipergeométrica
+
+Sea una población *finita* de $N$ elementos, de los cuales $N_1$ tienen una determinada característica (éxito) y los $N-N_1$ restantes no lo tienen (fracaso).
+
+La v.a. $X$ que cuenta el **número de éxitos en una muestra de $n$ unidades seleccionadas sin reposición** tiene distribución hipergeométrica de parámetros $N$, $N_1$ y $n$:
+
+$$p(x) = \frac{_{N_1}C_x \;\cdot\; _{N-N_1}C_{n-x}}{_NC_n} \quad;\quad x = \max\{0, n+N_1-N\}, \cdots, \min\{n, N_1\}$$
+
+Para esta variable aleatoria se tiene: $$E(X) = N_1\frac{n}{N} \qquad V(X) = N_1\frac{n}{N} \left(\frac{N-N_1}{N}\right) \left(\frac{N-n}{N-1}\right)$$
+
+::: {.examplebox data-latex=""}
+```{r}
+#| echo: FALSE
+contador_ejemplos <- contador_ejemplos + 1
+```
+
+::: {.center data-latex=""}
+**Ejemplo `r contador_ejemplos`**
+:::
+
+Se reparten 5 cartas al azar (y sin reemplazo) de una baraja de 52 cartas de póker. ¿Cuál es la probabilidad de que la mano no contenga ases?
+
+**Solución:** Considerando el as como un éxito, se tiene que $N=52$, $N_1=4$ y $n=5$. Luego:
+
+$$P(X=0) = p(0) = \frac{_4C_0 \;\cdot\; _{48}C_5}{_{52}C_5} = \frac{1 \cdot 1.712.304}{2.598.960} \approx 0,6584 = 65,84\%$$
+:::
+
+### Distribuciones continuas
+
+#### Distribución Uniforme
+
+Sea $X$ una v.a. continua con recorrido acotado $R_X=[a;b]$. Se dice que $X$ tiene distribución uniforme de parámetros $a$ y $b$ si su función de densidad está dada por: $$f(x) = \frac{1}{b-a} \quad ;\; a \leq x \leq b$$
+
+::: callout-note
+#### Nota
+
+Nótese que la función de densidad no depende del valor de $x$: es constante. Esto refleja que todos los intervalos de igual amplitud son **igualmente probables** a lo largo de todo el recorrido de $X$.
+:::
+
+A partir de la función de densidad se deduce: $$F(x) = \int_a^x \frac{1}{b-a} = \frac{x-a}{b-a} \qquad E(X) = \frac{a+b}{2} \qquad V(X) = \frac{(b-a)^2}{12}$$
+
+::: {.examplebox data-latex=""}
+```{r}
+#| echo: FALSE
+contador_ejemplos <- contador_ejemplos + 1
+```
+
+::: {.center data-latex=""}
+**Ejemplo `r contador_ejemplos`**
+:::
+
+Al estudiar bajas cotizaciones para contratos de embarques, una empresa fabricante de computadoras encuentra que los contratos interestatales tienen bajas cotizaciones uniformemente distribuidas entre 20 y 25 (en miles de dólares). ¿Cuál es la probabilidad de que la baja cotización en el siguiente contrato interestatal esté por debajo de los \$22.000?
+
+**Solución:** Se tiene que $a = 20$ y $b = 25$. Luego:
+
+$$P(X<22) = P(X\leq 22) = F(22) = \frac{22-20}{25-20} = \frac{2}{5} = 0,4 = 40\%$$
+:::
+
+#### Distribución Exponencial
+
+Sea $X$ una v.a. continua con $R_X = \mathbb{R}_0^+$ (es decir, los reales positivos incluyendo el cero). Se dice que $X$ tiene distribución exponencial si su función de densidad es: $$f(x) = \lambda e^{-\lambda x} \quad ;\; x \in \mathbb{R}_0^+$$.
+
+De la función de densidad se deduce: $$F(x) = 1 - e^{-\lambda x} \qquad E(X) = \frac{1}{\lambda} \qquad V(X) = \frac{1}{\lambda^2}$$
+
+Esta distribución es ampliamente utilizada en aplicaciones industriales, puesto que modela adecuadamente las variables del tipo "tiempo hasta la ocurrencia de un evento".
+
+::: {.examplebox data-latex=""}
+```{r}
+#| echo: FALSE
+contador_ejemplos <- contador_ejemplos + 1
+```
+
+::: {.center data-latex=""}
+**Ejemplo `r contador_ejemplos`**
+:::
+
+La magnitud de temblores registrados en una región de Norteamérica (medidos en escala de Richter) sigue una distribución exponencial con parámetro $\lambda = \tfrac{5}{12}$. ¿Cuál es la probabilidad de que un temblor en esa región supere los 3 puntos en la escala de Richter?
+
+**Solución:**
+
+$$P(X>3) = 1-P(X\leq 3) = 1- F(3) = 1 - [1 - e^{-\frac{5}{12}\cdot 3}] = e^{-\frac{15}{12}} \approx 0,2865 = 28,65\%$$
+:::
+
+#### Distribución Normal
+
+Sea $X$ una v.a. continua con $R_X = \mathbb{R}$ (todos los reales). Se dice que $X$ sigue una distribución Normal si su función de densidad viene dada por $$f(x) = \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2} \quad ;\; x \in \mathbb{R}$$
+
+Los parámetros $\mu$ y $\sigma$ representan la media y el desvío estándar de la distribución, respectivamente. De hecho, se verifica que $E(X) = \mu$ y $V(X) = \sigma^2$.
+
+La función de densidad normal presenta una particularidad: no puede integrarse. Por lo tanto no existe una expresión analítica (exacta) para $F(x)$. Es por ello que solemos utilizar osftware estadístico para realizar cálculos sobre esta distribución. En R contamos con dos funciones de gran utilidad: `pnorm` y `qnorm`.
+
+* La función `pnorm(q, mean = 0, sd = 1)` calcula $F(q) = P(X \leq q)$ para $X \sim N(mean, sd)$.
+* La función `qnorm(p, mean = 0, sd = 1)` calcula el valor que acumula un $100p\%$ de probabilidad en una distribución $N(mean, sd)$.
+
+::: {.examplebox data-latex=""}
+```{r}
+#| echo: FALSE
+contador_ejemplos <- contador_ejemplos + 1
+```
+
+::: {.center data-latex=""}
+**Ejemplo `r contador_ejemplos`**
+:::
+
+La cantidad semanal de dinero gastado por una compañía en mantenimiento y reparaciones está normalmente distribuida con una media de \$400 y un desvío estándar de \$20. Si están presupuestados \$450 para la semana próxima, ¿cuál es la probabilidad de que los costos reales superen dicha cifra?
+
+**Solución:** Se tiene que $\mu = 400$ y $\sigma = 20$. Se quiere calcular $P(X > 450) = 1 - F(450)$. Así:
+
+`1 - pnorm(450, mean = 400, sd = 20)` = 0,0062 = 0,62\%
+:::

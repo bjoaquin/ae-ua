@@ -25,6 +25,8 @@ bibliography: references.bib
 format:
   html:
     number-sections: false
+    number-depth: 4
+    toc-depth: 4
     theme: cosmo
     css: style.css
     link-external-icon: true

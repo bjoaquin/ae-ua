@@ -140,18 +140,32 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción">Introducción</a></li>
   <li><a href="#variable-aleatoria" id="toc-variable-aleatoria" class="nav-link" data-scroll-target="#variable-aleatoria">Variable aleatoria</a></li>
   <li><a href="#tipos-de-variable-aleatoria" id="toc-tipos-de-variable-aleatoria" class="nav-link" data-scroll-target="#tipos-de-variable-aleatoria">Tipos de variable aleatoria</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#variable-aleatoria-discreta" id="toc-variable-aleatoria-discreta" class="nav-link" data-scroll-target="#variable-aleatoria-discreta">Variable aleatoria discreta</a></li>
   <li><a href="#variable-aleatoria-continua" id="toc-variable-aleatoria-continua" class="nav-link" data-scroll-target="#variable-aleatoria-continua">Variable aleatoria continua</a></li>
   </ul></li>
   <li><a href="#función-de-distribución" id="toc-función-de-distribución" class="nav-link" data-scroll-target="#función-de-distribución">Función de distribución</a></li>
   <li><a href="#esperanza-y-variancia" id="toc-esperanza-y-variancia" class="nav-link" data-scroll-target="#esperanza-y-variancia">Esperanza y variancia</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#esperanza" id="toc-esperanza" class="nav-link" data-scroll-target="#esperanza">Esperanza</a></li>
   <li><a href="#variancia" id="toc-variancia" class="nav-link" data-scroll-target="#variancia">Variancia</a></li>
   <li><a href="#propiedades-de-ex-y-vx" id="toc-propiedades-de-ex-y-vx" class="nav-link" data-scroll-target="#propiedades-de-ex-y-vx">Propiedades de E(X) y V(X)</a></li>
   </ul></li>
-  <li><a href="#distribuciones-de-probabilidad" id="toc-distribuciones-de-probabilidad" class="nav-link" data-scroll-target="#distribuciones-de-probabilidad">Distribuciones de probabilidad</a></li>
+  <li><a href="#distribuciones-de-probabilidad" id="toc-distribuciones-de-probabilidad" class="nav-link" data-scroll-target="#distribuciones-de-probabilidad">Distribuciones de probabilidad</a>
+  <ul>
+  <li><a href="#distribuciones-discretas" id="toc-distribuciones-discretas" class="nav-link" data-scroll-target="#distribuciones-discretas">Distribuciones discretas</a>
+  <ul class="collapse">
+  <li><a href="#distribución-binomial" id="toc-distribución-binomial" class="nav-link" data-scroll-target="#distribución-binomial">Distribución Binomial</a></li>
+  <li><a href="#distribución-poisson" id="toc-distribución-poisson" class="nav-link" data-scroll-target="#distribución-poisson">Distribución Poisson</a></li>
+  <li><a href="#distribución-hipergeométrica" id="toc-distribución-hipergeométrica" class="nav-link" data-scroll-target="#distribución-hipergeométrica">Distribución Hipergeométrica</a></li>
+  </ul></li>
+  <li><a href="#distribuciones-continuas" id="toc-distribuciones-continuas" class="nav-link" data-scroll-target="#distribuciones-continuas">Distribuciones continuas</a>
+  <ul class="collapse">
+  <li><a href="#distribución-uniforme" id="toc-distribución-uniforme" class="nav-link" data-scroll-target="#distribución-uniforme">Distribución Uniforme</a></li>
+  <li><a href="#distribución-exponencial" id="toc-distribución-exponencial" class="nav-link" data-scroll-target="#distribución-exponencial">Distribución Exponencial</a></li>
+  <li><a href="#distribución-normal" id="toc-distribución-normal" class="nav-link" data-scroll-target="#distribución-normal">Distribución Normal</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -346,7 +360,7 @@ Advertencia
 <div class="center">
 <p><strong>Ejemplo 2</strong></p>
 </div>
-<p>Una empresa láctea vende sachets de yogur de un litro. La máquina que llena los envases no funciona a la perfección, por lo que el verdadero contenido de yogur puede variar entre envases. Se sabe que la variable ``litros de yogur en un sachet’’ (llamémosla <span class="math inline">\(X\)</span>) se distribuye siguiendo la función de densidad a continuación: <span class="math display">\[f(x) = K(4x - x^2) \qquad \forall \quad 0&lt;x&lt;2\]</span> ¿Cuál es el valor del número real <span class="math inline">\(K\)</span>?</p>
+<p>Una empresa láctea vende sachets de yogur de un litro. La máquina que llena los envases no funciona a la perfección, por lo que el verdadero contenido de yogur puede variar entre envases. Se sabe que la variable “litros de yogur en un sachet” (llamémosla <span class="math inline">\(X\)</span>) se distribuye siguiendo la función de densidad a continuación: <span class="math display">\[f(x) = K(4x - x^2) \qquad \forall \quad 0&lt;x&lt;2\]</span> ¿Cuál es el valor del número real <span class="math inline">\(K\)</span>?</p>
 <p><strong>Solución:</strong></p>
 <ul>
 <li><strong>Experimento aleatorio:</strong> usar la máquina para llenar un sachet de yogur.</li>
@@ -360,6 +374,19 @@ Advertencia
 <section id="función-de-distribución" class="level2">
 <h2 class="anchored" data-anchor-id="función-de-distribución">Función de distribución</h2>
 <p>Sea <span class="math inline">\(X\)</span> una v.a. cualquiera (discreta o continua), llamamos <strong>función de distribución acumulada</strong> de <span class="math inline">\(X\)</span> a la función: <span class="math display">\[F(x) = P(X \leq x) \quad \forall \quad x \in \mathbb{R}.\]</span> Es decir, esta función calcula la probabilidad de que <span class="math inline">\(X\)</span> tome el valor <span class="math inline">\(x\)</span> o cualquier valor menor a éste. De ahí la palabra “acumulada”. En esta definición no importa si se consideran valores menores a <span class="math inline">\(x\)</span> que no son posibles bajo nuestra variable aleatoria, visto que esos casos tienen probabilidad nula (o densidad nula, en variables continuas).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Para una v.a. continua, al verificarse que <span class="math inline">\(P(X=x)=0\)</span>, se tiene que <span class="math inline">\(F(x) = P(X \leq x) = P(X &lt; x)\)</span>. Esto no se cumple para variables aleatorias discretas.</p>
+</div>
+</div>
 <p>La definición dada puede particularizarse para cada tipo de variable aleatoria:</p>
 <ul>
 <li>Discreta: <span class="math inline">\(F(x) = \sum_{x_i \leq x} p(x_i)\)</span></li>
@@ -468,9 +495,144 @@ Advertencia
 <h2 class="anchored" data-anchor-id="distribuciones-de-probabilidad">Distribuciones de probabilidad</h2>
 <p>En la práctica, existen variables aleatorias que se utilizan con frecuencia y que, por lo tanto, tienen una distribución conocida. Esto nos ahorra tiempo y esfuerzo porque no tenemos que calcular cosas como su función de probabilidad (o densidad), su función de distribución, su esperanza o su variancia. Más aún, calcular probabilidades bajo estas distribuciones conocidas se vuelve relativamente sencillo porque programas informáticos como R ya tienen incluidos funciones que lo hacen por nosotros.</p>
 <p>Existen muchísimas distribuciones de probabilidad.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> En este curso nos limitaremos a estudiar seis: tres para variables discretas y tres para variables continuas.</p>
-<p><em>Próximamente.</em> 🚧</p>
+<section id="distribuciones-discretas" class="level3">
+<h3 class="anchored" data-anchor-id="distribuciones-discretas">Distribuciones discretas</h3>
+<section id="distribución-binomial" class="level4">
+<h4 class="anchored" data-anchor-id="distribución-binomial">Distribución Binomial</h4>
+<p>Sea un experimento en el que sólo existen dos resultados posibles (los llamaremos “éxito” y “fracaso”) y donde la probabilidad de éxito es igual a <span class="math inline">\(p\)</span>.</p>
+<p>Considérense <span class="math inline">\(n\)</span> repeticiones <em>independientes</em> del experimento, y sea <span class="math inline">\(X\)</span> una v.a. que mide el <strong>número de éxitos</strong> a través de las <span class="math inline">\(n\)</span> repeticiones. Entonces <span class="math inline">\(X\)</span> tiene distribución Binomial de parámetros <span class="math inline">\(p\)</span> y <span class="math inline">\(n\)</span>, donde: <span class="math display">\[p(x) = _nC_x \cdot p^x \cdot (1-p)^{n-x} \quad ;\; x=0,1,\cdots,n\]</span></p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Advertencia
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Establecer los valores de los parámetros es fundamental para calcular probabilidades. Una vez hecho esto, la distribución de la variable está definida de forma unívoca. Al proceso de explicitar los parámetros se lo llama <strong>parametrización</strong>.</p>
+<p>La Binomial (y, en líneas generales, cualquier distribución de probabilidad) no es una sola distribución sino una <em>familia</em> de distribuciones. Para centrarse en una distribución particular es necesario definir familia + parámetros. Por lo tanto, si en un examen se da como ejemplo un experimento aleatorio y se pide “definir la variable aleatoria correspondiente”, es necesario especificar la variable aleatoria <em>y</em> sus respectivos parámetros.</p>
+</div>
+</div>
+<p>Empleando la fórmula de esperanza y variancia sobre esta función de probabilidad, se obtiene que: <span class="math display">\[E(X) = n \cdot p \qquad V(X) = n \cdot p \cdot (1-p)\]</span></p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 4</strong></p>
+</div>
+<p>Un examen <em>multiple choice</em> consta de diez preguntas, cada una de ellas con 4 respuestas posibles. Si un alumno elige una opción al azar en cada pregunta ¿cuál es la probabilidad de acertar en exactamente 7 preguntas?</p>
+<p><strong>Solución:</strong> Considerando que el experimento es “adivinar la respuesta a una pregunta”, se tiene que la probabilidad de éxito es <span class="math inline">\(p=0,25\)</span> (porque hay 4 respuestas posibles, de las cuales sólo una es correcta) y hay en total <span class="math inline">\(n=10\)</span> repeticiones del experimento. Considerando estos valores para los parámetros, se tiene que:</p>
+<p><span class="math display">\[p(7) = _{10}C_7 \cdot 0,25^7 \cdot 0,75^3 = 120 \cdot \tfrac{1}{16384} \cdot \tfrac{27}{64} = \tfrac{405}{131072} \approx 0,00309 = 0,309\%\]</span></p>
+<p><strong>Propuesto:</strong> ¿cuál es la probabilidad de aprobar (al menos 6 correctas)?</p>
+</div>
+</section>
+<section id="distribución-poisson" class="level4">
+<h4 class="anchored" data-anchor-id="distribución-poisson">Distribución Poisson</h4>
+<p>Al igual que la Binomial, existe otra distribución que cuenta el número de éxitos, o bien, el número de incidencias de un cierto evento. La diferencia radica en que esta nueva variable se usa en casos donde no se puede identificar una “unidad mínima” en la que sólo puede darse el éxito o el fracaso. Supóngase, por ejemplo, una variable aleatoria que cuenta el número de llamadas que ingresan a una central telefónica en el plazo de una hora. No existe una unidad de tiempo en la que sólo pueda entrar una llamada (o ninguna). En un segundo pueden entrar muchas llamadas. En una décima de segundo también. Lo mejor que podemos hacer en estos casos es definir un número esperado de incidencias dentro del plazo de tiempo considerado (en el ejemplo es una hora) y compararlo con el número de incidencias observadas al realizar el experimento.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A pesar del ejemplo dado, no es necesario que las incidencias se midan a través del tiempo. También podrían medirse, por ejemplo, en el espacio. Supóngase una variable aleatoria que cuenta el número de colonias de bacterias en una placa de Petri. Nuevamente, existe una unidad de espacio limitada (la superficie de la placa de Petri) pero dentro de ella es imposible determinar cuál es la unidad mínima en la que puede presentarse sólo una colonia (o ninguna).</p>
+</div>
+</div>
+<p>Sea <span class="math inline">\(X\)</span> una v.a. discreta con <span class="math inline">\(R_X = \mathbb{N}_0\)</span>. Decimos que <span class="math inline">\(X\)</span> tiene una distribución Poisson<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> si su función de probabilidad es: <span class="math display">\[p(x) = \frac{e^{-\lambda}\lambda^x}{x!} \quad ;\; x \in \mathbb{N}_0\]</span></p>
+<p>El parámetro <span class="math inline">\(\lambda\)</span> representa el número medio de éxitos esperados por unidad de tiempo (o espacio).</p>
+<p>Para esta variable aleatoria se tiene que <span class="math inline">\(E(X) = V(X) = \lambda\)</span>.</p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 5</strong></p>
+</div>
+<p>El número de errores de imprenta en una página de un determinado libro es, en promedio, un error por página. ¿Cuál es la probabilidad de observar más de un error en una página seleccionada al azar?</p>
+<p><strong>Solución:</strong> Como el promedio es de un error por página se tiene que <span class="math inline">\(\lambda = 1\)</span>. Luego:</p>
+<p><span class="math display">\[P(X&gt;1) = 1 - [p(0) + p(1)] = 1 - [\frac{e^{-1}1^0}{0!} + \frac{e^{-1}1^1}{1!}] = 1 - 2e^{-1} \approx 0,264 = 26,4\%\]</span></p>
+</div>
+</section>
+<section id="distribución-hipergeométrica" class="level4">
+<h4 class="anchored" data-anchor-id="distribución-hipergeométrica">Distribución Hipergeométrica</h4>
+<p>Sea una población <em>finita</em> de <span class="math inline">\(N\)</span> elementos, de los cuales <span class="math inline">\(N_1\)</span> tienen una determinada característica (éxito) y los <span class="math inline">\(N-N_1\)</span> restantes no lo tienen (fracaso).</p>
+<p>La v.a. <span class="math inline">\(X\)</span> que cuenta el <strong>número de éxitos en una muestra de <span class="math inline">\(n\)</span> unidades seleccionadas sin reposición</strong> tiene distribución hipergeométrica de parámetros <span class="math inline">\(N\)</span>, <span class="math inline">\(N_1\)</span> y <span class="math inline">\(n\)</span>:</p>
+<p><span class="math display">\[p(x) = \frac{_{N_1}C_x \;\cdot\; _{N-N_1}C_{n-x}}{_NC_n} \quad;\quad x = \max\{0, n+N_1-N\}, \cdots, \min\{n, N_1\}\]</span></p>
+<p>Para esta variable aleatoria se tiene: <span class="math display">\[E(X) = N_1\frac{n}{N} \qquad V(X) = N_1\frac{n}{N} \left(\frac{N-N_1}{N}\right) \left(\frac{N-n}{N-1}\right)\]</span></p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 6</strong></p>
+</div>
+<p>Se reparten 5 cartas al azar (y sin reemplazo) de una baraja de 52 cartas de póker. ¿Cuál es la probabilidad de que la mano no contenga ases?</p>
+<p><strong>Solución:</strong> Considerando el as como un éxito, se tiene que <span class="math inline">\(N=52\)</span>, <span class="math inline">\(N_1=4\)</span> y <span class="math inline">\(n=5\)</span>. Luego:</p>
+<p><span class="math display">\[P(X=0) = p(0) = \frac{_4C_0 \;\cdot\; _{48}C_5}{_{52}C_5} = \frac{1 \cdot 1.712.304}{2.598.960} \approx 0,6584 = 65,84\%\]</span></p>
+</div>
+</section>
+</section>
+<section id="distribuciones-continuas" class="level3">
+<h3 class="anchored" data-anchor-id="distribuciones-continuas">Distribuciones continuas</h3>
+<section id="distribución-uniforme" class="level4">
+<h4 class="anchored" data-anchor-id="distribución-uniforme">Distribución Uniforme</h4>
+<p>Sea <span class="math inline">\(X\)</span> una v.a. continua con recorrido acotado <span class="math inline">\(R_X=[a;b]\)</span>. Se dice que <span class="math inline">\(X\)</span> tiene distribución uniforme de parámetros <span class="math inline">\(a\)</span> y <span class="math inline">\(b\)</span> si su función de densidad está dada por: <span class="math display">\[f(x) = \frac{1}{b-a} \quad ;\; a \leq x \leq b\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Nótese que la función de densidad no depende del valor de <span class="math inline">\(x\)</span>: es constante. Esto refleja que todos los intervalos de igual amplitud son <strong>igualmente probables</strong> a lo largo de todo el recorrido de <span class="math inline">\(X\)</span>.</p>
+</div>
+</div>
+<p>A partir de la función de densidad se deduce: <span class="math display">\[F(x) = \int_a^x \frac{1}{b-a} = \frac{x-a}{b-a} \qquad E(X) = \frac{a+b}{2} \qquad V(X) = \frac{(b-a)^2}{12}\]</span></p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 7</strong></p>
+</div>
+<p>Al estudiar bajas cotizaciones para contratos de embarques, una empresa fabricante de computadoras encuentra que los contratos interestatales tienen bajas cotizaciones uniformemente distribuidas entre 20 y 25 (en miles de dólares). ¿Cuál es la probabilidad de que la baja cotización en el siguiente contrato interestatal esté por debajo de los $22.000?</p>
+<p><strong>Solución:</strong> Se tiene que <span class="math inline">\(a = 20\)</span> y <span class="math inline">\(b = 25\)</span>. Luego:</p>
+<p><span class="math display">\[P(X&lt;22) = P(X\leq 22) = F(22) = \frac{22-20}{25-20} = \frac{2}{5} = 0,4 = 40\%\]</span></p>
+</div>
+</section>
+<section id="distribución-exponencial" class="level4">
+<h4 class="anchored" data-anchor-id="distribución-exponencial">Distribución Exponencial</h4>
+<p>Sea <span class="math inline">\(X\)</span> una v.a. continua con <span class="math inline">\(R_X = \mathbb{R}_0^+\)</span> (es decir, los reales positivos incluyendo el cero). Se dice que <span class="math inline">\(X\)</span> tiene distribución exponencial si su función de densidad es: <span class="math display">\[f(x) = \lambda e^{-\lambda x} \quad ;\; x \in \mathbb{R}_0^+\]</span>.</p>
+<p>De la función de densidad se deduce: <span class="math display">\[F(x) = 1 - e^{-\lambda x} \qquad E(X) = \frac{1}{\lambda} \qquad V(X) = \frac{1}{\lambda^2}\]</span></p>
+<p>Esta distribución es ampliamente utilizada en aplicaciones industriales, puesto que modela adecuadamente las variables del tipo “tiempo hasta la ocurrencia de un evento”.</p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 8</strong></p>
+</div>
+<p>La magnitud de temblores registrados en una región de Norteamérica (medidos en escala de Richter) sigue una distribución exponencial con parámetro <span class="math inline">\(\lambda = \tfrac{5}{12}\)</span>. ¿Cuál es la probabilidad de que un temblor en esa región supere los 3 puntos en la escala de Richter?</p>
+<p><strong>Solución:</strong></p>
+<p><span class="math display">\[P(X&gt;3) = 1-P(X\leq 3) = 1- F(3) = 1 - [1 - e^{-\frac{5}{12}\cdot 3}] = e^{-\frac{15}{12}} \approx 0,2865 = 28,65\%\]</span></p>
+</div>
+</section>
+<section id="distribución-normal" class="level4">
+<h4 class="anchored" data-anchor-id="distribución-normal">Distribución Normal</h4>
+<p>Sea <span class="math inline">\(X\)</span> una v.a. continua con <span class="math inline">\(R_X = \mathbb{R}\)</span> (todos los reales). Se dice que <span class="math inline">\(X\)</span> sigue una distribución Normal si su función de densidad viene dada por <span class="math display">\[f(x) = \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2} \quad ;\; x \in \mathbb{R}\]</span></p>
+<p>Los parámetros <span class="math inline">\(\mu\)</span> y <span class="math inline">\(\sigma\)</span> representan la media y el desvío estándar de la distribución, respectivamente. De hecho, se verifica que <span class="math inline">\(E(X) = \mu\)</span> y <span class="math inline">\(V(X) = \sigma^2\)</span>.</p>
+<p>La función de densidad normal presenta una particularidad: no puede integrarse. Por lo tanto no existe una expresión analítica (exacta) para <span class="math inline">\(F(x)\)</span>. Es por ello que solemos utilizar osftware estadístico para realizar cálculos sobre esta distribución. En R contamos con dos funciones de gran utilidad: <code>pnorm</code> y <code>qnorm</code>.</p>
+<ul>
+<li>La función <code>pnorm(q, mean = 0, sd = 1)</code> calcula <span class="math inline">\(F(q) = P(X \leq q)\)</span> para <span class="math inline">\(X \sim N(mean, sd)\)</span>.</li>
+<li>La función <code>qnorm(p, mean = 0, sd = 1)</code> calcula el valor que acumula un <span class="math inline">\(100p\%\)</span> de probabilidad en una distribución <span class="math inline">\(N(mean, sd)\)</span>.</li>
+</ul>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 9</strong></p>
+</div>
+<p>La cantidad semanal de dinero gastado por una compañía en mantenimiento y reparaciones está normalmente distribuida con una media de $400 y un desvío estándar de $20. Si están presupuestados $450 para la semana próxima, ¿cuál es la probabilidad de que los costos reales superen dicha cifra?</p>
+<p><strong>Solución:</strong> Se tiene que <span class="math inline">\(\mu = 400\)</span> y <span class="math inline">\(\sigma = 20\)</span>. Se quiere calcular <span class="math inline">\(P(X &gt; 450) = 1 - F(450)\)</span>. Así:</p>
+<p><code>1 - pnorm(450, mean = 400, sd = 20)</code> = 0,0062 = 0,62%</p>
+</div>
 
 
+</section>
+</section>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
@@ -479,6 +641,7 @@ Advertencia
 <li id="fn2"><p>Por comodidad, en ocasiones adoptamos esta forma de abreviar “variable aleatoria”.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>Se lee “<span class="math inline">\(X\)</span> se distribuye como una <span class="math inline">\(p(x)\)</span>”.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p><a href="https://en.wikipedia.org/wiki/List_of_probability_distributions" class="uri">https://en.wikipedia.org/wiki/List_of_probability_distributions</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Se pronuncia “Puasón”.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
