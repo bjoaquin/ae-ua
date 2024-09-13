@@ -1,0 +1,116 @@
+```{r}
+#| echo: FALSE
+#| message: FALSE
+
+library(tidyverse)
+
+contador_ejemplos <- 0
+```
+
+# 3. Inferencia estadística
+
+## Introducción
+
+Las decisiones que tomamos en nuestra vida cotidiana se basan en información parcial. Nunca contamos con la verdad completa. Es por eso que salimos de casa con nuestro paraguas sin saber con certeza si vamos a usarlo. O compramos cuatro empanadas aunque quizás sólo comamos tres. O compramos entradas para el Lollapalooza antes de que salga el *lineup*.[^3_infer-1]
+
+[^3_infer-1]: No se los recomendamos.
+
+Lo importante es que incluso en ese contexto de incertidumbre podemos vivir plenamente, sin preocuparnos por tener la información total. Pero eso es sólo porque podemos sacarle provecho a la información parcial de la que sí disponemos. Tómsese como ejemplo la siguiente imagen, de la cual sólo conocemos el 10\% de sus píxeles, estando el 90\% restante en blanco. ¿Qué logran identificar? ¿De qué se trata la imagen?
+
+![Uff, ni idea.](img/pixeles_random.png){#fig-pixrandom}
+
+Es muy difícil identificar algo. Como ya dijimos, tiene un 90\% de "ruido". Pero cuidado: no es el alto porcentaje de ruido lo que trae problemas, sino el hecho de que el 10\% de información está muy disperso. Si concentrásemos ese 10\% en la región adecuada de la imagen, tendríamos mucha más claridad sobre el asunto.
+
+![Ah, ahora sí. Jamás me hubiese dado cuenta.](img/pixeles_foco.png){#fig-pixfoco}
+
+Esa es la meta de la **inferencia estadística**: sacarle tanto jugo como sea posible a la información parcial de la que disponemos, con el fin de recrear fielmente la "información total" que nos gustaría tener, para que nuestra toma de decisiones sea lo mejor posible.
+
+## Terminología
+
+* Una **población** es un conjunto de individuos o elementos, en un tiempo y espacio definidos, sobre los cuales nos interesaría conocer una caraterística.
+
+* Una **muestra** es un subconjunto de esa población, al cual tenemos acceso para obtener "información parcial".
+
+* Una **unidad** es un elemento del (sub)conjunto: una persona, una institución, un vehículo, etcétera.
+
+* La **variable** en estudio (si bien podría haber más de una) es la característica de interés que se mide a cada unidad, y se utiliza en el cálculo de los valores poblacionales de interés.
+
+La **estadística inferencial** es la rama de la Estadística que, a partir de la información empírica proporcionada por una muestra, intenta predecir el comportamiento de una población.
+
+Dicha descripción estará siempre sujeta a un riesgo de cometer un cierto error por estar trabajando con los datos de una muestra y no de toda la población. Este error será medible o establecido en términos de probabilidades.
+
+* Un **parámetro** es un valor que describe o resume una característica de interés acerca de una población. Los parámetros son valores que nos interesan pero que desconocemos.
+
+* Un **estadístico**, en cambio, es una función de variables aleatorias, la cual no depende de valores desconocidos (parámetros).
+
+* Un **estimador** es un estadístico utilizado para representar un parámetro de interés en una población.
+
+::: callout-note
+#### Nota
+
+Todos los estimadores son estadísticos, pero no todos los estadísticos son estimadores. Sólo aquellos estadísticos que utilicemos para "representar" a nivel muestral el valor de un parámetro poblacional serán llamados estimadores.
+:::
+
+## Estimación puntual
+
+Sean $X_1, X_2, \cdots, X_n$ variables aleatorias de una población $X$ cuya función de distribución conjunta es $$g(x_1, x_2, \cdots, x_n) = f(x_1) \times f(x_2) \times \cdots \times f(x_n) = \prod_{i=1}^n f(x_i)$$ donde cada $f(x_i)$ representa la función de densidad asociada a la variable $X_i$, entonces decimos que $X_1, X_2, \cdots, X_n$ es una **muestra aleatoria** de tamaño $n$ de la población con densidad $f(x)$. Una muestra aleatoria de tamaño $n$ tiene variables aleatorias **independientes e igualmente distribuidas** (iid).
+
+Una muestra aleatoria es siempre extraída de una población $X$, la cual viene representada por una función de densidad $f(x, \theta)$ donde $\theta$ es un parámetro desconocido. Lo que nos interesa es estimar ese parámetro $\theta$.
+
+Un **estimador puntual** $\hat{\theta}$ es una función de $X_1, X_2, \cdots, X_n$ que estima al parámetro $\theta$.
+
+Dicho de otro modo, un estadístico es calculado a partir de información muestral para estimar un parámetro poblacional de interés.
+
+::: callout-note
+#### Nota
+
+Un estimador es aleatorio: puede tomar distintos valores dependiendo de cuáles elementos de la población sean seleccionados para formar parte de la muestra. Por lo tanto, puede definirse una distribución de probabilidad que defina la probabilidad de que el estimador tome cada uno de sus posibles valores.
+
+En otras palabras, un estimador es una *variable aleatoria*.
+:::
+
+Algunos de los estimadores más populares son:
+
+* **Media muestral:** $\overline{X} = \frac{1}{n} \sum_{i=1}^n x_i$
+
+* **Variancia muestral:** $S^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \overline{X})^2$
+
+* **Proporción muestral:** $\hat{p} = \frac{1}{n} \sum_{i=1}^n z_i$ (siendo $z$ una variable binaria)
+
+## Propiedades de estimadores
+
+Supóngase que ya tenemos una población de interés y un parámetro cuyo valor quisiéramos conocer: por ejemplo, la media. Teniendo una muestra, existen muchas formas de estimar la media poblacional. ¿Cuál de todos los posibles estimadores es mejor? Para compararlos entre ellos existen propiedades estadísticas de las que podemos valernos.
+
+### Insesgamiento
+
+Sea $X_1, X_2, \cdots, X_n$ una muestra aleatoria de tamaño $n$ de una población $X$, cuya distribución viene dada por $f(x,\theta)$, con $\theta$ un parámetro desconocido. Decimos que $\hat{\theta}$ es un **estimador insesgado** de $\theta$ si $$E(\hat{\theta}) = \theta$$ para todos los posibles valores de $\theta$. En caso contrario, decimos que $\hat{\theta}$ es un estimador *sesgado* de $\theta$.
+
+El **sesgo** de un estimador puede calcularse como $$b(\hat{\theta}) = E(\hat{\theta}) - \theta$$ de modo que:
+
+* $b(\hat{\theta}) > 0 \implies \hat{\theta}$ sobreestima al parámetro $\theta$.
+
+* $b(\hat{\theta}) < 0 \implies \hat{\theta}$ subestima al parámetro $\theta$.
+
+* $b(\hat{\theta}) = 0 \implies \hat{\theta}$ es insesgado del parámetro $\theta$.
+
+### Consistencia
+
+Se dice que un estimador $\hat{\theta}$ es **consistente** de $\theta$ si su distribución se concentra alrededor de valores cercanos al verdadero valor del parámetro $\theta$, a medida que $n$ crece.
+
+En otras palabras, la probabilidad de que $\hat{\theta}$ esté "lejos" del valor de $\theta$ tiende a 0 cuando el tamaño de la muestra aumenta.
+
+Existe una condición suficiente para probar si un estimador es consistente. $$b(\hat{\theta}) \stackrel{n\rightarrow\infty}{\longrightarrow} 0 \text{ y } V(\hat{\theta}) \stackrel{n\rightarrow\infty}{\longrightarrow} 0 \implies \hat{\theta} \text{ es consistente de } \theta$$
+
+### Eficiencia
+
+Decimos que un estimador puntual *insesgado* $\hat{\theta}$ es un estimador **eficiente** del parámetro $\theta$ si tiene la menor variancia entre todos los posibles estimadores insesgados del parámetro.
+
+::: callout-note
+#### Nota
+
+A diferencia del insesgamiento y la consistencia, la eficiencia es una propiedad relativa: no es algo que pueda definirse sobre cada estimador individualmente, sino que surge de compararlos entre ellos.
+:::
+
+En resumen, la propiedad de **insesgamiento** hace referencia al *centro* o posición central de la distribución muestral de nuestro estimador, mientras que las propiedades de **consistencia** y **eficiencia** refieren a su *variabilidad*.
+
+![Relación entre sesgo y variancia.](img/sesgo_variancia.png){#fig-sesgovariancia}

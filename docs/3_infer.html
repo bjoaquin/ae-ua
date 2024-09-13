@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Joaquín Bermejo">
-<meta name="author" content="Victorio Costa">
 
-<title>Análisis Estadístico (UA)</title>
+<title>Análisis Estadístico (UA) - 3. Inferencia estadística</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./0_conteo.html" rel="next">
+<link href="./references.html" rel="next">
+<link href="./2_va.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -62,6 +61,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="style.css">
 </head>
@@ -75,7 +76,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-title">Prefacio</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./3_infer.html"><span class="chapter-title">3. Inferencia estadística</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -102,7 +103,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Prefacio</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Prefacio</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -122,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3_infer.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3. Inferencia estadística</span></a>
+  <a href="./3_infer.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">3. Inferencia estadística</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -141,7 +142,15 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#prefacio" id="toc-prefacio" class="nav-link active" data-scroll-target="#prefacio">Prefacio</a></li>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción">Introducción</a></li>
+  <li><a href="#terminología" id="toc-terminología" class="nav-link" data-scroll-target="#terminología">Terminología</a></li>
+  <li><a href="#estimación-puntual" id="toc-estimación-puntual" class="nav-link" data-scroll-target="#estimación-puntual">Estimación puntual</a></li>
+  <li><a href="#propiedades-de-estimadores" id="toc-propiedades-de-estimadores" class="nav-link" data-scroll-target="#propiedades-de-estimadores">Propiedades de estimadores</a>
+  <ul>
+  <li><a href="#insesgamiento" id="toc-insesgamiento" class="nav-link" data-scroll-target="#insesgamiento">Insesgamiento</a></li>
+  <li><a href="#consistencia" id="toc-consistencia" class="nav-link" data-scroll-target="#consistencia">Consistencia</a></li>
+  <li><a href="#eficiencia" id="toc-eficiencia" class="nav-link" data-scroll-target="#eficiencia">Eficiencia</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -150,27 +159,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Análisis Estadístico (UA)</h1>
+<h1 class="title"><span class="chapter-title">3. Inferencia estadística</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Autores/as</div>
-    <div class="quarto-title-meta-contents">
-             <p>Joaquín Bermejo </p>
-             <p>Victorio Costa </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Últ. actualización</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">12 de septiembre de 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -178,13 +174,132 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="prefacio" class="level1">
-<h1>Prefacio</h1>
-<p>Desde la cátedra de Análisis Estadístico, les damos una cálida bienvenida a este nuevo curso, donde nos sumergiremos nuevamente en el fascinante mundo de los datos, la toma de decisiones y, sobre todas las cosas, el apasionante proceso de aprendizaje.</p>
-<p>¿Alguna vez se han preguntado cómo las empresas líderes toman decisiones cruciales basadas en datos? ¿O cómo pueden prever tendencias económicas que transforman industrias enteras? A lo largo de este curso, exploraremos técnicas y conceptos fundamentales que nos permitirán descubrir el valioso conocimiento que los datos pueden brindarnos. Desde los conceptos básicos de la teoría de probabilidad hasta métodos gráficos e inferenciales, aprenderemos a resolver problemas y ofrecer soluciones basadas en un análisis riguroso.</p>
-<p>¡Esperamos que tomen este recorrido como un desafío, como una oportunidad para poner a prueba sus habilidades y construir un espacio interactivo donde tanto ustedes como nosotros enriquezcamos nuestros conocimientos!</p>
+<section id="introducción" class="level2">
+<h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
+<p>Las decisiones que tomamos en nuestra vida cotidiana se basan en información parcial. Nunca contamos con la verdad completa. Es por eso que salimos de casa con nuestro paraguas sin saber con certeza si vamos a usarlo. O compramos cuatro empanadas aunque quizás sólo comamos tres. O compramos entradas para el Lollapalooza antes de que salga el <em>lineup</em>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Lo importante es que incluso en ese contexto de incertidumbre podemos vivir plenamente, sin preocuparnos por tener la información total. Pero eso es sólo porque podemos sacarle provecho a la información parcial de la que sí disponemos. Tómsese como ejemplo la siguiente imagen, de la cual sólo conocemos el 10% de sus píxeles, estando el 90% restante en blanco. ¿Qué logran identificar? ¿De qué se trata la imagen?</p>
+<div id="fig-pixrandom" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/pixeles_random.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figura&nbsp;5.1: Uff, ni idea.</figcaption>
+</figure>
+</div>
+<p>Es muy difícil identificar algo. Como ya dijimos, tiene un 90% de “ruido”. Pero cuidado: no es el alto porcentaje de ruido lo que trae problemas, sino el hecho de que el 10% de información está muy disperso. Si concentrásemos ese 10% en la región adecuada de la imagen, tendríamos mucha más claridad sobre el asunto.</p>
+<div id="fig-pixfoco" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/pixeles_foco.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figura&nbsp;5.2: Ah, ahora sí. Jamás me hubiese dado cuenta.</figcaption>
+</figure>
+</div>
+<p>Esa es la meta de la <strong>inferencia estadística</strong>: sacarle tanto jugo como sea posible a la información parcial de la que disponemos, con el fin de recrear fielmente la “información total” que nos gustaría tener, para que nuestra toma de decisiones sea lo mejor posible.</p>
+</section>
+<section id="terminología" class="level2">
+<h2 class="anchored" data-anchor-id="terminología">Terminología</h2>
+<ul>
+<li><p>Una <strong>población</strong> es un conjunto de individuos o elementos, en un tiempo y espacio definidos, sobre los cuales nos interesaría conocer una caraterística.</p></li>
+<li><p>Una <strong>muestra</strong> es un subconjunto de esa población, al cual tenemos acceso para obtener “información parcial”.</p></li>
+<li><p>Una <strong>unidad</strong> es un elemento del (sub)conjunto: una persona, una institución, un vehículo, etcétera.</p></li>
+<li><p>La <strong>variable</strong> en estudio (si bien podría haber más de una) es la característica de interés que se mide a cada unidad, y se utiliza en el cálculo de los valores poblacionales de interés.</p></li>
+</ul>
+<p>La <strong>estadística inferencial</strong> es la rama de la Estadística que, a partir de la información empírica proporcionada por una muestra, intenta predecir el comportamiento de una población.</p>
+<p>Dicha descripción estará siempre sujeta a un riesgo de cometer un cierto error por estar trabajando con los datos de una muestra y no de toda la población. Este error será medible o establecido en términos de probabilidades.</p>
+<ul>
+<li><p>Un <strong>parámetro</strong> es un valor que describe o resume una característica de interés acerca de una población. Los parámetros son valores que nos interesan pero que desconocemos.</p></li>
+<li><p>Un <strong>estadístico</strong>, en cambio, es una función de variables aleatorias, la cual no depende de valores desconocidos (parámetros).</p></li>
+<li><p>Un <strong>estimador</strong> es un estadístico utilizado para representar un parámetro de interés en una población.</p></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Todos los estimadores son estadísticos, pero no todos los estadísticos son estimadores. Sólo aquellos estadísticos que utilicemos para “representar” a nivel muestral el valor de un parámetro poblacional serán llamados estimadores.</p>
+</div>
+</div>
+</section>
+<section id="estimación-puntual" class="level2">
+<h2 class="anchored" data-anchor-id="estimación-puntual">Estimación puntual</h2>
+<p>Sean <span class="math inline">\(X_1, X_2, \cdots, X_n\)</span> variables aleatorias de una población <span class="math inline">\(X\)</span> cuya función de distribución conjunta es <span class="math display">\[g(x_1, x_2, \cdots, x_n) = f(x_1) \times f(x_2) \times \cdots \times f(x_n) = \prod_{i=1}^n f(x_i)\]</span> donde cada <span class="math inline">\(f(x_i)\)</span> representa la función de densidad asociada a la variable <span class="math inline">\(X_i\)</span>, entonces decimos que <span class="math inline">\(X_1, X_2, \cdots, X_n\)</span> es una <strong>muestra aleatoria</strong> de tamaño <span class="math inline">\(n\)</span> de la población con densidad <span class="math inline">\(f(x)\)</span>. Una muestra aleatoria de tamaño <span class="math inline">\(n\)</span> tiene variables aleatorias <strong>independientes e igualmente distribuidas</strong> (iid).</p>
+<p>Una muestra aleatoria es siempre extraída de una población <span class="math inline">\(X\)</span>, la cual viene representada por una función de densidad <span class="math inline">\(f(x, \theta)\)</span> donde <span class="math inline">\(\theta\)</span> es un parámetro desconocido. Lo que nos interesa es estimar ese parámetro <span class="math inline">\(\theta\)</span>.</p>
+<p>Un <strong>estimador puntual</strong> <span class="math inline">\(\hat{\theta}\)</span> es una función de <span class="math inline">\(X_1, X_2, \cdots, X_n\)</span> que estima al parámetro <span class="math inline">\(\theta\)</span>.</p>
+<p>Dicho de otro modo, un estadístico es calculado a partir de información muestral para estimar un parámetro poblacional de interés.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Un estimador es aleatorio: puede tomar distintos valores dependiendo de cuáles elementos de la población sean seleccionados para formar parte de la muestra. Por lo tanto, puede definirse una distribución de probabilidad que defina la probabilidad de que el estimador tome cada uno de sus posibles valores.</p>
+<p>En otras palabras, un estimador es una <em>variable aleatoria</em>.</p>
+</div>
+</div>
+<p>Algunos de los estimadores más populares son:</p>
+<ul>
+<li><p><strong>Media muestral:</strong> <span class="math inline">\(\overline{X} = \frac{1}{n} \sum_{i=1}^n x_i\)</span></p></li>
+<li><p><strong>Variancia muestral:</strong> <span class="math inline">\(S^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \overline{X})^2\)</span></p></li>
+<li><p><strong>Proporción muestral:</strong> <span class="math inline">\(\hat{p} = \frac{1}{n} \sum_{i=1}^n z_i\)</span> (siendo <span class="math inline">\(z\)</span> una variable binaria)</p></li>
+</ul>
+</section>
+<section id="propiedades-de-estimadores" class="level2">
+<h2 class="anchored" data-anchor-id="propiedades-de-estimadores">Propiedades de estimadores</h2>
+<p>Supóngase que ya tenemos una población de interés y un parámetro cuyo valor quisiéramos conocer: por ejemplo, la media. Teniendo una muestra, existen muchas formas de estimar la media poblacional. ¿Cuál de todos los posibles estimadores es mejor? Para compararlos entre ellos existen propiedades estadísticas de las que podemos valernos.</p>
+<section id="insesgamiento" class="level3">
+<h3 class="anchored" data-anchor-id="insesgamiento">Insesgamiento</h3>
+<p>Sea <span class="math inline">\(X_1, X_2, \cdots, X_n\)</span> una muestra aleatoria de tamaño <span class="math inline">\(n\)</span> de una población <span class="math inline">\(X\)</span>, cuya distribución viene dada por <span class="math inline">\(f(x,\theta)\)</span>, con <span class="math inline">\(\theta\)</span> un parámetro desconocido. Decimos que <span class="math inline">\(\hat{\theta}\)</span> es un <strong>estimador insesgado</strong> de <span class="math inline">\(\theta\)</span> si <span class="math display">\[E(\hat{\theta}) = \theta\]</span> para todos los posibles valores de <span class="math inline">\(\theta\)</span>. En caso contrario, decimos que <span class="math inline">\(\hat{\theta}\)</span> es un estimador <em>sesgado</em> de <span class="math inline">\(\theta\)</span>.</p>
+<p>El <strong>sesgo</strong> de un estimador puede calcularse como <span class="math display">\[b(\hat{\theta}) = E(\hat{\theta}) - \theta\]</span> de modo que:</p>
+<ul>
+<li><p><span class="math inline">\(b(\hat{\theta}) &gt; 0 \implies \hat{\theta}\)</span> sobreestima al parámetro <span class="math inline">\(\theta\)</span>.</p></li>
+<li><p><span class="math inline">\(b(\hat{\theta}) &lt; 0 \implies \hat{\theta}\)</span> subestima al parámetro <span class="math inline">\(\theta\)</span>.</p></li>
+<li><p><span class="math inline">\(b(\hat{\theta}) = 0 \implies \hat{\theta}\)</span> es insesgado del parámetro <span class="math inline">\(\theta\)</span>.</p></li>
+</ul>
+</section>
+<section id="consistencia" class="level3">
+<h3 class="anchored" data-anchor-id="consistencia">Consistencia</h3>
+<p>Se dice que un estimador <span class="math inline">\(\hat{\theta}\)</span> es <strong>consistente</strong> de <span class="math inline">\(\theta\)</span> si su distribución se concentra alrededor de valores cercanos al verdadero valor del parámetro <span class="math inline">\(\theta\)</span>, a medida que <span class="math inline">\(n\)</span> crece.</p>
+<p>En otras palabras, la probabilidad de que <span class="math inline">\(\hat{\theta}\)</span> esté “lejos” del valor de <span class="math inline">\(\theta\)</span> tiende a 0 cuando el tamaño de la muestra aumenta.</p>
+<p>Existe una condición suficiente para probar si un estimador es consistente. <span class="math display">\[b(\hat{\theta}) \stackrel{n\rightarrow\infty}{\longrightarrow} 0 \text{ y } V(\hat{\theta}) \stackrel{n\rightarrow\infty}{\longrightarrow} 0 \implies \hat{\theta} \text{ es consistente de } \theta\]</span></p>
+</section>
+<section id="eficiencia" class="level3">
+<h3 class="anchored" data-anchor-id="eficiencia">Eficiencia</h3>
+<p>Decimos que un estimador puntual <em>insesgado</em> <span class="math inline">\(\hat{\theta}\)</span> es un estimador <strong>eficiente</strong> del parámetro <span class="math inline">\(\theta\)</span> si tiene la menor variancia entre todos los posibles estimadores insesgados del parámetro.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A diferencia del insesgamiento y la consistencia, la eficiencia es una propiedad relativa: no es algo que pueda definirse sobre cada estimador individualmente, sino que surge de compararlos entre ellos.</p>
+</div>
+</div>
+<p>En resumen, la propiedad de <strong>insesgamiento</strong> hace referencia al <em>centro</em> o posición central de la distribución muestral de nuestro estimador, mientras que las propiedades de <strong>consistencia</strong> y <strong>eficiencia</strong> refieren a su <em>variabilidad</em>.</p>
+<div id="fig-sesgovariancia" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/sesgo_variancia.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figura&nbsp;5.3: Relación entre sesgo y variancia.</figcaption>
+</figure>
+</div>
 
 
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>No se los recomendamos.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
@@ -439,10 +554,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./2_va.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">2. Variable aleatoria</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./0_conteo.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-title">0. Herramientas de conteo</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./references.html" class="pagination-link">
+        <span class="nav-page-text">Referencias</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
