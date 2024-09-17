@@ -334,6 +334,21 @@ Nota
 <h3 class="anchored" data-anchor-id="distribución-de-la-media-muestral-caso-normal">Distribución de la media muestral (caso Normal)</h3>
 <p>Sea <span class="math inline">\(X_1, X_2, \cdots, X_n\)</span> una muestra aleatoria de tamaño <span class="math inline">\(n\)</span> extraída de una población <span class="math inline">\(N(\mu \,;\, \sigma^2)\)</span>. Sabemos que <span class="math inline">\(E(\overline{X}) = \mu\)</span> y <span class="math inline">\(V(\overline{X}) = \frac{\sigma^2}{n}\)</span>. Entonces, la distribución de la media muestral es: <span class="math display">\[\overline{X} \sim N \left( \mu \,;\, \frac{\sigma^2}{n} \right)\]</span></p>
 <p>Es decir, la media muestral, cuando la muestra aleatoria proviene de una población Normal, también tiene distribución Normal, con parámetros <span class="math inline">\(\mu\)</span> y <span class="math inline">\(\frac{\sigma^2}{n}\)</span>.</p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 4</strong></p>
+</div>
+<p>Según el envase, el tubo de papas Pringles tiene un peso neto de 124 gramos. Un día nos agarra un antojo severo y compramos 5 tubos de papas. Pero cuando llegamos a nuestro hogar sentimos que los tubos son demasiado livianos. Desconfiados, pesamos cada uno en la balanza y nos da un peso promedio de 118 gramos. ¡Nos estafaron! ¿O no?</p>
+<p>Llamamos a la atención al cliente de Pringles para reclamar y nos dicen que los tubos nunca tienen exactamente 124 gramos, sino que una máquina los llena siguiendo una distribución Normal con una media de 124 gramos y un desvío estándar de 8 gramos.</p>
+<p>En base a lo que pesan nuestras papas, ¿cuál es la probabilidad de que la información brindada por la atención al cliente sea verdadera?</p>
+<p><strong>Solución:</strong> Lo primordial es definir qué se entiende por “probabilidad de información verdadera”. Recordemos que, al estar ante una v.a. continua, no podemos simplemente calcular <span class="math inline">\(P(\overline{X} = 118)\)</span> porque dicha probabilidad es nula. Pero claramente debemos usar el 118 en algún lado. ¿Cómo?</p>
+<p>Sea <span class="math inline">\(\overline{X}\)</span> la variable “peso promedio de los tubos de papas en la muestra”. Bajo una presunción de que la información brindada por atención al cliente es correcta, tendríamos que <span class="math inline">\(X \sim N(\mu = 124 \,\;\, \sigma = 8)\)</span>. A su vez, nuestra sospecha es que, de no ser cierta la información provista, el veradero peso promedio será menor a 124 gramos (es decir, la empresa intentará sacar ventaja). Por lo tanto, podríamos preguntarnos: si suponemos que la información provista es cierta, ¿cuál sería la probabilidad de que el peso promedio sea lo que se observó o uno <em>aún más incriminante</em>? Entiéndase que, en este contexto, “más incriminante” implica un menor peso, porque eso reflejaría que es más probable que la información sea falsa.</p>
+<p>En términos matemáticos: <span class="math display">\[P(\text{Info cierta}) = P(\overline{X} \leq 118 \;|\; X \sim N(\mu = 124 \,;\, \sigma = 8))\]</span></p>
+<p>Luego: <span class="math display">\[X \sim N(\mu = 124 \,;\, \sigma = 8) \implies \overline{X} \sim N(\mu = 124 \,;\, \sigma = \tfrac{8}{\sqrt{5}})\]</span></p>
+<p>En conclusión, queremos calcular <span class="math inline">\(P(\overline{X} \leq 118 \;|\; \overline{X} \sim N(\mu = 124 \,;\, \sigma = \tfrac{8}{\sqrt{5}}))\)</span>.</p>
+<p>En el software estadístico R podemos calcular esta probabilidad mediante:</p>
+<p><code>pnorm(118, mean = 124, sd = 8/sqrt(5))</code> = 0.04676626 <span class="math inline">\(\approx\)</span> 4,67%</p>
+</div>
 </section>
 <section id="distribución-de-la-media-muestral-caso-no-normal" class="level3">
 <h3 class="anchored" data-anchor-id="distribución-de-la-media-muestral-caso-no-normal">Distribución de la media muestral (caso no Normal)</h3>

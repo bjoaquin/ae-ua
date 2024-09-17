@@ -185,6 +185,37 @@ Sea $X_1, X_2, \cdots, X_n$ una muestra aleatoria de tamaño $n$ extraída de un
 
 Es decir, la media muestral, cuando la muestra aleatoria proviene de una población Normal, también tiene distribución Normal, con parámetros $\mu$ y $\frac{\sigma^2}{n}$.
 
+::: {.examplebox data-latex=""}
+```{r}
+#| echo: FALSE
+contador_ejemplos <- contador_ejemplos + 1
+```
+
+::: {.center data-latex=""}
+**Ejemplo `r contador_ejemplos`**
+:::
+
+Según el envase, el tubo de papas Pringles tiene un peso neto de 124 gramos. Un día nos agarra un antojo severo y compramos 5 tubos de papas. Pero cuando llegamos a nuestro hogar sentimos que los tubos son demasiado livianos. Desconfiados, pesamos cada uno en la balanza y nos da un peso promedio de 118 gramos. ¡Nos estafaron! ¿O no?
+
+Llamamos a la atención al cliente de Pringles para reclamar y nos dicen que los tubos nunca tienen exactamente 124 gramos, sino que una máquina los llena siguiendo una distribución Normal con una media de 124 gramos y un desvío estándar de 8 gramos.
+
+En base a lo que pesan nuestras papas, ¿cuál es la probabilidad de que la información brindada por la atención al cliente sea verdadera?
+
+**Solución:** Lo primordial es definir qué se entiende por "probabilidad de información verdadera". Recordemos que, al estar ante una v.a. continua, no podemos simplemente calcular $P(\overline{X} = 118)$ porque dicha probabilidad es nula. Pero claramente debemos usar el 118 en algún lado. ¿Cómo?
+
+Sea $\overline{X}$ la variable "peso promedio de los tubos de papas en la muestra". Bajo una presunción de que la información brindada por atención al cliente es correcta, tendríamos que $X \sim N(\mu = 124 \,\;\, \sigma = 8)$. A su vez, nuestra sospecha es que, de no ser cierta la información provista, el veradero peso promedio será menor a 124 gramos (es decir, la empresa intentará sacar ventaja). Por lo tanto, podríamos preguntarnos: si suponemos que la información provista es cierta, ¿cuál sería la probabilidad de que el peso promedio sea lo que se observó o uno *aún más incriminante*? Entiéndase que, en este contexto, "más incriminante" implica un menor peso, porque eso reflejaría que es más probable que la información sea falsa.
+
+En términos matemáticos: $$P(\text{Info cierta}) = P(\overline{X} \leq 118 \;|\; X \sim N(\mu = 124 \,;\, \sigma = 8))$$
+
+Luego: $$X \sim N(\mu = 124 \,;\, \sigma = 8) \implies \overline{X} \sim N(\mu = 124 \,;\, \sigma = \tfrac{8}{\sqrt{5}})$$
+
+En conclusión, queremos calcular $P(\overline{X} \leq 118 \;|\; \overline{X} \sim N(\mu = 124 \,;\, \sigma = \tfrac{8}{\sqrt{5}}))$.
+
+En el software estadístico R podemos calcular esta probabilidad mediante:
+
+`pnorm(118, mean = 124, sd = 8/sqrt(5))` = 0.04676626 $\approx$ 4,67\% 
+:::
+
 ### Distribución de la media muestral (caso no Normal)
 
 Supóngase ahora que la muestra aleatoria $X_1, X_2, \cdots, X_n$ es extraída de una población cuya distribución se desconoce: podría ser Normal como también podría no serlo. En este caso no tenemos una expresión "conocida" para la esperanza y variancia de la media muestral porque no conocemos la distribución de la variable $X$. Sin embargo, existe un teorema que nos solucionará este problema.
