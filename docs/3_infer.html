@@ -372,6 +372,19 @@ Teorema Central del Límite
 <p>Volviendo al caso no Normal, se tiene entonces una muestra <span class="math inline">\(X_1, X_2, \cdots, X_n\)</span> proveniente de una población no necesariamente Normal. El TCL asegura que, bajo una muestra lo suficientemente grande, la media muestral sigue la siguiente distribución aproximada.</p>
 <p><span class="math display">\[\overline{X} \stackrel{TCL}{\sim} N \left( \mu \,;\, \frac{\sigma^2}{n} \right)\]</span></p>
 <p>Para reiterar, aún cuando la distribución de la población no sea Normal, un tamaño muestral lo suficientemente grande garantiza que la distribución de la media muestral sea Normal.</p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 5</strong></p>
+</div>
+<p>Los sueldos en una cierta empresa multinacional conforman una variable con una alta asimetría: hay muchos empleados con sueldos relativamente bajos y unos pocos empleados (directores y gerentes) con sueldos muy elevados.</p>
+<p>Si bien el sueldo de cada empleado es confidencial, es de público conocimiento que el sueldo promedio ronda los $1.800.000, con un desvío estándar de $1.000.000.</p>
+<p>Si se obtuviera una muestra aleatoria de 100 empleados, ¿cuál sería la probabilidad de que el sueldo medio muestral sea superior a $2.000.000?</p>
+<p><strong>Solución:</strong> Siendo <span class="math inline">\(X\)</span> la v.a. que representa el sueldo de los empleados de la empresa (en millones de pesos), se sabe que <span class="math inline">\(E(X) = \mu = 1,8\)</span> y que <span class="math inline">\(\sqrt{V(X)} = \sigma = 1\)</span>. Sin embargo, no se conoce con exactitud la distribución de probabilidad de la variable. Más aún, difícilmente ésta sea Normal, dada la asimetría mencionada. De todos modos, por tener una muestra de gran tamaño, y por conocer la esperanza y variancia de la variable, el Teorema Central del Límite nos permite calcular la probabilidad deseada.</p>
+<p><span class="math display">\[P(\overline{X} &gt; 2) = 1 - P(\overline{X} \leq 2)\]</span></p>
+<p>Por TCL: <span class="math display">\[\overline{X} \stackrel{n \to \infty}{\sim} N \left(\mu = 1.8 \,;\, \sigma = \tfrac{1}{\sqrt{100}} \right)\]</span></p>
+<p>Por lo tanto:</p>
+<p><code>1 - pnorm(2, mean = 1.8, sd = 1/sqrt(100))</code> = 0.02275013 <span class="math inline">\(\approx\)</span> 2,28%</p>
+</div>
 </section>
 <section id="distribución-de-la-media-muestral-caso-sigma2-desconocido" class="level3">
 <h3 class="anchored" data-anchor-id="distribución-de-la-media-muestral-caso-sigma2-desconocido">Distribución de la media muestral (caso <span class="math inline">\(\sigma^2\)</span> desconocido)</h3>
@@ -393,18 +406,52 @@ Nota
 <p>O sea, bajo una población con variancia desconocida, si ésta es Normal entonces siempre podemos hallar una distribución de probabilidad; pero si no lo es (o no lo sabemos) entonces sólo podemos trabajar con muestras grandes.</p>
 </div>
 </div>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 6</strong></p>
+</div>
+<p>El último álbum de Taylor Swift, el cual contiene 31 canciones, tiene una duración promedio por canción de 238 segundos, con un desvío estándar de 43 segundos.</p>
+<p>Si la verdadera duración promedio de <em>todas</em> sus canciones fuese de 250 segundos, ¿cuál sería la probabilidad de su álbum tuviera <em>a lo sumo</em> la duración promedio que se registró?</p>
+<p><strong>Solución:</strong> lo vemos en clase. El resultado es 0,0654.</p>
+<p>Para pensar: ¿el último álbum cumpliría las condiciones de <em>muestra aleatoria</em>?</p>
+<!-- No se conoce la distribución de la variable $X$: "duración de las canciones de Taylor Swift". Se asume, sin embargo, que la verdadera duración promedio es $E(X) = \mu = 250$ segundos. -->
+<!-- Se pretende calcular $P(\overline{X} \leq 238)$. -->
+<!-- Por TCL: $$T = \frac{\overline{X} - \mu}{S / \sqrt{n}} = \frac{\overline{X} - 250}{43 / \sqrt{31}} \sim t_{n-1}$$ -->
+<!-- Por lo tanto, $P(\overline{X} \leq 238) = P(T \leq -1.553795)$ -->
+<!-- Utilizando nuestro software estadístico: -->
+<!-- `pt(-1.553795, df = 30)` = 0.0653603 $\approx$ 6,54\%  -->
+</div>
 </section>
 <section id="distribución-de-la-diferencia-de-medias" class="level3">
 <h3 class="anchored" data-anchor-id="distribución-de-la-diferencia-de-medias">Distribución de la diferencia de medias</h3>
 <p>Supongamos ahora que tenemos dos muestras aleatorias extraídas de dos poblaciones <span class="math inline">\(X_1\)</span> y <span class="math inline">\(X_2\)</span> (no necesariamente Normales), de tamaños <span class="math inline">\(n_1\)</span> y <span class="math inline">\(n_2\)</span> respectivamente, e independientes entre sí.</p>
 <p>Por lo demostrado anteriormente, sabemos que si <span class="math inline">\(n_1\)</span> y <span class="math inline">\(n_2\)</span> son suficientemente grandes (mayores a 30), la media de cada muestra tiene distribución Normal. En consecuencia, la distyribución de la diferencia de medias es:</p>
-<p><span class="math display">\[\overline{X}_1 - \overline{X}_2 \stackrel{TCL}{\sim} N \left( \mu_1 - \mu_2 \,;\, \frac{\sigma^2_1}{n} + \frac{\sigma^2_2}{n} \right)\]</span></p>
+<p><span class="math display">\[\overline{X}_1 - \overline{X}_2 \stackrel{TCL}{\sim} N \left( \mu_1 - \mu_2 \,;\, \frac{\sigma^2_1}{n_1} + \frac{\sigma^2_2}{n_2} \right)\]</span></p>
 <p>En el caso en que las poblaciones de las que se extrae cada una de las muestras aleatorias sean Normales, la distribución de la diferencia de medias será Normal sin importar los tamaños muestrales.</p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 7</strong></p>
+</div>
+<p>El tiempo (en segundos) que tardan atletas argentinos federados en completar la carrera de 100 metros es una variable que sigue una distribución Normal, con media 11.5 y desvío estándar 1. Por otro lado, el tiempo para un grupo de corredores rosarinos aficionados también se distribuye Normalmente, con media 13 y desvío estándar 2.</p>
+<p>Si se seleccionan al azar 3 personas de cada grupo, ¿cuál es la probabilidad de que el promedio de los aficionados sea menor que el de los atletas?</p>
+<p><strong>Solución:</strong> Siendo <span class="math inline">\(X_1\)</span> la población de atletas federados y <span class="math inline">\(X_2\)</span> la población de corredores aficionados, se quiere calcular <span class="math inline">\(P(\overline{X}_1 &gt; \overline{X}_2) = P(\overline{X}_1 - \overline{X}_2 &gt; 0) = 1 - P(\overline{X}_1 - \overline{X}_2 \leq 0)\)</span>.</p>
+<p>Para los datos proporcionados, <span class="math inline">\(\mu_1-\mu_2 = -1.5\)</span> y <span class="math inline">\(\tfrac{\sigma_1^2}{n_1} + \tfrac{\sigma_1^2}{n_1} = \tfrac{5}{3}\)</span>. Luego:</p>
+<p><code>1 - pnorm(0, mean = -1.5, sd = sqrt(5/3))</code> = 0.1226391 <span class="math inline">\(\approx\)</span> 12,26%</p>
+</div>
 </section>
 <section id="distribución-de-la-proporción-muestral" class="level3">
 <h3 class="anchored" data-anchor-id="distribución-de-la-proporción-muestral">Distribución de la proporción muestral</h3>
 <p>Sea <span class="math inline">\(X_1, X_2, \cdots, X_n\)</span> una muestra aleatoria extraída de una población <span class="math inline">\(X\)</span> donde existen tan sólo dos resultados posibles: éxito y fracaso. Sabemos que una variable que mide el número de éxitos en la muestra aleatoria tiene distribución Binomial, con parámetros <span class="math inline">\(n\)</span> y <span class="math inline">\(p\)</span>. Además sabemos que: <span class="math display">\[E(\hat{p}) = p \qquad\qquad V(\hat{p}) = \frac{p(1-p)}{n}\]</span></p>
 <p>Entonces, por TCL, la distribución de la proporción muestral será: <span class="math display">\[\hat{p} \stackrel{TCL}{\sim} N \left( p \,;\, \frac{p(1-p)}{n} \right)\]</span></p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 8</strong></p>
+</div>
+<p>Aproximadamente un cuarto de la población mundial con acceso a internet tiene una cuenta de Instagram. Si se extrae una muestra de 50 personas a partir de dicha población, ¿cuál es la probabilidad de que al menos 40 de ellas tengan una cuenta de Instagram?</p>
+<p><strong>Solución:</strong> Sea <span class="math inline">\(X\)</span> la variable “posesión de una cuenta de Instagram” (sólo puede tomar como valores “sí” o “no”). Luego, <span class="math inline">\(p\)</span> es la verdadera proporción de éxitos (en este caso, <span class="math inline">\(p = 0.25\)</span>). A su vez, <span class="math inline">\(\hat{p}\)</span> es la proporción muestral de éxitos. Se pretende calcular <span class="math inline">\(P(\hat{p} &gt; 0.4) = 1 - P(\hat{p} \leq 0.4)\)</span>. Como la muestra extraída es grande, por TCL sabemos que <span class="math display">\[\hat{p} \stackrel{TCL}{\sim} N \left( 0.25 \,;\, \frac{0.25 \times 0.75}{50} \right)\]</span></p>
+<p>Por lo tanto:</p>
+<p><code>1 - pnorm(0.4, mean = 0.25, sd = sqrt(0.25*0.75/50))</code> = 0.007152939 <span class="math inline">\(\approx\)</span> 0,72%</p>
+</div>
 </section>
 <section id="distribución-de-la-variancia-muestral" class="level3">
 <h3 class="anchored" data-anchor-id="distribución-de-la-variancia-muestral">Distribución de la variancia muestral</h3>

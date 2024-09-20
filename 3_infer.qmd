@@ -15,11 +15,11 @@ Las decisiones que tomamos en nuestra vida cotidiana se basan en información pa
 
 [^3_infer-1]: No se los recomendamos.
 
-Lo importante es que incluso en ese contexto de incertidumbre podemos vivir plenamente, sin preocuparnos por tener la información total. Pero eso es sólo porque podemos sacarle provecho a la información parcial de la que sí disponemos. Tómsese como ejemplo la siguiente imagen, de la cual sólo conocemos el 10\% de sus píxeles, estando el 90\% restante en blanco. ¿Qué logran identificar? ¿De qué se trata la imagen?
+Lo importante es que incluso en ese contexto de incertidumbre podemos vivir plenamente, sin preocuparnos por tener la información total. Pero eso es sólo porque podemos sacarle provecho a la información parcial de la que sí disponemos. Tómsese como ejemplo la siguiente imagen, de la cual sólo conocemos el 10% de sus píxeles, estando el 90% restante en blanco. ¿Qué logran identificar? ¿De qué se trata la imagen?
 
 ![Uff, ni idea.](img/pixeles_random.png){#fig-pixrandom}
 
-Es muy difícil identificar algo. Como ya dijimos, tiene un 90\% de "ruido". Pero cuidado: no es el alto porcentaje de ruido lo que trae problemas, sino el hecho de que el 10\% de información está muy disperso. Si concentrásemos ese 10\% en la región adecuada de la imagen, tendríamos mucha más claridad sobre el asunto.
+Es muy difícil identificar algo. Como ya dijimos, tiene un 90% de "ruido". Pero cuidado: no es el alto porcentaje de ruido lo que trae problemas, sino el hecho de que el 10% de información está muy disperso. Si concentrásemos ese 10% en la región adecuada de la imagen, tendríamos mucha más claridad sobre el asunto.
 
 ![Ah, ahora sí. Jamás me hubiese dado cuenta.](img/pixeles_foco.png){#fig-pixfoco}
 
@@ -27,23 +27,23 @@ Esa es la meta de la **inferencia estadística**: sacarle tanto jugo como sea po
 
 ## Terminología
 
-* Una **población** es un conjunto de individuos o elementos, en un tiempo y espacio definidos, sobre los cuales nos interesaría conocer una caraterística.
+-   Una **población** es un conjunto de individuos o elementos, en un tiempo y espacio definidos, sobre los cuales nos interesaría conocer una caraterística.
 
-* Una **muestra** es un subconjunto de esa población, al cual tenemos acceso para obtener "información parcial".
+-   Una **muestra** es un subconjunto de esa población, al cual tenemos acceso para obtener "información parcial".
 
-* Una **unidad** es un elemento del (sub)conjunto: una persona, una institución, un vehículo, etcétera.
+-   Una **unidad** es un elemento del (sub)conjunto: una persona, una institución, un vehículo, etcétera.
 
-* La **variable** en estudio (si bien podría haber más de una) es la característica de interés que se mide a cada unidad, y se utiliza en el cálculo de los valores poblacionales de interés.
+-   La **variable** en estudio (si bien podría haber más de una) es la característica de interés que se mide a cada unidad, y se utiliza en el cálculo de los valores poblacionales de interés.
 
 La **estadística inferencial** es la rama de la Estadística que, a partir de la información empírica proporcionada por una muestra, intenta predecir el comportamiento de una población.
 
 Dicha descripción estará siempre sujeta a un riesgo de cometer un cierto error por estar trabajando con los datos de una muestra y no de toda la población. Este error será medible o establecido en términos de probabilidades.
 
-* Un **parámetro** es un valor que describe o resume una característica de interés acerca de una población. Los parámetros son valores que nos interesan pero que desconocemos.
+-   Un **parámetro** es un valor que describe o resume una característica de interés acerca de una población. Los parámetros son valores que nos interesan pero que desconocemos.
 
-* Un **estadístico**, en cambio, es una función de variables aleatorias, la cual no depende de valores desconocidos (parámetros).
+-   Un **estadístico**, en cambio, es una función de variables aleatorias, la cual no depende de valores desconocidos (parámetros).
 
-* Un **estimador** es un estadístico utilizado para representar un parámetro de interés en una población.
+-   Un **estimador** es un estadístico utilizado para representar un parámetro de interés en una población.
 
 ::: callout-note
 #### Nota
@@ -71,11 +71,11 @@ En otras palabras, un estimador es una *variable aleatoria*.
 
 Algunos de los estimadores más populares son:
 
-* **Media muestral:** $\overline{X} = \frac{1}{n} \sum_{i=1}^n x_i$
+-   **Media muestral:** $\overline{X} = \frac{1}{n} \sum_{i=1}^n x_i$
 
-* **Variancia muestral:** $S^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \overline{X})^2$
+-   **Variancia muestral:** $S^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \overline{X})^2$
 
-* **Proporción muestral:** $\hat{p} = \frac{1}{n} \sum_{i=1}^n z_i$ (siendo $z$ una variable binaria)
+-   **Proporción muestral:** $\hat{p} = \frac{1}{n} \sum_{i=1}^n z_i$ (siendo $z$ una variable binaria)
 
 ## Propiedades de estimadores
 
@@ -87,11 +87,11 @@ Sea $X_1, X_2, \cdots, X_n$ una muestra aleatoria de tamaño $n$ de una poblaci�
 
 El **sesgo** de un estimador puede calcularse como $$b(\hat{\theta}) = E(\hat{\theta}) - \theta$$ de modo que:
 
-* $b(\hat{\theta}) > 0 \implies \hat{\theta}$ sobreestima al parámetro $\theta$.
+-   $b(\hat{\theta}) > 0 \implies \hat{\theta}$ sobreestima al parámetro $\theta$.
 
-* $b(\hat{\theta}) < 0 \implies \hat{\theta}$ subestima al parámetro $\theta$.
+-   $b(\hat{\theta}) < 0 \implies \hat{\theta}$ subestima al parámetro $\theta$.
 
-* $b(\hat{\theta}) = 0 \implies \hat{\theta}$ es insesgado del parámetro $\theta$.
+-   $b(\hat{\theta}) = 0 \implies \hat{\theta}$ es insesgado del parámetro $\theta$.
 
 ::: {.examplebox data-latex=""}
 ```{r}
@@ -107,8 +107,7 @@ Sea $X$ una v.a. con distribución exponencial. Demuestre que la media muestral 
 
 **Solución:** Si $X \sim \text{exp}$, luego $f(x) = \lambda e^{-\lambda x}$ y $E(X) = \frac{1}{\lambda}$. Si obtenemos una muestra aleatoria de tamaño $n$ a partir de la población y definimos $\overline{X} = \frac{1}{n} \sum_{i=1}^n X_i$, luego:
 
-$$E(\overline{X}) = E \left( \frac{1}{n} \sum_{i=1}^n X_i \right) \stackrel{(1)}{=} \frac{1}{n} \sum_{i=1}^n E(X_i) \stackrel{(2)}{=} \frac{1}{n} \sum_{i=1}^n \frac{1}{\lambda} = \frac{1}{n} \cdot n \cdot \frac{1}{\lambda} = \frac{1}{\lambda}$$
-donde (1) se cumple por propiedad de esperanza (de una combinación lineal) y (2) se cumple por ser una muestra aleatoria.
+$$E(\overline{X}) = E \left( \frac{1}{n} \sum_{i=1}^n X_i \right) \stackrel{(1)}{=} \frac{1}{n} \sum_{i=1}^n E(X_i) \stackrel{(2)}{=} \frac{1}{n} \sum_{i=1}^n \frac{1}{\lambda} = \frac{1}{n} \cdot n \cdot \frac{1}{\lambda} = \frac{1}{\lambda}$$ donde (1) se cumple por propiedad de esperanza (de una combinación lineal) y (2) se cumple por ser una muestra aleatoria.
 :::
 
 ### Consistencia
@@ -133,9 +132,7 @@ Sea $X$ una v.a. con distribución exponencial. Demuestre que la media muestral 
 
 **Solución:** En primer lugar, ya se probó en el ejemplo anterior que el estimador "media muestral" es insesgado de $\frac{1}{\lambda}$, es decir, su sesgo es nulo: $b(\overline{X}) = 0$. En consecuencia, esto también significa que el sesgo tiende a cero cuando la muestra aumenta. Para evaluar la segunda condición:
 
-$$V(\overline{X}) = V \left( \frac{1}{n} \sum_{i=1}^n X_i \right) \stackrel{(1)}{=} \frac{1}{n^2} \sum_{i=1}^n V(X_i) \stackrel{(2)}{=} \frac{1}{n^2} \sum_{i=1}^n \frac{1}{\lambda^2} =$$
-$$= \frac{1}{n^2} \cdot n \cdot \frac{1}{\lambda^2} = \frac{1}{n \cdot \lambda^2} \stackrel{n \to \infty}{\longrightarrow} 0$$
-donde (1) se cumple por propiedad de variancia (de una combinación lineal) y (2) se cumple por ser una muestra aleatoria.
+$$V(\overline{X}) = V \left( \frac{1}{n} \sum_{i=1}^n X_i \right) \stackrel{(1)}{=} \frac{1}{n^2} \sum_{i=1}^n V(X_i) \stackrel{(2)}{=} \frac{1}{n^2} \sum_{i=1}^n \frac{1}{\lambda^2} =$$ $$= \frac{1}{n^2} \cdot n \cdot \frac{1}{\lambda^2} = \frac{1}{n \cdot \lambda^2} \stackrel{n \to \infty}{\longrightarrow} 0$$ donde (1) se cumple por propiedad de variancia (de una combinación lineal) y (2) se cumple por ser una muestra aleatoria.
 :::
 
 ### Eficiencia
@@ -160,15 +157,11 @@ contador_ejemplos <- contador_ejemplos + 1
 
 Sea $X_1, X_2, X_3$ una muestra aleatoria de tamaño $n=3$ proveniente de una población con distribución $N(\mu \,;\, \sigma^2)$, con $\mu$ y $\sigma^2$ desconocidos. Se proponen dos estimadores (insesgados) de $\mu$:
 
-$$\hat{\mu}_1 = \frac{1}{4} X_1 + \frac{1}{2} X_2 + \frac{1}{4} X_3$$
-$$\hat{\mu}_2 = \frac{1}{3} X_1 + \frac{1}{3} X_2 + \frac{1}{3} X_3$$
-¿Cuál de ellos es más eficiente?
+$$\hat{\mu}_1 = \frac{1}{4} X_1 + \frac{1}{2} X_2 + \frac{1}{4} X_3$$ $$\hat{\mu}_2 = \frac{1}{3} X_1 + \frac{1}{3} X_2 + \frac{1}{3} X_3$$ ¿Cuál de ellos es más eficiente?
 
 **Solución:** Calculando las variancias de cada uno:
 
-$$V(\hat{\mu}_1) = \frac{1}{4^2} V(X_1) + \frac{1}{2^2} V(X_2) + \frac{1}{4^2} V(X_3) = \sigma^2 \left( \frac{1}{16} + \frac{1}{4} + \frac{1}{16} \right) = \frac{3 \sigma^2}{8}$$
-$$V(\hat{\mu}_2) = \frac{1}{3^2} V(X_1) + \frac{1}{3^2} V(X_2) + \frac{1}{3^2} V(X_3) = \frac{3}{3^2} \sigma^2 = \frac{3 \sigma^2}{9}$$
-En conclusión, $\hat{\mu}_2$ es más eficiente que $\hat{\mu}_1$.
+$$V(\hat{\mu}_1) = \frac{1}{4^2} V(X_1) + \frac{1}{2^2} V(X_2) + \frac{1}{4^2} V(X_3) = \sigma^2 \left( \frac{1}{16} + \frac{1}{4} + \frac{1}{16} \right) = \frac{3 \sigma^2}{8}$$ $$V(\hat{\mu}_2) = \frac{1}{3^2} V(X_1) + \frac{1}{3^2} V(X_2) + \frac{1}{3^2} V(X_3) = \frac{3}{3^2} \sigma^2 = \frac{3 \sigma^2}{9}$$ En conclusión, $\hat{\mu}_2$ es más eficiente que $\hat{\mu}_1$.
 :::
 
 En resumen, la propiedad de **insesgamiento** hace referencia al *centro* o posición central de la distribución muestral de nuestro estimador, mientras que las propiedades de **consistencia** y **eficiencia** refieren a su *variabilidad*.
@@ -213,7 +206,7 @@ En conclusión, queremos calcular $P(\overline{X} \leq 118 \;|\; \overline{X} \s
 
 En el software estadístico R podemos calcular esta probabilidad mediante:
 
-`pnorm(118, mean = 124, sd = 8/sqrt(5))` = 0.04676626 $\approx$ 4,67\% 
+`pnorm(118, mean = 124, sd = 8/sqrt(5))` = 0.04676626 $\approx$ 4,67%
 :::
 
 ### Distribución de la media muestral (caso no Normal)
@@ -227,8 +220,7 @@ Sea una población $X$ con media $\mu$ y variancia $\sigma^2$. Sea $\overline{X}
 
 Luego, la distribución de $\overline{X}$ se aprocima a una distribución Normal a medida que aumenta el tamaño muestral $n$:
 
-$$\overline{X} \stackrel{n \to \infty}{\sim} N \left( \mu \,;\, \frac{\sigma^2}{n} \right)$$
-Este teorema es uno de los resultados fundamentales de la Estadística. Nos dice que, si una muestra es lo suficientemente grande ($n>30$), entonces la media muestral, sin importar la variable original $X$ (podría ser continua o incluso discreta), seguirá aproximadamente una distribución Normal.
+$$\overline{X} \stackrel{n \to \infty}{\sim} N \left( \mu \,;\, \frac{\sigma^2}{n} \right)$$ Este teorema es uno de los resultados fundamentales de la Estadística. Nos dice que, si una muestra es lo suficientemente grande ($n>30$), entonces la media muestral, sin importar la variable original $X$ (podría ser continua o incluso discreta), seguirá aproximadamente una distribución Normal.
 
 El TCL es la razón por la cual la distribución Normal es tan popular.
 :::
@@ -238,6 +230,33 @@ Volviendo al caso no Normal, se tiene entonces una muestra $X_1, X_2, \cdots, X_
 $$\overline{X} \stackrel{TCL}{\sim} N \left( \mu \,;\, \frac{\sigma^2}{n} \right)$$
 
 Para reiterar, aún cuando la distribución de la población no sea Normal, un tamaño muestral lo suficientemente grande garantiza que la distribución de la media muestral sea Normal.
+
+::: {.examplebox data-latex=""}
+```{r}
+#| echo: FALSE
+contador_ejemplos <- contador_ejemplos + 1
+```
+
+::: {.center data-latex=""}
+**Ejemplo `r contador_ejemplos`**
+:::
+
+Los sueldos en una cierta empresa multinacional conforman una variable con una alta asimetría: hay muchos empleados con sueldos relativamente bajos y unos pocos empleados (directores y gerentes) con sueldos muy elevados.
+
+Si bien el sueldo de cada empleado es confidencial, es de público conocimiento que el sueldo promedio ronda los \$1.800.000, con un desvío estándar de \$1.000.000.
+
+Si se obtuviera una muestra aleatoria de 100 empleados, ¿cuál sería la probabilidad de que el sueldo medio muestral sea superior a \$2.000.000?
+
+**Solución:** Siendo $X$ la v.a. que representa el sueldo de los empleados de la empresa (en millones de pesos), se sabe que $E(X) = \mu = 1,8$ y que $\sqrt{V(X)} = \sigma = 1$. Sin embargo, no se conoce con exactitud la distribución de probabilidad de la variable. Más aún, difícilmente ésta sea Normal, dada la asimetría mencionada. De todos modos, por tener una muestra de gran tamaño, y por conocer la esperanza y variancia de la variable, el Teorema Central del Límite nos permite calcular la probabilidad deseada.
+
+$$P(\overline{X} > 2) = 1 - P(\overline{X} \leq 2)$$
+
+Por TCL: $$\overline{X} \stackrel{n \to \infty}{\sim} N \left(\mu = 1.8 \,;\, \sigma = \tfrac{1}{\sqrt{100}} \right)$$
+
+Por lo tanto:
+
+`1 - pnorm(2, mean = 1.8, sd = 1/sqrt(100))` = 0.02275013 $\approx$ 2,28%
+:::
 
 ### Distribución de la media muestral (caso $\sigma^2$ desconocido)
 
@@ -257,21 +276,92 @@ Para muestras grandes ($n>30$) la distribución t-Student resulta casi idéntica
 O sea, bajo una población con variancia desconocida, si ésta es Normal entonces siempre podemos hallar una distribución de probabilidad; pero si no lo es (o no lo sabemos) entonces sólo podemos trabajar con muestras grandes.
 :::
 
+::: {.examplebox data-latex=""}
+```{r}
+#| echo: FALSE
+contador_ejemplos <- contador_ejemplos + 1
+```
+
+::: {.center data-latex=""}
+**Ejemplo `r contador_ejemplos`**
+:::
+
+El último álbum de Taylor Swift, el cual contiene 31 canciones, tiene una duración promedio por canción de 238 segundos, con un desvío estándar de 43 segundos.
+
+Si la verdadera duración promedio de *todas* sus canciones fuese de 250 segundos, ¿cuál sería la probabilidad de su álbum tuviera *a lo sumo* la duración promedio que se registró?
+
+**Solución:** lo vemos en clase. El resultado es 0,0654.
+
+Para pensar: ¿el último álbum cumpliría las condiciones de *muestra aleatoria*?
+
+<!-- No se conoce la distribución de la variable $X$: "duración de las canciones de Taylor Swift". Se asume, sin embargo, que la verdadera duración promedio es $E(X) = \mu = 250$ segundos. -->
+
+<!-- Se pretende calcular $P(\overline{X} \leq 238)$. -->
+
+<!-- Por TCL: $$T = \frac{\overline{X} - \mu}{S / \sqrt{n}} = \frac{\overline{X} - 250}{43 / \sqrt{31}} \sim t_{n-1}$$ -->
+
+<!-- Por lo tanto, $P(\overline{X} \leq 238) = P(T \leq -1.553795)$ -->
+
+<!-- Utilizando nuestro software estadístico: -->
+
+<!-- `pt(-1.553795, df = 30)` = 0.0653603 $\approx$ 6,54\%  -->
+:::
+
 ### Distribución de la diferencia de medias
 
 Supongamos ahora que tenemos dos muestras aleatorias extraídas de dos poblaciones $X_1$ y $X_2$ (no necesariamente Normales), de tamaños $n_1$ y $n_2$ respectivamente, e independientes entre sí.
 
 Por lo demostrado anteriormente, sabemos que si $n_1$ y $n_2$ son suficientemente grandes (mayores a 30), la media de cada muestra tiene distribución Normal. En consecuencia, la distyribución de la diferencia de medias es:
 
-$$\overline{X}_1 - \overline{X}_2 \stackrel{TCL}{\sim} N \left( \mu_1 - \mu_2 \,;\, \frac{\sigma^2_1}{n} + \frac{\sigma^2_2}{n} \right)$$
+$$\overline{X}_1 - \overline{X}_2 \stackrel{TCL}{\sim} N \left( \mu_1 - \mu_2 \,;\, \frac{\sigma^2_1}{n_1} + \frac{\sigma^2_2}{n_2} \right)$$
 
 En el caso en que las poblaciones de las que se extrae cada una de las muestras aleatorias sean Normales, la distribución de la diferencia de medias será Normal sin importar los tamaños muestrales.
+
+::: {.examplebox data-latex=""}
+```{r}
+#| echo: FALSE
+contador_ejemplos <- contador_ejemplos + 1
+```
+
+::: {.center data-latex=""}
+**Ejemplo `r contador_ejemplos`**
+:::
+
+El tiempo (en segundos) que tardan atletas argentinos federados en completar la carrera de 100 metros es una variable que sigue una distribución Normal, con media 11.5 y desvío estándar 1. Por otro lado, el tiempo para un grupo de corredores rosarinos aficionados también se distribuye Normalmente, con media 13 y desvío estándar 2.
+
+Si se seleccionan al azar 3 personas de cada grupo, ¿cuál es la probabilidad de que el promedio de los aficionados sea menor que el de los atletas?
+
+**Solución:** Siendo $X_1$ la población de atletas federados y $X_2$ la población de corredores aficionados, se quiere calcular $P(\overline{X}_1 > \overline{X}_2) = P(\overline{X}_1 - \overline{X}_2 > 0) = 1 - P(\overline{X}_1 - \overline{X}_2 \leq 0)$.
+
+Para los datos proporcionados, $\mu_1-\mu_2 = -1.5$ y $\tfrac{\sigma_1^2}{n_1} + \tfrac{\sigma_1^2}{n_1} = \tfrac{5}{3}$. Luego: 
+
+`1 - pnorm(0, mean = -1.5, sd = sqrt(5/3))` = 0.1226391 $\approx$ 12,26\%
+:::
 
 ### Distribución de la proporción muestral
 
 Sea $X_1, X_2, \cdots, X_n$ una muestra aleatoria extraída de una población $X$ donde existen tan sólo dos resultados posibles: éxito y fracaso. Sabemos que una variable que mide el número de éxitos en la muestra aleatoria tiene distribución Binomial, con parámetros $n$ y $p$. Además sabemos que: $$E(\hat{p}) = p \qquad\qquad V(\hat{p}) = \frac{p(1-p)}{n}$$
 
 Entonces, por TCL, la distribución de la proporción muestral será: $$\hat{p} \stackrel{TCL}{\sim} N \left( p \,;\, \frac{p(1-p)}{n} \right)$$
+
+::: {.examplebox data-latex=""}
+```{r}
+#| echo: FALSE
+contador_ejemplos <- contador_ejemplos + 1
+```
+
+::: {.center data-latex=""}
+**Ejemplo `r contador_ejemplos`**
+:::
+
+Aproximadamente un cuarto de la población mundial con acceso a internet tiene una cuenta de Instagram. Si se extrae una muestra de 50 personas a partir de dicha población, ¿cuál es la probabilidad de que al menos 40 de ellas tengan una cuenta de Instagram?
+
+**Solución:** Sea $X$ la variable "posesión de una cuenta de Instagram" (sólo puede tomar como valores "sí" o "no"). Luego, $p$ es la verdadera proporción de éxitos (en este caso, $p = 0.25$). A su vez, $\hat{p}$ es la proporción muestral de éxitos. Se pretende calcular $P(\hat{p} > 0.4) = 1 - P(\hat{p} \leq 0.4)$. Como la muestra extraída es grande, por TCL sabemos que $$\hat{p} \stackrel{TCL}{\sim} N \left( 0.25 \,;\, \frac{0.25 \times 0.75}{50} \right)$$
+
+Por lo tanto:
+
+`1 - pnorm(0.4, mean = 0.25, sd = sqrt(0.25*0.75/50))` = 0.007152939 $\approx$ 0,72\%
+:::
 
 ### Distribución de la variancia muestral
 
