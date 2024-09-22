@@ -362,11 +362,3 @@ Por lo tanto:
 
 `1 - pnorm(0.4, mean = 0.25, sd = sqrt(0.25*0.75/50))` = 0.007152939 $\approx$ 0,72\%
 :::
-
-### Distribución de la variancia muestral
-
-Sea $X_1, X_2, \cdots, X_n$ una muestra aleatoria extraída de una población Normalmente distribuída. La estadística $S^2$ no tiene una distribución de probabilidad definida, pero sí podemos encontrar una para la variable aleatoria $Y$, que es función de $S^2$.
-
-$$Y = \frac{(n-1)S^2}{\sigma^2} \sim \chi^2_{n-1}$$
-
-donde $\chi^2_{n-1}$ representa una distribución Chi-cuadrado con $n-1$ grados de libertad.
