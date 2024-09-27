@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -76,7 +76,8 @@ div.csl-indent {
     "search-more-matches-text": "resultados adicionales en este documento",
     "search-clear-button-title": "Borrar",
     "search-detached-cancel-button-title": "Cancelar",
-    "search-submit-button-title": "Enviar"
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
   }
 }</script>
 
@@ -98,7 +99,7 @@ div.csl-indent {
       <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./0_conteo.html"><span class="chapter-title">0. Herramientas de conteo</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -143,6 +144,11 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./3_infer.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3. Inferencia estadística</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4_tdh.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4. ICs y Tests de hipótesis</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -328,6 +334,16 @@ Idea clave
 </div>
 <p>Nótese el gran número de reordenamientos que resulta de un número tan pequeño de elementos. Este número es tan grande que sería inviable resolver el problema por enumeración exhaustiva. Incluso para una lista de 5 canciones se tendrían <span class="math inline">\(5!=120\)</span> posibles reordenamientos, los cuales ya son muchos como para escribirlos uno por uno. En líneas generales, el número factorial crece muy rápidamente, incluso más que el número exponencial.</p>
 <div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in geom_segment(aes(x = 5.2, y = 4000, xend = 6.8, yend = 5000), : All aesthetics have length 1, but the data has 61 rows.
+ℹ Please consider using `annotate()` or provide this layer with data containing
+  a single row.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in geom_segment(aes(x = 5.2, y = 2500, xend = 6.8, yend = 1200), : All aesthetics have length 1, but the data has 61 rows.
+ℹ Please consider using `annotate()` or provide this layer with data containing
+  a single row.</code></pre>
+</div>
 <div class="cell-output-display">
 <div id="fig-crecimiento-factorial" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">

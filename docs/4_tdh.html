@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Joaquín Bermejo">
-<meta name="author" content="Victorio Costa">
 
-<title>Análisis Estadístico (UA)</title>
+<title>Análisis Estadístico (UA) - 4. ICs y Tests de hipótesis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./0_conteo.html" rel="next">
+<link href="./references.html" rel="next">
+<link href="./3_infer.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -63,6 +62,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="style.css">
 </head>
@@ -76,7 +77,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-title">Prefacio</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./4_tdh.html"><span class="chapter-title">4. ICs y Tests de hipótesis</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -103,7 +104,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Prefacio</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Prefacio</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -128,7 +129,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4_tdh.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4. ICs y Tests de hipótesis</span></a>
+  <a href="./4_tdh.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">4. ICs y Tests de hipótesis</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -147,7 +148,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#prefacio" id="toc-prefacio" class="nav-link active" data-scroll-target="#prefacio">Prefacio</a></li>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción">Introducción</a></li>
+  <li><a href="#intervalos-de-confianza" id="toc-intervalos-de-confianza" class="nav-link" data-scroll-target="#intervalos-de-confianza">Intervalos de Confianza</a>
+  <ul>
+  <li><a href="#ic-para-la-media-de-una-población-normal-mu" id="toc-ic-para-la-media-de-una-población-normal-mu" class="nav-link" data-scroll-target="#ic-para-la-media-de-una-población-normal-mu">IC para la media de una población Normal (<span class="math inline">\(\mu\)</span>)</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -156,27 +161,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Análisis Estadístico (UA)</h1>
+<h1 class="title"><span class="chapter-title">4. ICs y Tests de hipótesis</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Autores/as</div>
-    <div class="quarto-title-meta-contents">
-             <p>Joaquín Bermejo </p>
-             <p>Victorio Costa </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Últ. actualización</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">27 de septiembre de 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -184,13 +176,94 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="prefacio" class="level1">
-<h1>Prefacio</h1>
-<p>Desde la cátedra de Análisis Estadístico, les damos una cálida bienvenida a este nuevo curso, donde nos sumergiremos nuevamente en el fascinante mundo de los datos, la toma de decisiones y, sobre todas las cosas, el apasionante proceso de aprendizaje.</p>
-<p>¿Alguna vez se han preguntado cómo las empresas líderes toman decisiones cruciales basadas en datos? ¿O cómo pueden prever tendencias económicas que transforman industrias enteras? A lo largo de este curso, exploraremos técnicas y conceptos fundamentales que nos permitirán descubrir el valioso conocimiento que los datos pueden brindarnos. Desde los conceptos básicos de la teoría de probabilidad hasta métodos gráficos e inferenciales, aprenderemos a resolver problemas y ofrecer soluciones basadas en un análisis riguroso.</p>
-<p>¡Esperamos que tomen este recorrido como un desafío, como una oportunidad para poner a prueba sus habilidades y construir un espacio interactivo donde tanto ustedes como nosotros enriquezcamos nuestros conocimientos!</p>
+<section id="introducción" class="level2">
+<h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
+<p>[Próximamente. Perdón por la demora. 🙏]</p>
+</section>
+<section id="intervalos-de-confianza" class="level2">
+<h2 class="anchored" data-anchor-id="intervalos-de-confianza">Intervalos de Confianza</h2>
+<p>La estimación puntual se basa en representar una característica de interés mediante los valores observados de una muestra aleatoria. Sin embargo, los estadísticos que usamos como estimadores son variables aleatorias: su valor varía de muestra en muestra. Por lo tanto, nunca tenemos certeza sobre si, para la muestra que obtuvimos, nuestra estimación está o no “cerca” del verdadero valor del parámetro de interés.</p>
+<p>Afortunadamente, existe otro tipo de estimación: en lugar de tener un solo número como estimador, podemos tener un rango de valores. La ventaja de este método que permite cuantificar (usando probabilidades) el grado de certeza con el que se espera que el verdadero valor del parámetro se encuentre dentro de dicho rango. Estamos hablando de los <em>intervalos de confianza</em>.</p>
+<p>Formalmente, una estimación por <strong>intervalo de confianza</strong> para un parámetro <span class="math inline">\(\theta\)</span> se construye a partir de dos funciones <span class="math inline">\(L(\mathbf{x})\)</span> y <span class="math inline">\(U(\mathbf{x})\)</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> y de un valor <span class="math inline">\(\alpha \in (0;1)\)</span>, y viene dado por <span class="math display">\[IC_{1-\alpha}(\theta) = [L(\mathbf{x}) \,;\, U(\mathbf{x})] \text{ tal que } P(L(\mathbf{x}) \leq \theta \leq U(\mathbf{x})) = 1 - \alpha\]</span></p>
+<p>A la hora de realizar una estimación por IC, el valor <span class="math inline">\(1-\alpha\)</span> representará la <strong>confianza</strong> de nuestro intervalo y se puede interpretar como la probabilidad de que el intervalo <span class="math inline">\([L(\mathbf{x}) \,;\, U(\mathbf{x})]\)</span> incluya al verdadero valor del parámetro <em>antes de extraer la muestra</em>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Otra interpretación posible es que, si se tomaran reiteradas muestras de la población bajo estudio y consecuentemente se construyeran múltiples intervalos de confianza, es de esperar que <span class="math inline">\(\theta\)</span> esté contenido en el <span class="math inline">\(100(1-\alpha)\%\)</span> de ellos.</p>
+<p>Existen varios métodos para construir intervalos de confianza. El más utilizado (y el que veremos en este curso) consiste en proponer cuantiles como valores de <span class="math inline">\(L(\mathbf{x})\)</span> y <span class="math inline">\(U(\mathbf{x})\)</span>. Dichos cuantiles provienen de la distribución muestral del estadístico que estamos usando para estimar el parámetro.</p>
+<p>Por ejemplo, supongamos que queremos estimar la media poblacional mediante la media muestral (hasta ahora esto sería una estimación puntual, como en la unidad anterior). Sabemos que la distribución muestral de dicho estadístico es Normal (ya sea exacta o aproximadamente, dependiendo de si la variable original es Normal o si debemos recurrir al Teorema Central del Límite). La campana Normal correspondiente estaría centrada en <span class="math inline">\(\mu\)</span>, pero este valor lo desconocemos. Sin embargo, si tomamos a la media muestral observada como nuestra mejor aproximación de <span class="math inline">\(\mu\)</span> (o sea, <span class="math inline">\(\hat{\mu} = \overline{x}\)</span>) entonces podemos concebir una curva Normal empírica centrada en este valor. Si quisiéramos constuir un intervalo con una confianza del 95%, deberíamos tomar los cuantiles 2,5% y 97,5%, de modo que el intervalo esté compuesto por el 95% central de la campana.</p>
+<div id="fig-meanci" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/ci_mean.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figura&nbsp;6.1: Ilustración de un intervalo de confianza del 95% para la media poblacional.</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Nótese cómo el uso de las distribuciones muestrales se torna casi opuesto entre la teoría (Unidad 3) y la práctica (Unidad 4). En un entorno teórico, conocemos el valor del parámetro poblacional e hipotetizamos sobre qué ocurriría cuando eventualmente tomemos una muestra, calculando la probabilidad de que nuestro estimador tome un valor dentro de un cierto intervalo: <span class="math inline">\(P(a \leq \hat{\theta} \leq b)\)</span>. En la práctica, sin embargo, el proceso es el inverso: el valor del estimador muestral es lo que se conoce, y se calcula la probabilidad de que el parámetro poblacional tome un valor dentro de un cierto intervalo.</p>
+</div>
+</div>
+<section id="ic-para-la-media-de-una-población-normal-mu" class="level3">
+<h3 class="anchored" data-anchor-id="ic-para-la-media-de-una-población-normal-mu">IC para la media de una población Normal (<span class="math inline">\(\mu\)</span>)</h3>
+<p>Sea <span class="math inline">\(X_1, X_2, \cdots, X_n\)</span> una muestra aleatoria de tamaño <span class="math inline">\(n\)</span> extraída de una población con distribución <span class="math inline">\(N(\mu,\sigma)\)</span>. Sabemos que la media muestral también tiene distribución Normal. Entonces podemos utilizar lo siguiente:</p>
+<p><span class="math display">\[\overline{X} \sim N\left( \mu, \frac{\sigma}{\sqrt{n}} \right) \implies Z = \frac{\overline{X}-\mu}{\sigma/\sqrt{n}} \sim N(0,1)\]</span></p>
+<p>Lo anterior es fácilmente demostrable. Para empezar, cualquier combinación lineal de una variable Normal es a su vez una variable Normal. Como <span class="math inline">\(Z\)</span> es una combinación lineal de <span class="math inline">\(\overline{X}\)</span> y <span class="math inline">\(\overline{X}\)</span> es Normal entonces <span class="math inline">\(Z\)</span> también es una variable Normal. ¿Cómo podríamos deducir la Esperanza y Variancia de esta nueva variable aleatoria? Utilizando propiedades de <span class="math inline">\(E(X)\)</span> y <span class="math inline">\(V(X)\)</span> para combinaciones lineales.</p>
+<p><span class="math inline">\(E(Z) = E(\tfrac{\sqrt{n}}{\sigma}[\overline{X}-\mu]) = \tfrac{\sqrt{n}}{\sigma} E(\overline{X}-\mu) = \tfrac{\sqrt{n}}{\sigma} [E(\overline{X})-E(\mu)] = \tfrac{\sqrt{n}}{\sigma} [\mu-\mu] = 0\)</span></p>
+<p><span class="math inline">\(V(Z) = V(\tfrac{\sqrt{n}}{\sigma}[\overline{X}-\mu]) = \tfrac{n}{\sigma^2} V(\overline{X}-\mu) = \tfrac{n}{\sigma^2} V(\overline{X}) = \tfrac{n}{\sigma^2} \cdot \tfrac{\sigma^2}{n} = 1\)</span></p>
+<p>Hemos así demostrado que <span class="math inline">\(Z \sim N(0,1)\)</span>. ¿De qué nos sirve esto? La distribución <span class="math inline">\(N(0,1)\)</span> se conoce como <strong>distribución Normal estándar</strong>. Es útil para obtener cuantiles sobre una distribución Normal. Sea <span class="math inline">\(Z_p\)</span> el cuantil que acumula un <span class="math inline">\(100p\%\)</span> del área bajo la curva Normal estándar. Bajo esta definición, resulta que <span class="math inline">\(Z_p\)</span> nos dice cuántos desvíos estándares debemos movernos respecto a la media para obtener el cuantil correspondiente en nuestra variable original: <span class="math inline">\(\overline{X}_p\)</span>.</p>
+<p>Por ejemplo, supongamos que queremos obtener un intervalo de confianza del 95% para la media poblacional. Como se mencionó anteriormente, debemos buscar los cuantiles 2,5% y 97,5%. Para esto podemos obtener <span class="math inline">\(Z_{0.025} = -1,96\)</span> y <span class="math inline">\(Z_{0.975} = 1,96\)</span>. En otras palabras, deberemos movernos 1,96 desvíos estándares por debajo y por encima de la media para obtener el intervalo de confianza deseado.</p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 1</strong></p>
+</div>
+<p>Sea <span class="math inline">\(X\)</span> una v.a. Normal con media desconocida y desvío estándar igual a 10. Se extrae una muestra aleatoria de tamaño 25 y se obtiene una media muestral <span class="math inline">\(\overline{x} = 18\)</span>. Construya un intervalo de confianza del 95% para la media poblacional.</p>
+<p><strong>Solución:</strong> Si <span class="math inline">\(X \sim N(\mu, \sigma=10)\)</span>, luego <span class="math inline">\(\overline{X} \sim N(\mu, \tfrac{10}{\sqrt{25}} = 2)\)</span>.</p>
+<p>En base a cálculos anteriores sabemos que debemos movernos <span class="math inline">\(\pm\)</span> 1,96 desvíos estándares respecto a la media muestral observada. Recordemos que esos desvíos estándares no corresponden a la variable original sino al estadístico que estamos utilizando. Por lo tanto:</p>
+<p><span class="math display">\[IC_{95\%}(\mu) = [18 - 1,96 \cdot 2 \,;\, 18 + 1,96 \cdot 2] = [14,08 \,;\, 21,92]\]</span></p>
+<p>En términos del problema diríamos que: en base a la evidencia muestral, se tiene un 95% de confianza de que la verdadera media poblacional se encuentra entre 14,08 y 21,92.</p>
+</div>
+<p>En líneas generales, la fórmula es la siguiente: <span class="math display">\[IC_{100(1-\alpha)\%}(\theta) = \left[\overline{x} + Z_{\tfrac{\alpha}{2}} \cdot \tfrac{\sigma}{\sqrt{n}} \,;\, \overline{x} + Z_{1-\tfrac{\alpha}{2}} \cdot \tfrac{\sigma}{\sqrt{n}} \right] = \left[\overline{x} - Z_{1-\tfrac{\alpha}{2}} \cdot \tfrac{\sigma}{\sqrt{n}} \,;\, \overline{x} + Z_{1-\tfrac{\alpha}{2}} \cdot \tfrac{\sigma}{\sqrt{n}} \right]\]</span></p>
+<p>Este intervalo está sujeto a las distribuciones muestrales estudiadas en la unidad anterior, por lo que aplican los mismos criterios: si la variable original <span class="math inline">\(X\)</span> es Normal, entonces se puede usar la distribución Normal para calcular el intervalo de confianza, sin importar el tamaño muestral. Si <span class="math inline">\(X\)</span> no es Normal o su distribución es desconocida, ante una muestra grande se puede construir este IC <em>aproximado</em> empleando el Teorema Central del Límite.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Idea clave
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Quizás hayan notado, a partir de la definición anterior, que <span class="math inline">\(Z_{\tfrac{\alpha}{2}} = -Z_{1-\tfrac{\alpha}{2}}\)</span>. Esto se vio en el ejemplo anterior: <span class="math inline">\(Z_{0.025} = -Z_{0.975} = -1,96\)</span>. Esta es una propiedad que cumple la distribución Normal estándar, y una de las razones por las que resulta cómoda para calcular cuantiles: sus cuantiles son simétricos respecto al centro (el percentil 50%).</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Idea clave
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Para calcular percentiles de una distribución Normal estándar podemos usar una función de R: <code>qnorm(p)</code>, donde <code>p</code> es el percentil de interés.</p>
+</div>
+</div>
 
 
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Nótese la negrita en la <span class="math inline">\(\mathbf{x}\)</span>. Esto es para representar el vector de valores muestrales observados: <span class="math inline">\(\mathbf{x} = (x_1, x_2, \cdots, x_n)\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Una vez tomada la muestra, los extremos del intervalo ya no son variables aleatorias sino números fijos. Por lo tanto, cuando esto ocurre la proabbilidad de que el verdadero valor del parámetro esté contenido en el intervalo es 0 ó 1: el intervalo contiene al parámetro, o bien no lo contiene (aunque nunca sabremos en cuál caso nos encontramos).<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
@@ -445,10 +518,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./3_infer.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">3. Inferencia estadística</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./0_conteo.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-title">0. Herramientas de conteo</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./references.html" class="pagination-link">
+        <span class="nav-page-text">Referencias</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

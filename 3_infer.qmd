@@ -333,9 +333,9 @@ Si se seleccionan al azar 3 personas de cada grupo, ¿cuál es la probabilidad d
 
 **Solución:** Siendo $X_1$ la población de atletas federados y $X_2$ la población de corredores aficionados, se quiere calcular $P(\overline{X}_1 > \overline{X}_2) = P(\overline{X}_1 - \overline{X}_2 > 0) = 1 - P(\overline{X}_1 - \overline{X}_2 \leq 0)$.
 
-Para los datos proporcionados, $\mu_1-\mu_2 = -1.5$ y $\tfrac{\sigma_1^2}{n_1} + \tfrac{\sigma_1^2}{n_1} = \tfrac{5}{3}$. Luego: 
+Para los datos proporcionados, $\mu_1-\mu_2 = -1.5$ y $\tfrac{\sigma_1^2}{n_1} + \tfrac{\sigma_1^2}{n_1} = \tfrac{5}{3}$. Luego:
 
-`1 - pnorm(0, mean = -1.5, sd = sqrt(5/3))` = 0.1226391 $\approx$ 12,26\%
+`1 - pnorm(0, mean = -1.5, sd = sqrt(5/3))` = 0.1226391 $\approx$ 12,26%
 :::
 
 ### Distribución de la proporción muestral
@@ -360,5 +360,5 @@ Aproximadamente un cuarto de la población mundial con acceso a internet tiene u
 
 Por lo tanto:
 
-`1 - pnorm(0.4, mean = 0.25, sd = sqrt(0.25*0.75/50))` = 0.007152939 $\approx$ 0,72\%
+`1 - pnorm(0.4, mean = 0.25, sd = sqrt(0.25*0.75/50))` = 0.007152939 $\approx$ 0,72%
 :::

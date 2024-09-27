@@ -1,0 +1,94 @@
+```{r}
+#| echo: FALSE
+#| message: FALSE
+
+library(tidyverse)
+
+contador_ejemplos <- 0
+```
+
+# 4. ICs y Tests de hipótesis
+
+## Introducción
+
+[Próximamente. Perdón por la demora. 🙏]
+
+## Intervalos de Confianza
+
+La estimación puntual se basa en representar una característica de interés mediante los valores observados de una muestra aleatoria. Sin embargo, los estadísticos que usamos como estimadores son variables aleatorias: su valor varía de muestra en muestra. Por lo tanto, nunca tenemos certeza sobre si, para la muestra que obtuvimos, nuestra estimación está o no "cerca" del verdadero valor del parámetro de interés.
+
+Afortunadamente, existe otro tipo de estimación: en lugar de tener un solo número como estimador, podemos tener un rango de valores. La ventaja de este método que permite cuantificar (usando probabilidades) el grado de certeza con el que se espera que el verdadero valor del parámetro se encuentre dentro de dicho rango. Estamos hablando de los *intervalos de confianza*.
+
+Formalmente, una estimación por **intervalo de confianza** para un parámetro $\theta$ se construye a partir de dos funciones $L(\mathbf{x})$ y $U(\mathbf{x})$[^4_tdh-1] y de un valor $\alpha \in (0;1)$, y viene dado por $$IC_{1-\alpha}(\theta) = [L(\mathbf{x}) \,;\, U(\mathbf{x})] \text{ tal que } P(L(\mathbf{x}) \leq \theta \leq U(\mathbf{x})) = 1 - \alpha$$
+
+[^4_tdh-1]: Nótese la negrita en la $\mathbf{x}$. Esto es para representar el vector de valores muestrales observados: $\mathbf{x} = (x_1, x_2, \cdots, x_n)$.
+
+A la hora de realizar una estimación por IC, el valor $1-\alpha$ representará la **confianza** de nuestro intervalo y se puede interpretar como la probabilidad de que el intervalo $[L(\mathbf{x}) \,;\, U(\mathbf{x})]$ incluya al verdadero valor del parámetro *antes de extraer la muestra*.[^4_tdh-2] Otra interpretación posible es que, si se tomaran reiteradas muestras de la población bajo estudio y consecuentemente se construyeran múltiples intervalos de confianza, es de esperar que $\theta$ esté contenido en el $100(1-\alpha)\%$ de ellos.
+
+[^4_tdh-2]: Una vez tomada la muestra, los extremos del intervalo ya no son variables aleatorias sino números fijos. Por lo tanto, cuando esto ocurre la proabbilidad de que el verdadero valor del parámetro esté contenido en el intervalo es 0 ó 1: el intervalo contiene al parámetro, o bien no lo contiene (aunque nunca sabremos en cuál caso nos encontramos).
+
+Existen varios métodos para construir intervalos de confianza. El más utilizado (y el que veremos en este curso) consiste en proponer cuantiles como valores de $L(\mathbf{x})$ y $U(\mathbf{x})$. Dichos cuantiles provienen de la distribución muestral del estadístico que estamos usando para estimar el parámetro.
+
+Por ejemplo, supongamos que queremos estimar la media poblacional mediante la media muestral (hasta ahora esto sería una estimación puntual, como en la unidad anterior). Sabemos que la distribución muestral de dicho estadístico es Normal (ya sea exacta o aproximadamente, dependiendo de si la variable original es Normal o si debemos recurrir al Teorema Central del Límite). La campana Normal correspondiente estaría centrada en $\mu$, pero este valor lo desconocemos. Sin embargo, si tomamos a la media muestral observada como nuestra mejor aproximación de $\mu$ (o sea, $\hat{\mu} = \overline{x}$) entonces podemos concebir una curva Normal empírica centrada en este valor. Si quisiéramos constuir un intervalo con una confianza del 95%, deberíamos tomar los cuantiles 2,5% y 97,5%, de modo que el intervalo esté compuesto por el 95% central de la campana.
+
+![Ilustración de un intervalo de confianza del 95% para la media poblacional.](img/ci_mean.jpg){#fig-meanci}
+
+::: callout-note
+#### Nota
+
+Nótese cómo el uso de las distribuciones muestrales se torna casi opuesto entre la teoría (Unidad 3) y la práctica (Unidad 4). En un entorno teórico, conocemos el valor del parámetro poblacional e hipotetizamos sobre qué ocurriría cuando eventualmente tomemos una muestra, calculando la probabilidad de que nuestro estimador tome un valor dentro de un cierto intervalo: $P(a \leq \hat{\theta} \leq b)$. En la práctica, sin embargo, el proceso es el inverso: el valor del estimador muestral es lo que se conoce, y se calcula la probabilidad de que el parámetro poblacional tome un valor dentro de un cierto intervalo.
+:::
+
+### IC para la media de una población Normal ($\mu$)
+
+Sea $X_1, X_2, \cdots, X_n$ una muestra aleatoria de tamaño $n$ extraída de una población con distribución $N(\mu,\sigma)$. Sabemos que la media muestral también tiene distribución Normal. Entonces podemos utilizar lo siguiente:
+
+$$\overline{X} \sim N\left( \mu, \frac{\sigma}{\sqrt{n}} \right) \implies Z = \frac{\overline{X}-\mu}{\sigma/\sqrt{n}} \sim N(0,1)$$
+
+Lo anterior es fácilmente demostrable. Para empezar, cualquier combinación lineal de una variable Normal es a su vez una variable Normal. Como $Z$ es una combinación lineal de $\overline{X}$ y $\overline{X}$ es Normal entonces $Z$ también es una variable Normal. ¿Cómo podríamos deducir la Esperanza y Variancia de esta nueva variable aleatoria? Utilizando propiedades de $E(X)$ y $V(X)$ para combinaciones lineales.
+
+$E(Z) = E(\tfrac{\sqrt{n}}{\sigma}[\overline{X}-\mu]) = \tfrac{\sqrt{n}}{\sigma} E(\overline{X}-\mu) = \tfrac{\sqrt{n}}{\sigma} [E(\overline{X})-E(\mu)] = \tfrac{\sqrt{n}}{\sigma} [\mu-\mu] = 0$
+
+$V(Z) = V(\tfrac{\sqrt{n}}{\sigma}[\overline{X}-\mu]) = \tfrac{n}{\sigma^2} V(\overline{X}-\mu) = \tfrac{n}{\sigma^2} V(\overline{X}) = \tfrac{n}{\sigma^2} \cdot \tfrac{\sigma^2}{n} = 1$
+
+Hemos así demostrado que $Z \sim N(0,1)$. ¿De qué nos sirve esto? La distribución $N(0,1)$ se conoce como **distribución Normal estándar**. Es útil para obtener cuantiles sobre una distribución Normal. Sea $Z_p$ el cuantil que acumula un $100p\%$ del área bajo la curva Normal estándar. Bajo esta definición, resulta que $Z_p$ nos dice cuántos desvíos estándares debemos movernos respecto a la media para obtener el cuantil correspondiente en nuestra variable original: $\overline{X}_p$.
+
+Por ejemplo, supongamos que queremos obtener un intervalo de confianza del 95% para la media poblacional. Como se mencionó anteriormente, debemos buscar los cuantiles 2,5% y 97,5%. Para esto podemos obtener $Z_{0.025} = -1,96$ y $Z_{0.975} = 1,96$. En otras palabras, deberemos movernos 1,96 desvíos estándares por debajo y por encima de la media para obtener el intervalo de confianza deseado.
+
+::: {.examplebox data-latex=""}
+```{r}
+#| echo: FALSE
+contador_ejemplos <- contador_ejemplos + 1
+```
+
+::: {.center data-latex=""}
+**Ejemplo `r contador_ejemplos`**
+:::
+
+Sea $X$ una v.a. Normal con media desconocida y desvío estándar igual a 10. Se extrae una muestra aleatoria de tamaño 25 y se obtiene una media muestral $\overline{x} = 18$. Construya un intervalo de confianza del 95% para la media poblacional.
+
+**Solución:** Si $X \sim N(\mu, \sigma=10)$, luego $\overline{X} \sim N(\mu, \tfrac{10}{\sqrt{25}} = 2)$.
+
+En base a cálculos anteriores sabemos que debemos movernos $\pm$ 1,96 desvíos estándares respecto a la media muestral observada. Recordemos que esos desvíos estándares no corresponden a la variable original sino al estadístico que estamos utilizando. Por lo tanto:
+
+$$IC_{95\%}(\mu) = [18 - 1,96 \cdot 2 \,;\, 18 + 1,96 \cdot 2] = [14,08 \,;\, 21,92]$$
+
+En términos del problema diríamos que: en base a la evidencia muestral, se tiene un 95% de confianza de que la verdadera media poblacional se encuentra entre 14,08 y 21,92.
+:::
+
+En líneas generales, la fórmula es la siguiente:
+$$IC_{100(1-\alpha)\%}(\theta) = \left[\overline{x} + Z_{\tfrac{\alpha}{2}} \cdot \tfrac{\sigma}{\sqrt{n}} \,;\, \overline{x} + Z_{1-\tfrac{\alpha}{2}} \cdot \tfrac{\sigma}{\sqrt{n}} \right] = \left[\overline{x} - Z_{1-\tfrac{\alpha}{2}} \cdot \tfrac{\sigma}{\sqrt{n}} \,;\, \overline{x} + Z_{1-\tfrac{\alpha}{2}} \cdot \tfrac{\sigma}{\sqrt{n}} \right]$$
+
+Este intervalo está sujeto a las distribuciones muestrales estudiadas en la unidad anterior, por lo que aplican los mismos criterios: si la variable original $X$ es Normal, entonces se puede usar la distribución Normal para calcular el intervalo de confianza, sin importar el tamaño muestral. Si $X$ no es Normal o su distribución es desconocida, ante una muestra grande se puede construir este IC *aproximado* empleando el Teorema Central del Límite.
+
+::: callout-tip
+#### Idea clave
+
+Quizás hayan notado, a partir de la definición anterior, que $Z_{\tfrac{\alpha}{2}} = -Z_{1-\tfrac{\alpha}{2}}$. Esto se vio en el ejemplo anterior: $Z_{0.025} = -Z_{0.975} = -1,96$. Esta es una propiedad que cumple la distribución Normal estándar, y una de las razones por las que resulta cómoda para calcular cuantiles: sus cuantiles son simétricos respecto al centro (el percentil 50%).
+:::
+
+::: callout-tip
+#### Idea clave
+
+Para calcular percentiles de una distribución Normal estándar podemos usar una función de R: `qnorm(p)`, donde `p` es el percentil de interés.
+:::
