@@ -311,7 +311,7 @@ Para pensar: ¿el último álbum cumpliría las condiciones de *muestra aleatori
 
 Supongamos ahora que tenemos dos muestras aleatorias extraídas de dos poblaciones $X_1$ y $X_2$ (no necesariamente Normales), de tamaños $n_1$ y $n_2$ respectivamente, e independientes entre sí.
 
-Por lo demostrado anteriormente, sabemos que si $n_1$ y $n_2$ son suficientemente grandes (mayores a 30), la media de cada muestra tiene distribución Normal. En consecuencia, la distyribución de la diferencia de medias es:
+Por lo demostrado anteriormente, sabemos que si $n_1$ y $n_2$ son suficientemente grandes (mayores a 30), la media de cada muestra tiene distribución Normal. En consecuencia, la distribución de la diferencia de medias es:
 
 $$\overline{X}_1 - \overline{X}_2 \stackrel{TCL}{\sim} N \left( \mu_1 - \mu_2 \,;\, \frac{\sigma^2_1}{n_1} + \frac{\sigma^2_2}{n_2} \right)$$
 
@@ -354,7 +354,7 @@ contador_ejemplos <- contador_ejemplos + 1
 **Ejemplo `r contador_ejemplos`**
 :::
 
-Aproximadamente un cuarto de la población mundial con acceso a internet tiene una cuenta de Instagram. Si se extrae una muestra de 50 personas a partir de dicha población, ¿cuál es la probabilidad de que al menos 40 de ellas tengan una cuenta de Instagram?
+Aproximadamente un cuarto de la población mundial con acceso a internet tiene una cuenta de Instagram. Si se extrae una muestra de 50 personas a partir de dicha población, ¿cuál es la probabilidad de que al menos 20 de ellas tengan una cuenta de Instagram?
 
 **Solución:** Sea $X$ la variable "posesión de una cuenta de Instagram" (sólo puede tomar como valores "sí" o "no"). Luego, $p$ es la verdadera proporción de éxitos (en este caso, $p = 0.25$). A su vez, $\hat{p}$ es la proporción muestral de éxitos. Se pretende calcular $P(\hat{p} > 0.4) = 1 - P(\hat{p} \leq 0.4)$. Como la muestra extraída es grande, por TCL sabemos que $$\hat{p} \stackrel{TCL}{\sim} N \left( 0.25 \,;\, \frac{0.25 \times 0.75}{50} \right)$$
 

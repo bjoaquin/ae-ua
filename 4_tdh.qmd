@@ -11,7 +11,15 @@ contador_ejemplos <- 0
 
 ## Introducción
 
-[Próximamente. Perdón por la demora. 🙏]
+Un día a principios de la década de 1920, Ronald Fisher, un reconocido estadístico, se encontró en una situación peculiar: le preparó una taza de té a una compañera de trabajo y ella la rechazó por haber servido la leche antes que el té. Fisher argumentó que el orden en el que se servían los líquidos no tenía importancia, pero ella estaba fuertemente en desacuerdo: de hecho, se jactaba de poder probar una taza de té y decir si se había servido primero la leche o el té.
+
+Motivado por la curiosa situación y por su formación profesional, Fisher se propuso diseñar un experimento para poner a prueba la supuesta habilidad de su compañera. Preparó ocho tazas de té: cuatro donde se había servido primero la leche y cuatro donde se había servido primero el té. En orden aleatorio, le hizo probar las tazas a su compañera, una por una, mientras ella señalaba para cada una su predicción. Cuando el experimento terminó, la mujer había podido etiquetar las ocho tazas correctamente. [@fisher]
+
+Fisher estaba sorprendido, pero aún había un pensamiento del que no podía desprenderse: existía la posibilidad de que la mujer estuviese adivinando cómo fue preparada cada taza, con la inesperada fortuna de haber acertado en todos los casos. ¿Cuál era la probabilidad de dicho caso? Aplicando la distribución hipergeométrica, puede demostrarse que dicha probabilidad es 1,4%. En otras palabras, era poco probable que la mujer estuviese adivinando: la evidencia muestral sugería que realmente podía percibir sabores distintos entre las preparaciones.
+
+Este simple experimento sentó las bases para lo que hoy se conoce como "pruebas de hipótesis".
+
+El contenido de esta unidad se basa en ese concepto: cómo usar la información muestral para tomar decisiones. Veremos dos manifestaciones de esta idea: intervalos de confianza y tests de hipótesis. Luego veremos las similitudes que comparten ambas herramientas y en qué casos son equivalentes.
 
 ## Intervalos de Confianza
 
@@ -76,8 +84,9 @@ $$IC_{95\%}(\mu) = [18 - 1,96 \cdot 2 \,;\, 18 + 1,96 \cdot 2] = [14,08 \,;\, 21
 En términos del problema diríamos que: en base a la evidencia muestral, se tiene un 95% de confianza de que la verdadera media poblacional se encuentra entre 14,08 y 21,92.
 :::
 
-En líneas generales, la fórmula es la siguiente:
-$$IC_{100(1-\alpha)\%}(\theta) = \left[\overline{x} + Z_{\tfrac{\alpha}{2}} \cdot \tfrac{\sigma}{\sqrt{n}} \,;\, \overline{x} + Z_{1-\tfrac{\alpha}{2}} \cdot \tfrac{\sigma}{\sqrt{n}} \right] = \left[\overline{x} - Z_{1-\tfrac{\alpha}{2}} \cdot \tfrac{\sigma}{\sqrt{n}} \,;\, \overline{x} + Z_{1-\tfrac{\alpha}{2}} \cdot \tfrac{\sigma}{\sqrt{n}} \right]$$
+En líneas generales, la fórmula es la siguiente: $$IC_{100(1-\alpha)\%}(\mu) = \left[\overline{x} + Z_{\tfrac{\alpha}{2}} \cdot \tfrac{\sigma}{\sqrt{n}} \,;\, \overline{x} + Z_{1-\tfrac{\alpha}{2}} \cdot \tfrac{\sigma}{\sqrt{n}} \right] = \left[\overline{x} - Z_{1-\tfrac{\alpha}{2}} \cdot \tfrac{\sigma}{\sqrt{n}} \,;\, \overline{x} + Z_{1-\tfrac{\alpha}{2}} \cdot \tfrac{\sigma}{\sqrt{n}} \right]$$
+
+$$IC_{100(1-\alpha)\%}(\mu) =  \overline{x} \pm Z_{1-\tfrac{\alpha}{2}} \cdot \tfrac{\sigma}{\sqrt{n}}$$
 
 Este intervalo está sujeto a las distribuciones muestrales estudiadas en la unidad anterior, por lo que aplican los mismos criterios: si la variable original $X$ es Normal, entonces se puede usar la distribución Normal para calcular el intervalo de confianza, sin importar el tamaño muestral. Si $X$ no es Normal o su distribución es desconocida, ante una muestra grande se puede construir este IC *aproximado* empleando el Teorema Central del Límite.
 
@@ -92,3 +101,150 @@ Quizás hayan notado, a partir de la definición anterior, que $Z_{\tfrac{\alpha
 
 Para calcular percentiles de una distribución Normal estándar podemos usar una función de R: `qnorm(p)`, donde `p` es el percentil de interés.
 :::
+
+#### Margen de error
+
+El término $e = Z_{1-\alpha/2} \tfrac{\sigma}{\sqrt{n}}$ es la *semiamplitud* del intervalo y se lo denomina **margen de error**. Naturalmente, un intervalo es más *preciso* mientras menor sea su margen de error.
+
+¿Cómo podemos aumentar la precisión de nuestro intervalo? O, equivalentemente, ¿cómo podemos hacer que el término $e$ sea lo más pequeño posible? El margen de error se expresa en función de otros tres valores: $\alpha$, $\sigma$ y $n$. Podemos hacer las siguientes observaciones:
+
+* $\alpha$: representa el complemento de la confianza del intervalo. Para disminuir $e$ en función de $\alpha$ habría que lograr que el factor $Z_{1-\alpha/2}$ sea lo más pequeño posible. En el caso extremo donde $\alpha=1$ se tiene que $1-\alpha/2 = 0.5$ y $Z_{0.5}=0$, porque el percentil 50% de la distribución Normal estándar es el punto medio de la campana, o sea, su Esperanza. En conclusión, aumentar el valor de $\alpha$ (o reducir el valor de $1-\alpha$) disminuye el margen de error.
+
+* $\sigma$: representa la variabilidad de nuestra variable original $X$. Este número no lo elegimos: es intrínseco a la variable. Por lo tanto, no podemos utilizarlo para reducir el margen de error.
+
+* $n$: representa el tamaño muestral. Se encuentra en el denominador del término $e$, por lo que, mientras mayor sea, menor será el error.
+
+En conclusión, para aumentar la precisión de nuestro intervalo podemos:
+
+* disminuir la confianza: $\downarrow \text{confianza} \implies \downarrow \text{error} \implies \uparrow \text{precisión}$.
+* aumentar el tamaño muestral: $\uparrow n \implies \downarrow \text{error} \implies \uparrow \text{precisión}$.
+
+La relación inversa entre confianza y precisión suele traer confusión. Una buena forma de recordarlo es la siguiente: si decimos algo como "Lionel Messi se encuentra actualmente en el continente americano", la ambigüedad de nuestra afirmación (o, en otras palabras, la poca precisión que estamos dando) nos permite tener una alta confianza de que sea cierta. En el otro extremo, si somos altamente específicos y decimos algo como "Lionel Messi está en la esquina de Zeballos y Ayacucho", estamos siendo muy precisos, pero la chance de que esto sea cierto es muy baja y por lo tanto nuestra confianza también lo sería.
+
+#### Determinación del tamaño muestral
+
+Como el error de nuestro intervalo es función de la confianza y el tamaño muestral, podríamos *a priori* optar por un tamaño muestral que nos dé una amplitud deseada: por ejemplo, $\pm$ 5. ¿Cómo calculamos dicho valor de $n$? Simplemente debemos tomar la fórmula del margen de error y despejar $n$.
+
+$$e = Z_{1-\alpha/2} \frac{\sigma}{\sqrt{n}} \implies n = \left( Z_{1-\alpha/2} \frac{\sigma}{e} \right)^2$$
+
+::: {.examplebox data-latex=""}
+```{r}
+#| echo: FALSE
+contador_ejemplos <- contador_ejemplos + 1
+```
+
+::: {.center data-latex=""}
+**Ejemplo `r contador_ejemplos`**
+:::
+
+Se pretende estimar por intervalo de confianza el tiempo medio de espera para el colectivo 103 rojo en la esquina de Paraguay e Ituzaingó. Se asume que dicha variable es Normal, con un desvío estándar de 11 minutos. Además, se pretende usar una confianza del 95%.
+
+Para lograr dicha estimación, nuestra muestra estará conformada por $n$ personas que reclutaremos para que vayan a la esquina designada en un día y horario elegido al azar, registrando cada una de ellas el tiempo que transcurre entre que llegan a la parada y el colectivo aparece. ¿Cuántas personas debemos reclutar si pretendemos que nuestro intervalo tenga una amplitud de $\pm$ 5'?
+
+**Solución:** Aplicando la fórmula dada, tenemos que $$n = \left( Z_{1-\alpha/2} \frac{\sigma}{e} \right)^2 = \left( Z_{0.975} \cdot \frac{11}{5} \right)^2 = (1.96 \times 2.2)^2 \approx 18.59$$
+
+En conclusión, necesitamos reclutar al menos 19 personas para construir el intervalo deseado.
+:::
+
+::: callout-warning
+#### Advertencia
+
+En las determinaciones de tamaño de muestra siempre se debe redondear hacia arriba el valor de $n$ obtenido. Por ejemplo, si usando la fórmula obtenemos $n=7,1$ entonces debemos extraer una muestra de al menos 8 individuos.
+:::
+
+::: callout-note
+#### Nota
+
+Por fines didácticos, los conceptos de "margen de error" y "determinación de tamaño muestral" fueron presentados para el caso de la media de una población Normal, pero en realidad aplican a todas las distribuciones muestrales que estudiamos, como las que presentamos a continuación.
+:::
+
+Hasta ahora se presentó el caso de una población Normal con $\sigma$ conocido. ¿Qué pasa si este valor es **desconocido**? Podemos aplicar la distribución muestral estudiada en la unidad anterior, basada en la distribución t-Student.
+
+$$IC_{100(1-\alpha)\%}(\mu) =  \overline{x} \pm t_{(n-1)\,;\, 1-\tfrac{\alpha}{2}} \cdot \tfrac{s}{\sqrt{n}}$$
+
+Recordemos que el valor $s$ representa el desvío estándar muestral.
+
+Para este caso, la función de R que utilizaremos para obtener el percentil $t_{(n-1)\,;\, p}$ será `qt(p, df = n-1)` siendo `n` nuestro tamaño muestral.
+
+Cuando $\sigma$ es desconocido pero la muestra es lo suficientemente grande, usar la distribución t-Student es indistinto a usar la distribución Normal, por lo que podemos plantear:
+
+$$IC_{100(1-\alpha)\%}(\mu) =  \overline{x} \pm Z_{1-\tfrac{\alpha}{2}} \cdot \tfrac{s}{\sqrt{n}}$$
+
+::: {.examplebox data-latex=""}
+```{r}
+#| echo: FALSE
+contador_ejemplos <- contador_ejemplos + 1
+```
+
+::: {.center data-latex=""}
+**Ejemplo `r contador_ejemplos`**
+:::
+
+Supongamos que la duración de las clases de Análisis Estadístico es una variable con distribución Normal. En las 17 clases que hemos tenido hasta ahora, la duración promedio fue de 97 minutos, con un desvío estándar de 16 minutos.
+
+Con una confianza del 90%, ¿entre qué valores se espera encontrar la verdadera duración media?
+
+**Solución:** estamos ante una variable Normal con $\sigma$ desconocido y una muestra pequeña. Por lo tanto: $$IC_{90\%}(\mu) =  97 \pm t_{16\,;\, 0.95} \cdot \tfrac{16}{\sqrt{17}} = [90.2 \,;\, 103.8]$$
+
+Con una confianza del 90% y en base a la evidencia muestral, se espera que la verdadera duración media de las clases de Análisis Estadístico se encuentre entre 90 y 104 minutos.
+:::
+
+### IC para la diferencia de medias ($\mu_1 - \mu_2$)
+
+Para el caso de dos poblaciones no necesariamente Normales con desvíos estándares conocidos, se tiene que $$\overline{X}_1 - \overline{X}_2 \stackrel{TCL}{\sim} N \left( \mu_1 - \mu_2 \,;\, \frac{\sigma^2_1}{n_1} + \frac{\sigma^2_2}{n_2} \right)$$
+
+(Nuevamente se recuerda que no es necesario obtener una muestra grande y aplicar el TCL si se sabe de antemano que ambas poblaciones son Normales.)
+
+En consecuencia, el intervalo de confianza para la diferencia de medias está dado por $$IC_{100(1-\alpha)\%}(\mu_1-\mu_2) =  (\overline{x}_1 - \overline{x}_2) \pm Z_{1-\tfrac{\alpha}{2}} \cdot \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}$$
+
+Para el caso de $\sigma_1$ y $\sigma_2$ desconocidos, nos enfocaremos sólo en el escenario donde las muestras son suficientemente grandes ($n_1 \geq 30$ y $n_2 \geq 30$).[^4_tdh-3] En este caso, el intervalo está dado por $$IC_{100(1-\alpha)\%}(\mu_1-\mu_2) =  (\overline{x}_1 - \overline{x}_2) \pm Z_{1-\tfrac{\alpha}{2}} \cdot \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$$
+
+[^4_tdh-3]: Existen distribuciones muestrales para la diferencia de medias con poblaciones Normales, variancias desconocidas y muestras pequeñas. Hemos optado por excluirlas del contenido de esta materia, visto que traen aparejadas cierta complejidad matemática y corresponden a un escenario que no suele darse con frecuencia en la práctica.
+
+::: {.examplebox data-latex=""}
+```{r}
+#| echo: FALSE
+contador_ejemplos <- contador_ejemplos + 1
+```
+
+::: {.center data-latex=""}
+**Ejemplo `r contador_ejemplos`**
+:::
+
+Un fabricante de nafta hace pruebas para determinar el rendimiento relativo de los automóviles, empleando dos aditivos diferentes. Los promedios observados (expresados en kilómetros por litro) son 12,37 para el Aditivo 1 y 15,25 para el Aditivo 2. Los desvíos estándar muestrales fueron 1,6 y 4,8. Dichos valores fueron obtenidos de muestras de 40 y 35 automóviles, respectivamente.
+
+Con una confianza del 95%, ¿considera usted que, en promedio, la nafta rinde menos kilómetros con el Aditivo 1?
+
+**Solución:** No conocemos la distribución de la variable en las poblaciones, pero las muestras son grandes. Por lo tanto, $$IC_{95\%}(\mu_1-\mu_2) =  (12.37-15.25) \pm 1.96 \cdot \sqrt{\frac{1.6}{40} + \frac{4.8}{35}} = [-3.70 \,;\, -2.06]$$
+
+Como el límite superior del intervalo es menor a cero, sería sensato asumir, con una confianza del 95%, que el Aditivo 1 rinde menos que el Aditivo 2.
+:::
+
+### IC para la proporción ($p$)
+
+Para una variable binaria que sólo admite éxitos y fracasos, hemos visto que ante muestras grandes se tiene $$\hat{p} \stackrel{TCL}{\sim} N \left( p \,;\, \frac{p(1-p)}{n} \right)$$
+
+Por lo tanto, para una confianza del $100(1-\alpha)\%$ se tiene que: $$IC_{100(1-\alpha)\%}(p) =  \hat{p} \pm Z_{1-\tfrac{\alpha}{2}} \cdot \sqrt{\frac{\hat{p} (1 - \hat{p})}{n}}$$
+
+::: {.examplebox data-latex=""}
+```{r}
+#| echo: FALSE
+contador_ejemplos <- contador_ejemplos + 1
+```
+
+::: {.center data-latex=""}
+**Ejemplo `r contador_ejemplos`**
+:::
+
+El sindicato que representa a los empleados de las casas de comida rápida de Rosario está considerando una propuesta de ajuste de salarios. De acuerdo con el reglamento del sindicato, por lo menos tres cuartas partes de los miembros del sindicato deben aprobar cualquier oferta para que ésta se lleve a cabo. Una muestra aleatoria de 1590 miembros actuales revela que 1283 de ellos planean aprobar la propuesta.
+
+Determine el IC del 95% para la proporción de miembros a favor de la propuesta. En base a esta muestra, ¿podría concluir que la propuesta será eventualmente aprobada?
+
+**Solución:** En primer lugar, la proporción muestral de aprobación es $\hat{p} = \tfrac{1283}{1590} \approx 0,807$. Luego, el IC está dado por $$IC_{95\%}(p) =  0.807 \pm 1.96 \cdot \sqrt{\frac{0.807 \cdot  0.193}{1590}} = 0.807 \pm 0.019 = [0.788 \,;\, 0.826]$$
+
+Como el límite inferior del intervalo supera las tres cuartas partes, sería sensato asumir que la propuesta será aprobada.
+:::
+
+## Tests de Hipótesis
+
+[Próximamente.]

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -57,8 +57,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "resultados adicionales en este documento",
     "search-clear-button-title": "Borrar",
     "search-detached-cancel-button-title": "Cancelar",
-    "search-submit-button-title": "Enviar",
-    "search-label": "Buscar"
+    "search-submit-button-title": "Enviar"
   }
 }</script>
 
@@ -80,7 +79,7 @@ ul.task-list li input[type="checkbox"] {
       <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./3_infer.html"><span class="chapter-title">3. Inferencia estadística</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -430,7 +429,7 @@ Nota
 <section id="distribución-de-la-diferencia-de-medias" class="level3">
 <h3 class="anchored" data-anchor-id="distribución-de-la-diferencia-de-medias">Distribución de la diferencia de medias</h3>
 <p>Supongamos ahora que tenemos dos muestras aleatorias extraídas de dos poblaciones <span class="math inline">\(X_1\)</span> y <span class="math inline">\(X_2\)</span> (no necesariamente Normales), de tamaños <span class="math inline">\(n_1\)</span> y <span class="math inline">\(n_2\)</span> respectivamente, e independientes entre sí.</p>
-<p>Por lo demostrado anteriormente, sabemos que si <span class="math inline">\(n_1\)</span> y <span class="math inline">\(n_2\)</span> son suficientemente grandes (mayores a 30), la media de cada muestra tiene distribución Normal. En consecuencia, la distyribución de la diferencia de medias es:</p>
+<p>Por lo demostrado anteriormente, sabemos que si <span class="math inline">\(n_1\)</span> y <span class="math inline">\(n_2\)</span> son suficientemente grandes (mayores a 30), la media de cada muestra tiene distribución Normal. En consecuencia, la distribución de la diferencia de medias es:</p>
 <p><span class="math display">\[\overline{X}_1 - \overline{X}_2 \stackrel{TCL}{\sim} N \left( \mu_1 - \mu_2 \,;\, \frac{\sigma^2_1}{n_1} + \frac{\sigma^2_2}{n_2} \right)\]</span></p>
 <p>En el caso en que las poblaciones de las que se extrae cada una de las muestras aleatorias sean Normales, la distribución de la diferencia de medias será Normal sin importar los tamaños muestrales.</p>
 <div class="examplebox">
@@ -452,7 +451,7 @@ Nota
 <div class="center">
 <p><strong>Ejemplo 8</strong></p>
 </div>
-<p>Aproximadamente un cuarto de la población mundial con acceso a internet tiene una cuenta de Instagram. Si se extrae una muestra de 50 personas a partir de dicha población, ¿cuál es la probabilidad de que al menos 40 de ellas tengan una cuenta de Instagram?</p>
+<p>Aproximadamente un cuarto de la población mundial con acceso a internet tiene una cuenta de Instagram. Si se extrae una muestra de 50 personas a partir de dicha población, ¿cuál es la probabilidad de que al menos 20 de ellas tengan una cuenta de Instagram?</p>
 <p><strong>Solución:</strong> Sea <span class="math inline">\(X\)</span> la variable “posesión de una cuenta de Instagram” (sólo puede tomar como valores “sí” o “no”). Luego, <span class="math inline">\(p\)</span> es la verdadera proporción de éxitos (en este caso, <span class="math inline">\(p = 0.25\)</span>). A su vez, <span class="math inline">\(\hat{p}\)</span> es la proporción muestral de éxitos. Se pretende calcular <span class="math inline">\(P(\hat{p} &gt; 0.4) = 1 - P(\hat{p} \leq 0.4)\)</span>. Como la muestra extraída es grande, por TCL sabemos que <span class="math display">\[\hat{p} \stackrel{TCL}{\sim} N \left( 0.25 \,;\, \frac{0.25 \times 0.75}{50} \right)\]</span></p>
 <p>Por lo tanto:</p>
 <p><code>1 - pnorm(0.4, mean = 0.25, sd = sqrt(0.25*0.75/50))</code> = 0.007152939 <span class="math inline">\(\approx\)</span> 0,72%</p>

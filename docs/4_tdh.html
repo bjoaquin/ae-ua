@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -57,8 +76,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "resultados adicionales en este documento",
     "search-clear-button-title": "Borrar",
     "search-detached-cancel-button-title": "Cancelar",
-    "search-submit-button-title": "Enviar",
-    "search-label": "Buscar"
+    "search-submit-button-title": "Enviar"
   }
 }</script>
 
@@ -80,7 +98,7 @@ ul.task-list li input[type="checkbox"] {
       <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./4_tdh.html"><span class="chapter-title">4. ICs y Tests de hipótesis</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -151,8 +169,15 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción">Introducción</a></li>
   <li><a href="#intervalos-de-confianza" id="toc-intervalos-de-confianza" class="nav-link" data-scroll-target="#intervalos-de-confianza">Intervalos de Confianza</a>
   <ul>
-  <li><a href="#ic-para-la-media-de-una-población-normal-mu" id="toc-ic-para-la-media-de-una-población-normal-mu" class="nav-link" data-scroll-target="#ic-para-la-media-de-una-población-normal-mu">IC para la media de una población Normal (<span class="math inline">\(\mu\)</span>)</a></li>
+  <li><a href="#ic-para-la-media-de-una-población-normal-mu" id="toc-ic-para-la-media-de-una-población-normal-mu" class="nav-link" data-scroll-target="#ic-para-la-media-de-una-población-normal-mu">IC para la media de una población Normal (<span class="math inline">\(\mu\)</span>)</a>
+  <ul class="collapse">
+  <li><a href="#margen-de-error" id="toc-margen-de-error" class="nav-link" data-scroll-target="#margen-de-error">Margen de error</a></li>
+  <li><a href="#determinación-del-tamaño-muestral" id="toc-determinación-del-tamaño-muestral" class="nav-link" data-scroll-target="#determinación-del-tamaño-muestral">Determinación del tamaño muestral</a></li>
   </ul></li>
+  <li><a href="#ic-para-la-diferencia-de-medias-mu_1---mu_2" id="toc-ic-para-la-diferencia-de-medias-mu_1---mu_2" class="nav-link" data-scroll-target="#ic-para-la-diferencia-de-medias-mu_1---mu_2">IC para la diferencia de medias (<span class="math inline">\(\mu_1 - \mu_2\)</span>)</a></li>
+  <li><a href="#ic-para-la-proporción-p" id="toc-ic-para-la-proporción-p" class="nav-link" data-scroll-target="#ic-para-la-proporción-p">IC para la proporción (<span class="math inline">\(p\)</span>)</a></li>
+  </ul></li>
+  <li><a href="#tests-de-hipótesis" id="toc-tests-de-hipótesis" class="nav-link" data-scroll-target="#tests-de-hipótesis">Tests de Hipótesis</a></li>
   </ul>
 </nav>
     </div>
@@ -178,7 +203,11 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="introducción" class="level2">
 <h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
-<p>[Próximamente. Perdón por la demora. 🙏]</p>
+<p>Un día a principios de la década de 1920, Ronald Fisher, un reconocido estadístico, se encontró en una situación peculiar: le preparó una taza de té a una compañera de trabajo y ella la rechazó por haber servido la leche antes que el té. Fisher argumentó que el orden en el que se servían los líquidos no tenía importancia, pero ella estaba fuertemente en desacuerdo: de hecho, se jactaba de poder probar una taza de té y decir si se había servido primero la leche o el té.</p>
+<p>Motivado por la curiosa situación y por su formación profesional, Fisher se propuso diseñar un experimento para poner a prueba la supuesta habilidad de su compañera. Preparó ocho tazas de té: cuatro donde se había servido primero la leche y cuatro donde se había servido primero el té. En orden aleatorio, le hizo probar las tazas a su compañera, una por una, mientras ella señalaba para cada una su predicción. Cuando el experimento terminó, la mujer había podido etiquetar las ocho tazas correctamente. <span class="citation" data-cites="fisher">(<a href="references.html#ref-fisher" role="doc-biblioref">Wikipedia 2024</a>)</span></p>
+<p>Fisher estaba sorprendido, pero aún había un pensamiento del que no podía desprenderse: existía la posibilidad de que la mujer estuviese adivinando cómo fue preparada cada taza, con la inesperada fortuna de haber acertado en todos los casos. ¿Cuál era la probabilidad de dicho caso? Aplicando la distribución hipergeométrica, puede demostrarse que dicha probabilidad es 1,4%. En otras palabras, era poco probable que la mujer estuviese adivinando: la evidencia muestral sugería que realmente podía percibir sabores distintos entre las preparaciones.</p>
+<p>Este simple experimento sentó las bases para lo que hoy se conoce como “pruebas de hipótesis”.</p>
+<p>El contenido de esta unidad se basa en ese concepto: cómo usar la información muestral para tomar decisiones. Veremos dos manifestaciones de esta idea: intervalos de confianza y tests de hipótesis. Luego veremos las similitudes que comparten ambas herramientas y en qué casos son equivalentes.</p>
 </section>
 <section id="intervalos-de-confianza" class="level2">
 <h2 class="anchored" data-anchor-id="intervalos-de-confianza">Intervalos de Confianza</h2>
@@ -226,7 +255,8 @@ Nota
 <p><span class="math display">\[IC_{95\%}(\mu) = [18 - 1,96 \cdot 2 \,;\, 18 + 1,96 \cdot 2] = [14,08 \,;\, 21,92]\]</span></p>
 <p>En términos del problema diríamos que: en base a la evidencia muestral, se tiene un 95% de confianza de que la verdadera media poblacional se encuentra entre 14,08 y 21,92.</p>
 </div>
-<p>En líneas generales, la fórmula es la siguiente: <span class="math display">\[IC_{100(1-\alpha)\%}(\theta) = \left[\overline{x} + Z_{\tfrac{\alpha}{2}} \cdot \tfrac{\sigma}{\sqrt{n}} \,;\, \overline{x} + Z_{1-\tfrac{\alpha}{2}} \cdot \tfrac{\sigma}{\sqrt{n}} \right] = \left[\overline{x} - Z_{1-\tfrac{\alpha}{2}} \cdot \tfrac{\sigma}{\sqrt{n}} \,;\, \overline{x} + Z_{1-\tfrac{\alpha}{2}} \cdot \tfrac{\sigma}{\sqrt{n}} \right]\]</span></p>
+<p>En líneas generales, la fórmula es la siguiente: <span class="math display">\[IC_{100(1-\alpha)\%}(\mu) = \left[\overline{x} + Z_{\tfrac{\alpha}{2}} \cdot \tfrac{\sigma}{\sqrt{n}} \,;\, \overline{x} + Z_{1-\tfrac{\alpha}{2}} \cdot \tfrac{\sigma}{\sqrt{n}} \right] = \left[\overline{x} - Z_{1-\tfrac{\alpha}{2}} \cdot \tfrac{\sigma}{\sqrt{n}} \,;\, \overline{x} + Z_{1-\tfrac{\alpha}{2}} \cdot \tfrac{\sigma}{\sqrt{n}} \right]\]</span></p>
+<p><span class="math display">\[IC_{100(1-\alpha)\%}(\mu) =  \overline{x} \pm Z_{1-\tfrac{\alpha}{2}} \cdot \tfrac{\sigma}{\sqrt{n}}\]</span></p>
 <p>Este intervalo está sujeto a las distribuciones muestrales estudiadas en la unidad anterior, por lo que aplican los mismos criterios: si la variable original <span class="math inline">\(X\)</span> es Normal, entonces se puede usar la distribución Normal para calcular el intervalo de confianza, sin importar el tamaño muestral. Si <span class="math inline">\(X\)</span> no es Normal o su distribución es desconocida, ante una muestra grande se puede construir este IC <em>aproximado</em> empleando el Teorema Central del Límite.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -254,15 +284,126 @@ Idea clave
 <p>Para calcular percentiles de una distribución Normal estándar podemos usar una función de R: <code>qnorm(p)</code>, donde <code>p</code> es el percentil de interés.</p>
 </div>
 </div>
-
-
+<section id="margen-de-error" class="level4">
+<h4 class="anchored" data-anchor-id="margen-de-error">Margen de error</h4>
+<p>El término <span class="math inline">\(e = Z_{1-\alpha/2} \tfrac{\sigma}{\sqrt{n}}\)</span> es la <em>semiamplitud</em> del intervalo y se lo denomina <strong>margen de error</strong>. Naturalmente, un intervalo es más <em>preciso</em> mientras menor sea su margen de error.</p>
+<p>¿Cómo podemos aumentar la precisión de nuestro intervalo? O, equivalentemente, ¿cómo podemos hacer que el término <span class="math inline">\(e\)</span> sea lo más pequeño posible? El margen de error se expresa en función de otros tres valores: <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\sigma\)</span> y <span class="math inline">\(n\)</span>. Podemos hacer las siguientes observaciones:</p>
+<ul>
+<li><p><span class="math inline">\(\alpha\)</span>: representa el complemento de la confianza del intervalo. Para disminuir <span class="math inline">\(e\)</span> en función de <span class="math inline">\(\alpha\)</span> habría que lograr que el factor <span class="math inline">\(Z_{1-\alpha/2}\)</span> sea lo más pequeño posible. En el caso extremo donde <span class="math inline">\(\alpha=1\)</span> se tiene que <span class="math inline">\(1-\alpha/2 = 0.5\)</span> y <span class="math inline">\(Z_{0.5}=0\)</span>, porque el percentil 50% de la distribución Normal estándar es el punto medio de la campana, o sea, su Esperanza. En conclusión, aumentar el valor de <span class="math inline">\(\alpha\)</span> (o reducir el valor de <span class="math inline">\(1-\alpha\)</span>) disminuye el margen de error.</p></li>
+<li><p><span class="math inline">\(\sigma\)</span>: representa la variabilidad de nuestra variable original <span class="math inline">\(X\)</span>. Este número no lo elegimos: es intrínseco a la variable. Por lo tanto, no podemos utilizarlo para reducir el margen de error.</p></li>
+<li><p><span class="math inline">\(n\)</span>: representa el tamaño muestral. Se encuentra en el denominador del término <span class="math inline">\(e\)</span>, por lo que, mientras mayor sea, menor será el error.</p></li>
+</ul>
+<p>En conclusión, para aumentar la precisión de nuestro intervalo podemos:</p>
+<ul>
+<li>disminuir la confianza: <span class="math inline">\(\downarrow \text{confianza} \implies \downarrow \text{error} \implies \uparrow \text{precisión}\)</span>.</li>
+<li>aumentar el tamaño muestral: <span class="math inline">\(\uparrow n \implies \downarrow \text{error} \implies \uparrow \text{precisión}\)</span>.</li>
+</ul>
+<p>La relación inversa entre confianza y precisión suele traer confusión. Una buena forma de recordarlo es la siguiente: si decimos algo como “Lionel Messi se encuentra actualmente en el continente americano”, la ambigüedad de nuestra afirmación (o, en otras palabras, la poca precisión que estamos dando) nos permite tener una alta confianza de que sea cierta. En el otro extremo, si somos altamente específicos y decimos algo como “Lionel Messi está en la esquina de Zeballos y Ayacucho”, estamos siendo muy precisos, pero la chance de que esto sea cierto es muy baja y por lo tanto nuestra confianza también lo sería.</p>
 </section>
+<section id="determinación-del-tamaño-muestral" class="level4">
+<h4 class="anchored" data-anchor-id="determinación-del-tamaño-muestral">Determinación del tamaño muestral</h4>
+<p>Como el error de nuestro intervalo es función de la confianza y el tamaño muestral, podríamos <em>a priori</em> optar por un tamaño muestral que nos dé una amplitud deseada: por ejemplo, <span class="math inline">\(\pm\)</span> 5. ¿Cómo calculamos dicho valor de <span class="math inline">\(n\)</span>? Simplemente debemos tomar la fórmula del margen de error y despejar <span class="math inline">\(n\)</span>.</p>
+<p><span class="math display">\[e = Z_{1-\alpha/2} \frac{\sigma}{\sqrt{n}} \implies n = \left( Z_{1-\alpha/2} \frac{\sigma}{e} \right)^2\]</span></p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 2</strong></p>
+</div>
+<p>Se pretende estimar por intervalo de confianza el tiempo medio de espera para el colectivo 103 rojo en la esquina de Paraguay e Ituzaingó. Se asume que dicha variable es Normal, con un desvío estándar de 11 minutos. Además, se pretende usar una confianza del 95%.</p>
+<p>Para lograr dicha estimación, nuestra muestra estará conformada por <span class="math inline">\(n\)</span> personas que reclutaremos para que vayan a la esquina designada en un día y horario elegido al azar, registrando cada una de ellas el tiempo que transcurre entre que llegan a la parada y el colectivo aparece. ¿Cuántas personas debemos reclutar si pretendemos que nuestro intervalo tenga una amplitud de <span class="math inline">\(\pm\)</span> 5’?</p>
+<p><strong>Solución:</strong> Aplicando la fórmula dada, tenemos que <span class="math display">\[n = \left( Z_{1-\alpha/2} \frac{\sigma}{e} \right)^2 = \left( Z_{0.975} \cdot \frac{11}{5} \right)^2 = (1.96 \times 2.2)^2 \approx 18.59\]</span></p>
+<p>En conclusión, necesitamos reclutar al menos 19 personas para construir el intervalo deseado.</p>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Advertencia
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En las determinaciones de tamaño de muestra siempre se debe redondear hacia arriba el valor de <span class="math inline">\(n\)</span> obtenido. Por ejemplo, si usando la fórmula obtenemos <span class="math inline">\(n=7,1\)</span> entonces debemos extraer una muestra de al menos 8 individuos.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Por fines didácticos, los conceptos de “margen de error” y “determinación de tamaño muestral” fueron presentados para el caso de la media de una población Normal, pero en realidad aplican a todas las distribuciones muestrales que estudiamos, como las que presentamos a continuación.</p>
+</div>
+</div>
+<p>Hasta ahora se presentó el caso de una población Normal con <span class="math inline">\(\sigma\)</span> conocido. ¿Qué pasa si este valor es <strong>desconocido</strong>? Podemos aplicar la distribución muestral estudiada en la unidad anterior, basada en la distribución t-Student.</p>
+<p><span class="math display">\[IC_{100(1-\alpha)\%}(\mu) =  \overline{x} \pm t_{(n-1)\,;\, 1-\tfrac{\alpha}{2}} \cdot \tfrac{s}{\sqrt{n}}\]</span></p>
+<p>Recordemos que el valor <span class="math inline">\(s\)</span> representa el desvío estándar muestral.</p>
+<p>Para este caso, la función de R que utilizaremos para obtener el percentil <span class="math inline">\(t_{(n-1)\,;\, p}\)</span> será <code>qt(p, df = n-1)</code> siendo <code>n</code> nuestro tamaño muestral.</p>
+<p>Cuando <span class="math inline">\(\sigma\)</span> es desconocido pero la muestra es lo suficientemente grande, usar la distribución t-Student es indistinto a usar la distribución Normal, por lo que podemos plantear:</p>
+<p><span class="math display">\[IC_{100(1-\alpha)\%}(\mu) =  \overline{x} \pm Z_{1-\tfrac{\alpha}{2}} \cdot \tfrac{s}{\sqrt{n}}\]</span></p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 3</strong></p>
+</div>
+<p>Supongamos que la duración de las clases de Análisis Estadístico es una variable con distribución Normal. En las 17 clases que hemos tenido hasta ahora, la duración promedio fue de 97 minutos, con un desvío estándar de 16 minutos.</p>
+<p>Con una confianza del 90%, ¿entre qué valores se espera encontrar la verdadera duración media?</p>
+<p><strong>Solución:</strong> estamos ante una variable Normal con <span class="math inline">\(\sigma\)</span> desconocido y una muestra pequeña. Por lo tanto: <span class="math display">\[IC_{90\%}(\mu) =  97 \pm t_{16\,;\, 0.95} \cdot \tfrac{16}{\sqrt{17}} = [90.2 \,;\, 103.8]\]</span></p>
+<p>Con una confianza del 90% y en base a la evidencia muestral, se espera que la verdadera duración media de las clases de Análisis Estadístico se encuentre entre 90 y 104 minutos.</p>
+</div>
+</section>
+</section>
+<section id="ic-para-la-diferencia-de-medias-mu_1---mu_2" class="level3">
+<h3 class="anchored" data-anchor-id="ic-para-la-diferencia-de-medias-mu_1---mu_2">IC para la diferencia de medias (<span class="math inline">\(\mu_1 - \mu_2\)</span>)</h3>
+<p>Para el caso de dos poblaciones no necesariamente Normales con desvíos estándares conocidos, se tiene que <span class="math display">\[\overline{X}_1 - \overline{X}_2 \stackrel{TCL}{\sim} N \left( \mu_1 - \mu_2 \,;\, \frac{\sigma^2_1}{n_1} + \frac{\sigma^2_2}{n_2} \right)\]</span></p>
+<p>(Nuevamente se recuerda que no es necesario obtener una muestra grande y aplicar el TCL si se sabe de antemano que ambas poblaciones son Normales.)</p>
+<p>En consecuencia, el intervalo de confianza para la diferencia de medias está dado por <span class="math display">\[IC_{100(1-\alpha)\%}(\mu_1-\mu_2) =  (\overline{x}_1 - \overline{x}_2) \pm Z_{1-\tfrac{\alpha}{2}} \cdot \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}\]</span></p>
+<p>Para el caso de <span class="math inline">\(\sigma_1\)</span> y <span class="math inline">\(\sigma_2\)</span> desconocidos, nos enfocaremos sólo en el escenario donde las muestras son suficientemente grandes (<span class="math inline">\(n_1 \geq 30\)</span> y <span class="math inline">\(n_2 \geq 30\)</span>).<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> En este caso, el intervalo está dado por <span class="math display">\[IC_{100(1-\alpha)\%}(\mu_1-\mu_2) =  (\overline{x}_1 - \overline{x}_2) \pm Z_{1-\tfrac{\alpha}{2}} \cdot \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}\]</span></p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 4</strong></p>
+</div>
+<p>Un fabricante de nafta hace pruebas para determinar el rendimiento relativo de los automóviles, empleando dos aditivos diferentes. Los promedios observados (expresados en kilómetros por litro) son 12,37 para el Aditivo 1 y 15,25 para el Aditivo 2. Los desvíos estándar muestrales fueron 1,6 y 4,8. Dichos valores fueron obtenidos de muestras de 40 y 35 automóviles, respectivamente.</p>
+<p>Con una confianza del 95%, ¿considera usted que, en promedio, la nafta rinde menos kilómetros con el Aditivo 1?</p>
+<p><strong>Solución:</strong> No conocemos la distribución de la variable en las poblaciones, pero las muestras son grandes. Por lo tanto, <span class="math display">\[IC_{95\%}(\mu_1-\mu_2) =  (12.37-15.25) \pm 1.96 \cdot \sqrt{\frac{1.6}{40} + \frac{4.8}{35}} = [-3.70 \,;\, -2.06]\]</span></p>
+<p>Como el límite superior del intervalo es menor a cero, sería sensato asumir, con una confianza del 95%, que el Aditivo 1 rinde menos que el Aditivo 2.</p>
+</div>
+</section>
+<section id="ic-para-la-proporción-p" class="level3">
+<h3 class="anchored" data-anchor-id="ic-para-la-proporción-p">IC para la proporción (<span class="math inline">\(p\)</span>)</h3>
+<p>Para una variable binaria que sólo admite éxitos y fracasos, hemos visto que ante muestras grandes se tiene <span class="math display">\[\hat{p} \stackrel{TCL}{\sim} N \left( p \,;\, \frac{p(1-p)}{n} \right)\]</span></p>
+<p>Por lo tanto, para una confianza del <span class="math inline">\(100(1-\alpha)\%\)</span> se tiene que: <span class="math display">\[IC_{100(1-\alpha)\%}(p) =  \hat{p} \pm Z_{1-\tfrac{\alpha}{2}} \cdot \sqrt{\frac{\hat{p} (1 - \hat{p})}{n}}\]</span></p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 5</strong></p>
+</div>
+<p>El sindicato que representa a los empleados de las casas de comida rápida de Rosario está considerando una propuesta de ajuste de salarios. De acuerdo con el reglamento del sindicato, por lo menos tres cuartas partes de los miembros del sindicato deben aprobar cualquier oferta para que ésta se lleve a cabo. Una muestra aleatoria de 1590 miembros actuales revela que 1283 de ellos planean aprobar la propuesta.</p>
+<p>Determine el IC del 95% para la proporción de miembros a favor de la propuesta. En base a esta muestra, ¿podría concluir que la propuesta será eventualmente aprobada?</p>
+<p><strong>Solución:</strong> En primer lugar, la proporción muestral de aprobación es <span class="math inline">\(\hat{p} = \tfrac{1283}{1590} \approx 0,807\)</span>. Luego, el IC está dado por <span class="math display">\[IC_{95\%}(p) =  0.807 \pm 1.96 \cdot \sqrt{\frac{0.807 \cdot  0.193}{1590}} = 0.807 \pm 0.019 = [0.788 \,;\, 0.826]\]</span></p>
+<p>Como el límite inferior del intervalo supera las tres cuartas partes, sería sensato asumir que la propuesta será aprobada.</p>
+</div>
+</section>
+</section>
+<section id="tests-de-hipótesis" class="level2">
+<h2 class="anchored" data-anchor-id="tests-de-hipótesis">Tests de Hipótesis</h2>
+<p>[Próximamente.]</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-fisher" class="csl-entry" role="listitem">
+Wikipedia. 2024. <span>«Lady tasting tea - Wikipedia, The Free Encyclopedia»</span>. <a href="https://en.wikipedia.org/wiki/Lady_tasting_tea">https://en.wikipedia.org/wiki/Lady_tasting_tea</a>.
+</div>
+</div>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
 <li id="fn1"><p>Nótese la negrita en la <span class="math inline">\(\mathbf{x}\)</span>. Esto es para representar el vector de valores muestrales observados: <span class="math inline">\(\mathbf{x} = (x_1, x_2, \cdots, x_n)\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Una vez tomada la muestra, los extremos del intervalo ya no son variables aleatorias sino números fijos. Por lo tanto, cuando esto ocurre la proabbilidad de que el verdadero valor del parámetro esté contenido en el intervalo es 0 ó 1: el intervalo contiene al parámetro, o bien no lo contiene (aunque nunca sabremos en cuál caso nos encontramos).<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Existen distribuciones muestrales para la diferencia de medias con poblaciones Normales, variancias desconocidas y muestras pequeñas. Hemos optado por excluirlas del contenido de esta materia, visto que traen aparejadas cierta complejidad matemática y corresponden a un escenario que no suele darse con frecuencia en la práctica.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
