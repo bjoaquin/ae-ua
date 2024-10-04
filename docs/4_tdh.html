@@ -177,7 +177,12 @@ div.csl-indent {
   <li><a href="#ic-para-la-diferencia-de-medias-mu_1---mu_2" id="toc-ic-para-la-diferencia-de-medias-mu_1---mu_2" class="nav-link" data-scroll-target="#ic-para-la-diferencia-de-medias-mu_1---mu_2">IC para la diferencia de medias (<span class="math inline">\(\mu_1 - \mu_2\)</span>)</a></li>
   <li><a href="#ic-para-la-proporción-p" id="toc-ic-para-la-proporción-p" class="nav-link" data-scroll-target="#ic-para-la-proporción-p">IC para la proporción (<span class="math inline">\(p\)</span>)</a></li>
   </ul></li>
-  <li><a href="#tests-de-hipótesis" id="toc-tests-de-hipótesis" class="nav-link" data-scroll-target="#tests-de-hipótesis">Tests de Hipótesis</a></li>
+  <li><a href="#tests-de-hipótesis" id="toc-tests-de-hipótesis" class="nav-link" data-scroll-target="#tests-de-hipótesis">Tests de Hipótesis</a>
+  <ul>
+  <li><a href="#hipótesis" id="toc-hipótesis" class="nav-link" data-scroll-target="#hipótesis">Hipótesis</a></li>
+  <li><a href="#error" id="toc-error" class="nav-link" data-scroll-target="#error">Error</a></li>
+  <li><a href="#tipos-de-error" id="toc-tipos-de-error" class="nav-link" data-scroll-target="#tipos-de-error">Tipos de error</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -389,7 +394,87 @@ Nota
 </section>
 <section id="tests-de-hipótesis" class="level2">
 <h2 class="anchored" data-anchor-id="tests-de-hipótesis">Tests de Hipótesis</h2>
-<p>[Próximamente.]</p>
+<p>En la vida cotidiana es común asumir cosas. Asumimos que la moneda que tenemos en el bolsillo es equilibrada: tiene la misma probabilidad de caer en cara como en cruz. Asumimos que si ahora el cielo está despejado entonces no va a llover en la próxima hora. Asumimos que mañana la Tierra va a seguir girando alrededor del sol. Pero todo esto podría ser falso. ¿Cómo podemos evaluar la “solidez” de estas suposiciones?</p>
+<section id="hipótesis" class="level3">
+<h3 class="anchored" data-anchor-id="hipótesis">Hipótesis</h3>
+<p>Una <strong>hipótesis</strong> es un enunciado acerca de una característica poblacional. Esta característica con frecuencia es desconocida, por lo que nuestra hipótesis puede ser verdadera o falsa. En la teoría estadística se trabaja con dos tipos de hipótesis:</p>
+<ul>
+<li><strong>Hipótesis nula</strong> (<span class="math inline">\(H_0\)</span>): es la creencia convencional, el <em>status quo</em>, lo que se asume por defecto.</li>
+<li><strong>Hipótesis alternativa</strong> (<span class="math inline">\(H_1\)</span>): es aquel enunciado que desafía el <em>status quo</em>, planteando una realidad opuesta a la que propone la hipótesis nula.</li>
+</ul>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 6</strong></p>
+</div>
+<p>Para cada par de hipótesis a continuación, determine cuál sería <span class="math inline">\(H_0\)</span> y cuál sería <span class="math inline">\(H_1\)</span>.</p>
+<ul>
+<li><p>“Los peces vuelan” versus “los peces no vuelan”.</p></li>
+<li><p>“Tomar agua es bueno para la salud” versus “tomar agua es perjudicial para la salud”.</p></li>
+<li><p>“El paciente está sano” versus “el paciente está enfermo”.</p></li>
+</ul>
+<p><strong>Solución:</strong> lo vemos en clase.</p>
+</div>
+<p>Cuando existe una competencia entre estas dos teorías, porque algunas personas creen en la hipótesis nula y otras en la hipótesis alternativa, es común realizar una <strong>prueba de hipótesis</strong>: se utiliza información muestral para intentar decidir cuál es la verdadera. La estadística adopta en estos casos la <strong>presunción de inocencia</strong>: se optará por creer que la hipótesis nula es cierta, a menos que se tenga suficiente información para demostrar lo contrario. Pero ¿cómo podemos demostrar lo que ocurre en una población a través de una muestra? ¿Es infalible este método?</p>
+</section>
+<section id="error" class="level3">
+<h3 class="anchored" data-anchor-id="error">Error</h3>
+<p>Si lanzamos una moneda al aire diez veces y registramos la cara superior, obteniendo 7 caras y 3 cruces, ¿podríamos sospechar que la moneda no está equilibrada? Después de todo, si lo estuviese, sería de esperar que se obtenga “cara” el 50% de las veces, no el 70%. El problema está en que la práctica no refleja fielmente la teoría. Recordemos la definición frecuencial de probabilidad: nos dice que la frecuencia relativa de un evento aleatorio <span class="math inline">\(A\)</span> tenderá a acercarse a <span class="math inline">\(P(A)\)</span> a medida que el número de repeticiones tiende a infinito.</p>
+<p>En la práctica nunca tenemos un número infinito de repeticiones o un tamaño muestral infinito. Debemos inferir mediante un número limitado de observaciones. Por lo tanto, debemos acostumbrarnos al hecho de que el valor de nuestra estimación probablemente no sea una réplica exacta del verdadero parámetro de interés.</p>
+<p>La pregunta del millón es entonces: ¿qué tamaño muestral es suficientemente grande como para saber con certeza si nuestros datos avalan o refutan la hipótesis planteada inicialmente? Lamentablemente, la respuesta es “ninguno”: no hay tamaño muestral que nos dé certeza.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> Sin importar cuán fuerte parezca ser la evidencia muestral (a favor o en contra de una hipótesis), siempre existe la posibilidad de que dicha “evidencia” sea azarosa.</p>
+<ul>
+<li>Podemos entrevistar a mil rosarinos adultos y observar que el 80% de ellos no tiene licencia de conducir, cuando en realidad la verdadera proporción de rosarinos sin licencia de conducir podría ser 10%.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></li>
+</ul>
+<ul>
+<li>Si de una caja opaca que contiene cinco canicas azules y una roja extraemos cien canicas con reposición, existe la posibilidad de que saquemos cien veces la canica roja y nos convenzamos de que la caja contiene sólo canicas rojas.</li>
+</ul>
+<p>En otras palabras, al hacer inferencia estadística siempre existe la posibilidad de cometer un <strong>error</strong>.</p>
+</section>
+<section id="tipos-de-error" class="level3">
+<h3 class="anchored" data-anchor-id="tipos-de-error">Tipos de error</h3>
+<p>Existe una dicotomía en la teoría y otra en la práctica: nuestra suposición inicial (<span class="math inline">\(H_0\)</span>) será cierta o no lo será; y nuestra información muestral respaldará la hipótesis nula o no lo hará. Hay dos posibilidades en la teoría y dos posibilidades en la práctica: en total existen cuatro escenarios posibles en los que podríamos estar parados.</p>
+<div class="flexcenter">
+<div class="half blackborder">
+<table class="table">
+<thead>
+<tr class="header">
+<th>Evidencia muestral</th>
+<th><span class="math inline">\(H_0\)</span> cierta</th>
+<th><span class="math inline">\(H_1\)</span> cierta</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Avala <span class="math inline">\(H_0\)</span></td>
+<td>Ok</td>
+<td>Error tipo II</td>
+</tr>
+<tr class="even">
+<td>Avala <span class="math inline">\(H_1\)</span></td>
+<td>Error tipo I</td>
+<td>Ok</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li><p><strong>Error tipo I</strong> (<span class="math inline">\(e_I\)</span>): sucede cuando rechazamos la hipótesis nula (en base a la evidencia muestral) pero en realidad ésta es verdadera.</p></li>
+<li><p><strong>Error tipo II</strong> (<span class="math inline">\(e_{II}\)</span>): sucede cuando no rechazamos la hipótesis nula pero en realidad deberíamos.</p></li>
+</ul>
+<p>Dependiendo del problema, un error puede ser más peligroso de cometer que el otro.</p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 7</strong></p>
+</div>
+<p>Para cada par de hipótesis a continuación, determine cuál error es más peligroso de cometer.</p>
+<ul>
+<li><p><span class="math inline">\(H_0) \text{ El paracaídas abre} \qquad H_1) \text{ El paracaídas no abre}\)</span></p></li>
+<li><p><span class="math inline">\(H_0) \text{ El acusado es inocente} \qquad H_1) \text{ El acusado es culpable}\)</span></p></li>
+<li><p><span class="math inline">\(H_0) \text{ El fármaco tiene efectos colaterales} \quad H_1) \text{ El fármaco no tiene efectos colaterales}\)</span></p></li>
+<li><p><span class="math inline">\(H_0) \text{ Va a llover} \qquad H_1) \text{ No va a llover}\)</span></p></li>
+</ul>
+<p><strong>Solución:</strong> lo vemos en clase.</p>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
@@ -398,12 +483,15 @@ Wikipedia. 2024. <span>«Lady tasting tea - Wikipedia, The Free Encyclopedia»</
 </div>
 </div>
 </section>
+</section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
 <li id="fn1"><p>Nótese la negrita en la <span class="math inline">\(\mathbf{x}\)</span>. Esto es para representar el vector de valores muestrales observados: <span class="math inline">\(\mathbf{x} = (x_1, x_2, \cdots, x_n)\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Una vez tomada la muestra, los extremos del intervalo ya no son variables aleatorias sino números fijos. Por lo tanto, cuando esto ocurre la proabbilidad de que el verdadero valor del parámetro esté contenido en el intervalo es 0 ó 1: el intervalo contiene al parámetro, o bien no lo contiene (aunque nunca sabremos en cuál caso nos encontramos).<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>Existen distribuciones muestrales para la diferencia de medias con poblaciones Normales, variancias desconocidas y muestras pequeñas. Hemos optado por excluirlas del contenido de esta materia, visto que traen aparejadas cierta complejidad matemática y corresponden a un escenario que no suele darse con frecuencia en la práctica.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Acá estamos asumiendo que nuestra población es infinita. En el caso de una población finita (por ejemplo: los habitantes de Argentina) podemos tener certeza si el tamaño muestral es igual al tamaño poblacional: <span class="math inline">\(n=N\)</span>. Esto sería equivalente a un censo en el que todos los individuos responden y nadie miente al responder (dos condiciones que difícilmente se dén en la práctica).<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Esto podría darse por falta de representatividad, pero incluso con una muestra perfectamente representativa puede darse este escenario simplemente por mala suerte.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

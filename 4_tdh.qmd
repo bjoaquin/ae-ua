@@ -247,4 +247,94 @@ Como el límite inferior del intervalo supera las tres cuartas partes, sería se
 
 ## Tests de Hipótesis
 
-[Próximamente.]
+En la vida cotidiana es común asumir cosas. Asumimos que la moneda que tenemos en el bolsillo es equilibrada: tiene la misma probabilidad de caer en cara como en cruz. Asumimos que si ahora el cielo está despejado entonces no va a llover en la próxima hora. Asumimos que mañana la Tierra va a seguir girando alrededor del sol. Pero todo esto podría ser falso. ¿Cómo podemos evaluar la "solidez" de estas suposiciones?
+
+### Hipótesis
+
+Una **hipótesis** es un enunciado acerca de una característica poblacional. Esta característica con frecuencia es desconocida, por lo que nuestra hipótesis puede ser verdadera o falsa. En la teoría estadística se trabaja con dos tipos de hipótesis:
+
+* **Hipótesis nula** ($H_0$): es la creencia convencional, el *status quo*, lo que se asume por defecto.
+* **Hipótesis alternativa** ($H_1$): es aquel enunciado que desafía el *status quo*, planteando una realidad opuesta a la que propone la hipótesis nula.
+
+::: {.examplebox data-latex=""}
+```{r}
+#| echo: FALSE
+contador_ejemplos <- contador_ejemplos + 1
+```
+
+::: {.center data-latex=""}
+**Ejemplo `r contador_ejemplos`**
+:::
+
+Para cada par de hipótesis a continuación, determine cuál sería $H_0$ y cuál sería $H_1$.
+
+* "Los peces vuelan" versus "los peces no vuelan".
+
+* "Tomar agua es bueno para la salud" versus "tomar agua es perjudicial para la salud".
+
+* "El paciente está sano" versus "el paciente está enfermo".
+
+**Solución:** lo vemos en clase.
+:::
+
+Cuando existe una competencia entre estas dos teorías, porque algunas personas creen en la hipótesis nula y otras en la hipótesis alternativa, es común realizar una **prueba de hipótesis**: se utiliza información muestral para intentar decidir cuál es la verdadera. La estadística adopta en estos casos la **presunción de inocencia**: se optará por creer que la hipótesis nula es cierta, a menos que se tenga suficiente información para demostrar lo contrario. Pero ¿cómo podemos demostrar lo que ocurre en una población a través de una muestra? ¿Es infalible este método?
+
+### Error
+
+Si lanzamos una moneda al aire diez veces y registramos la cara superior, obteniendo 7 caras y 3 cruces, ¿podríamos sospechar que la moneda no está equilibrada? Después de todo, si lo estuviese, sería de esperar que se obtenga "cara" el 50% de las veces, no el 70%. El problema está en que la práctica no refleja fielmente la teoría. Recordemos la definición frecuencial de probabilidad: nos dice que la frecuencia relativa de un evento aleatorio $A$ tenderá a acercarse a $P(A)$ a medida que el número de repeticiones tiende a infinito.
+
+En la práctica nunca tenemos un número infinito de repeticiones o un tamaño muestral infinito. Debemos inferir mediante un número limitado de observaciones. Por lo tanto, debemos acostumbrarnos al hecho de que el valor de nuestra estimación probablemente no sea una réplica exacta del verdadero parámetro de interés.
+
+La pregunta del millón es entonces: ¿qué tamaño muestral es suficientemente grande como para saber con certeza si nuestros datos avalan o refutan la hipótesis planteada inicialmente? Lamentablemente, la respuesta es "ninguno": no hay tamaño muestral que nos dé certeza.[^4_tdh-4] Sin importar cuán fuerte parezca ser la evidencia muestral (a favor o en contra de una hipótesis), siempre existe la posibilidad de que dicha "evidencia" sea azarosa.
+
+[^4_tdh-4]: Acá estamos asumiendo que nuestra población es infinita. En el caso de una población finita (por ejemplo: los habitantes de Argentina) podemos tener certeza si el tamaño muestral es igual al tamaño poblacional: $n=N$. Esto sería equivalente a un censo en el que todos los individuos responden y nadie miente al responder (dos condiciones que difícilmente se dén en la práctica).
+
+* Podemos entrevistar a mil rosarinos adultos y observar que el 80% de ellos no tiene licencia de conducir, cuando en realidad la verdadera proporción de rosarinos sin licencia de conducir podría ser 10%.[^4_tdh-5]
+
+[^4_tdh-5]: Esto podría darse por falta de representatividad, pero incluso con una muestra perfectamente representativa puede darse este escenario simplemente por mala suerte.
+
+* Si de una caja opaca que contiene cinco canicas azules y una roja extraemos cien canicas con reposición, existe la posibilidad de que saquemos cien veces la canica roja y nos convenzamos de que la caja contiene sólo canicas rojas.
+
+En otras palabras, al hacer inferencia estadística siempre existe la posibilidad de cometer un **error**.
+
+### Tipos de error
+
+Existe una dicotomía en la teoría y otra en la práctica: nuestra suposición inicial ($H_0$) será cierta o no lo será; y nuestra información muestral respaldará la hipótesis nula o no lo hará. Hay dos posibilidades en la teoría y dos posibilidades en la práctica: en total existen cuatro escenarios posibles en los que podríamos estar parados.
+
+::: {.flexcenter data-latex=""}
+::: {.half .blackborder data-latex=""}
+| Evidencia muestral | $H_0$ cierta | $H_1$ cierta  |
+|--------------------|--------------|---------------|
+| Avala $H_0$        | Ok           | Error tipo II |
+| Avala $H_1$        | Error tipo I | Ok            |
+:::
+:::
+
+* **Error tipo I** ($e_I$): sucede cuando rechazamos la hipótesis nula (en base a la evidencia muestral) pero en realidad ésta es verdadera.
+
+* **Error tipo II** ($e_{II}$): sucede cuando no rechazamos la hipótesis nula pero en realidad deberíamos.
+
+Dependiendo del problema, un error puede ser más peligroso de cometer que el otro.
+
+::: {.examplebox data-latex=""}
+```{r}
+#| echo: FALSE
+contador_ejemplos <- contador_ejemplos + 1
+```
+
+::: {.center data-latex=""}
+**Ejemplo `r contador_ejemplos`**
+:::
+
+Para cada par de hipótesis a continuación, determine cuál error es más peligroso de cometer.
+
+* $H_0) \text{ El paracaídas abre} \qquad H_1) \text{ El paracaídas no abre}$
+
+* $H_0) \text{ El acusado es inocente} \qquad H_1) \text{ El acusado es culpable}$
+
+* $H_0) \text{ El fármaco tiene efectos colaterales} \quad H_1) \text{ El fármaco no tiene efectos colaterales}$
+
+* $H_0) \text{ Va a llover} \qquad H_1) \text{ No va a llover}$
+
+**Solución:** lo vemos en clase.
+:::
