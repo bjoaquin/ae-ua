@@ -182,7 +182,13 @@ div.csl-indent {
   <li><a href="#hipótesis" id="toc-hipótesis" class="nav-link" data-scroll-target="#hipótesis">Hipótesis</a></li>
   <li><a href="#error" id="toc-error" class="nav-link" data-scroll-target="#error">Error</a></li>
   <li><a href="#tipos-de-error" id="toc-tipos-de-error" class="nav-link" data-scroll-target="#tipos-de-error">Tipos de error</a></li>
+  <li><a href="#p-value" id="toc-p-value" class="nav-link" data-scroll-target="#p-value">p-value</a></li>
+  <li><a href="#tests-basados-en-observaciones-individuales" id="toc-tests-basados-en-observaciones-individuales" class="nav-link" data-scroll-target="#tests-basados-en-observaciones-individuales">Tests basados en observaciones individuales</a></li>
+  <li><a href="#test-para-la-media-mu" id="toc-test-para-la-media-mu" class="nav-link" data-scroll-target="#test-para-la-media-mu">Test para la media (<span class="math inline">\(\mu\)</span>)</a></li>
+  <li><a href="#test-para-la-diferencia-de-medias-mu_1---mu_2" id="toc-test-para-la-diferencia-de-medias-mu_1---mu_2" class="nav-link" data-scroll-target="#test-para-la-diferencia-de-medias-mu_1---mu_2">Test para la diferencia de medias (<span class="math inline">\(\mu_1 - \mu_2\)</span>)</a></li>
+  <li><a href="#test-para-la-proporción-p" id="toc-test-para-la-proporción-p" class="nav-link" data-scroll-target="#test-para-la-proporción-p">Test para la proporción (<span class="math inline">\(p\)</span>)</a></li>
   </ul></li>
+  <li><a href="#ic-test-de-hipótesis" id="toc-ic-test-de-hipótesis" class="nav-link" data-scroll-target="#ic-test-de-hipótesis">¿IC = Test de hipótesis?</a></li>
   </ul>
 </nav>
     </div>
@@ -412,8 +418,31 @@ Nota
 <li><p>“Tomar agua es bueno para la salud” versus “tomar agua es perjudicial para la salud”.</p></li>
 <li><p>“El paciente está sano” versus “el paciente está enfermo”.</p></li>
 </ul>
-<p><strong>Solución:</strong> lo vemos en clase.</p>
+<p><strong>Solución:</strong></p>
+<ul>
+<li><p><span class="math inline">\(H_0) \text{ Los peces no vuelan} \qquad H_1) \text{ Los peces vuelan}\)</span></p></li>
+<li><p><span class="math inline">\(H_0) \text{ Tomar agua es bueno} \qquad H_1) \text{ Tomar agua es perjudicial}\)</span></p></li>
+<li><p><span class="math inline">\(H_0) \text{ El paciente está sano} \qquad H_1) \text{ El paciente está enfermo}\)</span></p></li>
+</ul>
 </div>
+<p>En la práctica, las hipótesis suelen centrarse en un parámetro poblacional: el peso medio de las cajas de tornillos manufacturadas en cierta fábrica, la proporción de fumadores en Argentina, el tiempo medio de espera entre colectivos de la misma línea, etcétera. De este modo, las hipótesis pasan a ser redactadas con notación matemática.</p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 7</strong></p>
+</div>
+<p>Según el envase, el tubo de papas Pringles tiene un peso neto de 124 gramos. Sin embargo, experiencias previas nos han llevado a sospechar que dicho peso medio es falso: suponemos que en realidad es menor. ¿Cuáles son las hipótesis a probar en este caso?</p>
+<p><strong>Solución:</strong> Sea <span class="math inline">\(X\)</span> el peso de un tubo de papas Pringles y <span class="math inline">\(\mu\)</span> el verdadero peso medio de los tubos (en gramos). Luego: <span class="math display">\[H_0) \; \mu \geq 124 \qquad H_1) \; \mu &lt; 124\]</span></p>
+</div>
+<p>¿Por qué el ejemplo anterior considera el caso <span class="math inline">\(\mu &gt; 124\)</span> como parte de <span class="math inline">\(H_0\)</span> si el envase afirma que es exactamente igual a 124 gramos? Recordemos que las hipótesis deben ser <em>exhaustivas y mutuamente excluyentes</em>; es decir, su unión debe ser el total de casos posibles y su intersección debe ser vacía. Por lo tanto, el caso <span class="math inline">\(\mu &gt; 124\)</span> debe ser parte de alguna de las dos hipótesis. Como en el ejemplo se sospecha (<span class="math inline">\(H_1\)</span>) que el peso medio es menor al estipulado, entonces el caso en cuestión no puede pertenecer a <span class="math inline">\(H_1\)</span> y debe ir a <span class="math inline">\(H_0\)</span>. En otras palabras, un peso medio superior a 124 gramos también se consideraría parte del status quo.</p>
+<p>Dicho esto, hemos visto en cursos anteriores que es posible definir un test donde <span class="math inline">\(H_0\)</span> sólo incluye una igualdad, y todo lo demás está contenido en <span class="math inline">\(H_1\)</span>. Efectivamente existen situaciones prácticas que ameritan esta alternativa.</p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 8</strong></p>
+</div>
+<p>Se tiene una moneda que se sospecha que no es equilibrada. ¿Cómo pueden formularse hipótesis que pongan a prueba validen o refuten esta sospecha?</p>
+<p><strong>Solución:</strong> Sea <span class="math inline">\(X\)</span> una variable binaria cuyo éxito es “la moneda cae en cruz” y cuyo fracaso es “la moneda cae en cara”. Sea <span class="math inline">\(p\)</span> la verdadera proporción de veces que la moneda cae en cruz. Una moneda equilibrada verifica <span class="math inline">\(p=0,5\)</span>. Por lo tanto: <span class="math display">\[H_0) \; p = 0,5 \qquad H_1) \; p \neq 0,5\]</span></p>
+</div>
+<p>Cualquiera sea el caso, debe seguirse la siguiente regla: <strong>la igualdad siempre forma parte de <span class="math inline">\(H_0\)</span></strong>.</p>
 <p>Cuando existe una competencia entre estas dos teorías, porque algunas personas creen en la hipótesis nula y otras en la hipótesis alternativa, es común realizar una <strong>prueba de hipótesis</strong>: se utiliza información muestral para intentar decidir cuál es la verdadera. La estadística adopta en estos casos la <strong>presunción de inocencia</strong>: se optará por creer que la hipótesis nula es cierta, a menos que se tenga suficiente información para demostrar lo contrario. Pero ¿cómo podemos demostrar lo que ocurre en una población a través de una muestra? ¿Es infalible este método?</p>
 </section>
 <section id="error" class="level3">
@@ -464,17 +493,240 @@ Nota
 <p>Dependiendo del problema, un error puede ser más peligroso de cometer que el otro.</p>
 <div class="examplebox">
 <div class="center">
-<p><strong>Ejemplo 7</strong></p>
+<p><strong>Ejemplo 9</strong></p>
 </div>
 <p>Para cada par de hipótesis a continuación, determine cuál error es más peligroso de cometer.</p>
 <ul>
 <li><p><span class="math inline">\(H_0) \text{ El paracaídas abre} \qquad H_1) \text{ El paracaídas no abre}\)</span></p></li>
 <li><p><span class="math inline">\(H_0) \text{ El acusado es inocente} \qquad H_1) \text{ El acusado es culpable}\)</span></p></li>
-<li><p><span class="math inline">\(H_0) \text{ El fármaco tiene efectos colaterales} \quad H_1) \text{ El fármaco no tiene efectos colaterales}\)</span></p></li>
-<li><p><span class="math inline">\(H_0) \text{ Va a llover} \qquad H_1) \text{ No va a llover}\)</span></p></li>
+<li><p><span class="math inline">\(H_0) \text{ El fármaco no tiene efectos colaterales} \quad H_1) \text{ El fármaco tiene efectos colaterales}\)</span></p></li>
+<li><p><span class="math inline">\(H_0) \text{ No va a llover} \qquad H_1) \text{ Va a llover}\)</span></p></li>
 </ul>
-<p><strong>Solución:</strong> lo vemos en clase.</p>
+<p><strong>Solución:</strong></p>
+<ul>
+<li><p><span class="math inline">\(e_{II}\)</span>: decir que abre cuando en realidad no abre.</p></li>
+<li><p><span class="math inline">\(e_I\)</span>: decir que es culpable cuando en realidad es inocente.</p></li>
+<li><p><span class="math inline">\(e_{II}\)</span>: decir que no tiene efectos colaterales cuando en realidad los tiene.</p></li>
+<li><p><span class="math inline">\(e_{II}\)</span>: decir que no va a llover cuando en realidad va a llover.</p></li>
+</ul>
 </div>
+<p>Generalmente se desea defender el punto de vista predominante (es decir, el status quo: <span class="math inline">\(H_0\)</span>) porque introducir cambios en algún proceso suele ser una tarea costosa en tiempo, dinero y recursos. Estadísticamente, una manera de “proteger” la hipótesis nula es mediante un procedimiento que asegure una pequeña probabilidad de cometer un error tipo I: <span class="math inline">\(P(e_I)\)</span>.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Advertencia
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Dado que tanto <span class="math inline">\(P(e_I)\)</span> como <span class="math inline">\(P(e_{II})\)</span> representan chances de cometer errores, idealmente deseamos que ambas probabilidades sean lo más pequeñas posibles. Desafortunadamente, cuando el número de observaciones <span class="math inline">\(n\)</span> es fijo, no podemos controlar ambas probabilidades. Por eso nos centramos en <span class="math inline">\(P(e_I)\)</span>.</p>
+<p>La única forma de reducir ambos errores es aumentando el tamaño muestral.</p>
+</div>
+</div>
+<p>Sabiendo que no podemos anular la probabilidad de cometer un error, debemos definir un umbral o cota superior para <span class="math inline">\(P(e_I)\)</span>, de forma tal que estemos cómodos sabiendo que la probabilidad de cometer un error tipo I será menor o a lo sumo igual a la cota. Dicho valor se denomina <strong>nivel de significación</strong>: <span class="math inline">\(\alpha \in (0 \,;\, 1)\)</span>. Este valor es definido por el/la investigador/a <em>antes</em> de obtener los datos y llevar a cabo el análisis correspondiente. Valores usuales para <span class="math inline">\(\alpha\)</span> son 0,01; 0,05 y 0,10.</p>
+<p>De esta manera se tiene: <span class="math display">\[P(e_I) = P(\text{rechazar }H_0 \;|\; H_0 \text{ cierta}) \leq \alpha\]</span></p>
+<p>Una vez impuesta esa condición, existen múltiples metodologías que podrían proponerse para poner a prueba las hipótesis de interés. Los tests de hipótesis tradicionales (que estudiaremos en este curso) son aquellos que, dada la restricción anterior, maximizan la <strong>potencia del test</strong>: <span class="math inline">\(1-\beta = 1-P(e_{II})\)</span>.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+</section>
+<section id="p-value" class="level3">
+<h3 class="anchored" data-anchor-id="p-value">p-value</h3>
+<p>Hasta ahora hemos definido las reglas teóricas bajo las cuales se construyen los tests de hipótesis que emplearemos en esta unidad. Todavía falta contestar una pregunta importante: ¿qué criterio emplear en la práctica para aceptar una hipótesis y rechazar la otra?</p>
+<p>Como ya se dijo, al aplicar un test se implementa como principio la presunción de inocencia: se toma el status quo (<span class="math inline">\(H_0\)</span>) como realidad hasta que se demuestre lo contrario. Este <em>mindset</em> nos conduce a una estrategia matemática para abordar la prueba de hipótesis: si nuestra muestra resulta en un valor que sería muy improbable de observar bajo <span class="math inline">\(H_0\)</span>,<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> entonces sería sensato suponer que estamos bajo <span class="math inline">\(H_1\)</span>.</p>
+<p>Podemos usar este resultado para proponer la siguiente regla de decisión:</p>
+<ul>
+<li><strong>Propuesta inicial:</strong> en base a la muestra, si <span class="math inline">\(P(\text{observar lo observado} \;|\; H_0 \text{ cierta}) \leq \alpha\)</span> entonces se rechaza <span class="math inline">\(H_0\)</span>.</li>
+</ul>
+<p>⚠️ La conclusión anterior es un paso en la dirección correcta. Pero aún presenta un problema, como se ve en el ejemplo siguiente.</p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 10</strong></p>
+</div>
+<p>Se tiene una moneda y se quiere probar si es equilibrada. Para ello se la arroja al aire un total de 1000 veces, cayendo 500 veces sobre cara y 500 veces sobre cruz. Suponiendo que la moneda es equilibrada, ¿cuál sería la probabilidad de observar este resultado?</p>
+<p><strong>Solución:</strong> Sea <span class="math inline">\(X\)</span> el número de cruces obtenidas tras 1000 lanzamientos de la moneda. Es fácil ver que la variable sigue una distribución Binomial, con parámetro <span class="math inline">\(n=1000\)</span>. ¿Cuál es el valor del parámetro <span class="math inline">\(p\)</span>? Si suponemos que la moneda es equilibrada, entonces sería <span class="math inline">\(p=0,5\)</span>. ¿Cuál es, entonces, la probabilidad de obtener 500 cruces?</p>
+<p><span class="math display">\[X \sim Bi(n=1000 \;,\; p=0,5) \implies P(X=500) = \binom{1000}{500} \left(\frac{1}{2}\right)^{1000} \approx 0,0252 = 2,52\%\]</span></p>
+</div>
+<p>Cuando una variable puede tomar muchos valores distintos, la probabilidad de cada uno de ellos tiende a ser baja. Esto puede llevar a un resultado que desafía la intuición: incluso teniendo una moneda equilibrada, la probabilidad de observar un resultado perfecto tras <span class="math inline">\(n=1000\)</span> réplicas es muy bajo. Para el ejemplo dado, nótese que rechazaríamos la hipótesis nula en todos los resultados posibles. ¡Incluso el que la refleja a la perfección! Para las variables continuas es incluso peor, porque se tendría <span class="math inline">\(P(X=x)=0\)</span> en todos los casos, independientemente del tamaño de la muestra y los valores observados.</p>
+<p>Claramente no podemos basar nuestra decisión en la probabilidad puntual del evento observado. Algo que hemos aprendido de trabajar con variables aleatorias continuas es que a veces tiene más sentido calcular la probabilidad de un <em>intervalo</em> o conjunto de valores. Surge entonces la siguiente regla:</p>
+<ul>
+<li><strong>Propuesta nueva:</strong> si <span class="math inline">\(P(\text{observar lo observado o algo más extremo} \;|\; H_0 \text{ cierta}) \leq \alpha\)</span> entonces se rechaza <span class="math inline">\(H_0\)</span>.</li>
+</ul>
+<p>¿Qué significa “algo más extremo”? Nos referimos a cualquier resultado que, respecto a lo observado, se encuentre en dirección a la hipótesis alternativa <span class="math inline">\(H_1\)</span>. Esto depende de la <em>lateralidad</em> del test.</p>
+<ul>
+<li><p><span class="math inline">\(H_1) \; \theta &lt; \theta_0 \iff\)</span> test unilateral por izquierda</p></li>
+<li><p><span class="math inline">\(H_1) \; \theta &gt; \theta_0 \iff\)</span> test unilateral por derecha</p></li>
+<li><p><span class="math inline">\(H_1) \; \theta \neq \theta_0 \iff\)</span> test bilateral</p></li>
+</ul>
+<p>Entonces:</p>
+<ul>
+<li><p>Si el test es <strong>unilateral por izquierda</strong>, se calcula <span class="math inline">\(P(\hat{\theta} \leq \hat{\theta}_o \;|\; H_0 \text{ cierta}) = P(\hat{\theta} \leq \hat{\theta}_o \;|\; \theta = \theta_0)\)</span>.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p></li>
+<li><p>Si es <strong>unilateral por derecha</strong>, se calcula <span class="math inline">\(P(\hat{\theta} \geq \hat{\theta}_o \;|\; H_0 \text{ cierta}) = P(\hat{\theta} \geq \hat{\theta}_o \;|\; \theta = \theta_0)\)</span>.</p></li>
+<li><p>Si es <strong>bilateral</strong>, se calcula <span class="math inline">\(P[(|\hat{\theta} - \theta| \geq |\hat{\theta}_o - \theta|) \;|\; H_0 \text{ cierta}] = P[(|\hat{\theta} - \theta| \geq |\hat{\theta}_o - \theta|) \;|\; \theta=\theta_0]\)</span>.</p></li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Advertencia
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Nótese que en los tests unilaterales la probabilidad condicional se calcula asumiendo <span class="math inline">\(\theta = \theta_0\)</span> cuando en realidad la hipótesis nula plantea <span class="math inline">\(\theta \geq \theta_0\)</span> ó <span class="math inline">\(\theta \leq \theta_0\)</span> según el caso. Esto es una convención de los tests de hipótesis: se usa la igualdad para calcular la probabilidad, si bien la hipótesis original puede contemplar más valores.</p>
+</div>
+</div>
+<p>En el siguiente ejemplo se ilustran todos estos casos en simultáneo.</p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 11</strong></p>
+</div>
+<p>Se arroja una moneda al aire un total de 100 veces, cayendo 63 veces sobre cara y 37 veces sobre cruz. Para cada test que podría plantearse (unilateral por izquierda, por derecha y bilateral) determine si rechazaría o no la hipótesis nula, utilizando un nivel de significación <span class="math inline">\(\alpha = 0,05\)</span>.</p>
+<p><strong>Solución:</strong> Sabemos por el ejemplo anterior que la variable bajo estudio (digamos que es “número de cruces”) es Binomial. A continuación se plantea la probabilidad de observar lo observado <em>o algo más extremo</em> para cada test posible.</p>
+<ul>
+<li><strong>Caso 1:</strong> test unilateral por izquierda (<span class="math inline">\(H_0)\; p \geq 0,5\)</span> versus <span class="math inline">\(H_1)\; p &lt; 0,5\)</span>)</li>
+</ul>
+<p><span class="math display">\[P(\hat{p} \leq \tfrac{37}{100} \;|\; p = 0,5) = \sum_{x=0}^{37} \binom{100}{x} \left(\frac{1}{2}\right)^{100} \approx 0,006 &lt; \alpha \implies \text{Rechazo } H_0\]</span></p>
+<ul>
+<li><strong>Caso 2:</strong> test unilateral por derecha (<span class="math inline">\(H_0)\; p \leq 0,5\)</span> versus <span class="math inline">\(H_1)\; p &gt; 0,5\)</span>)</li>
+</ul>
+<p><span class="math display">\[P(\hat{p} \geq \tfrac{37}{100} \;|\; p = 0,5) = \sum_{x=37}^{100} \binom{100}{x} \left(\frac{1}{2}\right)^{100} \approx 0,997 &gt; \alpha \implies \text{No rechazo } H_0\]</span></p>
+<ul>
+<li><strong>Caso 3:</strong> test bilateral (<span class="math inline">\(H_0)\; p = 0,5\)</span> versus <span class="math inline">\(H_1)\; p \neq 0,5\)</span>)</li>
+</ul>
+<p><span class="math display">\[P(|\hat{p} - \tfrac{50}{100}| \geq |\tfrac{37}{100} - \tfrac{50}{100}|) = P(|X - 50| \geq 13) = P(X \leq 37) + P(X \geq 63) \approx\]</span></p>
+<p><span class="math display">\[ \approx 0,006 + 0,006 = 0,012 &lt; \alpha \implies \text{Rechazo } H_0\]</span></p>
+</div>
+<p>La probabilidad calculada funciona como esperábamos: rechaza o acepta la hipótesis nula de forma sensata en base a la información muestral. Esta herramienta es ampliamente utilizada en Estadística y se la conoce como <strong>p-value</strong>.</p>
+<p><span class="math display">\[\text{p-value} = P(\text{observar lo observado o algo más extremo} \;|\; H_0 \text{ cierta})\]</span> Así, la regla de decisión se reduce a: <span class="math inline">\(\text{p-value} \leq \alpha \implies \text{ Rechazo } H_0\)</span>.</p>
+</section>
+<section id="tests-basados-en-observaciones-individuales" class="level3">
+<h3 class="anchored" data-anchor-id="tests-basados-en-observaciones-individuales">Tests basados en observaciones individuales</h3>
+<p>Si conocemos la distribución de la variable bajo estudio podemos llevar a cabo un test de hipótesis con una sola observación, equivalente a una muestra de tamaño <span class="math inline">\(n=1\)</span>. Esto podemos aplicarlo a cualquiera de las distribuciones de probabilidad que conocemos.</p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 12</strong></p>
+</div>
+<p>Un hombre apareció muerto de un disparo mientras cazaba en una zona boscosa de Chubut. Se hizo pasar como un accidente, pero la policía interrogó a otro cazador que, según se supo, tuvo un altercado con la víctima. Ellos encontraron una hoja de pino en el saco del sospechoso. El acusado afirmó que estuvo cazando en Salta el día del incidente.</p>
+<p>El bosque de Chubut tiene sólo pinos de la especie A y Salta sólo pinos de la especie B. Las hojas tipo aguja de la especie A tienen longitudes distribuidas Normalmente con una media de 5,4 cm y un desvío de 0,4 cm; mientras que las de la especie B también se distribuyen Normalmente pero con una media de 6,4 cm y un desvío de 0,5 cm.</p>
+<p>El acusador lo contrata a usted como experto estadístico. La hoja de pino hallada en el saco del sospechoso mide 5,42 cm. En base a esto, ¿qué concluiría? Utilice <span class="math inline">\(\alpha = 0,05\)</span>.</p>
+<p><strong>Solución:</strong> El primer paso es postular las hipótesis, a partir de la presunción de inocencia. Sea <span class="math inline">\(X\)</span> la longitud (en centímetros) de la hoja en el saco del sospechoso. Sabemos que la distribución de la variable es Normal, pero no sabemos si sus parámetros corresponden a la especie A o a la especie B.</p>
+<p>Si el hombre fuese inocente, la hoja pertenecería a la especie B, cuyas longitudes son mayores. En cambio, si fuese culpable, la hoja pertenecería a la especie A, cuyas longitudes son menores. Por lo tanto planteamos:</p>
+<p><span class="math display">\[H_0)\; \mu \geq \mu_B = 6,4 \quad\text{ versus }\quad H_1)\; \mu &lt; \mu_B = 6,4\]</span></p>
+<p>Luego, bajo la hipótesis nula se tiene que: <span class="math display">\[X \sim_{H_0} N(\mu = 6,4 \;;\; \sigma = 0,5)\]</span></p>
+<p>Por lo tanto: <span class="math inline">\(P(X \leq 5,42) =\)</span> <code>pnorm(5.42, mean = 6.4, sd = 0.5)</code> <span class="math inline">\(\approx 0,025 &lt; 0,05 = \alpha\)</span>.</p>
+<p>En base a la evidencia muestral, y con un nivel de significación <span class="math inline">\(\alpha=0,05\)</span>, se puede concluir que la hoja encontrada en el saco del sospechoso no pertenece a la especie B.</p>
+</div>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 13</strong></p>
+</div>
+<p>Tras escribir el borrador de nuestra primera novela, decidimos contactar a un traductor para que convierta el texto a inglés. La persona que contratamos es muy veloz pero nos advierte que suele cometer errores tipográficos, y que el número de errores por página sigue una distribución Poisson con parámetro <span class="math inline">\(\lambda = 1,5\)</span>.</p>
+<p>Tras terminar la traducción, nos envía el borrador en inglés. Nosotros abrimos una página al azar y rápidamente detectamos 4 errores tipográficos. ¿Es esto evidencia suficiente para reclamar al traductor que está cometiendo más errores de los que admite? Utilice <span class="math inline">\(\alpha = 0,05\)</span>.</p>
+<p><strong>Solución:</strong> Sea <span class="math inline">\(X\)</span> el número de errores tipográficos en una hoja. En base a la honestidad o no honestidad del traductor, podemos plantear:</p>
+<p><span class="math display">\[H_0)\; \lambda \leq 1,5 \quad\text{ versus }\quad H_1)\; \lambda &gt; 1,5\]</span></p>
+<p>Luego, bajo la hipótesis nula se tiene que: <span class="math display">\[X \sim_{H_0} Po(\lambda = 1,5)\]</span></p>
+<p>Por lo tanto: <span class="math inline">\(P(X \geq 4) =\)</span> <code>1 - ppois(3, lambda = 1.5)</code> <span class="math inline">\(\approx 0,066 &gt; 0,05 = \alpha\)</span>.</p>
+<p>En base a la evidencia muestral, y con un nivel de significación <span class="math inline">\(\alpha=0,05\)</span>, no se puede rechazar la hipótesis de que el traductor está siendo honesto.</p>
+</div>
+<p>Por otro lado, cuando contamos no con una única observación sino con una muestra, debemos hacer uso de las distribuciones muestrales.</p>
+</section>
+<section id="test-para-la-media-mu" class="level3">
+<h3 class="anchored" data-anchor-id="test-para-la-media-mu">Test para la media (<span class="math inline">\(\mu\)</span>)</h3>
+<p>En base a lo visto en la unidad anterior y en la sección sobre intervalos de confianza, hay esencialmente 3 casos distintos en los que podemos plantear un test de hipótesis para la media poblacional.</p>
+<ul>
+<li><strong>Caso 1 (distribución Normal, <span class="math inline">\(\sigma\)</span> conocido):</strong> lo siguiente se cumple para cualquier tamaño muestral.</li>
+</ul>
+<p><span class="math display">\[\overline{X} \sim N\left( \mu_0, \frac{\sigma_0}{\sqrt{n}} \right)\]</span></p>
+<p>En esta notación, <span class="math inline">\(\mu_0\)</span> y <span class="math inline">\(\sigma_0\)</span> son los valores de los parámetros propuestos bajo la hipótesis nula.</p>
+<ul>
+<li><p><strong>Caso 2 (distribución Normal, <span class="math inline">\(\sigma\)</span> desconocido):</strong> lo siguiente se cumple para cualquier tamaño muestral. <span class="math display">\[T = \frac{\overline{X} - \mu_0}{S / \sqrt{n}} \sim t_{n-1}\]</span></p></li>
+<li><p><strong>Caso 3 (distribución desconocida):</strong> lo siguiente se cumple para muestras grandes (<span class="math inline">\(n \geq 30\)</span>).<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></p></li>
+</ul>
+<p><span class="math display">\[\overline{X} \stackrel{TCL}{\sim} N\left( \mu_0, \frac{\sigma_0}{\sqrt{n}} \right)\]</span></p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 14</strong></p>
+</div>
+<p>Ramón sospecha que los profesores de su escuela técnica tienen, en promedio, menos de 5 años de experiencia. Para poner a prueba su sospecha toma una muestra aleatoria de 25 profesores. La media de su muestra fue de 4 años y el desvío estándar fue de 2 años. Suponiendo que la variable en cuestión es Normal y utilizando <span class="math inline">\(\alpha=0,05\)</span>, ¿qué debería concluir?</p>
+<p><strong>Solución:</strong> Se plantean las hipótesis:</p>
+<p><span class="math display">\[H_0)\; \mu \geq 5 \quad\text{ versus }\quad H_1)\; \mu &lt; 5\]</span></p>
+<p>Luego, bajo la hipótesis nula se tiene que: <span class="math display">\[T = \frac{\overline{X} - 5}{S / \sqrt{25}} \sim_{H_0} t_{24}\]</span></p>
+<p>Por lo tanto: <span class="math inline">\(P(T \leq \tfrac{4-5}{2/5}) = P(T \leq -2,5) =\)</span> <code>pt(-2.5, df=24)</code> <span class="math inline">\(\approx 0,0098 &lt; \alpha\)</span></p>
+<p>En base a la evidencia muestral, y con un nivel de significación <span class="math inline">\(\alpha=0,05\)</span>, se rechaza la hipótesis de que la experiencia media en la escuela técnica es, al menos, 5 años.</p>
+</div>
+</section>
+<section id="test-para-la-diferencia-de-medias-mu_1---mu_2" class="level3">
+<h3 class="anchored" data-anchor-id="test-para-la-diferencia-de-medias-mu_1---mu_2">Test para la diferencia de medias (<span class="math inline">\(\mu_1 - \mu_2\)</span>)</h3>
+<ul>
+<li><strong>Caso 1 (distribución Normal):</strong> lo siguiente se cumple para cualquier tamaño muestral.</li>
+</ul>
+<p><span class="math display">\[\overline{X}_1 - \overline{X}_2 \sim N \left( \mu_1 - \mu_2 \,;\, \frac{\sigma^2_1}{n_1} + \frac{\sigma^2_2}{n_2} \right)\]</span></p>
+<p>Aunque no se vea reflejado en la notación, los valores de los parámetros son los propuestos bajo <span class="math inline">\(H_0\)</span>.</p>
+<ul>
+<li><strong>Caso 2 (distribución desconocida ó <span class="math inline">\(\sigma\)</span> desconocido):</strong> aplica para muestras grandes (<span class="math inline">\(n \geq 30\)</span>).</li>
+</ul>
+<p><span class="math display">\[\overline{X}_1 - \overline{X}_2 \stackrel{TCL}{\sim} N \left( \mu_1 - \mu_2 \,;\, \frac{s^2_1}{n_1} + \frac{s^2_2}{n_2} \right)\]</span></p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 15</strong></p>
+</div>
+<p>Carla sospecha que, mientras más ejercicio hacen las personas, mayor temperatura toma su cuerpo. Asignó aleatoriamente a unas personas para que ejercitaran durante media hora y otras durante una hora.</p>
+<p>Las 54 personas que ejercitaron durante media hora tuvieron una temperatura media de 38,3 °C con un desvío estándar de 0,97 °C. Las 72 personas que entrenaron durante una hora tuvieron una temperatura media de 38,9 °C con un desvío estándar de 1,09 °C.</p>
+<p>Utilizando <span class="math inline">\(\alpha=0,05\)</span>, ¿concluiría que las temperaturas difieren según el tiempo de ejercicio?</p>
+<p><strong>Solución:</strong> Se plantean las hipótesis:</p>
+<p><span class="math display">\[H_0)\; \mu_{30'} = \mu_{60'} \quad\text{ versus }\quad H_1)\; \mu_{30'} \neq \mu_{60'}\]</span></p>
+<p>Luego, bajo la hipótesis nula se tiene que: <span class="math display">\[\overline{X}_{30'} - \overline{X}_{60'} \sim_{H_0} N \left( 0 \,;\, \sqrt{\frac{0,97^2}{54} + \frac{1,09^2}{72}} \right)\]</span></p>
+<p>Por lo tanto: <span class="math inline">\(\text{p-value} = P(\overline{X}_{30'} - \overline{X}_{60'} \leq -0,6) + P(\overline{X}_{30'} - \overline{X}_{60'} \leq -0,6)\)</span>.</p>
+<ul>
+<li><p><span class="math inline">\(P(\overline{X}_{30'} - \overline{X}_{60'} \leq -0,6) =\)</span> <code>pnorm(-0.6, sd = sqrt(0.97**2/54 + 1.09**2/72))</code> <span class="math inline">\(\approx 0,00056\)</span></p></li>
+<li><p><span class="math inline">\(P(\overline{X}_{30'} - \overline{X}_{60'} \geq 0,6) =\)</span> <code>1-pnorm(0.6, sd = sqrt(0.97**2/54 + 1.09**2/72))</code> <span class="math inline">\(\approx 0,00056\)</span></p></li>
+</ul>
+<p>Finalmente: <span class="math inline">\(\text{p-value} = 0,00056 + 0,00056 = 0,00112 &lt; \alpha\)</span></p>
+<p>En base a la evidencia muestral, y con un nivel de significación <span class="math inline">\(\alpha=0,05\)</span>, se rechaza la hipótesis de que el tiempo de entrenamiento no afecta la temperatura corporal.</p>
+</div>
+</section>
+<section id="test-para-la-proporción-p" class="level3">
+<h3 class="anchored" data-anchor-id="test-para-la-proporción-p">Test para la proporción (<span class="math inline">\(p\)</span>)</h3>
+<p>Para muestras grandes se tiene <span class="math display">\[\hat{p} \stackrel{TCL}{\sim} N \left( p_0 \,;\, \frac{p_0(1-p_0)}{n} \right)\]</span> donde <span class="math inline">\(p_0\)</span> es el valor de <span class="math inline">\(p\)</span> postulado bajo <span class="math inline">\(H_0\)</span>.</p>
+<div class="examplebox">
+<div class="center">
+<p><strong>Ejemplo 16</strong></p>
+</div>
+<p>El alcalde de una ciudad leyó un artículo que afirmaba que la tasa de desempleo a nivel nacional es del 8%. Para determinar si esto también se aplica en su ciudad tomó una muestra de 200 residentes. La muestra incluyó 22 residentes desempleados. Utilizando <span class="math inline">\(\alpha=0,05\)</span>, ¿qué debería concluir?</p>
+<p><strong>Solución:</strong> Se plantean las hipótesis:</p>
+<p><span class="math display">\[H_0)\; p = 0,08 \quad\text{ versus }\quad H_1)\; p \neq 0,08\]</span></p>
+<p>Luego, bajo la hipótesis nula se tiene que: <span class="math display">\[\hat{p} \sim_{H_0} N \left( \mu=0,08 \,;\, \sigma^2=\frac{0,08 \cdot 0,92}{200} \right)\]</span></p>
+<p>El valor del estimador fue <span class="math inline">\(\hat{p}_o = 22/200 = 0,11\)</span>.</p>
+<p>Por lo tanto: <span class="math inline">\(P(\hat{p} \geq 0,11) + P(\hat{p} \leq 0,05)\)</span>. Luego:</p>
+<ul>
+<li><p><span class="math inline">\(P(\hat{p} \geq 0,11) =\)</span> <code>1 - pnorm(0.11, mean = 0.08, sd = sqrt(0.08*0.92/200))</code> <span class="math inline">\(\approx 0,059\)</span></p></li>
+<li><p><span class="math inline">\(P(\hat{p} \leq 0,05) =\)</span> <code>pnorm(0.05, mean = 0.08, sd = sqrt(0.08*0.92/200))</code> <span class="math inline">\(\approx 0,059\)</span></p></li>
+</ul>
+<p>Finalmente: <span class="math inline">\(\text{p-value} = 0,059 + 0,059 = 0,118 &gt; \alpha\)</span></p>
+<p>En base a la evidencia muestral, y con un nivel de significación <span class="math inline">\(\alpha=0,05\)</span>, no se puede rechazar la hipótesis de que la tasa de desempleo en la ciudad es del 8%.</p>
+</div>
+</section>
+</section>
+<section id="ic-test-de-hipótesis" class="level2">
+<h2 class="anchored" data-anchor-id="ic-test-de-hipótesis">¿IC = Test de hipótesis?</h2>
+<p>Llegado este punto, es probable que hayan detectado muchas similitudes entre la construcción de un intervalo de confianza y la de un test de hipótesis. De hecho, la teoría detrás de cada uno es la misma: se definen a partir de las distribuciones muestrales del estimador de interés.</p>
+<p>Más aún, existe una relación entre la determinación de una confianza <span class="math inline">\(1-\alpha\)</span> para un intervalo y la de un nivel de significación <span class="math inline">\(\alpha\)</span> para un test. La relación es la siguiente:</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Relación entre ICs y tests de hipótesis
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Supóngase un test de hipótesis bilateral: <span class="math inline">\(H_0)\; \theta = \theta_0\)</span> versus <span class="math inline">\(H_1)\; \theta \neq \theta_0\)</span>. Para un cierto nivel de significación <span class="math inline">\(\alpha \in (0 \;;\; 1)\)</span>, si se construye un intervalo de confianza del <span class="math inline">\(100(1-\alpha)\%\)</span> para el parámetro <span class="math inline">\(\theta\)</span> y éste no contiene al valor <span class="math inline">\(\theta_0\)</span>, esto es equivalente a un rechazo de la hipótesis nula.</p>
+<p>En otras palabras, podemos plantear un test de hipótesis <strong>bilateral</strong> mediante un intervalo de confianza.</p>
+</div>
+</div>
+<p>Recordemos que una de las interpretaciones de “confianza” es la probabilidad de que el intervalo incluya al verdadero valor del parámetro. Por ejemplo, se tiene un 95% de confianza de que el intervalo <span class="math inline">\([a;b]\)</span> contiene al verdadero valor de <span class="math inline">\(\theta\)</span>. Si el valor <span class="math inline">\(\theta_0\)</span> postulado por la hipótesis nula no está contenido en el intervalo, esto implica que probablemente la muestra no haya provenido de una distribución con <span class="math inline">\(\theta=\theta_0\)</span>, y por lo tanto habría que rechazar esa hipótesis nula.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
@@ -482,7 +734,6 @@ Nota
 Wikipedia. 2024. <span>«Lady tasting tea - Wikipedia, The Free Encyclopedia»</span>. <a href="https://en.wikipedia.org/wiki/Lady_tasting_tea">https://en.wikipedia.org/wiki/Lady_tasting_tea</a>.
 </div>
 </div>
-</section>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
@@ -492,6 +743,10 @@ Wikipedia. 2024. <span>«Lady tasting tea - Wikipedia, The Free Encyclopedia»</
 <li id="fn3"><p>Existen distribuciones muestrales para la diferencia de medias con poblaciones Normales, variancias desconocidas y muestras pequeñas. Hemos optado por excluirlas del contenido de esta materia, visto que traen aparejadas cierta complejidad matemática y corresponden a un escenario que no suele darse con frecuencia en la práctica.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>Acá estamos asumiendo que nuestra población es infinita. En el caso de una población finita (por ejemplo: los habitantes de Argentina) podemos tener certeza si el tamaño muestral es igual al tamaño poblacional: <span class="math inline">\(n=N\)</span>. Esto sería equivalente a un censo en el que todos los individuos responden y nadie miente al responder (dos condiciones que difícilmente se dén en la práctica).<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>Esto podría darse por falta de representatividad, pero incluso con una muestra perfectamente representativa puede darse este escenario simplemente por mala suerte.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Nótese lo que implica esta definición: la potencia del test es la probabilidad de rechazar <span class="math inline">\(H_0\)</span> sin error.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>La expresión “bajo <span class="math inline">\(H_0\)</span>” denota el hecho de estar ante un escenario donde la hipótesis <span class="math inline">\(H_0\)</span> es cierta.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Se utiliza la notación <span class="math inline">\(\hat{\theta}_o\)</span> para referirse al valor observado del estimador, mientras que <span class="math inline">\(\theta_0\)</span> refiere al valor del parámetro propuesto en la hipótesis nula.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>En este caso, si se desconoce el valor de <span class="math inline">\(\sigma\)</span> se usa este mismo resultado pero reemplazando el valor por <span class="math inline">\(s\)</span>: el desvío estándar muestral.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
