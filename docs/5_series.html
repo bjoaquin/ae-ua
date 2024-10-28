@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Análisis Estadístico (UA) - 5. Series de Tiempo</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./4_tdh.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./5_series.html"><span class="chapter-title">5. Series de Tiempo</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Análisis Estadístico (UA)</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Prefacio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0_conteo.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">0. Herramientas de conteo</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1_prob.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1. Probabilidad</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2_va.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2. Variable aleatoria</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3_infer.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3. Inferencia estadística</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4_tdh.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4. ICs y Tests de hipótesis</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./5_series.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">5. Series de Tiempo</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referencias</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción">Introducción</a></li>
+  <li><a href="#serie-de-tiempo" id="toc-serie-de-tiempo" class="nav-link" data-scroll-target="#serie-de-tiempo">Serie de tiempo</a></li>
+  <li><a href="#autocorrelación" id="toc-autocorrelación" class="nav-link" data-scroll-target="#autocorrelación">Autocorrelación</a></li>
+  <li><a href="#características-de-una-serie" id="toc-características-de-una-serie" class="nav-link" data-scroll-target="#características-de-una-serie">Características de una serie</a>
+  <ul>
+  <li><a href="#estacionariedad" id="toc-estacionariedad" class="nav-link" data-scroll-target="#estacionariedad">Estacionariedad</a></li>
+  <li><a href="#tendencia" id="toc-tendencia" class="nav-link" data-scroll-target="#tendencia">Tendencia</a></li>
+  <li><a href="#estacionalidad" id="toc-estacionalidad" class="nav-link" data-scroll-target="#estacionalidad">Estacionalidad</a></li>
+  <li><a href="#comportamiento-cíclico" id="toc-comportamiento-cíclico" class="nav-link" data-scroll-target="#comportamiento-cíclico">Comportamiento cíclico</a></li>
+  </ul></li>
+  <li><a href="#diferenciación" id="toc-diferenciación" class="nav-link" data-scroll-target="#diferenciación">Diferenciación</a></li>
+  <li><a href="#transformación" id="toc-transformación" class="nav-link" data-scroll-target="#transformación">Transformación</a></li>
+  <li><a href="#proceso-ruido-blanco" id="toc-proceso-ruido-blanco" class="nav-link" data-scroll-target="#proceso-ruido-blanco">Proceso “ruido blanco”</a></li>
+  <li><a href="#descomposición-de-una-serie" id="toc-descomposición-de-una-serie" class="nav-link" data-scroll-target="#descomposición-de-una-serie">Descomposición de una serie</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">5. Series de Tiempo</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introducción" class="level2">
+<h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
+<p>Los métodos estadísticos que hemos estudiado para resumir información muestral e inferir sobre una población dependen de supuestos fuertes: la muestra aleatoria debe estar compuesta por observaciones independientes e igualmente distribuidas. Entre otras cosas, esto nos permitía darle la misma ponderación o relevancia a cada observación. En la práctica, sin embargo, existen situaciones comunes en las que los supuestos mencionados son insostenibles.</p>
+<p>Supongamos que comenzamos nuestro propio emprendimiento y queremos predecir la ganancia media por mes. Para ello podríamos registrar las ganancias reales durante los primeros meses y utilizar esta información para construir un intervalo de confianza del 95%.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="5_series_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>¿Este intervalo resulta útil a la hora de hacer predicciones? Seguramente no. Como puede verse en el gráfico, la ganancia tiende a aumentar mes a mes. Esto provoca que los intervalos de confianza que podamos calcular con información pasada estén permanentemente desactualizados.</p>
+<p>Podríamos considerar, entonces, una técnica de modelización, como regresión lineal.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="5_series_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>¿Es esto una fiel representación de las ganancias mensuales? ¿Podríamos usarlo para extrapolar sobre la ganancia en meses futuros? No siempre. Pensemos qué ocurriría si nuestro emprendimiento estuviese basado en la venta de un producto cuya demanda es alta en un momento del año y baja en otra; por ejemplo: buzos pólar. Sería de esperar que la ganancia aumente en los meses de invierno y decrezca en los meses de verano. Nuestro modelo basado en una línea recta se desviaría groseramente de este comportamiento. De hecho, no existe polinomio (sin importar cuán alto sea su grado) que pueda modelar tal comportamiento sin eventualmente alejarse de él.</p>
+<p>Muchas variables experimentan una evolución temporal que está atravesada por diversos factores: tendencias, fluctuaciones, oscilaciones, valores atípicos, entre otros. Si bien dichos factores dificultan el uso de técnicas estadísticas tradicionales, al mismo tiempo brindan un terreno fértil para el desarrollo de herramientas diseñadas específicamente para estos casos.</p>
+<p>Esta última unidad es una introducción a las series de tiempo: sus componentes, cómo se clasifican, cómo se analizan y cómo pueden usarse para hacer pronósticos.</p>
+</section>
+<section id="serie-de-tiempo" class="level2">
+<h2 class="anchored" data-anchor-id="serie-de-tiempo">Serie de tiempo</h2>
+<p>Una <strong>serie de tiempo</strong> es una secuencia ordenada de observaciones.</p>
+<div id="fig-stock" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/tesla_stock.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figura&nbsp;7.1: Ejemplo de una serie de tiempo: acciones de Tesla.</figcaption>
+</figure>
+</div>
+<p>Si bien cada observación suele registrar el valor de una única variable de interés, implícitamente estamos contrastando dos variables: la de interés versus el tiempo. <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Los datos de este estilo, obtenidos de observaciones recopiladas secuencialmente a lo largo del tiempo, son muy comunes y tienen utilidad muchas áreas de estudio.</p>
+<ul>
+<li><p><strong>Negocios:</strong> tasas de interés semanales, precios diarios de cierre de acciones, índices de precios mensuales.</p></li>
+<li><p><strong>Meteorología:</strong> temperaturas diarias, índices de precipitación y sequía anuales, velocidades del viento horarias.</p></li>
+<li><p><strong>Agricultura:</strong> producción anual de cultivos y ganado, erosión del suelo, ventas de exportación.</p></li>
+<li><p><strong>Biología:</strong> actividad eléctrica del corazón, a intervalos de milisegundos.</p></li>
+<li><p><strong>Ecología:</strong> abundancia de una especie animal en una región determinada, a través del tiempo.</p></li>
+</ul>
+<p>El propósito del análisis de series de tiempo generalmente es doble. Por un lado, se pretende <strong>describir</strong> el comportamiento de una serie, entender sus características y patrones, y evaluar las diversas variables que ayudan a explicarla. Por otro lado, se intenta predecir o <strong>pronosticar</strong> los valores futuros de una serie en función de la información histórica de la que se dispone. En síntesis, el análisis de series de tiempo consiste en comprender y predecir patrones de datos que cambian con el tiempo.</p>
+</section>
+<section id="autocorrelación" class="level2">
+<h2 class="anchored" data-anchor-id="autocorrelación">Autocorrelación</h2>
+<p>Cabe preguntarse ahora por qué las series de tiempo conforman su propia rama de estudio dentro de la Estadística. Como ya se vio en la introducción, las herramientas estadísticas clásicas pueden no ser eficaces a la hora de resumir la información de una serie o de inferir sobre ella. Existe una razón matemática detrás de esto.</p>
+<p>La naturaleza intrínseca de una serie de tiempo es que sus observaciones son dependientes o están correlacionadas, y por lo tanto el orden de las observaciones es importante. En otras palabras: el futuro depende del pasado. En la terminología de series de tiempo, este fenómeno se conoce como <strong>autocorrelación</strong>, pues implica la correlación de una variable consigo misma (pero en tiempos distintos).</p>
+<p>Como ya sabemos, los procedimientos estadísticos comunmente aplicados a muestras aleatorias asumen independencia entre las observaciones. Por lo tanto, su uso queda invalidado para analizar series de tiempo. Esto, sin embargo, no supone un problema: existen muchas otras herramientas específicamente diseñadas para datos de este estilo.</p>
+</section>
+<section id="características-de-una-serie" class="level2">
+<h2 class="anchored" data-anchor-id="características-de-una-serie">Características de una serie</h2>
+<p>Una serie de tiempo puede presentar múltiples características o propiedades que describen su comportamiento. Estas características tienen una definición precisa (matemática) pero a su vez son fácilmente identificables observando el gráfico de una serie.</p>
+<p>Sea <span class="math inline">\(y_t\)</span> el conjunto de valores que componen la serie de tiempo, donde <span class="math inline">\(t=1,2,\cdots,n\)</span> es el índice que usamos para referirnos a las <span class="math inline">\(n\)</span> instancias temporales en que la variable fue medida. De este modo:</p>
+<ul>
+<li><span class="math inline">\(y_1\)</span> es la primera observación.</li>
+<li><span class="math inline">\(y_2\)</span> es la segunda observación, que ocurrió luego de <span class="math inline">\(y_1\)</span>.</li>
+</ul>
+<p>Y así sucesivamente. En general, <span class="math inline">\(y_t\)</span> siempre es sucedido por <span class="math inline">\(y_{t+1}\)</span>, y el tiempo <span class="math inline">\(t\)</span> puede estar medido en días, meses, años, etcétera.</p>
+<section id="estacionariedad" class="level3">
+<h3 class="anchored" data-anchor-id="estacionariedad">Estacionariedad</h3>
+<p>Una serie de tiempo se dice <strong>estacionaria</strong> si la media y la variabilidad de la serie se mantienen constantes a lo largo del tiempo. Por el contrario, una serie se dice <strong>no estacionaria</strong> si la media y/o la variabilidad cambian a lo largo del tiempo. Es decir:</p>
+<p><span class="math display">\[y_t \text{ estacionaria } \iff E(y_t) = \mu \;\wedge\; V(y_t) = \sigma^2 \quad\forall\; t=1,2,\cdots,n\]</span></p>
+<p>También podemos hablar de <strong>estacionariedad en media</strong> y <strong>estacionariedad en variancia</strong> cuando sólo se cumple una de las dos condiciones de estacionariedad.</p>
+<p>La media constante se corresponde visualmente con valores oscilantes alrededor de una recta horizontal. La variancia constante se corresponde con oscilaciones de igual magnitud a través de todas las mediciones.</p>
+<p>A continuación se ejemplifica esta caracterización con cuatro series de tiempo distintas.</p>
+<div id="fig-seriesvarias" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/series_varias.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figura&nbsp;7.2: Cuatro series de tiempo con distintas características.</figcaption>
+</figure>
+</div>
+<ul>
+<li><p><strong>Ventas de casas:</strong> a simple vista puede parecer estacionaria en media, pero no lo es. Las mediciones son mensuales, y dentro de cada año puede verse que existen meses de muchas ventas (en la mitad del año) y meses de pocas ventas (a principio y fin de año). Por lo tanto, la media de enero es menor a la media de julio y no se cumple el primer requisito. La estacionariedad en variancia sí parece cumplirse.</p></li>
+<li><p><strong>Compras de celulares:</strong> hay una clara disminución en compras a través del tiempo, por lo que la media no es constante. La variancia parece ir aumentando con el tiempo: tampoco es constante. No se cumple ninguno de los requisitos.</p></li>
+<li><p><strong>Consumo de energía:</strong> no es estacionaria en media, por el claro aumento de consumo en el tiempo. Tampoco es estacionaria en variancia, pues al aumentar la media parece aumentar también la variabilidad.</p></li>
+<li><p><strong>Precio de cierre:</strong> parece ser estacionaria en media: los valores oscilan erráticamente alrededor del cero. La variancia, sin embargo, no parece ser constante: parece aumentar en las últimas mediciones.</p></li>
+</ul>
+</section>
+<section id="tendencia" class="level3">
+<h3 class="anchored" data-anchor-id="tendencia">Tendencia</h3>
+<p>Es el comportamiento monótono (creciente o decreciente) de una serie a través del tiempo. Por “monótono” se entiende que se habla de una cinética a grandes rasgos, obviando oscilaciones menores que son despreciables ante la presencia de tal cinética. Naturalmente, si existe tendencia entonces la serie no es estacionaria (en media).</p>
+<p>En los ejemplos anteriores, se ve una tendencia decreciente en las compras de celulares y una creciente en el consumo de energía. En estos casos la tendencia parece ser aproximadamente lineal, pero esto no tiene por qué ser así.</p>
+<div id="fig-tendencia" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/tendencia_nolineal.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figura&nbsp;7.3: Ejemplo de una tendencia no lineal. Nótese cómo la regresión no alcanza para modelar el crecimiento de la variable.</figcaption>
+</figure>
+</div>
+</section>
+<section id="estacionalidad" class="level3">
+<h3 class="anchored" data-anchor-id="estacionalidad">Estacionalidad</h3>
+<p>Una serie <strong>estacional</strong> es aquella que presenta un cambio <em>periódico</em> en la media de la serie, es decir, en cantidades regulares de tiempo. Dicha periodicidad suele darse en intervalos relativamente cortos de tiempo: una semana, un mes, un trimestre, un año.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Advertencia
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A pesar de que sus nombres son similares, los conceptos de <strong>estacionariedad</strong> y <strong>estacionalidad</strong> son muy distintos. De hecho, si una serie es estacional entonces no es estacionaria.</p>
+</div>
+</div>
+<p>Las manifestaciones más evidentes de estacionalidad se dan en las variables relacionadas al clima, siendo la estacionalidad de periodicidad anual.</p>
+<div id="fig-estacional" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/estacionalidad.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figura&nbsp;7.4: Ejemplo de una serie estacional.</figcaption>
+</figure>
+</div>
+</section>
+<section id="comportamiento-cíclico" class="level3">
+<h3 class="anchored" data-anchor-id="comportamiento-cíclico">Comportamiento cíclico</h3>
+<p>Del mismo modo que la estacionalidad, esta característica refiere a comportamientos recurrentes, aunque en este caso no tienen por qué ser exactamente periódicos. Si tienen un período, este suele ser en un intervalo grande de tiempo (habitualmente superior a un año). Son el efecto de fenómenos macroscópicos, como la alternancia de períodos de prosperidad y crisis económicas. Pueden ser difíciles de reconocer visualmente.</p>
+</section>
+</section>
+<section id="diferenciación" class="level2">
+<h2 class="anchored" data-anchor-id="diferenciación">Diferenciación</h2>
+<p>Aunque suene raro, la estacionariedad (en media y variancia) es una propiedad deseable en las series de tiempo: muchos modelos requieren estacionariedad para ser aplicados. No obstante, como hemos visto, es difícil que una serie cumpla naturalmente con los requisitos.</p>
+<p>¿Qué hacemos si nuestra serie no es estacionaria? Hay distintas soluciones, las cuales se aplican dependiendo de la causa raíz. En casos donde la serie no es estacionaria por presentar una tendencia, entonces una posible solución es la diferenciación.</p>
+<p>La <strong>diferenciación de primer orden</strong> se logra considerando: <span class="math display">\[w_t = \nabla y_t = y_t - y_{t-1}\]</span></p>
+<p>Como consecuencia directa de este cálculo: si la serie <span class="math inline">\(y\)</span> tiene <span class="math inline">\(n\)</span> observaciones, la serie <span class="math inline">\(w\)</span> tendrá <span class="math inline">\(n-1\)</span>.</p>
+<div id="fig-dif1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/diferenciacion.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figura&nbsp;7.5: Ejemplo de una diferenciación de primer orden.</figcaption>
+</figure>
+</div>
+<p>Para series cuya tendencia es aproximadamente lineal, la diferenciación de primer orden corrige la falta de estacionariedad. A veces esto no es suficiente porque la serie puede exhibir, por ejemplo, una tendencia cuadrática. En este caso una <strong>diferenciación de segundo orden</strong> puede ser la solución:</p>
+<p><span class="math display">\[u_t = \nabla w_t = w_t - w_{t-1} = (y_t - y_{t-1}) - (y_{t-1} - y_{t-2}) = y_t - 2y_{t-1} + y_{t-2}\]</span></p>
+<p>Si la serie original tiene <span class="math inline">\(n\)</span> observaciones, la doble diferenciación tendrá <span class="math inline">\(n-2\)</span>.</p>
+<p>En general, para un polinomio de grado <span class="math inline">\(k\)</span> se pueden aplicar <span class="math inline">\(k\)</span> diferenciaciones sucesivas para lograr la estacionariedad en media.</p>
+<p>Pero a veces los polinomios no son suficientes. ¿Qué pasa si el crecimiento es exponencial?</p>
+</section>
+<section id="transformación" class="level2">
+<h2 class="anchored" data-anchor-id="transformación">Transformación</h2>
+<p>Existe también la posibilidad de aplicar una <strong>transformación</strong> sobre la serie, es decir, elegir una función real y transformar cada valor de la serie a través de tal función. En este caso, a diferencia de la diferenciación, la nueva serie tendrá el mismo número de observaciones que la serie original.</p>
+<p>Un ejemplo de una transformación es <span class="math inline">\(z_t = \log(y_t)\)</span>, la cual podría usarse ante una tendencia exponencial.</p>
+<p>Las transformaciones no sólo se utilizan para corregir tendencias. A veces también son útiles para corregir la <strong>heterocedasticidad</strong>: variancia no constante en el tiempo.</p>
+<div id="fig-logserie" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/log_serie.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figura&nbsp;7.6: Transformación logarítmica para corregir la heterocedasticidad de una serie.</figcaption>
+</figure>
+</div>
+</section>
+<section id="proceso-ruido-blanco" class="level2">
+<h2 class="anchored" data-anchor-id="proceso-ruido-blanco">Proceso “ruido blanco”</h2>
+<p>El proceso estacionario más simple (trivial) que existe es el que se conoce como <strong>ruido blanco</strong>, el cual cumple las siguientes condiciones:</p>
+<p><span class="math display">\[
+\begin{cases}
+E(y_t) = 0 \quad\forall\; t \\
+V(y_t) = \sigma^2 \quad\forall\; t \\
+Cov(y_t,y_{t-k}) = 0 \quad \forall\; k
+\end{cases}
+\]</span></p>
+<p>Las dos primeras condiciones corresponden a estacionariedad (en media y variancia, respectivamente), mientras que la tercera refleja que las mediciones de la variable están incorrelacionadas a través del tiempo. En otras palabras, este es un proceso sin memoria: conocer valores pasados no provee información alguna sobre el futuro.</p>
+</section>
+<section id="descomposición-de-una-serie" class="level2">
+<h2 class="anchored" data-anchor-id="descomposición-de-una-serie">Descomposición de una serie</h2>
+<p>La modelización de una serie de tiempo suele realizarse en etapas: se identifican los componentes (características) de la serie, se las separa mediante operaciones matemáticas como diferenciaciones y transformaciones, y se modela cada componente por separado. Esto permite aprovechar toda la información proveniente de las observaciones para lograr un pronóstico más completo.</p>
+<p>De este modo, por ejemplo, si una serie presenta una tendencia y un comportamiento estacional, puede expresarse como <span class="math display">\[\text{serie original} = \text{tendencia} + \text{estacionalidad} + \text{ruido blanco}\]</span> y cada uno de estos sumandos puede representarse individualmente para formar el modelo completo.</p>
+<div id="fig-descomposicion" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/descomposicion_st.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figura&nbsp;7.7: Descomposición de una serie de tiempo en sus componentes básicos.</figcaption>
+</figure>
+</div>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Aunque el ordenamiento entre las observaciones suele ser a través del tiempo (particularmente en intervalos equiespaciados), también puede darse en otras dimensiones, como el espacio.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./4_tdh.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">4. ICs y Tests de hipótesis</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link">
+        <span class="nav-page-text">Referencias</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
