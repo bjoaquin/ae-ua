@@ -166,6 +166,8 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#transformación" id="toc-transformación" class="nav-link" data-scroll-target="#transformación">Transformación</a></li>
   <li><a href="#proceso-ruido-blanco" id="toc-proceso-ruido-blanco" class="nav-link" data-scroll-target="#proceso-ruido-blanco">Proceso “ruido blanco”</a></li>
   <li><a href="#descomposición-de-una-serie" id="toc-descomposición-de-una-serie" class="nav-link" data-scroll-target="#descomposición-de-una-serie">Descomposición de una serie</a></li>
+  <li><a href="#promedio-móvil" id="toc-promedio-móvil" class="nav-link" data-scroll-target="#promedio-móvil">Promedio móvil</a></li>
+  <li><a href="#pronósticos" id="toc-pronósticos" class="nav-link" data-scroll-target="#pronósticos">Pronósticos</a></li>
   </ul>
 </nav>
     </div>
@@ -355,6 +357,83 @@ Cov(y_t,y_{t-k}) = 0 \quad \forall\; k
 <p><img src="img/descomposicion_st.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figura&nbsp;7.7: Descomposición de una serie de tiempo en sus componentes básicos.</figcaption>
 </figure>
+</div>
+</section>
+<section id="promedio-móvil" class="level2">
+<h2 class="anchored" data-anchor-id="promedio-móvil">Promedio móvil</h2>
+<p>A veces el ruido de una serie es tan alto que resulta difícil reconocer a simple vista su comportamiento general.</p>
+<div id="fig-serie-ruido" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/serie_juego_original.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figura&nbsp;7.8: Una serie de tiempo ruidosa.</figcaption>
+</figure>
+</div>
+<p>Una forma rápida y sencilla de alivianar la carga de ruido sin recurrir a la modelización es mediante <strong>suavizados</strong>. Estos son métodos matemáticos que obtienen como resultado una nueva serie de tiempo, cuya función es “resumir” el comportamiento de la serie original.</p>
+<div id="fig-serie-ma" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/serie_juego_ma.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figura&nbsp;7.9: Una suavizado mediante un promedio móvil (k = 10).</figcaption>
+</figure>
+</div>
+<p>Un método de suavizado ampliamente utilizado es el <strong>promedio móvil</strong>, el cual consiste en calcular, para cada punto de la serie, un promedio de <span class="math inline">\(k\)</span> valores consecutivos, siendo <span class="math inline">\(k \in \mathbb{N}\)</span> el tamaño de la <em>ventana</em> o lapso de tiempo a promediar. En aplicaciones financieras, las ventanas suelen situarse <em>antes</em> de su respectivo punto, aunque en algunos ámbitos la ventana suele estar centrada en el punto. Sea cual sea el caso, si la serie original tiene <span class="math inline">\(n\)</span> observaciones, la nueva serie tendrá menos puntos, pues para algunas observaciones originales no tendrá suficientes datos como para calcular un promedio. Nótese cómo en la figura anterior las primeras y últimas observaciones no tienen promedio móvil.</p>
+<p>Este método es un proceso útil para suavizar una serie de tiempo y apreciar mejor su tendencia. En contraste con el método de mínimos cuadrados, que expresa la tendencia en términos de una ecuación matemática, el método del promedio móvil sólo suaviza las fluctuaciones de los datos. En otras palabras, se busca simplificar la representación de una serie de tiempo mediante un promedio, el cual también depende del tiempo (por eso se dice que es “móvil”).</p>
+<p>Lo que logra el promedio móvil es promediar las variaciones cíclicas y/o irregularidades que pueda presentar una serie, para representar puntualmente una de sus características: la tendencia.</p>
+</section>
+<section id="pronósticos" class="level2">
+<h2 class="anchored" data-anchor-id="pronósticos">Pronósticos</h2>
+<p>Las series de tiempo son útiles para conocer el comportamiento de un fenómeno de interés a lo largo del tiempo, pero también para intentar predecir o pronosticar tal comportamiento en el futuro.</p>
+<p>Dada una serie de tiempo <span class="math inline">\(y_t\)</span>, nos interesa hallar una expresión para <span class="math inline">\(y_{t+h\;|\;t}\)</span> que intente representar de la mejor manera los datos futuros de la serie. Existen diversos métodos para lograr este objetivo. En este curso nos limitamos a cuatro.</p>
+<ul>
+<li><strong>Método de la media:</strong> proyecta la serie mediante un valor constante, igual a la media de la serie.</li>
+<li><strong>Método naïve:</strong> proyecta la serie mediante un valor constante, igual al último valor de la serie.</li>
+<li><strong>Método naïve estacional:</strong> proyecta la serie mediante el último valor observado asociado al mismo período estacional.</li>
+<li><strong>Método drift:</strong> proyecta la serie mediante una línea recta, que une el primer valor observado con el último.</li>
+</ul>
+<div id="fig-pronosticos" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/forecasts.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figura&nbsp;7.10: Cuatro métodos distintos de pronósticos.</figcaption>
+</figure>
+</div>
+<div class="flexcenter">
+<div data-latex="">
+<table class="table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 41%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Método</th>
+<th>Ventaja</th>
+<th>Desventaja</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Media</td>
+<td>Fácil de implementar.</td>
+<td>Sólo aplica para series estacionarias.</td>
+</tr>
+<tr class="even">
+<td>Naïve</td>
+<td>Fácil de implementar.</td>
+<td>Sus casos de aplicación son escasos.</td>
+</tr>
+<tr class="odd">
+<td>Naïve estacional</td>
+<td>Considera información previa y es útil bajo estacionalidad.</td>
+<td>Puede pronosticar mal si no se usa correctamente.</td>
+</tr>
+<tr class="even">
+<td>Drift</td>
+<td>Es simple y permite pronosticar tendencias.</td>
+<td>Puede ser inefriciente ante series muy variables.</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 
 

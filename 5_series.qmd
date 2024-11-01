@@ -205,3 +205,43 @@ De este modo, por ejemplo, si una serie presenta una tendencia y un comportamien
 y cada uno de estos sumandos puede representarse individualmente para formar el modelo completo.
 
 ![Descomposición de una serie de tiempo en sus componentes básicos.](img/descomposicion_st.png){#fig-descomposicion}
+
+## Promedio móvil
+
+A veces el ruido de una serie es tan alto que resulta difícil reconocer a simple vista su comportamiento general.
+
+![Una serie de tiempo ruidosa.](img/serie_juego_original.png){#fig-serie-ruido}
+
+Una forma rápida y sencilla de alivianar la carga de ruido sin recurrir a la modelización es mediante **suavizados**. Estos son métodos matemáticos que obtienen como resultado una nueva serie de tiempo, cuya función es "resumir" el comportamiento de la serie original.
+
+![Una suavizado mediante un promedio móvil (k = 10).](img/serie_juego_ma.png){#fig-serie-ma}
+
+Un método de suavizado ampliamente utilizado es el **promedio móvil**, el cual consiste en calcular, para cada punto de la serie, un promedio de $k$ valores consecutivos, siendo $k \in \mathbb{N}$ el tamaño de la *ventana* o lapso de tiempo a promediar. En aplicaciones financieras, las ventanas suelen situarse *antes* de su respectivo punto, aunque en algunos ámbitos la ventana suele estar centrada en el punto. Sea cual sea el caso, si la serie original tiene $n$ observaciones, la nueva serie tendrá menos puntos, pues para algunas observaciones originales no tendrá suficientes datos como para calcular un promedio. Nótese cómo en la figura anterior las primeras y últimas observaciones no tienen promedio móvil.
+
+Este método es un proceso útil para suavizar una serie de tiempo y apreciar mejor su tendencia. En contraste con el método de mínimos cuadrados, que expresa la tendencia en términos de una ecuación matemática, el método del promedio móvil sólo suaviza las fluctuaciones de los datos. En otras palabras, se busca simplificar la representación de una serie de tiempo mediante un promedio, el cual también depende del tiempo (por eso se dice que es "móvil").
+
+Lo que logra el promedio móvil es promediar las variaciones cíclicas y/o irregularidades que pueda presentar una serie, para representar puntualmente una de sus características: la tendencia.
+
+## Pronósticos
+
+Las series de tiempo son útiles para conocer el comportamiento de un fenómeno de interés a lo largo del tiempo, pero también para intentar predecir o pronosticar tal comportamiento en el futuro.
+
+Dada una serie de tiempo $y_t$, nos interesa hallar una expresión para $y_{t+h\;|\;t}$ que intente representar de la mejor manera los datos futuros de la serie. Existen diversos métodos para lograr este objetivo. En este curso nos limitamos a cuatro.
+
+* **Método de la media:** proyecta la serie mediante un valor constante, igual a la media de la serie.
+* **Método naïve:** proyecta la serie mediante un valor constante, igual al último valor de la serie.
+* **Método naïve estacional:** proyecta la serie mediante el último valor observado asociado al mismo período estacional.
+* **Método drift:** proyecta la serie mediante una línea recta, que une el primer valor observado con el último.
+
+![Cuatro métodos distintos de pronósticos.](img/forecasts.png){#fig-pronosticos}
+
+::: {.flexcenter data-latex=""}
+::: {data-latex=""}
+| Método | Ventaja | Desventaja |
+|--------|---------------------|----------------------|
+| Media  | Fácil de implementar. | Sólo aplica para series estacionarias. |
+| Naïve  | Fácil de implementar. | Sus casos de aplicación son escasos. |
+| Naïve estacional  | Considera información previa y es útil bajo estacionalidad. | Puede pronosticar mal si no se usa correctamente. |
+| Drift  | Es simple y permite pronosticar tendencias. | Puede ser inefriciente ante series muy variables. |
+:::
+:::
