@@ -314,7 +314,7 @@ contador_ejemplos <- contador_ejemplos + 1
 **Ejemplo `r contador_ejemplos`**
 :::
 
-Se tiene una moneda que se sospecha que no es equilibrada. ¿Cómo pueden formularse hipótesis que pongan a prueba validen o refuten esta sospecha?
+Se tiene una moneda que se sospecha que no es equilibrada. ¿Cómo pueden formularse hipótesis que pongan a prueba esta sospecha?
 
 **Solución:** Sea $X$ una variable binaria cuyo éxito es "la moneda cae en cruz" y cuyo fracaso es "la moneda cae en cara". Sea $p$ la verdadera proporción de veces que la moneda cae en cruz. Una moneda equilibrada verifica $p=0,5$. Por lo tanto: $$H_0) \; p = 0,5 \qquad H_1) \; p \neq 0,5$$
 :::
